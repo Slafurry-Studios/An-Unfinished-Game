@@ -1,10 +1,9 @@
-# PROJECT NAME
-One-line pitch of what this project does or what problem it solves.
+# AN UNFINISHED GAME
+A 2D narrative platformer about a solo game developer refusing to give up on an impossible project — and the monsters inside his own head that won't let him let go.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9dee6058-b82a-43b4-ae26-eab6ffe699da" width="100%" alt="PROJECT NAME banner" />
+  <img src="https://github.com/user-attachments/assets/76e4e3ae-d047-4df0-aeea-8e507847a708" width="100%" alt="AN UNFINISHED GAME banner" />
 </p>
-
 <br>
 <p align="left">
   <img src="https://img.shields.io/badge/UNITY-ffffff?style=for-the-badge&logo=unity&logoColor=000000" />
@@ -15,58 +14,36 @@ One-line pitch of what this project does or what problem it solves.
 ---
 
 ## ABOUT
-Short paragraph explaining the project's purpose, scope, and what makes it worth using or contributing to. 2-4 sentences max.
+An Unfinished Game is a 2D narrative platformer about the founder of a game studio left alone after his entire team abandons an overly ambitious project. Refusing to accept defeat, he keeps developing it alone — only to find himself confronting manifestations of his own mind: Perfectionism, Burnout, Sunk Cost, and other inner conflicts that keep the project (and him) from ever being finished. Rather than rewarding endless persistence, the game's message is that knowing when to let go can be healthier than never giving up.
 
 ---
 
 ## PLAY IT ON
 <p align="left">
-  <a href="https://lordzaini.itch.io/"><img src="https://img.shields.io/badge/ITCH.IO-ffffff?style=for-the-badge&logo=itch.io&logoColor=000000" /></a>
+  <a href="https://slafurrystudios.itch.io/"><img src="https://img.shields.io/badge/ITCH.IO-ffffff?style=for-the-badge&logo=itch.io&logoColor=000000" /></a>
 </p>
 
 ---
 
 ## FEATURES
-- Feature one, described in a single clear line
-- Feature two
-- Feature three
-- Feature four
-
----
-
-## ARCHITECTURE
-Brief summary of the core architecture pattern used, with a link to the full doc for anyone who wants details.
-
-```
-Assets/
-├── 00_Scripts/
-│   ├── Core/       — base classes & interfaces (Singleton, GameSystem, Manager)
-│   ├── System/     — persistent cross-scene services (Audio, Save, Scene, Localization)
-│   ├── Manager/    — per-session gameplay coordinators
-│   ├── Game/       — per-instance controllers & entities
-│   ├── UI/         — reactive observers & screen coordination
-│   └── Utils/      — generic reusable helpers (GameFeel, extensions)
-├── 01_Objects/     — prefabs & data, grouped by domain
-├── 02_Art/
-├── 03_Audio/
-├── 04_Scenes/
-└── 05_Settings/
-```
-
-See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full breakdown of base classes, naming conventions, and design decisions.
+- Narrative-driven platforming exploring the emotional struggles of solo game development
+- Development-themed puzzles and mini-games that grow harder as the project spirals out of control
+- Psychological encounters with symbolic inner conflicts — Perfectionism, Sunk Cost, Burnout
+- Hand-drawn, intentionally unfinished art style with a limited two-color palette
+- Atmospheric audio that shifts from calm to unsettling as the story progresses
+- A story about knowing when to let go, not just pushing through
 
 ---
 
 ## GETTING STARTED
-
 ### Prerequisites
-- Unity `[version]`
+- Unity `2022.3.62f3` (2022.3 LTS)
 - Git LFS ([installation guide](https://git-lfs.github.com))
 
 ### Setup
 ```bash
 git lfs install
-git clone [repo-url]
+git clone https://github.com/Slafurry-Studios/An-Unfinished-Game.git
 ```
 Open the project in Unity Hub, let it import, then open the `Boot` scene to start.
 
@@ -74,17 +51,17 @@ Open the project in Unity Hub, let it import, then open the `Boot` scene to star
 
 ## TECH STACK
 ![Unity](https://img.shields.io/badge/Unity-000000?style=flat-square&logo=unity&logoColor=ffffff)
-![C#](https://img.shields.io/badge/C%23-000000?style=flat-square&logo=csharp&logoColor=ffffff)
-![Cinemachine](https://img.shields.io/badge/Cinemachine-000000?style=flat-square&logo=unity&logoColor=ffffff)
-![Newtonsoft.Json](https://img.shields.io/badge/Newtonsoft.Json-000000?style=flat-square&logo=json&logoColor=ffffff)
 
 ---
 
 ## TEAM
 | Role | Name |
 |---|---|
-| [Role] | [Name] |
-| [Role] | [Name] |
+| Project Manager, Unity Programmer, Game Designer | Lord Zaini |
+| Level Designer, Unity Programmer | TiramissuCake |
+| 2D Artist, UI Designer | Fekanme |
+| Audio Engineer | Ifanitas |
+| Narrative Designer | americano |
 
 ---
 
