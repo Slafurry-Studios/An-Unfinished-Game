@@ -51,7 +51,7 @@ jobs:
       - name: Commit updated state to chore/assets
         run: |
           git config user.name "Kozeki Ui"
-          git config user.email "kozeki-ui@users.noreply.github.com"
+          git config user.email "45u35+kozeki-ui[bot]@users.noreply.github.com"
 
           WORKTREE=/tmp/chore-assets
           git fetch origin chore/assets 2>/dev/null || true
