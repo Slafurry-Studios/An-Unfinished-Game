@@ -1,0 +1,53 @@
+name: Retrieve New Drive Files
+
+on:
+  workflow_dispatch: {}
+  # Uncomment below if you want this to also run automatically (e.g. right after Track,
+  # or on its own schedule). Left manual by default since downloads can be heavier.
+  # schedule:
+  #   - cron: '15 23 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install -r requirements.txt
+
+      - name: Retrieve new sprite files
+        run: |
+          python retrieve.py \
+            --drive-folder-id "${{ secrets.DRIVE_SPRITE_FOLDER_ID }}" \
+            --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
+            --state-file "state/sprite_manifest.json" \
+            --download-dir "Assets/_Game/02_Art/Sprite" \
+            --project-name "${{ github.repository }} (sprite)" \
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
+            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+
+      - name: Retrieve new audio files
+        run: |
+          python retrieve.py \
+            --drive-folder-id "${{ secrets.DRIVE_AUDIO_FOLDER_ID }}" \
+            --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
+            --state-file "state/audio_manifest.json" \
+            --download-dir "Assets/_Game/03_Audio" \
+            --project-name "${{ github.repository }} (audio)" \
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
+            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+
+      - name: Commit retrieved files and updated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/ Assets/_Game/02_Art/Sprite Assets/_Game/03_Audio
+          git diff --cached --quiet || git commit -m "chore: retrieve new drive files [skip ci]"
+          git push
