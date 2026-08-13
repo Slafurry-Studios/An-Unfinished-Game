@@ -6,7 +6,7 @@ sends normally without it. Never blocks or breaks the main track/retrieve flow.
 
 import requests
 
-DEFAULT_MODEL = "gemini-2.5-flash-lite"
+DEFAULT_MODEL = "gemini-3.1-flash-lite"
 _ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 _TIMEOUT_SECONDS = 8
 
