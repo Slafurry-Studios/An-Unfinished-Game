@@ -1,0 +1,49 @@
+name: Track Drive Changes
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 07:00 WITA (UTC+8) daily. See README for how to change this.
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install -r requirements.txt
+
+      - name: Check sprite folder for changes
+        run: |
+          python track.py \
+            --drive-folder-id "${{ secrets.DRIVE_SPRITE_FOLDER_ID }}" \
+            --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
+            --state-file "state/sprite_manifest.json" \
+            --project-name "${{ github.repository }} (sprite)" \
+            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+
+      - name: Check audio folder for changes
+        run: |
+          python track.py \
+            --drive-folder-id "${{ secrets.DRIVE_AUDIO_FOLDER_ID }}" \
+            --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
+            --state-file "state/audio_manifest.json" \
+            --project-name "${{ github.repository }} (audio)" \
+            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+
+      - name: Commit updated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          git diff --cached --quiet || git commit -m "chore: update drive state [skip ci]"
+          git push
