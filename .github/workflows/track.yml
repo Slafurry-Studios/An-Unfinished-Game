@@ -20,6 +20,16 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Sync latest state from chore/assets
+        run: |
+          mkdir -p state
+          git fetch origin chore/assets 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git archive origin/chore/assets -- state 2>/dev/null | tar -x || true
+          else
+            echo "chore/assets branch doesn't exist yet, starting fresh."
+          fi
+
       - name: Check sprite folder for changes
         run: |
           python track.py \
@@ -27,8 +37,7 @@ jobs:
             --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
             --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
             --state-file "state/sprite_manifest.json" \
-            --project-name "${{ github.repository }} (sprite)" \
-            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+            --project-name "${{ github.repository }} (sprite)"
 
       - name: Check audio folder for changes
         run: |
@@ -37,13 +46,32 @@ jobs:
             --service-account-b64 "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON_B64 }}" \
             --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
             --state-file "state/audio_manifest.json" \
-            --project-name "${{ github.repository }} (audio)" \
-            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+            --project-name "${{ github.repository }} (audio)"
 
-      - name: Commit updated state
+      - name: Commit updated state to chore/assets
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Kozeki Ui"
+          git config user.email "kozeki-ui@users.noreply.github.com"
+
+          WORKTREE=/tmp/chore-assets
+          git fetch origin chore/assets 2>/dev/null || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git worktree add "$WORKTREE" origin/chore/assets
+          else
+            git worktree add --orphan -b chore/assets "$WORKTREE"
+          fi
+
+          mkdir -p "$WORKTREE/state"
+          cp -f state/*.json "$WORKTREE/state/" 2>/dev/null || true
+
+          cd "$WORKTREE"
           git add state/
-          git diff --cached --quiet || git commit -m "chore: update drive state [skip ci]"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No state changes, skipping."
+            exit 0
+          fi
+
+          git commit -m "chore(assets): update drive state [skip ci]"
+          git push origin HEAD:chore/assets

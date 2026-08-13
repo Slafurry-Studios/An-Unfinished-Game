@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   retrieve:
@@ -22,6 +23,19 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Sync latest state & assets from chore/assets
+        run: |
+          mkdir -p state Assets/_Game/02_Art/Sprite Assets/_Game/03_Audio
+          git fetch origin chore/assets 2>/dev/null || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git archive origin/chore/assets -- state 2>/dev/null | tar -x || true
+            git archive origin/chore/assets -- Assets/_Game/02_Art/Sprite 2>/dev/null | tar -x || true
+            git archive origin/chore/assets -- Assets/_Game/03_Audio 2>/dev/null | tar -x || true
+          else
+            echo "chore/assets branch doesn't exist yet, starting fresh."
+          fi
+
       - name: Retrieve new sprite files
         run: |
           python retrieve.py \
@@ -30,8 +44,7 @@ jobs:
             --state-file "state/sprite_manifest.json" \
             --download-dir "Assets/_Game/02_Art/Sprite" \
             --project-name "${{ github.repository }} (sprite)" \
-            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
-            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}"
 
       - name: Retrieve new audio files
         run: |
@@ -41,13 +54,74 @@ jobs:
             --state-file "state/audio_manifest.json" \
             --download-dir "Assets/_Game/03_Audio" \
             --project-name "${{ github.repository }} (audio)" \
-            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}" \
-            --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
+            --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}"
 
-      - name: Commit retrieved files and updated state
+      - name: Commit retrieved files to a new branch
+        id: commit
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add state/ Assets/_Game/02_Art/Sprite Assets/_Game/03_Audio
-          git diff --cached --quiet || git commit -m "chore: retrieve new drive files [skip ci]"
-          git push
+          git config user.name "Kozeki Ui"
+          git config user.email "kozeki-ui@users.noreply.github.com"
+
+          WORKTREE=/tmp/chore-assets
+          git fetch origin chore/assets 2>/dev/null || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git worktree add "$WORKTREE" origin/chore/assets
+          else
+            git worktree add --orphan -b chore/assets "$WORKTREE"
+          fi
+
+          mkdir -p \
+            "$WORKTREE/state" \
+            "$WORKTREE/Assets/_Game/02_Art/Sprite" \
+            "$WORKTREE/Assets/_Game/03_Audio"
+
+          cp -f state/*.json "$WORKTREE/state/" 2>/dev/null || true
+          cp -rf Assets/_Game/02_Art/Sprite/. \
+            "$WORKTREE/Assets/_Game/02_Art/Sprite/" 2>/dev/null || true
+          cp -rf Assets/_Game/03_Audio/. \
+            "$WORKTREE/Assets/_Game/03_Audio/" 2>/dev/null || true
+
+          cd "$WORKTREE"
+
+          git add \
+            state/ \
+            Assets/_Game/02_Art/Sprite \
+            Assets/_Game/03_Audio
+
+          if git diff --cached --quiet; then
+            echo "No changes, skipping."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          COMMIT_MSG="chore(assets): retrieve new drive files"
+
+          BRANCH_NAME="retrieve/run-${{ github.run_id }}"
+
+          git checkout -b "$BRANCH_NAME"
+          git commit -m "$COMMIT_MSG"
+          git push origin "HEAD:$BRANCH_NAME"
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          echo "branch_name=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+          echo "commit_msg=$COMMIT_MSG" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request into chore/assets
+        if: steps.commit.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --repo "${{ github.repository }}" \
+            --base chore/assets \
+            --head "${{ steps.commit.outputs.branch_name }}" \
+            --title "${{ steps.commit.outputs.commit_msg }}" \
+            --body "Automated retrieval by Kozeki Ui. Review the new/updated files before merging into \`chore/assets\`." \
+            --label "assets" 2>/dev/null || \
+          gh pr create \
+            --repo "${{ github.repository }}" \
+            --base chore/assets \
+            --head "${{ steps.commit.outputs.branch_name }}" \
+            --title "${{ steps.commit.outputs.commit_msg }}" \
+            --body "Automated retrieval by Kozeki Ui. Review the new/updated files before merging into \`chore/assets\`."
