@@ -20,6 +20,16 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Sync latest state from chore/assets
+        run: |
+          mkdir -p state
+          git fetch origin chore/assets 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git archive origin/chore/assets -- state 2>/dev/null | tar -x || true
+          else
+            echo "chore/assets branch doesn't exist yet, starting fresh."
+          fi
+
       - name: Check sprite folder for changes
         run: |
           python track.py \
@@ -40,10 +50,63 @@ jobs:
             --project-name "${{ github.repository }} (audio)" \
             --gemini-api-key "${{ secrets.GEMINI_API_KEY }}"
 
-      - name: Commit updated state
+      - name: Commit updated state to chore/assets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           git config user.name "Kozeki Ui"
           git config user.email "kozeki-ui@users.noreply.github.com"
+
+          WORKTREE=/tmp/chore-assets
+          git fetch origin chore/assets 2>/dev/null || true
+
+          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
+            git worktree add "$WORKTREE" origin/chore/assets
+          else
+            git worktree add --orphan -b chore/assets "$WORKTREE"
+          fi
+
+          mkdir -p "$WORKTREE/state"
+          cp -f state/*.json "$WORKTREE/state/" 2>/dev/null || true
+
+          cd "$WORKTREE"
           git add state/
-          git diff --cached --quiet || git commit -m "chore: update drive state [skip ci]"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No state changes, skipping."
+            exit 0
+          fi
+
+          export DIFF_SUMMARY=$(git diff --cached --stat)
+          COMMIT_MSG="chore(assets): update drive state [skip ci]"
+
+          if [ -n "$GEMINI_API_KEY" ]; then
+            GEN_MSG=$(python3 - <<'PYEOF' 2>/dev/null || true
+import os, json, urllib.request
+
+api_key = os.environ.get("GEMINI_API_KEY")
+diff_summary = os.environ.get("DIFF_SUMMARY", "")
+
+prompt = (
+    "Write a single-line git commit message, conventional commits style, "
+    "prefix 'chore(assets):', under 72 chars, for this diffstat of an "
+    "auto-generated Drive asset manifest update:\n" + diff_summary
+)
+
+body = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode()
+req = urllib.request.Request(
+    f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key={api_key}",
+    data=body,
+    headers={"Content-Type": "application/json"},
+)
+with urllib.request.urlopen(req, timeout=15) as resp:
+    data = json.load(resp)
+text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+print(text.splitlines()[0][:72])
+PYEOF
+)
+            [ -n "$GEN_MSG" ] && COMMIT_MSG="$GEN_MSG [skip ci]"
+          fi
+
+          git commit -m "$COMMIT_MSG"
+          git push origin HEAD:chore/assets
