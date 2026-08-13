@@ -46,8 +46,8 @@ jobs:
 
       - name: Commit retrieved files and updated state
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Kozeki Ui"
+          git config user.email "kozeki-ui@users.noreply.github.com"
           git add state/ Assets/_Game/02_Art/Sprite Assets/_Game/03_Audio
           git diff --cached --quiet || git commit -m "chore: retrieve new drive files [skip ci]"
           git push
