@@ -68,7 +68,10 @@ jobs:
           if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
             git worktree add "$WORKTREE" origin/chore/assets
           else
-            git worktree add --orphan -b chore/assets "$WORKTREE"
+            # Branch off the current main tip (NOT --orphan) so chore/assets shares a
+            # common ancestor with main. Without this, GitHub can't compare/PR the two
+            # branches ("There isn't anything to compare" / unrelated histories).
+            git worktree add -b chore/assets "$WORKTREE" HEAD
           fi
 
           mkdir -p \
