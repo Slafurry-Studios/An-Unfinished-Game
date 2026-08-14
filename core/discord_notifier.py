@@ -1,28 +1,101 @@
 """Send notifications to a Discord webhook. Kept separate from the Drive logic so it can be
-used both by track.py (change report) and retrieve.py (download result report)."""
+used both by track.py (change report) and retrieve.py (download result report).
 
+Long lists never get silently cut off: they're split across multiple fields, then multiple
+embeds, then multiple messages as needed, following Discord's own limits.
+"""
 import requests
-
 from core import gemini_flavor
 
+# Discord's hard limits (webhook messages).
+FIELD_VALUE_LIMIT = 1024
+MAX_FIELDS_PER_EMBED = 25
+MAX_EMBED_CHARS = 6000
+MAX_EMBEDS_PER_MESSAGE = 10
+DESCRIPTION_LIMIT = 4096
 
-def _post(webhook_url, embed):
-    r = requests.post(webhook_url, json={"embeds": [embed]}, timeout=15)
-    r.raise_for_status()
+# Small safety buffers so we never brush right up against a hard limit.
+_FIELD_BUFFER = 40
+_EMBED_BUFFER = 200
 
 
-def _fmt(files, limit=15):
-    lines = [f"- [{f['relative_path']}]({f.get('webViewLink', '')})" for f in files[:limit]]
-    if len(files) > limit:
-        lines.append(f"... and {len(files) - limit} more")
-    return "\n".join(lines) if lines else "_none_"
+def _lines_files(files):
+    return [f"- [{f['relative_path']}]({f.get('webViewLink', '')})" for f in files]
 
 
-def _fmt_names(names, limit=15):
-    lines = [f"- {n}" for n in names[:limit]]
-    if len(names) > limit:
-        lines.append(f"... and {len(names) - limit} more")
-    return "\n".join(lines) if lines else "_none_"
+def _lines_names(names):
+    return [f"- {n}" for n in names]
+
+
+def _chunk_by_length(lines, limit=FIELD_VALUE_LIMIT - _FIELD_BUFFER):
+    """Group lines into chunks that each join to under `limit` chars."""
+    chunks, current, current_len = [], [], 0
+    for line in lines:
+        cost = len(line) + 1  # +1 for the newline joining it to the next line
+        if current and current_len + cost > limit:
+            chunks.append(current)
+            current, current_len = [], 0
+        current.append(line)
+        current_len += cost
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+def _fields_for(label, lines):
+    """Turn a list of markdown lines into one or more Discord fields, each safely under the
+    1024-char value limit. If it takes more than one field, each is numbered (i/N)."""
+    if not lines:
+        return [{"name": label, "value": "_none_", "inline": False}]
+    chunks = _chunk_by_length(lines)
+    total = len(chunks)
+    fields = []
+    for i, chunk in enumerate(chunks, start=1):
+        name = label if total == 1 else f"{label} ({i}/{total})"
+        fields.append({"name": name, "value": "\n".join(chunk), "inline": False})
+    return fields
+
+
+def _split_into_embeds(title, color, fields, description=None):
+    """Group fields into one or more embeds, respecting the 25-fields and 6000-char limits.
+    Only the first embed gets the description; later parts are labeled (part i/N)."""
+    groups, current, current_chars = [], [], len(title) + len(description or "")
+    for f in fields:
+        f_chars = len(f["name"]) + len(f["value"])
+        if current and (
+            len(current) >= MAX_FIELDS_PER_EMBED
+            or current_chars + f_chars > MAX_EMBED_CHARS - _EMBED_BUFFER
+        ):
+            groups.append(current)
+            current, current_chars = [], len(title) + len(description or "")
+        current.append(f)
+        current_chars += f_chars
+    if current:
+        groups.append(current)
+
+    total = len(groups)
+    embeds = []
+    for i, flds in enumerate(groups, start=1):
+        embed = {
+            "title": title if total == 1 else f"{title} (part {i}/{total})",
+            "color": color,
+            "fields": flds,
+        }
+        if description and i == 1:
+            embed["description"] = description[:DESCRIPTION_LIMIT]
+        embeds.append(embed)
+    return embeds
+
+
+def _send_embeds(webhook_url, embeds):
+    """Post embeds to the webhook, batching in groups of 10 (Discord's per-message max)."""
+    for i in range(0, len(embeds), MAX_EMBEDS_PER_MESSAGE):
+        batch = embeds[i:i + MAX_EMBEDS_PER_MESSAGE]
+        r = requests.post(webhook_url, json={"embeds": batch}, timeout=15)
+        if not r.ok:
+            # Surface Discord's actual error message in the Actions log instead of a bare 400.
+            print("Discord response body:", r.text)
+        r.raise_for_status()
 
 
 def send_track_notification(
@@ -35,28 +108,18 @@ def send_track_notification(
 
     fields = []
     if new_files:
-        fields.append({"name": f"🆕 New files ({len(new_files)})", "value": _fmt(new_files), "inline": False})
+        fields += _fields_for(f"🆕 New files ({len(new_files)})", _lines_files(new_files))
     if changed_files:
-        fields.append({"name": f"✏️ Changed files ({len(changed_files)})", "value": _fmt(changed_files), "inline": False})
+        fields += _fields_for(f"✏️ Changed files ({len(changed_files)})", _lines_files(changed_files))
     if deleted_files:
-        fields.append({
-            "name": f"🗑️ Removed from Drive ({len(deleted_files)})",
-            "value": _fmt(deleted_files) + "\n_(not deleted automatically anywhere)_",
-            "inline": False,
-        })
-
-    embed = {
-        "title": f"📁 Drive update — {pair_name}",
-        "color": 0x4285F4,
-        "fields": fields,
-    }
+        lines = _lines_files(deleted_files) + ["_(not deleted automatically anywhere)_"]
+        fields += _fields_for(f"🗑️ Removed from Drive ({len(deleted_files)})", lines)
 
     summary = f"{len(new_files)} new, {len(changed_files)} changed, {len(deleted_files)} removed"
     flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model)
-    if flavor:
-        embed["description"] = flavor
 
-    _post(webhook_url, embed)
+    embeds = _split_into_embeds(f"📁 Drive update — {pair_name}", 0x4285F4, fields, flavor)
+    _send_embeds(webhook_url, embeds)
 
 
 def send_retrieve_notification(
@@ -66,7 +129,6 @@ def send_retrieve_notification(
     """Report the result of a retrieve/download run. Always fires when there's something to
     report (something downloaded, updated, and/or skipped). webhook_url is required by
     retrieve.py.
-
     - retrieved_names: brand-new files downloaded for the first time.
     - updated_names: files that existed before and got re-downloaded because the SAME Drive
       file changed (overwrote the local copy).
@@ -77,33 +139,18 @@ def send_retrieve_notification(
 
     fields = []
     if retrieved_names:
-        fields.append({
-            "name": f"⬇️ Downloaded ({len(retrieved_names)})",
-            "value": _fmt_names(retrieved_names),
-            "inline": False,
-        })
+        fields += _fields_for(f"⬇️ Downloaded ({len(retrieved_names)})", _lines_names(retrieved_names))
     if updated_names:
-        fields.append({
-            "name": f"🔄 Updated, file changed in Drive ({len(updated_names)})",
-            "value": _fmt_names(updated_names),
-            "inline": False,
-        })
+        fields += _fields_for(
+            f"🔄 Updated, file changed in Drive ({len(updated_names)})", _lines_names(updated_names)
+        )
     if skipped_names:
-        fields.append({
-            "name": f"⏭️ Skipped, name already exists ({len(skipped_names)})",
-            "value": _fmt_names(skipped_names),
-            "inline": False,
-        })
-
-    embed = {
-        "title": f"⬇️ Retrieve result — {pair_name}",
-        "color": 0x57F287,
-        "fields": fields,
-    }
+        fields += _fields_for(
+            f"⏭️ Skipped, name already exists ({len(skipped_names)})", _lines_names(skipped_names)
+        )
 
     summary = f"{len(retrieved_names)} downloaded, {len(updated_names)} updated, {len(skipped_names)} skipped"
     flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model)
-    if flavor:
-        embed["description"] = flavor
 
-    _post(webhook_url, embed)
+    embeds = _split_into_embeds(f"⬇️ Retrieve result — {pair_name}", 0x57F287, fields, flavor)
+    _send_embeds(webhook_url, embeds)
