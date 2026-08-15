@@ -17,6 +17,7 @@ namespace Slafurry.Player
         [SerializeField] private GroundCheck groundCheck;
         [SerializeField] private HeadCheck headCheck;
         [SerializeField] private WallCheck wallCheck;
+        [SerializeField] private PlayerCrouch crouch;
 
         [Header("Move Settings")]
         [SerializeField] private float moveSpeed = 8f;
@@ -80,7 +81,8 @@ namespace Slafurry.Player
 
         private void ApplyHorizontalMovement()
         {
-            float targetSpeed = _moveInput * moveSpeed;
+            float speedMultiplier = crouch != null ? crouch.SpeedMultiplier : 1f;
+            float targetSpeed = _moveInput * moveSpeed * speedMultiplier;
             bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
 
             float rate;
@@ -124,6 +126,12 @@ namespace Slafurry.Player
             _jumpQueued = false;
 
             if (!IsGrounded) return; // no double jump for now
+
+            // Never launch airborne while still in the crouch collider —
+            // stand up first. If a low ceiling prevents standing, there's
+            // no headroom to jump into either, so skip the jump entirely.
+            if (crouch != null && !crouch.TryStandUp())
+                return;
 
             _velocity.y = jumpForce;
         }

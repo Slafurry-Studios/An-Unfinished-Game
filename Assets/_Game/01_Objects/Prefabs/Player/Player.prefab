@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1629194992214366239}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.835, y: -0.47, z: 0}
+  m_LocalPosition: {x: 0.48, y: -2.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 4849605089204666722}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.615, y: -0.502, z: 0}
+  m_LocalPosition: {x: -0.46, y: -2.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +314,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4026639399213959098}
+  - component: {fileID: 3547221376415295912}
   - component: {fileID: 6005708918789559535}
+  - component: {fileID: 3871270154464803940}
   - component: {fileID: 7107952602140745662}
   - component: {fileID: 6095368971388077174}
   - component: {fileID: 4261564368857208814}
@@ -347,6 +349,20 @@ Transform:
   - {fileID: 7552324505537126767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3547221376415295912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273749987144518326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de85bf8911db806e7a0fda30b752a19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &6005708918789559535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +378,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1962884940778513218}
   headCheck: {fileID: 2390795738628044251}
   wallCheck: {fileID: 5841989436360759510}
+  crouch: {fileID: 0}
   moveSpeed: 8
   groundAcceleration: 60
   groundDeceleration: 70
@@ -373,6 +390,24 @@ MonoBehaviour:
   fallGravityMultiplier: 1.4
   groundSnapMargin: 0.05
   wallSnapMargin: 0.02
+--- !u!114 &3871270154464803940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273749987144518326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330b3e9514da050bb96cbf29cd5f0c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 1962884940778513218}
+  headCheck: {fileID: 2390795738628044251}
+  wallCheck: {fileID: 5841989436360759510}
+  standingCollider: {fileID: 4261564368857208814}
+  crouchCollider: {fileID: 6095368971388077174}
+  crouchSpeedMultiplier: 0.5
 --- !u!50 &7107952602140745662
 Rigidbody2D:
   serializedVersion: 4
@@ -504,7 +539,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPoint: {fileID: 2193709681307962861}
   rightPoint: {fileID: 2678533187946403908}
-  checkRadius: 0.1
+  standingCheckHeight: 3.6
+  crouchCheckHeight: 1.8
+  checkThickness: 0.1
   skinWidth: 0.05
   wallLayer:
     serializedVersion: 2
