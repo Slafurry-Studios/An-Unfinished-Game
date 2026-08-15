@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 3547221376415295912}
   - component: {fileID: 6005708918789559535}
   - component: {fileID: 3871270154464803940}
+  - component: {fileID: 5052214079559742798}
   - component: {fileID: 7107952602140745662}
   - component: {fileID: 6095368971388077174}
   - component: {fileID: 4261564368857208814}
@@ -378,7 +379,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1962884940778513218}
   headCheck: {fileID: 2390795738628044251}
   wallCheck: {fileID: 5841989436360759510}
-  crouch: {fileID: 0}
+  crouch: {fileID: 3871270154464803940}
   moveSpeed: 8
   groundAcceleration: 60
   groundDeceleration: 70
@@ -408,6 +409,24 @@ MonoBehaviour:
   standingCollider: {fileID: 4261564368857208814}
   crouchCollider: {fileID: 6095368971388077174}
   crouchSpeedMultiplier: 0.5
+--- !u!114 &5052214079559742798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273749987144518326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1f99c7148484f4e86a21a96e9d40a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactPoint: {fileID: 7090833922233850714}
+  interactRadius: 2.22
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  drawGizmo: 1
 --- !u!50 &7107952602140745662
 Rigidbody2D:
   serializedVersion: 4
@@ -557,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7090833922233850714}
   m_Layer: 0
-  m_Name: InteractCheck
+  m_Name: InteractPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,6 +29,16 @@ namespace Slafurry.System.InputHub
             add => InputHub.Instance.OnCrouchCanceled += value;
             remove => InputHub.Instance.OnCrouchCanceled -= value;
         }
+        public static event Action OnInteractPressed
+        {
+            add => InputHub.Instance.OnInteractPressed += value;
+            remove => InputHub.Instance.OnInteractPressed -= value;
+        }
+        public static event Action OnInteractReleased
+        {
+            add => InputHub.Instance.OnInteractReleased += value;
+            remove => InputHub.Instance.OnInteractReleased -= value;
+        }
     }
 
     public class InputHub : GameSystem<InputHub>
@@ -40,10 +50,13 @@ namespace Slafurry.System.InputHub
         public event Action<Vector2> OnMoveChanged;
         public event Action OnCrouchStarted;
         public event Action OnCrouchCanceled;
+        public event Action OnInteractPressed;
+        public event Action OnInteractReleased;
 
         private InputAction _jumpAction;
         private InputAction _moveAction;
         private InputAction _crouchAction;
+        private InputAction _interactAction;
 
         public override IEnumerator Initialize() { yield return null; }
         public override void PostInitialize() { }
@@ -56,12 +69,15 @@ namespace Slafurry.System.InputHub
             _jumpAction = map.FindAction("Jump");
             _moveAction = map.FindAction("Move");
             _crouchAction = map.FindAction("Crouch");
+            _interactAction = map.FindAction("Interact");
 
             _jumpAction.performed += ctx => OnJumpPressed?.Invoke();
             _moveAction.performed += ctx => OnMoveChanged?.Invoke(ctx.ReadValue<Vector2>());
             _moveAction.canceled += ctx => OnMoveChanged?.Invoke(Vector2.zero);
             _crouchAction.started += ctx => OnCrouchStarted?.Invoke();
             _crouchAction.canceled += ctx => OnCrouchCanceled?.Invoke();
+            _interactAction.performed += ctx => OnInteractPressed?.Invoke();
+            _interactAction.canceled += ctx => OnInteractReleased?.Invoke();
 
             map.Enable();
         }
