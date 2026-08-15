@@ -154,5 +154,29 @@
     "retrieve_status": "downloaded",
     "downloaded_as": "Player/Idle.png",
     "downloaded_modified_time": "2026-08-13T16:20:03.000Z"
+  },
+  "1rtwsY7FE4o9TRKpt2H3KsScv51YByWfF": {
+    "mimeType": "image/png",
+    "webViewLink": "https://drive.google.com/file/d/1rtwsY7FE4o9TRKpt2H3KsScv51YByWfF/view?usp=drivesdk",
+    "size": "7950",
+    "id": "1rtwsY7FE4o9TRKpt2H3KsScv51YByWfF",
+    "name": "Fall(loop).png",
+    "modifiedTime": "2026-08-14T10:52:22.000Z",
+    "relative_path": "Player/Fall(loop).png",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Player/Fall(loop).png",
+    "downloaded_modified_time": "2026-08-14T10:52:22.000Z"
+  },
+  "12FvoEBu2HnhQ_F8LhW7u0QrQQ3JFfTGk": {
+    "mimeType": "image/png",
+    "webViewLink": "https://drive.google.com/file/d/12FvoEBu2HnhQ_F8LhW7u0QrQQ3JFfTGk/view?usp=drivesdk",
+    "size": "13377",
+    "id": "12FvoEBu2HnhQ_F8LhW7u0QrQQ3JFfTGk",
+    "name": "Jump(Transition to fall).png",
+    "modifiedTime": "2026-08-14T10:51:54.000Z",
+    "relative_path": "Player/Jump(Transition to fall).png",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Player/Jump(Transition to fall).png",
+    "downloaded_modified_time": "2026-08-14T10:51:54.000Z"
   }
 }
