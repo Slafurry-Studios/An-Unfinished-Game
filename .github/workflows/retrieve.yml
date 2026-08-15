@@ -2,10 +2,6 @@ name: Retrieve New Drive Files
 
 on:
   workflow_dispatch: {}
-  # Uncomment below if you want this to also run automatically (e.g. right after Track,
-  # or on its own schedule). Left manual by default since downloads can be heavier.
-  # schedule:
-  #   - cron: '15 23 * * *'
 
 permissions:
   contents: write
@@ -13,8 +9,12 @@ permissions:
 jobs:
   retrieve:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -22,18 +22,23 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Sync latest state & assets from chore/assets
+      # Always start from the latest main
+      - name: Sync latest main state & assets
         run: |
-          mkdir -p state Assets/_Game/02_Art/Sprite Assets/_Game/03_Audio
-          git fetch origin chore/assets 2>/dev/null || true
+          git fetch origin main
 
-          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
-            git archive origin/chore/assets -- state 2>/dev/null | tar -x || true
-            git archive origin/chore/assets -- Assets/_Game/02_Art/Sprite 2>/dev/null | tar -x || true
-            git archive origin/chore/assets -- Assets/_Game/03_Audio 2>/dev/null | tar -x || true
-          else
-            echo "chore/assets branch doesn't exist yet, starting fresh."
-          fi
+          rm -rf state \
+            Assets/_Game/02_Art/Sprite \
+            Assets/_Game/03_Audio
+
+          mkdir -p \
+            state \
+            Assets/_Game/02_Art/Sprite \
+            Assets/_Game/03_Audio
+
+          git archive origin/main -- state 2>/dev/null | tar -x || true
+          git archive origin/main -- Assets/_Game/02_Art/Sprite 2>/dev/null | tar -x || true
+          git archive origin/main -- Assets/_Game/03_Audio 2>/dev/null | tar -x || true
 
       - name: Retrieve new sprite files
         run: |
@@ -55,30 +60,33 @@ jobs:
             --project-name "${{ github.repository }} (audio)" \
             --discord-webhook "${{ secrets.DISCORD_WEBHOOK_URL }}"
 
-      - name: Commit retrieved files and updated state to chore/assets
+      - name: Commit retrieved files to chore/asset
         run: |
           git config user.name "Kozeki Ui"
           git config user.email "45u35+kozeki-ui[bot]@users.noreply.github.com"
 
-          WORKTREE=/tmp/chore-assets
-          git fetch origin chore/assets 2>/dev/null || true
+          git fetch origin main
 
-          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
-            git worktree add "$WORKTREE" origin/chore/assets
-          else
-            # Branch off the current main tip (NOT --orphan) so chore/assets shares a
-            # common ancestor with main, keeping PR compares possible later if you want them.
-            git worktree add -b chore/assets "$WORKTREE" HEAD
-          fi
+          WORKTREE=/tmp/chore-asset
+
+          # Always recreate chore/asset from latest main.
+          # This avoids inheriting the broken branch history/state.
+          git branch -D chore/asset 2>/dev/null || true
+          git push origin --delete chore/asset 2>/dev/null || true
+
+          git worktree add -b chore/asset "$WORKTREE" origin/main
 
           mkdir -p \
             "$WORKTREE/state" \
             "$WORKTREE/Assets/_Game/02_Art/Sprite" \
             "$WORKTREE/Assets/_Game/03_Audio"
 
-          cp -f state/*.json "$WORKTREE/state/" 2>/dev/null || true
+          cp -f state/*.json \
+            "$WORKTREE/state/" 2>/dev/null || true
+
           cp -rf Assets/_Game/02_Art/Sprite/. \
             "$WORKTREE/Assets/_Game/02_Art/Sprite/" 2>/dev/null || true
+
           cp -rf Assets/_Game/03_Audio/. \
             "$WORKTREE/Assets/_Game/03_Audio/" 2>/dev/null || true
 
@@ -95,4 +103,4 @@ jobs:
           fi
 
           git commit -m "chore(assets): retrieve new drive files [skip ci]"
-          git push origin HEAD:chore/assets
+          git push origin HEAD:chore/asset
