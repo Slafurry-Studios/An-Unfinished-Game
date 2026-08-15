@@ -34,6 +34,10 @@ jobs:
           git archive origin/main -- state 2>/dev/null | tar -x || true
 
       - name: Check sprite folder for changes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_PERSONA: ${{ secrets.GEMINI_PERSONA }}
         run: |
           python track.py \
             --drive-folder-id "${{ secrets.DRIVE_SPRITE_FOLDER_ID }}" \
@@ -43,6 +47,10 @@ jobs:
             --project-name "${{ github.repository }} (sprite)"
 
       - name: Check audio folder for changes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_PERSONA: ${{ secrets.GEMINI_PERSONA }}
         run: |
           python track.py \
             --drive-folder-id "${{ secrets.DRIVE_AUDIO_FOLDER_ID }}" \
@@ -52,9 +60,12 @@ jobs:
             --project-name "${{ github.repository }} (audio)"
 
       - name: Commit updated state to chore/asset
+        env:
+          BOT_GIT_USERNAME: ${{ vars.BOT_GIT_USERNAME || 'Kozeki Ui' }}
+          BOT_GIT_EMAIL: ${{ vars.BOT_GIT_EMAIL || '45u35+kozeki-ui[bot]@users.noreply.github.com' }}
         run: |
-          git config user.name "Kozeki Ui"
-          git config user.email "45u35+kozeki-ui[bot]@users.noreply.github.com"
+          git config user.name "$BOT_GIT_USERNAME"
+          git config user.email "$BOT_GIT_EMAIL"
 
           git fetch origin main
 

@@ -27,6 +27,36 @@ def _lines_names(names):
     return [f"- {n}" for n in names]
 
 
+# How many filenames get surfaced to Gemini per category, so it can react to *something*
+# specific without dumping potentially huge lists into the prompt. "Secukupnya" — just enough
+# for flavor, not a full report (that's what the Discord fields above are for).
+_SAMPLE_NAMES_LIMIT = 3
+_SAMPLE_NAME_MAXLEN = 60
+
+
+def _sample_names(names, limit=_SAMPLE_NAMES_LIMIT):
+    """Turn a list of names/paths into a short 'a, b, c, +N more' string for the Gemini
+    prompt. Each name is truncated if it's absurdly long. Returns None for an empty list."""
+    names = list(names)
+    if not names:
+        return None
+    shown = [n if len(n) <= _SAMPLE_NAME_MAXLEN else n[:_SAMPLE_NAME_MAXLEN - 1] + "…" for n in names[:limit]]
+    text = ", ".join(shown)
+    remaining = len(names) - len(shown)
+    if remaining > 0:
+        text += f", +{remaining} more"
+    return text
+
+
+def _summary_part(label, items, names_fn):
+    """Build one '<label>: N (a, b, +N more)' chunk for the Gemini summary, or '<label>: 0'
+    if empty."""
+    if not items:
+        return f"{label}: 0"
+    sample = _sample_names(names_fn(items))
+    return f"{label}: {len(items)} ({sample})"
+
+
 def _chunk_by_length(lines, limit=FIELD_VALUE_LIMIT - _FIELD_BUFFER):
     """Group lines into chunks that each join to under `limit` chars."""
     chunks, current, current_len = [], [], 0
@@ -100,7 +130,7 @@ def _send_embeds(webhook_url, embeds):
 
 def send_track_notification(
     webhook_url, pair_name, new_files, changed_files, deleted_files,
-    gemini_api_key=None, gemini_model=None,
+    gemini_api_key=None, gemini_model=None, gemini_persona=None,
 ):
     """Report the result of a change check. Not sent if there are no changes at all."""
     if not (new_files or changed_files or deleted_files):
@@ -115,8 +145,13 @@ def send_track_notification(
         lines = _lines_files(deleted_files) + ["_(not deleted automatically anywhere)_"]
         fields += _fields_for(f"🗑️ Removed from Drive ({len(deleted_files)})", lines)
 
-    summary = f"{len(new_files)} new, {len(changed_files)} changed, {len(deleted_files)} removed"
-    flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model)
+    summary = (
+        f"Project: {pair_name}. "
+        + _summary_part("New", new_files, lambda fs: [f["relative_path"] for f in fs]) + "; "
+        + _summary_part("Changed", changed_files, lambda fs: [f["relative_path"] for f in fs]) + "; "
+        + _summary_part("Removed", deleted_files, lambda fs: [f["relative_path"] for f in fs])
+    )
+    flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model, gemini_persona)
 
     embeds = _split_into_embeds(f"📁 Drive update — {pair_name}", 0x4285F4, fields, flavor)
     _send_embeds(webhook_url, embeds)
@@ -124,7 +159,7 @@ def send_track_notification(
 
 def send_retrieve_notification(
     webhook_url, pair_name, retrieved_names, updated_names, skipped_names,
-    gemini_api_key=None, gemini_model=None,
+    gemini_api_key=None, gemini_model=None, gemini_persona=None,
 ):
     """Report the result of a retrieve/download run. Always fires when there's something to
     report (something downloaded, updated, and/or skipped). webhook_url is required by
@@ -149,8 +184,13 @@ def send_retrieve_notification(
             f"⏭️ Skipped, name already exists ({len(skipped_names)})", _lines_names(skipped_names)
         )
 
-    summary = f"{len(retrieved_names)} downloaded, {len(updated_names)} updated, {len(skipped_names)} skipped"
-    flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model)
+    summary = (
+        f"Project: {pair_name}. "
+        + _summary_part("Downloaded", retrieved_names, lambda ns: ns) + "; "
+        + _summary_part("Updated", updated_names, lambda ns: ns) + "; "
+        + _summary_part("Skipped", skipped_names, lambda ns: ns)
+    )
+    flavor = gemini_flavor.generate_flavor_text(gemini_api_key, summary, gemini_model, gemini_persona)
 
     embeds = _split_into_embeds(f"⬇️ Retrieve result — {pair_name}", 0x57F287, fields, flavor)
     _send_embeds(webhook_url, embeds)
