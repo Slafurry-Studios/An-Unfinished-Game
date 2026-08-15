@@ -36,6 +36,9 @@ namespace Slafurry.Player
         [SerializeField] private float groundSnapMargin = 0.05f; // extra cast distance beyond intended vertical movement
         [SerializeField] private float wallSnapMargin = 0.02f;   // extra cast distance beyond intended horizontal movement
 
+        [Header("Visual")]
+        [SerializeField] private SpriteRenderer playerSprite;
+
         private Rigidbody2D _rb;
         private Vector2 _velocity;
         private float _moveInput;
@@ -75,8 +78,16 @@ namespace Slafurry.Player
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
-
+            UpdateFacing();
             MoveAndSnap();
+        }
+
+        private void UpdateFacing()
+        {
+            if (_moveInput > 0.01f)
+                playerSprite.flipX = false;
+            else if (_moveInput < -0.01f)
+                playerSprite.flipX = true;
         }
 
         private void ApplyHorizontalMovement()

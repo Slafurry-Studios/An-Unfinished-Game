@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Slafurry.System.InputHub;
 
@@ -31,6 +32,9 @@ namespace Slafurry.Player
 
         public IInteractable CurrentTarget { get; private set; }
         public bool IsHolding => _holdTarget != null;
+
+        /// <summary>Fired the instant an interaction actually resolves — an immediate tap, or a hold reaching 100%. Used by PlayerAnimationStateMachine to trigger the Interact/Crouch_Interact clips.</summary>
+        public event Action OnInteracted;
 
         private void Start()
         {
@@ -72,6 +76,7 @@ namespace Slafurry.Player
                 var completed = _holdTarget;
                 _holdTarget = null;
                 completed.Interact();
+                OnInteracted?.Invoke();
             }
         }
 
@@ -116,6 +121,7 @@ namespace Slafurry.Player
             else
             {
                 CurrentTarget.Interact();
+                OnInteracted?.Invoke();
             }
         }
 
