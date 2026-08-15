@@ -2,7 +2,7 @@ name: Track Drive Changes
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # 07:00 WITA (UTC+8) daily. See README for how to change this.
+    - cron: '0 23 * * *'  # 07:00 WITA (UTC+8) daily
   workflow_dispatch: {}
 
 permissions:
@@ -11,8 +11,12 @@ permissions:
 jobs:
   track:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -20,15 +24,14 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Sync latest state from chore/assets
+      - name: Sync latest state from main
         run: |
+          git fetch origin main
+
+          rm -rf state
           mkdir -p state
-          git fetch origin chore/assets 2>/dev/null || true
-          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
-            git archive origin/chore/assets -- state 2>/dev/null | tar -x || true
-          else
-            echo "chore/assets branch doesn't exist yet, starting fresh."
-          fi
+
+          git archive origin/main -- state 2>/dev/null | tar -x || true
 
       - name: Check sprite folder for changes
         run: |
@@ -48,27 +51,27 @@ jobs:
             --state-file "state/audio_manifest.json" \
             --project-name "${{ github.repository }} (audio)"
 
-      - name: Commit updated state to chore/assets
+      - name: Commit updated state to chore/asset
         run: |
           git config user.name "Kozeki Ui"
           git config user.email "45u35+kozeki-ui[bot]@users.noreply.github.com"
 
-          WORKTREE=/tmp/chore-assets
-          git fetch origin chore/assets 2>/dev/null || true
+          git fetch origin main
 
-          if git show-ref --verify --quiet refs/remotes/origin/chore/assets; then
-            git worktree add "$WORKTREE" origin/chore/assets
-          else
-            # Branch off the current main tip (NOT --orphan) so chore/assets shares a
-            # common ancestor with main. Without this, GitHub can't compare/PR the two
-            # branches ("There isn't anything to compare" / unrelated histories).
-            git worktree add -b chore/assets "$WORKTREE" HEAD
-          fi
+          WORKTREE=/tmp/chore-asset
+
+          # chore/asset is disposable.
+          # Always recreate it from the latest main.
+          git branch -D chore/asset 2>/dev/null || true
+          git push origin --delete chore/asset 2>/dev/null || true
+
+          git worktree add -b chore/asset "$WORKTREE" origin/main
 
           mkdir -p "$WORKTREE/state"
           cp -f state/*.json "$WORKTREE/state/" 2>/dev/null || true
 
           cd "$WORKTREE"
+
           git add state/
 
           if git diff --cached --quiet; then
@@ -77,4 +80,4 @@ jobs:
           fi
 
           git commit -m "chore(assets): update drive state [skip ci]"
-          git push origin HEAD:chore/assets
+          git push origin HEAD:chore/asset
