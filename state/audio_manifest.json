@@ -7,9 +7,7 @@
     "name": "mus_perfectionism.ogg",
     "modifiedTime": "2026-08-13T08:37:20.000Z",
     "relative_path": "Music/Perfectionism/mus_perfectionism.ogg",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Music/Perfectionism/mus_perfectionism.ogg",
-    "downloaded_modified_time": "2026-08-13T08:37:20.000Z"
+    "retrieve_status": "downloaded"
   },
   "17fq-A9YFux1tDHWV1LIZuRN7xGd94r7P": {
     "mimeType": "audio/mpeg",
@@ -19,9 +17,7 @@
     "name": "Perfectionism preview unlooped.mp3",
     "modifiedTime": "2026-08-13T07:45:29.000Z",
     "relative_path": "Music/Perfectionism/Perfectionism preview unlooped.mp3",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Music/Perfectionism/Perfectionism preview unlooped.mp3",
-    "downloaded_modified_time": "2026-08-13T07:45:29.000Z"
+    "retrieve_status": "downloaded"
   },
   "1OOnkQarkzSyIwL1WvqNxdQfzz5Mb-A-V": {
     "mimeType": "audio/ogg",
@@ -31,9 +27,7 @@
     "name": "mus_main-gameplay.ogg",
     "modifiedTime": "2026-08-15T05:48:02.852Z",
     "relative_path": "Music/Main Gameplay/mus_main-gameplay.ogg",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Music/Main Gameplay/mus_main-gameplay.ogg",
-    "downloaded_modified_time": "2026-08-15T05:48:02.852Z"
+    "retrieve_status": "downloaded"
   },
   "1qSEaI6AWMrbNFYCKt5oK-v8TAfpPFozN": {
     "mimeType": "application/ogg",
@@ -43,8 +37,6 @@
     "name": "mus_main-menu.ogg",
     "modifiedTime": "2026-08-15T14:17:25.000Z",
     "relative_path": "Music/Main Menu/mus_main-menu.ogg",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Music/Main Menu/mus_main-menu.ogg",
-    "downloaded_modified_time": "2026-08-15T14:17:25.000Z"
+    "retrieve_status": "downloaded"
   }
 }
