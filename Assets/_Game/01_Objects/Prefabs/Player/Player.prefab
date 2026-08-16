@@ -443,9 +443,9 @@ MonoBehaviour:
   groundDeceleration: 70
   airAcceleration: 40
   airDeceleration: 30
-  jumpForce: 14
-  gravity: 35
-  maxFallSpeed: 25
+  jumpForce: 60
+  gravity: 50
+  maxFallSpeed: 40
   fallGravityMultiplier: 1.4
   groundSnapMargin: 0.05
   wallSnapMargin: 0.02
