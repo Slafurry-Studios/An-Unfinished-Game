@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,13 +9,23 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int currentHealth;
     public int CurrentHealth => currentHealth;
     public bool IsDead { get; private set; }
+    public UnityEvent OnTakeDamage;
+    public UnityEvent OnDied;
 
-    /// <summary>Fired once, the moment health hits 0. Used by PlayerAnimationStateMachine to trigger the death states.</summary>
-    public event Action OnDied;
+    [Header("Debug")]
+    [SerializeField] private bool debug = true;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+    }
+
+    void Update()
+    {
+        if (debug &&Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(10);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -27,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+
+        OnTakeDamage?.Invoke();
     }
 
     private void Die()
