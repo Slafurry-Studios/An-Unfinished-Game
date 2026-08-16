@@ -129,13 +129,11 @@ namespace Slafurry.Player.Animation
 
         private void OnEnable()
         {
-            health.OnDied += HandleDied;
             interact.OnInteracted += HandleInteracted;
         }
 
         private void OnDisable()
         {
-            health.OnDied -= HandleDied;
             interact.OnInteracted -= HandleInteracted;
         }
 
@@ -204,7 +202,7 @@ namespace Slafurry.Player.Animation
 
         private void HandleInteracted() => _interactRequested = true;
 
-        private void HandleDied()
+        public void HandleDied()
         {
             if (_isDead) return;
             _isDead = true;
