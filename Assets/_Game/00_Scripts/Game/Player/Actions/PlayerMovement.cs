@@ -7,16 +7,24 @@ namespace Slafurry.Player
     /// <summary>
     /// Core movement controller.
     ///
-    /// Uses Kinematic Rigidbody2D with custom movement/collision resolution.
-    /// External movement from other Rigidbody2D objects is also supported,
-    /// allowing the player to ride moving platforms and be pushed by moving
-    /// physics objects without switching the player to Dynamic physics.
+    /// Supports:
+    /// - Independent left/right movement control
+    /// - Movement speed multiplier
+    /// - Gravity enable/disable
+    /// - Four-direction gravity
+    /// - Jump opposite to gravity direction
+    /// - Jump enable/disable
+    /// - Crouch enable/disable
+    /// - Full control enable/disable
+    /// - Selective collider enable/disable
     ///
-    /// External motion is detected via the same raycasts used for ground /
-    /// wall snapping (not via collision callbacks). Kinematic-vs-kinematic
-    /// collision events are unreliable when the player is resting exactly
-    /// against a surface (no real overlap), which caused external motion
-    /// (moving platforms) to be missed or flicker on/off.
+    /// Gravity directions:
+    /// Down  = (0, -1)
+    /// Up    = (0,  1)
+    /// Left  = (-1, 0)
+    /// Right = (1,  0)
+    ///
+    /// Player rotates to match gravity direction.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
@@ -44,42 +52,47 @@ namespace Slafurry.Player
         [SerializeField] private float groundSnapMargin = 0.05f;
         [SerializeField] private float wallSnapMargin = 0.02f;
 
-        [Header("External Motion")]
-        [Tooltip("How much external Rigidbody2D movement is transferred to the player.")]
-        [SerializeField] private float externalMotionMultiplier = 1f;
-
-        [Tooltip("Ignore extremely small Rigidbody movement.")]
-        [SerializeField] private float minimumExternalMotion = 0.0001f;
-
-        [Tooltip("Layers containing moving platforms / physics objects.")]
-        [SerializeField] private LayerMask externalMotionMask = ~0;
-
-        [Tooltip("How far beyond the resting margin to probe for a touching ground/wall body.")]
-        [SerializeField] private float externalDetectionMargin = 0.02f;
-
         [Header("Visual")]
         [SerializeField] private SpriteRenderer playerSprite;
 
+        [Header("Gravity")]
+        [SerializeField] private Vector2 gravityDirection = Vector2.down;
+        [SerializeField] private bool gravityEnabled = true;
+
+        [Header("Control")]
+        [SerializeField] private bool leftMovementEnabled = true;
+        [SerializeField] private bool rightMovementEnabled = true;
+        [SerializeField] private bool jumpEnabled = true;
+        [SerializeField] private bool crouchEnabled = true;
+        [SerializeField] private float moveSpeedMultiplier = 1f;
+
+        [Header("Collider Control")]
+        [Tooltip("Only these colliders will be affected by EnableCollider/DisableCollider.")]
+        [SerializeField] private Collider2D[] controlledColliders;
+
         private Rigidbody2D _rb;
-        private Collider2D _collider;
 
         private Vector2 _velocity;
         private float _moveInput;
         private bool _jumpQueued;
 
-        // Last known position of each external body we're currently in
-        // contact with, used to compute per-frame delta movement.
-        private readonly Dictionary<Rigidbody2D, Vector2> _previousBodyPositions = new();
-
-        // Scratch set rebuilt every FixedUpdate: bodies detected as touching
-        // this frame. Used to prune _previousBodyPositions of stale entries.
-        private readonly HashSet<Rigidbody2D> _activeBodiesThisFrame = new();
-
-        private Vector2 _externalMotion;
+        private Quaternion _originalRotation;
 
         public bool IsGrounded { get; private set; }
         public bool IsHeadBlocked { get; private set; }
+
         public Vector2 Velocity => _velocity;
+
+        public bool GravityEnabled => gravityEnabled;
+        public Vector2 GravityDirection => gravityDirection;
+
+        public bool LeftMovementEnabled => leftMovementEnabled;
+        public bool RightMovementEnabled => rightMovementEnabled;
+
+        public bool JumpEnabled => jumpEnabled;
+        public bool CrouchEnabled => crouchEnabled;
+
+        public float MoveSpeedMultiplier => moveSpeedMultiplier;
 
         private void Awake()
         {
@@ -88,14 +101,18 @@ namespace Slafurry.Player
 
             _rb.bodyType = RigidbodyType2D.Kinematic;
 
-            // Important for Kinematic <-> Kinematic contacts.
-            _rb.useFullKinematicContacts = true;
+            _originalRotation = transform.localRotation;
+
+            gravityDirection =
+                NormalizeGravityDirection(gravityDirection);
         }
 
         private void Start()
         {
             Controls.OnMoveChanged += HandleMoveChanged;
             Controls.OnJumpPressed += HandleJumpPressed;
+
+            ApplyGravityOrientation();
         }
 
         private void OnDisable()
@@ -119,7 +136,6 @@ namespace Slafurry.Player
 
         private void FixedUpdate()
         {
-            // Use last frame's settled state for movement/jump decisions.
             IsGrounded = groundCheck.IsGrounded;
             IsHeadBlocked = headCheck.IsBlocked;
 
@@ -137,27 +153,48 @@ namespace Slafurry.Player
             PruneStaleBodyPositions();
         }
 
-        private void UpdateFacing()
-        {
-            if (_moveInput > 0.01f)
-                playerSprite.flipX = false;
-            else if (_moveInput < -0.01f)
-                playerSprite.flipX = true;
-        }
+        // =========================================================
+        // HORIZONTAL MOVEMENT
+        // =========================================================
 
         private void ApplyHorizontalMovement()
         {
-            float speedMultiplier = crouch != null ? crouch.SpeedMultiplier : 1f;
-            float targetSpeed = _moveInput * moveSpeed * speedMultiplier;
+            float input = _moveInput;
 
-            bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
+            if (input < 0f && !leftMovementEnabled)
+                input = 0f;
+
+            if (input > 0f && !rightMovementEnabled)
+                input = 0f;
+
+            float crouchMultiplier =
+                crouch != null
+                    ? crouch.SpeedMultiplier
+                    : 1f;
+
+            float targetSpeed =
+                input *
+                moveSpeed *
+                moveSpeedMultiplier *
+                crouchMultiplier;
+
+            bool accelerating =
+                Mathf.Abs(targetSpeed) > 0.01f;
 
             float rate;
 
             if (IsGrounded)
-                rate = accelerating ? groundAcceleration : groundDeceleration;
+            {
+                rate = accelerating
+                    ? groundAcceleration
+                    : groundDeceleration;
+            }
             else
-                rate = accelerating ? airAcceleration : airDeceleration;
+            {
+                rate = accelerating
+                    ? airAcceleration
+                    : airDeceleration;
+            }
 
             _velocity.x = Mathf.MoveTowards(
                 _velocity.x,
@@ -165,33 +202,87 @@ namespace Slafurry.Player
                 rate * Time.fixedDeltaTime
             );
 
-            // Do not fight a wall we're already resting against.
-            if (_velocity.x > 0f && wallCheck.IsTouchingRight)
+            if (_velocity.x > 0f &&
+                wallCheck != null &&
+                wallCheck.IsTouchingRight)
+            {
                 _velocity.x = 0f;
-            else if (_velocity.x < 0f && wallCheck.IsTouchingLeft)
+            }
+            else if (_velocity.x < 0f &&
+                     wallCheck != null &&
+                     wallCheck.IsTouchingLeft)
+            {
                 _velocity.x = 0f;
+            }
+
+            if (_velocity.x < 0f &&
+                !leftMovementEnabled)
+            {
+                _velocity.x = 0f;
+            }
+
+            if (_velocity.x > 0f &&
+                !rightMovementEnabled)
+            {
+                _velocity.x = 0f;
+            }
         }
+
+        // =========================================================
+        // GRAVITY
+        // =========================================================
 
         private void ApplyGravity()
         {
-            if (IsGrounded && _velocity.y <= 0f)
+            if (!gravityEnabled)
             {
-                _velocity.y = 0f;
+                _velocity = Vector2.zero;
+                return;
             }
-            else
-            {
-                float g = _velocity.y < 0f
+
+            Vector2 direction =
+                gravityDirection.normalized;
+
+            float velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    direction
+                );
+
+            bool movingWithGravity =
+                velocityAlongGravity > 0f;
+
+            float currentGravity =
+                movingWithGravity
                     ? gravity * fallGravityMultiplier
                     : gravity;
 
-                _velocity.y -= g * Time.fixedDeltaTime;
-                _velocity.y = Mathf.Max(_velocity.y, -maxFallSpeed);
-            }
+            _velocity +=
+                direction *
+                currentGravity *
+                Time.fixedDeltaTime;
 
-            // Ceiling hit while rising.
-            if (IsHeadBlocked && _velocity.y > 0f)
-                _velocity.y = 0f;
+            velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    direction
+                );
+
+            if (velocityAlongGravity > maxFallSpeed)
+            {
+                Vector2 perpendicularVelocity =
+                    _velocity -
+                    direction * velocityAlongGravity;
+
+                _velocity =
+                    perpendicularVelocity +
+                    direction * maxFallSpeed;
+            }
         }
+
+        // =========================================================
+        // JUMP
+        // =========================================================
 
         private void HandleJump()
         {
@@ -200,116 +291,84 @@ namespace Slafurry.Player
 
             _jumpQueued = false;
 
+            if (!jumpEnabled)
+                return;
+
             if (!IsGrounded)
                 return;
 
-            // Stand before jumping.
-            if (crouch != null && !crouch.TryStandUp())
-                return;
-
-            _velocity.y = jumpForce;
-        }
-
-        /// <summary>
-        /// Calculates movement coming from other Rigidbody2D objects the
-        /// player is currently resting against (ground and/or wall),
-        /// detected via the same raycasts used for snapping - not via
-        /// collision callbacks, which are unreliable for a kinematic body
-        /// resting exactly against a surface with no real overlap.
-        ///
-        /// Example:
-        /// Platform moves +1 X between FixedUpdates.
-        /// Player receives +1 X as external movement.
-        /// </summary>
-        private void UpdateExternalMotion()
-        {
-            _externalMotion = Vector2.zero;
-            _activeBodiesThisFrame.Clear();
-
-            if (IsGrounded)
-                AccumulateExternalMotion(GetGroundBody());
-
-            if (wallCheck.IsTouchingRight)
-                AccumulateExternalMotion(GetWallBody(1));
-
-            if (wallCheck.IsTouchingLeft)
-                AccumulateExternalMotion(GetWallBody(-1));
-        }
-
-        private Rigidbody2D GetGroundBody()
-        {
-            float checkDistance = groundSnapMargin + externalDetectionMargin;
-
-            if (groundCheck.CastGround(checkDistance, out RaycastHit2D hit))
-                return hit.rigidbody;
-
-            return null;
-        }
-
-        private Rigidbody2D GetWallBody(int direction)
-        {
-            float checkDistance = wallSnapMargin + externalDetectionMargin;
-
-            if (wallCheck.CastWall(direction, checkDistance, out RaycastHit2D hit))
-                return hit.rigidbody;
-
-            return null;
-        }
-
-        private void AccumulateExternalMotion(Rigidbody2D body)
-        {
-            if (body == null)
-                return;
-
-            if (body == _rb)
-                return;
-
-            if (!IsLayerIncluded(body.gameObject.layer))
-                return;
-
-            // Same body detected via both ground and wall checks (e.g. a
-            // corner) - don't double count its delta.
-            if (!_activeBodiesThisFrame.Add(body))
-                return;
-
-            Vector2 currentPosition = body.position;
-
-            if (!_previousBodyPositions.TryGetValue(body, out Vector2 previousPosition))
+            if (crouch != null && crouchEnabled)
             {
-                // First frame touching this body - no delta yet, just seed it.
-                _previousBodyPositions[body] = currentPosition;
-                return;
+                if (!crouch.TryStandUp())
+                    return;
             }
 
-            Vector2 delta = currentPosition - previousPosition;
+            float velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    gravityDirection
+                );
 
-            if (delta.sqrMagnitude >= minimumExternalMotion * minimumExternalMotion)
-            {
-                _externalMotion += delta * externalMotionMultiplier;
-            }
+            Vector2 gravityVelocity =
+                gravityDirection *
+                velocityAlongGravity;
 
-            _previousBodyPositions[body] = currentPosition;
+            Vector2 sidewaysVelocity =
+                _velocity -
+                gravityVelocity;
+
+            Vector2 jumpVelocity =
+                -gravityDirection *
+                jumpForce;
+
+            _velocity =
+                sidewaysVelocity +
+                jumpVelocity;
         }
 
-        private bool IsLayerIncluded(int layer)
+        // =========================================================
+        // FACING
+        // =========================================================
+
+        private void UpdateFacing()
         {
-            return (externalMotionMask.value & (1 << layer)) != 0;
+            if (playerSprite == null)
+                return;
+
+            if (_moveInput > 0.01f &&
+                rightMovementEnabled)
+            {
+                playerSprite.flipX = false;
+            }
+            else if (_moveInput < -0.01f &&
+                     leftMovementEnabled)
+            {
+                playerSprite.flipX = true;
+            }
         }
 
-        /// <summary>
-        /// Combines movement generated by the player and movement generated
-        /// by external Rigidbody2D objects.
-        /// </summary>
+        // =========================================================
+        // MOVEMENT
+        // =========================================================
+
         private void MoveAndSnap()
         {
-            Vector2 playerMove = _velocity * Time.fixedDeltaTime;
+            Vector2 move =
+                _velocity *
+                Time.fixedDeltaTime;
 
-            Vector2 totalMove = playerMove + _externalMotion;
+            float newX =
+                ResolveHorizontal(move.x);
 
-            float newX = ResolveHorizontal(totalMove.x);
-            float newY = ResolveVertical(totalMove.y);
+            float newY =
+                ResolveVertical(move.y);
 
-            _rb.MovePosition(new Vector2(newX, newY));
+            _rb.MovePosition(
+                new Vector2(
+                    newX,
+                    newY
+                )
+            );
         }
 
         private float ResolveHorizontal(float moveX)
@@ -317,12 +376,15 @@ namespace Slafurry.Player
             if (Mathf.Approximately(moveX, 0f))
                 return _rb.position.x;
 
-            int direction = moveX > 0f ? 1 : -1;
+            int direction =
+                moveX > 0f ? 1 : -1;
 
             float checkDistance =
-                Mathf.Abs(moveX) + wallSnapMargin;
+                Mathf.Abs(moveX) +
+                wallSnapMargin;
 
-            if (wallCheck.CastWall(
+            if (wallCheck != null &&
+                wallCheck.CastWall(
                     direction,
                     checkDistance,
                     out RaycastHit2D hit))
@@ -331,7 +393,9 @@ namespace Slafurry.Player
                 // another solid surface.
                 _velocity.x = 0f;
 
-                return _rb.position.x + direction * hit.distance;
+                return _rb.position.x +
+                       direction *
+                       hit.distance;
             }
 
             return _rb.position.x + moveX;
@@ -342,26 +406,324 @@ namespace Slafurry.Player
             if (Mathf.Approximately(moveY, 0f))
                 return _rb.position.y;
 
-            // Moving upward.
-            if (moveY > 0f)
+            /*
+             * GroundCheck tetap sederhana dan melakukan
+             * pengecekan ke bawah.
+             *
+             * Jadi snap hanya berlaku untuk gravity ke bawah.
+             */
+
+            if (gravityDirection == Vector2.down &&
+                moveY < 0f)
             {
-                // HeadCheck handles ceiling collision.
-                return _rb.position.y + moveY;
-            }
+                float checkDistance =
+                    Mathf.Abs(moveY) +
+                    groundSnapMargin;
 
-            float checkDistance =
-                Mathf.Abs(moveY) + groundSnapMargin;
+                if (groundCheck != null &&
+                    groundCheck.CastGround(
+                        checkDistance,
+                        out RaycastHit2D hit))
+                {
+                    _velocity.y = 0f;
 
-            if (groundCheck.CastGround(
-                    checkDistance,
-                    out RaycastHit2D hit))
-            {
-                _velocity.y = 0f;
-
-                return _rb.position.y - hit.distance;
+                    return _rb.position.y -
+                           hit.distance;
+                }
             }
 
             return _rb.position.y + moveY;
+        }
+
+        // =========================================================
+        // GRAVITY DIRECTION
+        // =========================================================
+
+        private Vector2 NormalizeGravityDirection(
+            Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f)
+                return Vector2.down;
+
+            return direction.normalized;
+        }
+
+        private void ApplyGravityOrientation()
+        {
+            Vector2 direction =
+                gravityDirection.normalized;
+
+            /*
+             * Gravity:
+             *
+             * Down  ->   0°
+             * Right -> -90°
+             * Up    -> 180°
+             * Left  ->  90°
+             */
+
+            float angle =
+                Mathf.Atan2(
+                    direction.y,
+                    direction.x
+                ) *
+                Mathf.Rad2Deg +
+                90f;
+
+            transform.localRotation =
+                _originalRotation *
+                Quaternion.Euler(
+                    0f,
+                    0f,
+                    angle
+                );
+        }
+
+        public void SetGravityDirection(
+            Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f)
+                return;
+
+            gravityDirection =
+                NormalizeGravityDirection(direction);
+
+            _velocity = Vector2.zero;
+
+            ApplyGravityOrientation();
+        }
+
+        // =========================================================
+        // GRAVITY PRESETS
+        // =========================================================
+
+        public void SetGravityDown()
+        {
+            SetGravityDirection(Vector2.down);
+        }
+
+        public void SetGravityUp()
+        {
+            SetGravityDirection(Vector2.up);
+        }
+
+        public void SetGravityLeft()
+        {
+            SetGravityDirection(Vector2.left);
+        }
+
+        public void SetGravityRight()
+        {
+            SetGravityDirection(Vector2.right);
+        }
+
+        public void RotateGravityClockwise()
+        {
+            Vector2 direction =
+                new Vector2(
+                    gravityDirection.y,
+                    -gravityDirection.x
+                );
+
+            SetGravityDirection(direction);
+        }
+
+        public void RotateGravityCounterClockwise()
+        {
+            Vector2 direction =
+                new Vector2(
+                    -gravityDirection.y,
+                    gravityDirection.x
+                );
+
+            SetGravityDirection(direction);
+        }
+
+        // =========================================================
+        // GRAVITY ENABLE
+        // =========================================================
+
+        public void SetGravityEnabled(bool enabled)
+        {
+            gravityEnabled = enabled;
+
+            if (!enabled)
+                _velocity = Vector2.zero;
+        }
+
+        public void EnableGravity()
+        {
+            SetGravityEnabled(true);
+        }
+
+        public void DisableGravity()
+        {
+            SetGravityEnabled(false);
+        }
+
+        // =========================================================
+        // LEFT MOVEMENT
+        // =========================================================
+
+        public void SetLeftMovementEnabled(bool enabled)
+        {
+            leftMovementEnabled = enabled;
+
+            if (!enabled &&
+                _velocity.x < 0f)
+            {
+                _velocity.x = 0f;
+            }
+        }
+
+        public void EnableLeftMovement()
+        {
+            SetLeftMovementEnabled(true);
+        }
+
+        public void DisableLeftMovement()
+        {
+            SetLeftMovementEnabled(false);
+        }
+
+        // =========================================================
+        // RIGHT MOVEMENT
+        // =========================================================
+
+        public void SetRightMovementEnabled(bool enabled)
+        {
+            rightMovementEnabled = enabled;
+
+            if (!enabled &&
+                _velocity.x > 0f)
+            {
+                _velocity.x = 0f;
+            }
+        }
+
+        public void EnableRightMovement()
+        {
+            SetRightMovementEnabled(true);
+        }
+
+        public void DisableRightMovement()
+        {
+            SetRightMovementEnabled(false);
+        }
+
+        // =========================================================
+        // SPEED
+        // =========================================================
+
+        public void SetMoveSpeedMultiplier(float multiplier)
+        {
+            moveSpeedMultiplier =
+                Mathf.Max(0f, multiplier);
+        }
+
+        public void ResetMoveSpeedMultiplier()
+        {
+            moveSpeedMultiplier = 1f;
+        }
+
+        // =========================================================
+        // JUMP
+        // =========================================================
+
+        public void SetJumpEnabled(bool enabled)
+        {
+            jumpEnabled = enabled;
+
+            if (!enabled)
+                _jumpQueued = false;
+        }
+
+        public void EnableJump()
+        {
+            SetJumpEnabled(true);
+        }
+
+        public void DisableJump()
+        {
+            SetJumpEnabled(false);
+        }
+
+        // =========================================================
+        // CROUCH
+        // =========================================================
+
+        public void SetCrouchEnabled(bool enabled)
+        {
+            crouchEnabled = enabled;
+        }
+
+        public void EnableCrouch()
+        {
+            SetCrouchEnabled(true);
+        }
+
+        public void DisableCrouch()
+        {
+            SetCrouchEnabled(false);
+        }
+
+        // =========================================================
+        // COLLIDER CONTROL
+        // =========================================================
+
+        /// <summary>
+        /// Enables or disables only the colliders assigned
+        /// to Controlled Colliders.
+        /// </summary>
+        public void SetCollidersEnabled(bool enabled)
+        {
+            if (controlledColliders == null)
+                return;
+
+            foreach (Collider2D collider in controlledColliders)
+            {
+                if (collider != null)
+                    collider.enabled = enabled;
+            }
+        }
+
+        public void EnableColliders()
+        {
+            SetCollidersEnabled(true);
+        }
+
+        public void DisableColliders()
+        {
+            SetCollidersEnabled(false);
+        }
+
+        // =========================================================
+        // ALL CONTROL
+        // =========================================================
+
+        public void SetControlEnabled(bool enabled)
+        {
+            leftMovementEnabled = enabled;
+            rightMovementEnabled = enabled;
+            gravityEnabled = enabled;
+            jumpEnabled = enabled;
+            crouchEnabled = enabled;
+
+            if (!enabled)
+            {
+                _velocity = Vector2.zero;
+                _jumpQueued = false;
+            }
+        }
+
+        public void EnableControl()
+        {
+            SetControlEnabled(true);
+        }
+
+        public void DisableControl()
+        {
+            SetControlEnabled(false);
         }
 
         private void PruneStaleBodyPositions()
