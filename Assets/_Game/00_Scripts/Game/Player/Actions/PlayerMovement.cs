@@ -1,14 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Slafurry.System.InputHub;
 
 namespace Slafurry.Player
 {
     /// <summary>
-    /// Core movement controller. Kinematic (manual) physics — Rigidbody2D is
-    /// only used in Kinematic mode so trigger/collision events keep working
-    /// (enemy detection, pickups, etc.), but all motion is computed here and
-    /// applied via Rigidbody2D.MovePosition, with the player snapped exactly
-    /// onto ground/wall surfaces each frame instead of overshooting into them.
+    /// Core movement controller.
+    ///
+    /// Uses Kinematic Rigidbody2D with custom movement/collision resolution.
+    /// External movement from other Rigidbody2D objects is also supported,
+    /// allowing the player to ride moving platforms and be pushed by moving
+    /// physics objects without switching the player to Dynamic physics.
+    ///
+    /// External motion is detected via the same raycasts used for ground /
+    /// wall snapping (not via collision callbacks). Kinematic-vs-kinematic
+    /// collision events are unreliable when the player is resting exactly
+    /// against a surface (no real overlap), which caused external motion
+    /// (moving platforms) to be missed or flicker on/off.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
@@ -30,19 +38,44 @@ namespace Slafurry.Player
         [SerializeField] private float jumpForce = 14f;
         [SerializeField] private float gravity = 35f;
         [SerializeField] private float maxFallSpeed = 25f;
-        [SerializeField] private float fallGravityMultiplier = 1.4f; // snappier descent
+        [SerializeField] private float fallGravityMultiplier = 1.4f;
 
         [Header("Snap Settings")]
-        [SerializeField] private float groundSnapMargin = 0.05f; // extra cast distance beyond intended vertical movement
-        [SerializeField] private float wallSnapMargin = 0.02f;   // extra cast distance beyond intended horizontal movement
+        [SerializeField] private float groundSnapMargin = 0.05f;
+        [SerializeField] private float wallSnapMargin = 0.02f;
+
+        [Header("External Motion")]
+        [Tooltip("How much external Rigidbody2D movement is transferred to the player.")]
+        [SerializeField] private float externalMotionMultiplier = 1f;
+
+        [Tooltip("Ignore extremely small Rigidbody movement.")]
+        [SerializeField] private float minimumExternalMotion = 0.0001f;
+
+        [Tooltip("Layers containing moving platforms / physics objects.")]
+        [SerializeField] private LayerMask externalMotionMask = ~0;
+
+        [Tooltip("How far beyond the resting margin to probe for a touching ground/wall body.")]
+        [SerializeField] private float externalDetectionMargin = 0.02f;
 
         [Header("Visual")]
         [SerializeField] private SpriteRenderer playerSprite;
 
         private Rigidbody2D _rb;
+        private Collider2D _collider;
+
         private Vector2 _velocity;
         private float _moveInput;
         private bool _jumpQueued;
+
+        // Last known position of each external body we're currently in
+        // contact with, used to compute per-frame delta movement.
+        private readonly Dictionary<Rigidbody2D, Vector2> _previousBodyPositions = new();
+
+        // Scratch set rebuilt every FixedUpdate: bodies detected as touching
+        // this frame. Used to prune _previousBodyPositions of stale entries.
+        private readonly HashSet<Rigidbody2D> _activeBodiesThisFrame = new();
+
+        private Vector2 _externalMotion;
 
         public bool IsGrounded { get; private set; }
         public bool IsHeadBlocked { get; private set; }
@@ -51,7 +84,12 @@ namespace Slafurry.Player
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
+
             _rb.bodyType = RigidbodyType2D.Kinematic;
+
+            // Important for Kinematic <-> Kinematic contacts.
+            _rb.useFullKinematicContacts = true;
         }
 
         private void Start()
@@ -64,22 +102,39 @@ namespace Slafurry.Player
         {
             Controls.OnMoveChanged -= HandleMoveChanged;
             Controls.OnJumpPressed -= HandleJumpPressed;
+
+            _activeBodiesThisFrame.Clear();
+            _previousBodyPositions.Clear();
         }
 
-        private void HandleMoveChanged(Vector2 input) => _moveInput = input.x;
-        private void HandleJumpPressed() => _jumpQueued = true;
+        private void HandleMoveChanged(Vector2 input)
+        {
+            _moveInput = input.x;
+        }
+
+        private void HandleJumpPressed()
+        {
+            _jumpQueued = true;
+        }
 
         private void FixedUpdate()
         {
-            // Use last frame's settled ground state for movement/jump decisions.
+            // Use last frame's settled state for movement/jump decisions.
             IsGrounded = groundCheck.IsGrounded;
             IsHeadBlocked = headCheck.IsBlocked;
+
+            // Detect movement produced by other Rigidbody2D objects we are
+            // currently resting against (ground and/or wall).
+            UpdateExternalMotion();
 
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
             UpdateFacing();
+
             MoveAndSnap();
+
+            PruneStaleBodyPositions();
         }
 
         private void UpdateFacing()
@@ -94,19 +149,23 @@ namespace Slafurry.Player
         {
             float speedMultiplier = crouch != null ? crouch.SpeedMultiplier : 1f;
             float targetSpeed = _moveInput * moveSpeed * speedMultiplier;
+
             bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
 
             float rate;
+
             if (IsGrounded)
                 rate = accelerating ? groundAcceleration : groundDeceleration;
             else
                 rate = accelerating ? airAcceleration : airDeceleration;
 
-            _velocity.x = Mathf.MoveTowards(_velocity.x, targetSpeed, rate * Time.fixedDeltaTime);
+            _velocity.x = Mathf.MoveTowards(
+                _velocity.x,
+                targetSpeed,
+                rate * Time.fixedDeltaTime
+            );
 
-            // Stop pushing into a wall we're already resting against —
-            // prevents wasted acceleration buildup that would otherwise
-            // "let go" instantly once the wall is no longer there.
+            // Do not fight a wall we're already resting against.
             if (_velocity.x > 0f && wallCheck.IsTouchingRight)
                 _velocity.x = 0f;
             else if (_velocity.x < 0f && wallCheck.IsTouchingLeft)
@@ -121,26 +180,30 @@ namespace Slafurry.Player
             }
             else
             {
-                float g = _velocity.y < 0f ? gravity * fallGravityMultiplier : gravity;
+                float g = _velocity.y < 0f
+                    ? gravity * fallGravityMultiplier
+                    : gravity;
+
                 _velocity.y -= g * Time.fixedDeltaTime;
                 _velocity.y = Mathf.Max(_velocity.y, -maxFallSpeed);
             }
 
-            // Ceiling hit while rising: stop upward motion instead of clipping through
+            // Ceiling hit while rising.
             if (IsHeadBlocked && _velocity.y > 0f)
                 _velocity.y = 0f;
         }
 
         private void HandleJump()
         {
-            if (!_jumpQueued) return;
+            if (!_jumpQueued)
+                return;
+
             _jumpQueued = false;
 
-            if (!IsGrounded) return; // no double jump for now
+            if (!IsGrounded)
+                return;
 
-            // Never launch airborne while still in the crouch collider —
-            // stand up first. If a low ceiling prevents standing, there's
-            // no headroom to jump into either, so skip the jump entirely.
+            // Stand before jumping.
             if (crouch != null && !crouch.TryStandUp())
                 return;
 
@@ -148,15 +211,103 @@ namespace Slafurry.Player
         }
 
         /// <summary>
-        /// Moves the player and, if approaching a wall or the ground, snaps
-        /// the position exactly onto the surface instead of moving the full
-        /// velocity-based distance and potentially clipping through it.
+        /// Calculates movement coming from other Rigidbody2D objects the
+        /// player is currently resting against (ground and/or wall),
+        /// detected via the same raycasts used for snapping - not via
+        /// collision callbacks, which are unreliable for a kinematic body
+        /// resting exactly against a surface with no real overlap.
+        ///
+        /// Example:
+        /// Platform moves +1 X between FixedUpdates.
+        /// Player receives +1 X as external movement.
+        /// </summary>
+        private void UpdateExternalMotion()
+        {
+            _externalMotion = Vector2.zero;
+            _activeBodiesThisFrame.Clear();
+
+            if (IsGrounded)
+                AccumulateExternalMotion(GetGroundBody());
+
+            if (wallCheck.IsTouchingRight)
+                AccumulateExternalMotion(GetWallBody(1));
+
+            if (wallCheck.IsTouchingLeft)
+                AccumulateExternalMotion(GetWallBody(-1));
+        }
+
+        private Rigidbody2D GetGroundBody()
+        {
+            float checkDistance = groundSnapMargin + externalDetectionMargin;
+
+            if (groundCheck.CastGround(checkDistance, out RaycastHit2D hit))
+                return hit.rigidbody;
+
+            return null;
+        }
+
+        private Rigidbody2D GetWallBody(int direction)
+        {
+            float checkDistance = wallSnapMargin + externalDetectionMargin;
+
+            if (wallCheck.CastWall(direction, checkDistance, out RaycastHit2D hit))
+                return hit.rigidbody;
+
+            return null;
+        }
+
+        private void AccumulateExternalMotion(Rigidbody2D body)
+        {
+            if (body == null)
+                return;
+
+            if (body == _rb)
+                return;
+
+            if (!IsLayerIncluded(body.gameObject.layer))
+                return;
+
+            // Same body detected via both ground and wall checks (e.g. a
+            // corner) - don't double count its delta.
+            if (!_activeBodiesThisFrame.Add(body))
+                return;
+
+            Vector2 currentPosition = body.position;
+
+            if (!_previousBodyPositions.TryGetValue(body, out Vector2 previousPosition))
+            {
+                // First frame touching this body - no delta yet, just seed it.
+                _previousBodyPositions[body] = currentPosition;
+                return;
+            }
+
+            Vector2 delta = currentPosition - previousPosition;
+
+            if (delta.sqrMagnitude >= minimumExternalMotion * minimumExternalMotion)
+            {
+                _externalMotion += delta * externalMotionMultiplier;
+            }
+
+            _previousBodyPositions[body] = currentPosition;
+        }
+
+        private bool IsLayerIncluded(int layer)
+        {
+            return (externalMotionMask.value & (1 << layer)) != 0;
+        }
+
+        /// <summary>
+        /// Combines movement generated by the player and movement generated
+        /// by external Rigidbody2D objects.
         /// </summary>
         private void MoveAndSnap()
         {
-            Vector2 move = _velocity * Time.fixedDeltaTime;
-            float newX = ResolveHorizontal(move.x);
-            float newY = ResolveVertical(move.y);
+            Vector2 playerMove = _velocity * Time.fixedDeltaTime;
+
+            Vector2 totalMove = playerMove + _externalMotion;
+
+            float newX = ResolveHorizontal(totalMove.x);
+            float newY = ResolveVertical(totalMove.y);
 
             _rb.MovePosition(new Vector2(newX, newY));
         }
@@ -167,11 +318,19 @@ namespace Slafurry.Player
                 return _rb.position.x;
 
             int direction = moveX > 0f ? 1 : -1;
-            float checkDistance = Mathf.Abs(moveX) + wallSnapMargin;
 
-            if (wallCheck.CastWall(direction, checkDistance, out RaycastHit2D hit))
+            float checkDistance =
+                Mathf.Abs(moveX) + wallSnapMargin;
+
+            if (wallCheck.CastWall(
+                    direction,
+                    checkDistance,
+                    out RaycastHit2D hit))
             {
+                // External object is allowed to push us until we hit
+                // another solid surface.
                 _velocity.x = 0f;
+
                 return _rb.position.x + direction * hit.distance;
             }
 
@@ -180,18 +339,45 @@ namespace Slafurry.Player
 
         private float ResolveVertical(float moveY)
         {
+            if (Mathf.Approximately(moveY, 0f))
+                return _rb.position.y;
+
+            // Moving upward.
             if (moveY > 0f)
-                return _rb.position.y + moveY; // rising, no ground snap needed (head check handles ceiling)
+            {
+                // HeadCheck handles ceiling collision.
+                return _rb.position.y + moveY;
+            }
 
-            float checkDistance = Mathf.Abs(moveY) + groundSnapMargin;
+            float checkDistance =
+                Mathf.Abs(moveY) + groundSnapMargin;
 
-            if (groundCheck.CastGround(checkDistance, out RaycastHit2D hit))
+            if (groundCheck.CastGround(
+                    checkDistance,
+                    out RaycastHit2D hit))
             {
                 _velocity.y = 0f;
+
                 return _rb.position.y - hit.distance;
             }
 
             return _rb.position.y + moveY;
+        }
+
+        private void PruneStaleBodyPositions()
+        {
+            List<Rigidbody2D> bodiesToRemove = new();
+
+            foreach (Rigidbody2D body in _previousBodyPositions.Keys)
+            {
+                if (body == null || !_activeBodiesThisFrame.Contains(body))
+                    bodiesToRemove.Add(body);
+            }
+
+            foreach (Rigidbody2D body in bodiesToRemove)
+            {
+                _previousBodyPositions.Remove(body);
+            }
         }
     }
 }
