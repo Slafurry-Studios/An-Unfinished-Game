@@ -4,11 +4,25 @@ using Slafurry.System.InputHub;
 namespace Slafurry.Player
 {
     /// <summary>
-    /// Core movement controller. Kinematic (manual) physics — Rigidbody2D is
-    /// only used in Kinematic mode so trigger/collision events keep working
-    /// (enemy detection, pickups, etc.), but all motion is computed here and
-    /// applied via Rigidbody2D.MovePosition, with the player snapped exactly
-    /// onto ground/wall surfaces each frame instead of overshooting into them.
+    /// Core movement controller.
+    ///
+    /// Supports:
+    /// - Independent left/right movement control
+    /// - Movement speed multiplier
+    /// - Gravity enable/disable
+    /// - Four-direction gravity
+    /// - Jump opposite to gravity direction
+    /// - Jump enable/disable
+    /// - Crouch enable/disable
+    /// - Full control enable/disable
+    ///
+    /// Gravity directions:
+    /// Down  = (0, -1)
+    /// Up    = (0,  1)
+    /// Left  = (-1, 0)
+    /// Right = (1,  0)
+    ///
+    /// Player rotates to match gravity direction.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
@@ -30,34 +44,68 @@ namespace Slafurry.Player
         [SerializeField] private float jumpForce = 14f;
         [SerializeField] private float gravity = 35f;
         [SerializeField] private float maxFallSpeed = 25f;
-        [SerializeField] private float fallGravityMultiplier = 1.4f; // snappier descent
+        [SerializeField] private float fallGravityMultiplier = 1.4f;
 
         [Header("Snap Settings")]
-        [SerializeField] private float groundSnapMargin = 0.05f; // extra cast distance beyond intended vertical movement
-        [SerializeField] private float wallSnapMargin = 0.02f;   // extra cast distance beyond intended horizontal movement
+        [SerializeField] private float groundSnapMargin = 0.05f;
+        [SerializeField] private float wallSnapMargin = 0.02f;
 
         [Header("Visual")]
         [SerializeField] private SpriteRenderer playerSprite;
 
+        [Header("Gravity")]
+        [SerializeField] private Vector2 gravityDirection = Vector2.down;
+        [SerializeField] private bool gravityEnabled = true;
+
+        [Header("Control")]
+        [SerializeField] private bool leftMovementEnabled = true;
+        [SerializeField] private bool rightMovementEnabled = true;
+        [SerializeField] private bool jumpEnabled = true;
+        [SerializeField] private bool crouchEnabled = true;
+
+        [SerializeField] private float moveSpeedMultiplier = 1f;
+
         private Rigidbody2D _rb;
+
         private Vector2 _velocity;
         private float _moveInput;
         private bool _jumpQueued;
 
+        private Quaternion _originalRotation;
+
         public bool IsGrounded { get; private set; }
         public bool IsHeadBlocked { get; private set; }
+
         public Vector2 Velocity => _velocity;
+
+        public bool GravityEnabled => gravityEnabled;
+        public Vector2 GravityDirection => gravityDirection;
+
+        public bool LeftMovementEnabled => leftMovementEnabled;
+        public bool RightMovementEnabled => rightMovementEnabled;
+
+        public bool JumpEnabled => jumpEnabled;
+        public bool CrouchEnabled => crouchEnabled;
+
+        public float MoveSpeedMultiplier => moveSpeedMultiplier;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _rb.bodyType = RigidbodyType2D.Kinematic;
+
+            _originalRotation = transform.localRotation;
+
+            gravityDirection =
+                NormalizeGravityDirection(gravityDirection);
         }
 
         private void Start()
         {
             Controls.OnMoveChanged += HandleMoveChanged;
             Controls.OnJumpPressed += HandleJumpPressed;
+
+            ApplyGravityOrientation();
         }
 
         private void OnDisable()
@@ -66,12 +114,18 @@ namespace Slafurry.Player
             Controls.OnJumpPressed -= HandleJumpPressed;
         }
 
-        private void HandleMoveChanged(Vector2 input) => _moveInput = input.x;
-        private void HandleJumpPressed() => _jumpQueued = true;
+        private void HandleMoveChanged(Vector2 input)
+        {
+            _moveInput = input.x;
+        }
+
+        private void HandleJumpPressed()
+        {
+            _jumpQueued = true;
+        }
 
         private void FixedUpdate()
         {
-            // Use last frame's settled ground state for movement/jump decisions.
             IsGrounded = groundCheck.IsGrounded;
             IsHeadBlocked = headCheck.IsBlocked;
 
@@ -82,83 +136,228 @@ namespace Slafurry.Player
             MoveAndSnap();
         }
 
-        private void UpdateFacing()
-        {
-            if (_moveInput > 0.01f)
-                playerSprite.flipX = false;
-            else if (_moveInput < -0.01f)
-                playerSprite.flipX = true;
-        }
+        // =========================================================
+        // HORIZONTAL MOVEMENT
+        // =========================================================
 
         private void ApplyHorizontalMovement()
         {
-            float speedMultiplier = crouch != null ? crouch.SpeedMultiplier : 1f;
-            float targetSpeed = _moveInput * moveSpeed * speedMultiplier;
-            bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
+            float input = _moveInput;
+
+            if (input < 0f && !leftMovementEnabled)
+                input = 0f;
+
+            if (input > 0f && !rightMovementEnabled)
+                input = 0f;
+
+            float crouchMultiplier =
+                crouch != null
+                    ? crouch.SpeedMultiplier
+                    : 1f;
+
+            float targetSpeed =
+                input *
+                moveSpeed *
+                moveSpeedMultiplier *
+                crouchMultiplier;
+
+            bool accelerating =
+                Mathf.Abs(targetSpeed) > 0.01f;
 
             float rate;
+
             if (IsGrounded)
-                rate = accelerating ? groundAcceleration : groundDeceleration;
+            {
+                rate = accelerating
+                    ? groundAcceleration
+                    : groundDeceleration;
+            }
             else
-                rate = accelerating ? airAcceleration : airDeceleration;
+            {
+                rate = accelerating
+                    ? airAcceleration
+                    : airDeceleration;
+            }
 
-            _velocity.x = Mathf.MoveTowards(_velocity.x, targetSpeed, rate * Time.fixedDeltaTime);
+            _velocity.x = Mathf.MoveTowards(
+                _velocity.x,
+                targetSpeed,
+                rate * Time.fixedDeltaTime
+            );
 
-            // Stop pushing into a wall we're already resting against —
-            // prevents wasted acceleration buildup that would otherwise
-            // "let go" instantly once the wall is no longer there.
-            if (_velocity.x > 0f && wallCheck.IsTouchingRight)
+            if (_velocity.x > 0f &&
+                wallCheck != null &&
+                wallCheck.IsTouchingRight)
+            {
                 _velocity.x = 0f;
-            else if (_velocity.x < 0f && wallCheck.IsTouchingLeft)
+            }
+            else if (_velocity.x < 0f &&
+                     wallCheck != null &&
+                     wallCheck.IsTouchingLeft)
+            {
                 _velocity.x = 0f;
+            }
+
+            if (_velocity.x < 0f &&
+                !leftMovementEnabled)
+            {
+                _velocity.x = 0f;
+            }
+
+            if (_velocity.x > 0f &&
+                !rightMovementEnabled)
+            {
+                _velocity.x = 0f;
+            }
         }
+
+        // =========================================================
+        // GRAVITY
+        // =========================================================
 
         private void ApplyGravity()
         {
-            if (IsGrounded && _velocity.y <= 0f)
+            if (!gravityEnabled)
             {
-                _velocity.y = 0f;
-            }
-            else
-            {
-                float g = _velocity.y < 0f ? gravity * fallGravityMultiplier : gravity;
-                _velocity.y -= g * Time.fixedDeltaTime;
-                _velocity.y = Mathf.Max(_velocity.y, -maxFallSpeed);
+                _velocity = Vector2.zero;
+                return;
             }
 
-            // Ceiling hit while rising: stop upward motion instead of clipping through
-            if (IsHeadBlocked && _velocity.y > 0f)
-                _velocity.y = 0f;
+            Vector2 direction =
+                gravityDirection.normalized;
+
+            // Velocity yang searah dengan gravity.
+            float velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    direction
+                );
+
+            bool movingWithGravity =
+                velocityAlongGravity > 0f;
+
+            float currentGravity =
+                movingWithGravity
+                    ? gravity * fallGravityMultiplier
+                    : gravity;
+
+            _velocity +=
+                direction *
+                currentGravity *
+                Time.fixedDeltaTime;
+
+            // Hitung ulang velocity searah gravity
+            // setelah gravity diterapkan.
+            velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    direction
+                );
+
+            // Batasi kecepatan jatuh.
+            if (velocityAlongGravity > maxFallSpeed)
+            {
+                Vector2 perpendicularVelocity =
+                    _velocity -
+                    direction * velocityAlongGravity;
+
+                _velocity =
+                    perpendicularVelocity +
+                    direction * maxFallSpeed;
+            }
         }
+
+        // =========================================================
+        // JUMP
+        // =========================================================
 
         private void HandleJump()
         {
-            if (!_jumpQueued) return;
-            _jumpQueued = false;
-
-            if (!IsGrounded) return; // no double jump for now
-
-            // Never launch airborne while still in the crouch collider —
-            // stand up first. If a low ceiling prevents standing, there's
-            // no headroom to jump into either, so skip the jump entirely.
-            if (crouch != null && !crouch.TryStandUp())
+            if (!_jumpQueued)
                 return;
 
-            _velocity.y = jumpForce;
+            _jumpQueued = false;
+
+            if (!jumpEnabled)
+                return;
+
+            if (!IsGrounded)
+                return;
+
+            if (crouch != null && crouchEnabled)
+            {
+                if (!crouch.TryStandUp())
+                    return;
+            }
+
+            // Ambil velocity yang tegak lurus terhadap gravity.
+            float velocityAlongGravity =
+                Vector2.Dot(
+                    _velocity,
+                    gravityDirection
+                );
+
+            Vector2 gravityVelocity =
+                gravityDirection *
+                velocityAlongGravity;
+
+            Vector2 sidewaysVelocity =
+                _velocity -
+                gravityVelocity;
+
+            // Jump selalu berlawanan dengan gravity.
+            Vector2 jumpVelocity =
+                -gravityDirection *
+                jumpForce;
+
+            _velocity =
+                sidewaysVelocity +
+                jumpVelocity;
         }
 
-        /// <summary>
-        /// Moves the player and, if approaching a wall or the ground, snaps
-        /// the position exactly onto the surface instead of moving the full
-        /// velocity-based distance and potentially clipping through it.
-        /// </summary>
+        // =========================================================
+        // FACING
+        // =========================================================
+
+        private void UpdateFacing()
+        {
+            if (playerSprite == null)
+                return;
+
+            if (_moveInput > 0.01f &&
+                rightMovementEnabled)
+            {
+                playerSprite.flipX = false;
+            }
+            else if (_moveInput < -0.01f &&
+                     leftMovementEnabled)
+            {
+                playerSprite.flipX = true;
+            }
+        }
+
+        // =========================================================
+        // MOVEMENT
+        // =========================================================
+
         private void MoveAndSnap()
         {
-            Vector2 move = _velocity * Time.fixedDeltaTime;
-            float newX = ResolveHorizontal(move.x);
-            float newY = ResolveVertical(move.y);
+            Vector2 move =
+                _velocity *
+                Time.fixedDeltaTime;
 
-            _rb.MovePosition(new Vector2(newX, newY));
+            float newX =
+                ResolveHorizontal(move.x);
+
+            float newY =
+                ResolveVertical(move.y);
+
+            _rb.MovePosition(
+                new Vector2(
+                    newX,
+                    newY
+                )
+            );
         }
 
         private float ResolveHorizontal(float moveX)
@@ -166,13 +365,24 @@ namespace Slafurry.Player
             if (Mathf.Approximately(moveX, 0f))
                 return _rb.position.x;
 
-            int direction = moveX > 0f ? 1 : -1;
-            float checkDistance = Mathf.Abs(moveX) + wallSnapMargin;
+            int direction =
+                moveX > 0f ? 1 : -1;
 
-            if (wallCheck.CastWall(direction, checkDistance, out RaycastHit2D hit))
+            float checkDistance =
+                Mathf.Abs(moveX) +
+                wallSnapMargin;
+
+            if (wallCheck != null &&
+                wallCheck.CastWall(
+                    direction,
+                    checkDistance,
+                    out RaycastHit2D hit))
             {
                 _velocity.x = 0f;
-                return _rb.position.x + direction * hit.distance;
+
+                return _rb.position.x +
+                       direction *
+                       hit.distance;
             }
 
             return _rb.position.x + moveX;
@@ -180,18 +390,318 @@ namespace Slafurry.Player
 
         private float ResolveVertical(float moveY)
         {
-            if (moveY > 0f)
-                return _rb.position.y + moveY; // rising, no ground snap needed (head check handles ceiling)
+            if (Mathf.Approximately(moveY, 0f))
+                return _rb.position.y;
 
-            float checkDistance = Mathf.Abs(moveY) + groundSnapMargin;
+            /*
+             * GroundCheck kamu tetap sederhana:
+             *
+             * CircleCast selalu ke bawah.
+             *
+             * Jadi snap ground hanya dilakukan untuk
+             * gravity normal/down.
+             *
+             * Untuk gravity kiri/kanan/atas, movement tetap
+             * mengikuti gravity direction, tetapi sistem
+             * ground snap belum directional.
+             */
 
-            if (groundCheck.CastGround(checkDistance, out RaycastHit2D hit))
+            if (gravityDirection == Vector2.down &&
+                moveY < 0f)
             {
-                _velocity.y = 0f;
-                return _rb.position.y - hit.distance;
+                float checkDistance =
+                    Mathf.Abs(moveY) +
+                    groundSnapMargin;
+
+                if (groundCheck != null &&
+                    groundCheck.CastGround(
+                        checkDistance,
+                        out RaycastHit2D hit))
+                {
+                    _velocity.y = 0f;
+
+                    return _rb.position.y -
+                           hit.distance;
+                }
             }
 
             return _rb.position.y + moveY;
+        }
+
+        // =========================================================
+        // GRAVITY DIRECTION
+        // =========================================================
+
+        private Vector2 NormalizeGravityDirection(
+            Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f)
+                return Vector2.down;
+
+            return direction.normalized;
+        }
+
+        private void ApplyGravityOrientation()
+        {
+            Vector2 direction =
+                gravityDirection.normalized;
+
+            /*
+             * Gravity:
+             *
+             * Down  ->   0°
+             * Right -> -90°
+             * Up    -> 180°
+             * Left  ->  90°
+             */
+
+            float angle =
+                Mathf.Atan2(
+                    direction.y,
+                    direction.x
+                ) *
+                Mathf.Rad2Deg +
+                90f;
+
+            transform.localRotation =
+                _originalRotation *
+                Quaternion.Euler(
+                    0f,
+                    0f,
+                    angle
+                );
+        }
+
+        public void SetGravityDirection(
+            Vector2 direction)
+        {
+            if (direction.sqrMagnitude < 0.001f)
+                return;
+
+            gravityDirection =
+                NormalizeGravityDirection(direction);
+
+            _velocity = Vector2.zero;
+
+            ApplyGravityOrientation();
+        }
+
+        // =========================================================
+        // GRAVITY PRESETS
+        // =========================================================
+
+        public void SetGravityDown()
+        {
+            SetGravityDirection(
+                Vector2.down
+            );
+        }
+
+        public void SetGravityUp()
+        {
+            SetGravityDirection(
+                Vector2.up
+            );
+        }
+
+        public void SetGravityLeft()
+        {
+            SetGravityDirection(
+                Vector2.left
+            );
+        }
+
+        public void SetGravityRight()
+        {
+            SetGravityDirection(
+                Vector2.right
+            );
+        }
+
+        public void RotateGravityClockwise()
+        {
+            Vector2 direction =
+                new Vector2(
+                    gravityDirection.y,
+                    -gravityDirection.x
+                );
+
+            SetGravityDirection(direction);
+        }
+
+        public void RotateGravityCounterClockwise()
+        {
+            Vector2 direction =
+                new Vector2(
+                    -gravityDirection.y,
+                    gravityDirection.x
+                );
+
+            SetGravityDirection(direction);
+        }
+
+        // =========================================================
+        // GRAVITY ENABLE
+        // =========================================================
+
+        public void SetGravityEnabled(
+            bool enabled)
+        {
+            gravityEnabled = enabled;
+
+            if (!enabled)
+                _velocity = Vector2.zero;
+        }
+
+        public void EnableGravity()
+        {
+            SetGravityEnabled(true);
+        }
+
+        public void DisableGravity()
+        {
+            SetGravityEnabled(false);
+        }
+
+        // =========================================================
+        // LEFT MOVEMENT
+        // =========================================================
+
+        public void SetLeftMovementEnabled(
+            bool enabled)
+        {
+            leftMovementEnabled = enabled;
+
+            if (!enabled &&
+                _velocity.x < 0f)
+            {
+                _velocity.x = 0f;
+            }
+        }
+
+        public void EnableLeftMovement()
+        {
+            SetLeftMovementEnabled(true);
+        }
+
+        public void DisableLeftMovement()
+        {
+            SetLeftMovementEnabled(false);
+        }
+
+        // =========================================================
+        // RIGHT MOVEMENT
+        // =========================================================
+
+        public void SetRightMovementEnabled(
+            bool enabled)
+        {
+            rightMovementEnabled = enabled;
+
+            if (!enabled &&
+                _velocity.x > 0f)
+            {
+                _velocity.x = 0f;
+            }
+        }
+
+        public void EnableRightMovement()
+        {
+            SetRightMovementEnabled(true);
+        }
+
+        public void DisableRightMovement()
+        {
+            SetRightMovementEnabled(false);
+        }
+
+        // =========================================================
+        // SPEED
+        // =========================================================
+
+        public void SetMoveSpeedMultiplier(
+            float multiplier)
+        {
+            moveSpeedMultiplier =
+                Mathf.Max(0f, multiplier);
+        }
+
+        public void ResetMoveSpeedMultiplier()
+        {
+            moveSpeedMultiplier = 1f;
+        }
+
+        // =========================================================
+        // JUMP
+        // =========================================================
+
+        public void SetJumpEnabled(
+            bool enabled)
+        {
+            jumpEnabled = enabled;
+
+            if (!enabled)
+                _jumpQueued = false;
+        }
+
+        public void EnableJump()
+        {
+            SetJumpEnabled(true);
+        }
+
+        public void DisableJump()
+        {
+            SetJumpEnabled(false);
+        }
+
+        // =========================================================
+        // CROUCH
+        // =========================================================
+
+        public void SetCrouchEnabled(
+            bool enabled)
+        {
+            crouchEnabled = enabled;
+        }
+
+        public void EnableCrouch()
+        {
+            SetCrouchEnabled(true);
+        }
+
+        public void DisableCrouch()
+        {
+            SetCrouchEnabled(false);
+        }
+
+        // =========================================================
+        // ALL CONTROL
+        // =========================================================
+
+        public void SetControlEnabled(
+            bool enabled)
+        {
+            leftMovementEnabled = enabled;
+            rightMovementEnabled = enabled;
+            gravityEnabled = enabled;
+            jumpEnabled = enabled;
+            crouchEnabled = enabled;
+
+            if (!enabled)
+            {
+                _velocity = Vector2.zero;
+                _jumpQueued = false;
+            }
+        }
+
+        public void EnableControl()
+        {
+            SetControlEnabled(true);
+        }
+
+        public void DisableControl()
+        {
+            SetControlEnabled(false);
         }
     }
 }
