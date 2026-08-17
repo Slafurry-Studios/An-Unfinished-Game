@@ -14,7 +14,7 @@ namespace Slafurry.System.Audio
 
         private Coroutine _currentFadeCoroutine;
 
-        void OnEnable()
+        public void Initialize()
         {
             SceneLoader.Instance.OnSceneLoadCompleted += HandleSceneLoaded;
         }
