@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0307bdc683facf99b48dbde6ecc84f, type: 3}
   m_Name: Music Data
   m_EditorClassIdentifier: 
-  tracks: []
+  tracks:
+  - trackName: MainMenuMusic
+    clip: {fileID: 8300000, guid: 8933d9a9bdcd01bc392642197d690124, type: 3}
+    volume: 5.82
