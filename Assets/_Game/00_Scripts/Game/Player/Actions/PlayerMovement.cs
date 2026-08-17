@@ -15,6 +15,7 @@ namespace Slafurry.Player
     /// - Jump enable/disable
     /// - Crouch enable/disable
     /// - Full control enable/disable
+    /// - Selective collider enable/disable
     ///
     /// Gravity directions:
     /// Down  = (0, -1)
@@ -62,8 +63,11 @@ namespace Slafurry.Player
         [SerializeField] private bool rightMovementEnabled = true;
         [SerializeField] private bool jumpEnabled = true;
         [SerializeField] private bool crouchEnabled = true;
-
         [SerializeField] private float moveSpeedMultiplier = 1f;
+
+        [Header("Collider Control")]
+        [Tooltip("Only these colliders will be affected by EnableCollider/DisableCollider.")]
+        [SerializeField] private Collider2D[] controlledColliders;
 
         private Rigidbody2D _rb;
 
@@ -226,7 +230,6 @@ namespace Slafurry.Player
             Vector2 direction =
                 gravityDirection.normalized;
 
-            // Velocity yang searah dengan gravity.
             float velocityAlongGravity =
                 Vector2.Dot(
                     _velocity,
@@ -246,15 +249,12 @@ namespace Slafurry.Player
                 currentGravity *
                 Time.fixedDeltaTime;
 
-            // Hitung ulang velocity searah gravity
-            // setelah gravity diterapkan.
             velocityAlongGravity =
                 Vector2.Dot(
                     _velocity,
                     direction
                 );
 
-            // Batasi kecepatan jatuh.
             if (velocityAlongGravity > maxFallSpeed)
             {
                 Vector2 perpendicularVelocity =
@@ -290,7 +290,6 @@ namespace Slafurry.Player
                     return;
             }
 
-            // Ambil velocity yang tegak lurus terhadap gravity.
             float velocityAlongGravity =
                 Vector2.Dot(
                     _velocity,
@@ -305,7 +304,6 @@ namespace Slafurry.Player
                 _velocity -
                 gravityVelocity;
 
-            // Jump selalu berlawanan dengan gravity.
             Vector2 jumpVelocity =
                 -gravityDirection *
                 jumpForce;
@@ -394,16 +392,10 @@ namespace Slafurry.Player
                 return _rb.position.y;
 
             /*
-             * GroundCheck kamu tetap sederhana:
+             * GroundCheck tetap sederhana dan melakukan
+             * pengecekan ke bawah.
              *
-             * CircleCast selalu ke bawah.
-             *
-             * Jadi snap ground hanya dilakukan untuk
-             * gravity normal/down.
-             *
-             * Untuk gravity kiri/kanan/atas, movement tetap
-             * mengikuti gravity direction, tetapi sistem
-             * ground snap belum directional.
+             * Jadi snap hanya berlaku untuk gravity ke bawah.
              */
 
             if (gravityDirection == Vector2.down &&
@@ -492,30 +484,22 @@ namespace Slafurry.Player
 
         public void SetGravityDown()
         {
-            SetGravityDirection(
-                Vector2.down
-            );
+            SetGravityDirection(Vector2.down);
         }
 
         public void SetGravityUp()
         {
-            SetGravityDirection(
-                Vector2.up
-            );
+            SetGravityDirection(Vector2.up);
         }
 
         public void SetGravityLeft()
         {
-            SetGravityDirection(
-                Vector2.left
-            );
+            SetGravityDirection(Vector2.left);
         }
 
         public void SetGravityRight()
         {
-            SetGravityDirection(
-                Vector2.right
-            );
+            SetGravityDirection(Vector2.right);
         }
 
         public void RotateGravityClockwise()
@@ -544,8 +528,7 @@ namespace Slafurry.Player
         // GRAVITY ENABLE
         // =========================================================
 
-        public void SetGravityEnabled(
-            bool enabled)
+        public void SetGravityEnabled(bool enabled)
         {
             gravityEnabled = enabled;
 
@@ -567,8 +550,7 @@ namespace Slafurry.Player
         // LEFT MOVEMENT
         // =========================================================
 
-        public void SetLeftMovementEnabled(
-            bool enabled)
+        public void SetLeftMovementEnabled(bool enabled)
         {
             leftMovementEnabled = enabled;
 
@@ -593,8 +575,7 @@ namespace Slafurry.Player
         // RIGHT MOVEMENT
         // =========================================================
 
-        public void SetRightMovementEnabled(
-            bool enabled)
+        public void SetRightMovementEnabled(bool enabled)
         {
             rightMovementEnabled = enabled;
 
@@ -619,8 +600,7 @@ namespace Slafurry.Player
         // SPEED
         // =========================================================
 
-        public void SetMoveSpeedMultiplier(
-            float multiplier)
+        public void SetMoveSpeedMultiplier(float multiplier)
         {
             moveSpeedMultiplier =
                 Mathf.Max(0f, multiplier);
@@ -635,8 +615,7 @@ namespace Slafurry.Player
         // JUMP
         // =========================================================
 
-        public void SetJumpEnabled(
-            bool enabled)
+        public void SetJumpEnabled(bool enabled)
         {
             jumpEnabled = enabled;
 
@@ -658,8 +637,7 @@ namespace Slafurry.Player
         // CROUCH
         // =========================================================
 
-        public void SetCrouchEnabled(
-            bool enabled)
+        public void SetCrouchEnabled(bool enabled)
         {
             crouchEnabled = enabled;
         }
@@ -675,11 +653,40 @@ namespace Slafurry.Player
         }
 
         // =========================================================
+        // COLLIDER CONTROL
+        // =========================================================
+
+        /// <summary>
+        /// Enables or disables only the colliders assigned
+        /// to Controlled Colliders.
+        /// </summary>
+        public void SetCollidersEnabled(bool enabled)
+        {
+            if (controlledColliders == null)
+                return;
+
+            foreach (Collider2D collider in controlledColliders)
+            {
+                if (collider != null)
+                    collider.enabled = enabled;
+            }
+        }
+
+        public void EnableColliders()
+        {
+            SetCollidersEnabled(true);
+        }
+
+        public void DisableColliders()
+        {
+            SetCollidersEnabled(false);
+        }
+
+        // =========================================================
         // ALL CONTROL
         // =========================================================
 
-        public void SetControlEnabled(
-            bool enabled)
+        public void SetControlEnabled(bool enabled)
         {
             leftMovementEnabled = enabled;
             rightMovementEnabled = enabled;
