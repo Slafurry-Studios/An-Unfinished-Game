@@ -171,7 +171,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: SetGravityLeft
         m_Mode: 1
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: DisableGravity
         m_Mode: 1
@@ -2004,7 +2004,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: SetGravityUp
         m_Mode: 1
@@ -2311,7 +2311,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: SetGravityRight
         m_Mode: 1
@@ -2739,7 +2739,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3098,7 +3098,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: DisableRightMovement
         m_Mode: 1
@@ -3256,7 +3256,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: DisableLeftMovement
         m_Mode: 1
@@ -3414,7 +3414,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: DisableJump
         m_Mode: 1
@@ -4048,7 +4048,7 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4345808338436497909}
+      - m_Target: {fileID: 4345808338436497918}
         m_TargetAssemblyTypeName: Slafurry.Player.PlayerMovement, Assembly-CSharp
         m_MethodName: DisableCrouch
         m_Mode: 1
@@ -4240,6 +4240,51 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 481104362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2072684301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072684303}
+  - component: {fileID: 2072684302}
+  m_Layer: 0
+  m_Name: DEBUG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2072684302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072684301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16befb332213a052a9416afaea6a1dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetKey: 113
+--- !u!4 &2072684303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072684301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 269.24493, y: 118.78234, z: 0.046656854}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145519001
 GameObject:
@@ -4629,16 +4674,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad960b3581ad50a0a0e59dcd1c9300f, type: 3}
---- !u!114 &4345808338436497909 stripped
+--- !u!114 &4345808338436497918 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 640449279693738336, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+  m_CorrespondingSourceObject: {fileID: 3342133722336362804, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
     type: 3}
   m_PrefabInstance: {fileID: 4345808338436497908}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c092c65941df03cdea695b3039426b10, type: 3}
+  m_Script: {fileID: 11500000, guid: 4001da9d4ec1684508255b8896bddff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
@@ -4651,3 +4696,4 @@ SceneRoots:
   - {fileID: 1347636539}
   - {fileID: 1278544997}
   - {fileID: 560493647}
+  - {fileID: 2072684303}
