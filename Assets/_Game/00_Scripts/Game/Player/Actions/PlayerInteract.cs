@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Slafurry.System.InputHub;
+using Slafurry.System.Audio;
 
 namespace Slafurry.Player
 {
@@ -76,6 +77,7 @@ namespace Slafurry.Player
                 var completed = _holdTarget;
                 _holdTarget = null;
                 completed.Interact();
+                Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.Interact);
                 OnInteracted?.Invoke();
             }
         }
@@ -121,6 +123,7 @@ namespace Slafurry.Player
             else
             {
                 CurrentTarget.Interact();
+                Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.Interact);
                 OnInteracted?.Invoke();
             }
         }

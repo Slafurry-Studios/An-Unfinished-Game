@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Collider
+  - 
   - Water
   - UI
   - Ceiling
-  - Ground
+  - Solid
   - Interactable
   - 
   - 
@@ -41,4 +41,34 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4000769145
+    locked: 0
+  - name: Background_Decoration
+    uniqueID: 1268938619
+    locked: 0
+  - name: Solid
+    uniqueID: 478148855
+    locked: 0
+  - name: Solid_Decoration
+    uniqueID: 798567821
+    locked: 0
+  - name: Entity
+    uniqueID: 1046680719
+    locked: 0
+  - name: Player
+    uniqueID: 1003663621
+    locked: 0
+  - name: VFX
+    uniqueID: 4037655649
+    locked: 0
+  - name: Foreground
+    uniqueID: 1403498421
+    locked: 0
+  - name: Foreground_Decoration
+    uniqueID: 3791856391
+    locked: 0
+  - name: Clues
+    uniqueID: 1948506973
     locked: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Slafurry.System.InputHub;
+using Slafurry.System.Audio;
 
 namespace Slafurry.Player
 {
@@ -77,6 +78,11 @@ namespace Slafurry.Player
 
         private Quaternion _originalRotation;
 
+        // SFX state tracking
+        private bool _wasGrounded;
+        private bool _wasMovingOnGround;
+        private bool _wasCrouchingWhileMoving;
+
         public bool IsGrounded { get; private set; }
         public bool IsHeadBlocked { get; private set; }
 
@@ -116,6 +122,9 @@ namespace Slafurry.Player
         {
             Controls.OnMoveChanged -= HandleMoveChanged;
             Controls.OnJumpPressed -= HandleJumpPressed;
+
+            // Make sure looping movement SFX doesn't keep playing after disable
+            StopMovementLoopSFX();
         }
 
         private void HandleMoveChanged(Vector2 input)
@@ -128,16 +137,54 @@ namespace Slafurry.Player
             _jumpQueued = true;
         }
 
+        private MovingPlatform _currentPlatform;
+
         private void FixedUpdate()
         {
             IsGrounded = groundCheck.IsGrounded;
             IsHeadBlocked = headCheck.IsBlocked;
+
+            HandleLandingSFX();
+
+            HandlePlatformMovement(); // <-- tambahan
 
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
             UpdateFacing();
             MoveAndSnap();
+        }
+
+        // =========================================================
+        // LANDING SFX
+        // =========================================================
+
+        private void HandleLandingSFX()
+        {
+            if (IsGrounded && !_wasGrounded)
+            {
+                Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.Land);
+            }
+
+            _wasGrounded = IsGrounded;
+        }
+
+        private void HandlePlatformMovement()
+        {
+            MovingPlatform platform = null;
+
+            if (IsGrounded && groundCheck.GroundCollider != null)
+            {
+                platform = groundCheck.GroundCollider
+                    .GetComponentInParent<MovingPlatform>();
+            }
+
+            _currentPlatform = platform;
+
+            if (_currentPlatform != null)
+            {
+                _rb.position += _currentPlatform.DeltaMovement;
+            }
         }
 
         // =========================================================
@@ -153,6 +200,8 @@ namespace Slafurry.Player
 
             if (input > 0f && !rightMovementEnabled)
                 input = 0f;
+
+            bool isCrouching = crouch != null && crouch.IsCrouching;
 
             float crouchMultiplier =
                 crouch != null
@@ -213,6 +262,46 @@ namespace Slafurry.Player
             {
                 _velocity.x = 0f;
             }
+
+            HandleMovementLoopSFX(isCrouching);
+        }
+
+        // =========================================================
+        // RUN / CROUCH WALK LOOP SFX
+        // =========================================================
+
+        private void HandleMovementLoopSFX(bool isCrouching)
+        {
+            bool isMovingOnGround =
+                IsGrounded &&
+                Mathf.Abs(_velocity.x) > 0.05f;
+
+            // Started moving, or switched between crouch-walk <-> run while moving
+            if (isMovingOnGround &&
+                (!_wasMovingOnGround || isCrouching != _wasCrouchingWhileMoving))
+            {
+                StopMovementLoopSFX();
+
+                Audio.PlaySFX2D(
+                    PlayerSFX.Category,
+                    isCrouching ? PlayerSFX.CrouchWalk : PlayerSFX.Run,
+                    true
+                );
+            }
+            // Stopped moving (or left ground)
+            else if (!isMovingOnGround && _wasMovingOnGround)
+            {
+                StopMovementLoopSFX();
+            }
+
+            _wasMovingOnGround = isMovingOnGround;
+            _wasCrouchingWhileMoving = isCrouching;
+        }
+
+        private void StopMovementLoopSFX()
+        {
+            Audio.StopSFX(PlayerSFX.Category, PlayerSFX.Run);
+            Audio.StopSFX(PlayerSFX.Category, PlayerSFX.CrouchWalk);
         }
 
         // =========================================================
@@ -311,6 +400,9 @@ namespace Slafurry.Player
             _velocity =
                 sidewaysVelocity +
                 jumpVelocity;
+
+            StopMovementLoopSFX();
+            Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.Jump);
         }
 
         // =========================================================
@@ -391,29 +483,15 @@ namespace Slafurry.Player
             if (Mathf.Approximately(moveY, 0f))
                 return _rb.position.y;
 
-            /*
-             * GroundCheck tetap sederhana dan melakukan
-             * pengecekan ke bawah.
-             *
-             * Jadi snap hanya berlaku untuk gravity ke bawah.
-             */
-
-            if (gravityDirection == Vector2.down &&
-                moveY < 0f)
+            if (moveY < 0f)
             {
-                float checkDistance =
-                    Mathf.Abs(moveY) +
-                    groundSnapMargin;
+                float checkDistance = Mathf.Abs(moveY) + groundSnapMargin;
 
                 if (groundCheck != null &&
-                    groundCheck.CastGround(
-                        checkDistance,
-                        out RaycastHit2D hit))
+                    groundCheck.CastGround(checkDistance, out RaycastHit2D hit))
                 {
                     _velocity.y = 0f;
-
-                    return _rb.position.y -
-                           hit.distance;
+                    return _rb.position.y - hit.distance;
                 }
             }
 
@@ -698,6 +776,7 @@ namespace Slafurry.Player
             {
                 _velocity = Vector2.zero;
                 _jumpQueued = false;
+                StopMovementLoopSFX();
             }
         }
 

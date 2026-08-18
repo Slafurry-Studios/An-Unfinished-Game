@@ -233,8 +233,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1003663621
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -98852560, guid: 496f3b6ed641e3c64bd2569351e2e4ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -405,18 +405,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: ShowGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   debug: 1
 --- !u!114 &325501432412664729
 MonoBehaviour:
@@ -470,12 +458,12 @@ MonoBehaviour:
   headCheck: {fileID: 716935780959154649}
   wallCheck: {fileID: 7418909346122191739}
   crouch: {fileID: 325501432412664729}
-  moveSpeed: 8
+  moveSpeed: 13
   groundAcceleration: 60
   groundDeceleration: 70
   airAcceleration: 40
   airDeceleration: 30
-  jumpForce: 60
+  jumpForce: 30
   gravity: 50
   maxFallSpeed: 40
   fallGravityMultiplier: 1.4

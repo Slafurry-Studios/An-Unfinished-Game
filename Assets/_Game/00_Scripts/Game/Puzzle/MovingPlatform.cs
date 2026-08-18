@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class MovingPlatform : MonoBehaviour
 {
     [Header("Movement")]
@@ -13,19 +14,32 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private bool loop = true;
     [SerializeField] private float loopDelay = 1f;
 
+    private Rigidbody2D _rb;
+    private Vector2 _lastPosition;
+
     private bool movingToEnd = true;
     private bool isWaiting = false;
+
+    public Vector2 DeltaMovement { get; private set; }
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.bodyType = RigidbodyType2D.Kinematic;
+    }
 
     private void Start()
     {
         if (startPos != null)
-        {
-            transform.position = startPos.position;
-        }
+            _rb.position = startPos.position;
+
+        _lastPosition = _rb.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        DeltaMovement = Vector2.zero;
+
         if (!isActive || isWaiting)
             return;
 
@@ -34,39 +48,26 @@ public class MovingPlatform : MonoBehaviour
 
         Transform target = movingToEnd ? endPos : startPos;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
+        Vector2 newPos = Vector2.MoveTowards(
+            _rb.position,
             target.position,
-            speed * Time.deltaTime
+            speed * Time.fixedDeltaTime
         );
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.01f)
-        {
-            transform.position = target.position;
+        _rb.MovePosition(newPos);
 
-            if (movingToEnd)
+        DeltaMovement = newPos - _lastPosition;
+        _lastPosition = newPos;
+
+        if (Vector2.Distance(newPos, target.position) <= 0.01f)
+        {
+            if (loop)
             {
-                // Sampai di end
-                if (loop)
-                {
-                    StartCoroutine(WaitAndReverse());
-                }
-                else
-                {
-                    isActive = false;
-                }
+                StartCoroutine(WaitAndReverse());
             }
             else
             {
-                // Sampai di start
-                if (loop)
-                {
-                    StartCoroutine(WaitAndReverse());
-                }
-                else
-                {
-                    isActive = false;
-                }
+                isActive = false;
             }
         }
     }
