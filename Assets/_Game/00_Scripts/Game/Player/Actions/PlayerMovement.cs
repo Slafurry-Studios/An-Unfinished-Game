@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Slafurry.System.InputHub;
 
@@ -97,8 +96,6 @@ namespace Slafurry.Player
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _collider = GetComponent<Collider2D>();
-
             _rb.bodyType = RigidbodyType2D.Kinematic;
 
             _originalRotation = transform.localRotation;
@@ -119,9 +116,6 @@ namespace Slafurry.Player
         {
             Controls.OnMoveChanged -= HandleMoveChanged;
             Controls.OnJumpPressed -= HandleJumpPressed;
-
-            _activeBodiesThisFrame.Clear();
-            _previousBodyPositions.Clear();
         }
 
         private void HandleMoveChanged(Vector2 input)
@@ -139,18 +133,11 @@ namespace Slafurry.Player
             IsGrounded = groundCheck.IsGrounded;
             IsHeadBlocked = headCheck.IsBlocked;
 
-            // Detect movement produced by other Rigidbody2D objects we are
-            // currently resting against (ground and/or wall).
-            UpdateExternalMotion();
-
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
             UpdateFacing();
-
             MoveAndSnap();
-
-            PruneStaleBodyPositions();
         }
 
         // =========================================================
@@ -389,8 +376,6 @@ namespace Slafurry.Player
                     checkDistance,
                     out RaycastHit2D hit))
             {
-                // External object is allowed to push us until we hit
-                // another solid surface.
                 _velocity.x = 0f;
 
                 return _rb.position.x +
@@ -724,22 +709,6 @@ namespace Slafurry.Player
         public void DisableControl()
         {
             SetControlEnabled(false);
-        }
-
-        private void PruneStaleBodyPositions()
-        {
-            List<Rigidbody2D> bodiesToRemove = new();
-
-            foreach (Rigidbody2D body in _previousBodyPositions.Keys)
-            {
-                if (body == null || !_activeBodiesThisFrame.Contains(body))
-                    bodiesToRemove.Add(body);
-            }
-
-            foreach (Rigidbody2D body in bodiesToRemove)
-            {
-                _previousBodyPositions.Remove(body);
-            }
         }
     }
 }

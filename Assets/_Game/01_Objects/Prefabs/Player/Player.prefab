@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 121594030843658420}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,6 +482,14 @@ MonoBehaviour:
   groundSnapMargin: 0.05
   wallSnapMargin: 0.02
   playerSprite: {fileID: 6878744658898407997}
+  gravityDirection: {x: 0, y: -1}
+  gravityEnabled: 1
+  leftMovementEnabled: 1
+  rightMovementEnabled: 1
+  jumpEnabled: 1
+  crouchEnabled: 1
+  moveSpeedMultiplier: 1
+  controlledColliders: []
 --- !u!50 &7107952602140745662
 Rigidbody2D:
   serializedVersion: 4
