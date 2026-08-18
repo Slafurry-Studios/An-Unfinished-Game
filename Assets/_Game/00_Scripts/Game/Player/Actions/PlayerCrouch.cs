@@ -1,5 +1,6 @@
 using UnityEngine;
 using Slafurry.System.InputHub;
+using Slafurry.System.Audio;
 
 namespace Slafurry.Player
 {
@@ -65,6 +66,13 @@ namespace Slafurry.Player
             crouchCollider.enabled = crouching;
 
             wallCheck.SetCrouching(crouching);
+
+            // Transition sound plays on every collider swap (in or out of crouch)
+            Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.CrouchTransition);
+
+            // Crouch one-shot only plays when entering crouch
+            if (crouching)
+                Audio.PlaySFX2D(PlayerSFX.Category, PlayerSFX.Crouch);
         }
 
         /// <summary>

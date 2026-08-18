@@ -13,12 +13,27 @@ namespace Slafurry.Player
     ///
     /// leftPoint/rightPoint should be positioned at FEET height (same as
     /// GroundCheck), not center — the check box is anchored at the feet and
-    /// grows upward, so shrinking for a crouch only lowers the top of the
-    /// box instead of shrinking symmetrically toward the center (which
-    /// would incorrectly lift the bottom of the check off the ground).
+    /// grows "upward" (relative to the player, not the world) so shrinking
+    /// for a crouch only lowers the top of the box instead of shrinking
+    /// symmetrically toward the center (which would incorrectly lift the
+    /// bottom of the check off the ground).
+    ///
+    /// IMPORTANT: all directions here are resolved relative to
+    /// `player` (its .right / .up), NOT world Vector2.left/right/up.
+    /// The player transform is rotated by PlayerMovement.ApplyGravityOrientation()
+    /// to match the current gravity direction, so "right" and "up" change
+    /// meaning whenever gravity changes. Using world-space axes here would
+    /// cause the check boxes to point/grow in the wrong direction as soon as
+    /// gravity is anything other than Down, making IsTouchingLeft/Right get
+    /// stuck true (box embedded in geometry) and permanently zeroing
+    /// horizontal movement.
     /// </summary>
     public class WallCheck : MonoBehaviour
     {
+        [Header("References")]
+        [Tooltip("The player's root transform (the one PlayerMovement rotates to match gravity). Defaults to this transform's root if not set.")]
+        [SerializeField] private Transform player;
+
         [Header("Check Points (positioned at feet height)")]
         [SerializeField] private Transform leftPoint;
         [SerializeField] private Transform rightPoint;
@@ -42,6 +57,9 @@ namespace Slafurry.Player
         private void Awake()
         {
             _currentCheckHeight = standingCheckHeight;
+
+            if (player == null)
+                player = transform.root;
         }
 
         /// <summary>
@@ -56,37 +74,55 @@ namespace Slafurry.Player
         }
 
         /// <summary>
-        /// Box center anchored so the BOTTOM edge sits at the point's feet
-        /// position, growing upward by _currentCheckHeight.
+        /// Box center anchored so the "bottom" edge (relative to the
+        /// player's current orientation) sits at the point's feet
+        /// position, growing "upward" (player.up) by _currentCheckHeight.
         /// </summary>
         private Vector2 GetOrigin(Transform point)
         {
-            return (Vector2)point.position + Vector2.up * (_currentCheckHeight * 0.5f);
-        }
-
-        private void FixedUpdate()
-        {
-            IsTouchingLeft = Physics2D.BoxCast(GetOrigin(leftPoint), BoxSize, 0f, Vector2.left, skinWidth, wallLayer);
-            IsTouchingRight = Physics2D.BoxCast(GetOrigin(rightPoint), BoxSize, 0f, Vector2.right, skinWidth, wallLayer);
+            return (Vector2)point.position + (Vector2)player.up * (_currentCheckHeight * 0.5f);
         }
 
         /// <summary>
-        /// Casts sideways by an arbitrary distance (typically this frame's
-        /// intended horizontal movement + a small margin). Used by
-        /// PlayerMovement to find exactly how far the player can move
-        /// before touching a wall, so position can be snapped instead of
-        /// overshooting into it.
+        /// The box needs to be rotated to match the player's current
+        /// orientation, otherwise an axis-aligned (angle 0) box stops
+        /// matching the check points as soon as the player is rotated
+        /// away from the default "gravity down" orientation.
         /// </summary>
-        /// <param name="direction">-1 for left, +1 for right.</param>
+        private float BoxAngle => player.eulerAngles.z;
+
+        private void FixedUpdate()
+        {
+            IsTouchingLeft = Physics2D.BoxCast(
+                GetOrigin(leftPoint), BoxSize, BoxAngle,
+                -player.right, skinWidth, wallLayer);
+
+            IsTouchingRight = Physics2D.BoxCast(
+                GetOrigin(rightPoint), BoxSize, BoxAngle,
+                player.right, skinWidth, wallLayer);
+        }
+
+        /// <summary>
+        /// Casts sideways (relative to the player's current orientation) by
+        /// an arbitrary distance (typically this frame's intended
+        /// horizontal movement + a small margin). Used by PlayerMovement to
+        /// find exactly how far the player can move before touching a
+        /// wall, so position can be snapped instead of overshooting into it.
+        /// </summary>
+        /// <param name="direction">-1 for left, +1 for right (relative to player.right).</param>
         public bool CastWall(int direction, float distance, out RaycastHit2D hit)
         {
             if (direction < 0)
             {
-                hit = Physics2D.BoxCast(GetOrigin(leftPoint), BoxSize, 0f, Vector2.left, distance, wallLayer);
+                hit = Physics2D.BoxCast(
+                    GetOrigin(leftPoint), BoxSize, BoxAngle,
+                    -player.right, distance, wallLayer);
             }
             else if (direction > 0)
             {
-                hit = Physics2D.BoxCast(GetOrigin(rightPoint), BoxSize, 0f, Vector2.right, distance, wallLayer);
+                hit = Physics2D.BoxCast(
+                    GetOrigin(rightPoint), BoxSize, BoxAngle,
+                    player.right, distance, wallLayer);
             }
             else
             {
@@ -100,16 +136,25 @@ namespace Slafurry.Player
         {
             if (!drawGizmo) return;
 
+            if (player == null)
+                player = transform.root;
+
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+
             if (leftPoint != null)
             {
                 Gizmos.color = IsTouchingLeft ? Color.red : Color.green;
-                Gizmos.DrawWireCube(GetOrigin(leftPoint), BoxSize);
+                Gizmos.matrix = Matrix4x4.TRS(GetOrigin(leftPoint), Quaternion.Euler(0f, 0f, BoxAngle), Vector3.one);
+                Gizmos.DrawWireCube(Vector3.zero, BoxSize);
             }
             if (rightPoint != null)
             {
                 Gizmos.color = IsTouchingRight ? Color.red : Color.green;
-                Gizmos.DrawWireCube(GetOrigin(rightPoint), BoxSize);
+                Gizmos.matrix = Matrix4x4.TRS(GetOrigin(rightPoint), Quaternion.Euler(0f, 0f, BoxAngle), Vector3.one);
+                Gizmos.DrawWireCube(Vector3.zero, BoxSize);
             }
+
+            Gizmos.matrix = oldMatrix;
         }
     }
 }
