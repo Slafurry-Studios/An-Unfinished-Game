@@ -7,7 +7,9 @@
     "name": "mus_perfectionism.ogg",
     "modifiedTime": "2026-08-13T08:37:20.000Z",
     "relative_path": "Music/Perfectionism/mus_perfectionism.ogg",
-    "retrieve_status": "downloaded"
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Music/Perfectionism/mus_perfectionism.ogg",
+    "downloaded_modified_time": "2026-08-13T08:37:20.000Z"
   },
   "17fq-A9YFux1tDHWV1LIZuRN7xGd94r7P": {
     "mimeType": "audio/mpeg",
@@ -17,7 +19,9 @@
     "name": "Perfectionism preview unlooped.mp3",
     "modifiedTime": "2026-08-13T07:45:29.000Z",
     "relative_path": "Music/Perfectionism/Perfectionism preview unlooped.mp3",
-    "retrieve_status": "downloaded"
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Music/Perfectionism/Perfectionism preview unlooped.mp3",
+    "downloaded_modified_time": "2026-08-13T07:45:29.000Z"
   },
   "1OOnkQarkzSyIwL1WvqNxdQfzz5Mb-A-V": {
     "mimeType": "audio/ogg",
@@ -27,7 +31,9 @@
     "name": "mus_main-gameplay.ogg",
     "modifiedTime": "2026-08-15T05:48:02.852Z",
     "relative_path": "Music/Main Gameplay/mus_main-gameplay.ogg",
-    "retrieve_status": "downloaded"
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Music/Main Gameplay/mus_main-gameplay.ogg",
+    "downloaded_modified_time": "2026-08-15T05:48:02.852Z"
   },
   "1qSEaI6AWMrbNFYCKt5oK-v8TAfpPFozN": {
     "mimeType": "application/ogg",
@@ -37,6 +43,104 @@
     "name": "mus_main-menu.ogg",
     "modifiedTime": "2026-08-15T14:17:25.000Z",
     "relative_path": "Music/Main Menu/mus_main-menu.ogg",
-    "retrieve_status": "downloaded"
+    "retrieve_status": "downloaded",
+    "downloaded_as": "Music/Main Menu/mus_main-menu.ogg",
+    "downloaded_modified_time": "2026-08-15T14:17:25.000Z"
+  },
+  "1igRZPHTf55-WqFFhhl9RjNdemQFjHFWy": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1igRZPHTf55-WqFFhhl9RjNdemQFjHFWy/view?usp=drivesdk",
+    "size": "25624",
+    "id": "1igRZPHTf55-WqFFhhl9RjNdemQFjHFWy",
+    "name": "sfx_s2_walk-3.wav",
+    "modifiedTime": "2026-08-18T08:40:04.000Z",
+    "relative_path": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-3.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-3.wav",
+    "downloaded_modified_time": "2026-08-18T08:40:04.000Z"
+  },
+  "1LikvifFOJMEhqmKAsIk1bEKb9Fa2_fp0": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1LikvifFOJMEhqmKAsIk1bEKb9Fa2_fp0/view?usp=drivesdk",
+    "size": "28168",
+    "id": "1LikvifFOJMEhqmKAsIk1bEKb9Fa2_fp0",
+    "name": "sfx_s2_walk-2.wav",
+    "modifiedTime": "2026-08-18T08:39:40.000Z",
+    "relative_path": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-2.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-2.wav",
+    "downloaded_modified_time": "2026-08-18T08:39:40.000Z"
+  },
+  "1jwY8429fiNWJ5QaJDxhWjcxmSm6Thv2z": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1jwY8429fiNWJ5QaJDxhWjcxmSm6Thv2z/view?usp=drivesdk",
+    "size": "45982",
+    "id": "1jwY8429fiNWJ5QaJDxhWjcxmSm6Thv2z",
+    "name": "sfx_s2_walk-1.wav",
+    "modifiedTime": "2026-08-18T08:39:06.000Z",
+    "relative_path": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-1.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface2 Barefoot on Ceramic/sfx_s2_walk-1.wav",
+    "downloaded_modified_time": "2026-08-18T08:39:06.000Z"
+  },
+  "14yWJ04Fb1DEnUVbsJt5YxXGiZ_UMhNdH": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/14yWJ04Fb1DEnUVbsJt5YxXGiZ_UMhNdH/view?usp=drivesdk",
+    "size": "113404",
+    "id": "14yWJ04Fb1DEnUVbsJt5YxXGiZ_UMhNdH",
+    "name": "sfx_jump.wav",
+    "modifiedTime": "2026-08-18T10:13:06.413Z",
+    "relative_path": "SFX/Movement/Jump/sfx_jump.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Jump/sfx_jump.wav",
+    "downloaded_modified_time": "2026-08-18T10:13:06.413Z"
+  },
+  "1F8TUZL-z-Goq-9TCXxOZUSi5sb68QRlD": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1F8TUZL-z-Goq-9TCXxOZUSi5sb68QRlD/view?usp=drivesdk",
+    "size": "49798",
+    "id": "1F8TUZL-z-Goq-9TCXxOZUSi5sb68QRlD",
+    "name": "sfx_s1_walk-3.wav",
+    "modifiedTime": "2026-08-17T13:10:32.000Z",
+    "relative_path": "SFX/Movement/Surface1/sfx_s1_walk-3.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface1/sfx_s1_walk-3.wav",
+    "downloaded_modified_time": "2026-08-17T13:10:32.000Z"
+  },
+  "1M0gPtmfHmEEu98a_DrRyXiD4k7kZjTMv": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1M0gPtmfHmEEu98a_DrRyXiD4k7kZjTMv/view?usp=drivesdk",
+    "size": "26896",
+    "id": "1M0gPtmfHmEEu98a_DrRyXiD4k7kZjTMv",
+    "name": "sfx_s1_walk-2.wav",
+    "modifiedTime": "2026-08-17T13:09:48.000Z",
+    "relative_path": "SFX/Movement/Surface1/sfx_s1_walk-2.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface1/sfx_s1_walk-2.wav",
+    "downloaded_modified_time": "2026-08-17T13:09:48.000Z"
+  },
+  "1nl_BlLxadrtAqKTEwCTtdsAU4-BSzteb": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1nl_BlLxadrtAqKTEwCTtdsAU4-BSzteb/view?usp=drivesdk",
+    "size": "51070",
+    "id": "1nl_BlLxadrtAqKTEwCTtdsAU4-BSzteb",
+    "name": "sfx_s1_walk-1.wav",
+    "modifiedTime": "2026-08-17T13:08:53.000Z",
+    "relative_path": "SFX/Movement/Surface1/sfx_s1_walk-1.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Surface1/sfx_s1_walk-1.wav",
+    "downloaded_modified_time": "2026-08-17T13:08:53.000Z"
+  },
+  "1QqUmWbXFKQ61J5YUmSuKMqWRFQcBgJ4u": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1QqUmWbXFKQ61J5YUmSuKMqWRFQcBgJ4u/view?usp=drivesdk",
+    "size": "75238",
+    "id": "1QqUmWbXFKQ61J5YUmSuKMqWRFQcBgJ4u",
+    "name": "crouch.wav",
+    "modifiedTime": "2026-08-17T13:28:17.000Z",
+    "relative_path": "SFX/Movement/Crouch/crouch.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Movement/Crouch/crouch.wav",
+    "downloaded_modified_time": "2026-08-17T13:28:17.000Z"
   }
 }
