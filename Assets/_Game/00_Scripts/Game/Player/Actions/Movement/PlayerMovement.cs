@@ -67,6 +67,9 @@ namespace Slafurry.Player
         private Rigidbody2D _rb;
 
         private Vector2 _velocity;
+        public float SpeedAlongRight => Vector2.Dot(_velocity, transform.right);
+        public float SpeedAlongGravity => Vector2.Dot(_velocity, gravityDirection);
+        
         private float _moveInput;
         private bool _jumpQueued;
 
