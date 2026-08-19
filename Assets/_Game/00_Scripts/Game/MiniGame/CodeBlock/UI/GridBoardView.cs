@@ -30,6 +30,8 @@ public class GridBoardView : MonoBehaviour
     {
         foreach (Transform child in gridParent) Destroy(child.gameObject);
 
+        ApplyGridSizing();
+
         int w = Circuit.width;
         int h = Circuit.height;
         cellViews = new GridCellView[w, h];
@@ -51,6 +53,36 @@ public class GridBoardView : MonoBehaviour
         RefreshVisuals();
     }
 
+    // Hitung ulang Cell Size di GridLayoutGroup supaya grid selalu pas ngisi
+    // seluruh area gridParent, berapapun width/height level-nya
+    void ApplyGridSizing()
+    {
+        UnityEngine.UI.GridLayoutGroup layout = gridParent.GetComponent<UnityEngine.UI.GridLayoutGroup>();
+        if (layout == null) return;
+
+        int w = Circuit.width;
+        int h = Circuit.height;
+
+        float availableWidth = gridParent.rect.width
+            - layout.padding.left - layout.padding.right
+            - layout.spacing.x * (w - 1);
+
+        float availableHeight = gridParent.rect.height
+            - layout.padding.top - layout.padding.bottom
+            - layout.spacing.y * (h - 1);
+
+        float cellWidth = availableWidth / w;
+        float cellHeight = availableHeight / h;
+
+        // Pakai yang lebih kecil biar cell tetap persegi (gak gepeng), sisanya
+        // otomatis jadi margin simetris kiri-kanan atau atas-bawah
+        float cellSize = Mathf.Min(cellWidth, cellHeight);
+        layout.cellSize = new Vector2(cellSize, cellSize);
+
+        layout.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+        layout.constraintCount = w;
+    }
+
     public void RefreshVisuals()
     {
         bool solved = Loader != null && Loader.IsLevelComplete();
@@ -65,8 +97,12 @@ public class GridBoardView : MonoBehaviour
 
                 if (view.icon != null)
                 {
-                    view.icon.sprite = iconSet != null ? iconSet.GetSprite(cell.type) : null;
-                    view.icon.enabled = cell.type != GridObjectType.Empty;
+                    Sprite sprite = iconSet != null ? iconSet.GetSprite(cell.type) : null;
+                    view.icon.sprite = sprite;
+                    // Image tanpa sprite tetap kegambar kotak putih solid kalau enabled,
+                    // jadi cuma nyalain icon kalau memang ada sprite-nya (misal gate type belum
+                    // punya sprite di GateIconSet, biarin transparan daripada nutupin cell)
+                    view.icon.enabled = sprite != null;
                 }
 
                 if (cell.type == GridObjectType.Empty)
