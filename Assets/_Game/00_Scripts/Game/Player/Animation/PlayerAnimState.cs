@@ -17,7 +17,16 @@ namespace Slafurry.Player.Animation
         public PlayerAnimationStateMachine Machine;
 
         public const float MoveInputThreshold = 0.05f;
-        public bool IsMoving => Mathf.Abs(Movement.Velocity.x) > MoveInputThreshold;
+
+        // IMPORTANT: Movement.Velocity is a WORLD-SPACE vector
+        // (gravityDirection * alongGravity + rightAxis * alongRight).
+        // rightAxis/gravityDirection rotate with the player whenever
+        // gravity changes, so raw Velocity.x/.y only means "sideways" /
+        // "vertical" while gravity happens to be Down. Use the
+        // gravity-relative projections exposed by PlayerMovement instead
+        // (SpeedAlongRight / SpeedAlongGravity), which stay correct no
+        // matter which way gravity is currently pointing.
+        public bool IsMoving => Mathf.Abs(Movement.SpeedAlongRight) > MoveInputThreshold;
 
         /// <summary>
         /// Picks the correct "steady state" (Idle/Run/CrouchIdle/CrouchMove)
@@ -37,10 +46,15 @@ namespace Slafurry.Player.Animation
         /// Picks Jump vs FallTransition when the player leaves the ground —
         /// Jump if it happened because of an upward jump impulse, otherwise
         /// FallTransition (walked off a ledge, no jump).
+        ///
+        /// SpeedAlongGravity is the velocity component along gravityDirection:
+        /// negative means moving AGAINST gravity (jumping "up" relative to
+        /// the player, regardless of which world direction that currently is),
+        /// positive means moving WITH gravity (falling).
         /// </summary>
         public PlayerAnimState ResolveAirborneEntryState()
         {
-            return Movement.Velocity.y > 0f ? Machine.Jump : Machine.FallTransition;
+            return Movement.SpeedAlongGravity < 0f ? Machine.Jump : Machine.FallTransition;
         }
     }
 
