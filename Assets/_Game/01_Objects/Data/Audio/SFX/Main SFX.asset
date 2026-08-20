@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a31b9af8a529ba3ea3c290e47a3f733, type: 3}
   m_Name: Main SFX
   m_EditorClassIdentifier: 
-  categories: []
+  categories:
+  - {fileID: 11400000, guid: d487a1da8202adb2893ffb34d733b618, type: 2}
+  - {fileID: 11400000, guid: 1896b3f7d3ea5b935aaabb0f7d3582a9, type: 2}
