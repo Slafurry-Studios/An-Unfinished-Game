@@ -35,8 +35,7 @@ MonoBehaviour:
     volume: 10
     maxSimultaneous: 1
   - groupID: Interact
-    clips:
-    - {fileID: 8300000, guid: a088df54d0884b8a9a1ae645d74592a2, type: 3}
+    clips: []
     volume: 6.54
     maxSimultaneous: 1
   - groupID: Crouch

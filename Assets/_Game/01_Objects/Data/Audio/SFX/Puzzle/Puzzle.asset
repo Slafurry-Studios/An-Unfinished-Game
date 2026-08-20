@@ -18,25 +18,55 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 5f7bc50064329f86396067e6c1d2c163, type: 3}
     volume: 8
-    maxSimultaneous: 3
+    maxSimultaneous: 10
+    fadeIn: 1.77
+    fadeOut: 1.68
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 50
   - groupID: Gate_Open
     clips:
     - {fileID: 8300000, guid: 537da13d30d38527589e2ccacc5416b7, type: 3}
     volume: 7.38
-    maxSimultaneous: 3
+    maxSimultaneous: 10
+    fadeIn: 0
+    fadeOut: 5
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 50
   - groupID: Joint
     clips:
     - {fileID: 8300000, guid: a088df54d0884b8a9a1ae645d74592a2, type: 3}
-    volume: 6.38
-    maxSimultaneous: 3
+    volume: 10
+    maxSimultaneous: 10
+    fadeIn: 0.22
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 300
   - groupID: Glitch_Portal
     clips:
     - {fileID: 8300000, guid: ae697ce741c04cdc8aa51f67fde3fc70, type: 3}
     volume: 7.08
     maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Platform
     clips:
     - {fileID: 8300000, guid: a088df54d0884b8a9a1ae645d74592a2, type: 3}
-    volume: 5.38
+    volume: 1.8
     maxSimultaneous: 3
-  poolSize: 8
+    fadeIn: 0.27
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  poolSize: 30
