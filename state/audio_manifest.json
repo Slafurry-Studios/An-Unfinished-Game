@@ -184,12 +184,12 @@
     "webViewLink": "https://drive.google.com/file/d/1sgIv88QHRWPYpg1ZXk_x5C83VFz_MXlp/view?usp=drivesdk",
     "size": "1992482",
     "id": "1sgIv88QHRWPYpg1ZXk_x5C83VFz_MXlp",
-    "name": "sfx_gate-open.wav",
-    "modifiedTime": "2026-08-18T18:00:57.000Z",
-    "relative_path": "SFX/Puzzle and Platforms SFX/sfx_gate-open.wav",
+    "name": "sfx_gate-open_loopable.wav",
+    "modifiedTime": "2026-08-19T08:50:51.236Z",
+    "relative_path": "SFX/Puzzle and Platforms SFX/sfx_gate-open_loopable.wav",
     "retrieve_status": "downloaded",
     "downloaded_as": "SFX/Puzzle and Platforms SFX/sfx_gate-open.wav",
-    "downloaded_modified_time": "2026-08-18T18:00:57.000Z"
+    "downloaded_modified_time": "2026-08-19T08:50:51.236Z"
   },
   "15vJJhu6B1hinOunpcIvYK-qWRQXKM7gj": {
     "mimeType": "audio/wav",
@@ -226,5 +226,113 @@
     "retrieve_status": "downloaded",
     "downloaded_as": "Music/Main Gameplay/mus_main-gameplay.wav",
     "downloaded_modified_time": "2026-08-18T12:05:25.000Z"
+  },
+  "154PK5GKH3hgZaXVM1rBoGWTJ3B6jwxAe": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/154PK5GKH3hgZaXVM1rBoGWTJ3B6jwxAe/view?usp=drivesdk",
+    "size": "339890",
+    "id": "154PK5GKH3hgZaXVM1rBoGWTJ3B6jwxAe",
+    "name": "sfx_rejected.wav",
+    "modifiedTime": "2026-08-20T03:59:06.000Z",
+    "relative_path": "SFX/UI SFX/sfx_rejected.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/UI SFX/sfx_rejected.wav",
+    "downloaded_modified_time": "2026-08-20T03:59:06.000Z"
+  },
+  "1xUYjYTKhvr2nU7rIPfrxCr695gF9azSJ": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1xUYjYTKhvr2nU7rIPfrxCr695gF9azSJ/view?usp=drivesdk",
+    "size": "62806",
+    "id": "1xUYjYTKhvr2nU7rIPfrxCr695gF9azSJ",
+    "name": "sfx_close.wav",
+    "modifiedTime": "2026-08-20T03:55:21.000Z",
+    "relative_path": "SFX/UI SFX/sfx_close.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/UI SFX/sfx_close.wav",
+    "downloaded_modified_time": "2026-08-20T03:55:21.000Z"
+  },
+  "1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT/view?usp=drivesdk",
+    "size": "123830",
+    "id": "1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT",
+    "name": "sfx_click.wav",
+    "modifiedTime": "2026-08-20T03:52:09.000Z",
+    "relative_path": "SFX/UI SFX/sfx_click.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/UI SFX/sfx_click.wav",
+    "downloaded_modified_time": "2026-08-20T03:52:09.000Z"
+  },
+  "19gTignLph_KAg0IklR2oXaa9ElyHnLNL": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/19gTignLph_KAg0IklR2oXaa9ElyHnLNL/view?usp=drivesdk",
+    "size": "462216",
+    "id": "19gTignLph_KAg0IklR2oXaa9ElyHnLNL",
+    "name": "sfx_new-task.wav",
+    "modifiedTime": "2026-08-19T16:17:35.000Z",
+    "relative_path": "SFX/Task SFX/sfx_new-task.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Task SFX/sfx_new-task.wav",
+    "downloaded_modified_time": "2026-08-19T16:17:35.000Z"
+  },
+  "1w-C0AWBLkNu7jaG-5FvbFr-FtjsnJwCq": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1w-C0AWBLkNu7jaG-5FvbFr-FtjsnJwCq/view?usp=drivesdk",
+    "size": "178556",
+    "id": "1w-C0AWBLkNu7jaG-5FvbFr-FtjsnJwCq",
+    "name": "sfx_task-done.wav",
+    "modifiedTime": "2026-08-19T12:54:27.000Z",
+    "relative_path": "SFX/Task SFX/sfx_task-done.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Task SFX/sfx_task-done.wav",
+    "downloaded_modified_time": "2026-08-19T12:54:27.000Z"
+  },
+  "1PhBRRXkOF40-OMhqSg8jFcqW8pf-p8zo": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1PhBRRXkOF40-OMhqSg8jFcqW8pf-p8zo/view?usp=drivesdk",
+    "size": "18246",
+    "id": "1PhBRRXkOF40-OMhqSg8jFcqW8pf-p8zo",
+    "name": "sfx_typing-blip-hoarse.wav",
+    "modifiedTime": "2026-08-20T04:13:07.000Z",
+    "relative_path": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-hoarse.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-hoarse.wav",
+    "downloaded_modified_time": "2026-08-20T04:13:07.000Z"
+  },
+  "1l1AYdu-S624AswpcGolk9nBYFIpoSVKm": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1l1AYdu-S624AswpcGolk9nBYFIpoSVKm/view?usp=drivesdk",
+    "size": "30966",
+    "id": "1l1AYdu-S624AswpcGolk9nBYFIpoSVKm",
+    "name": "sfx_typing-blip-dark.wav",
+    "modifiedTime": "2026-08-20T04:10:46.000Z",
+    "relative_path": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-dark.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-dark.wav",
+    "downloaded_modified_time": "2026-08-20T04:10:46.000Z"
+  },
+  "1QO0fcGmPpeAyQfI5-TyJ_dUHtNVBTRYi": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1QO0fcGmPpeAyQfI5-TyJ_dUHtNVBTRYi/view?usp=drivesdk",
+    "size": "8066",
+    "id": "1QO0fcGmPpeAyQfI5-TyJ_dUHtNVBTRYi",
+    "name": "sfx_typing-blip-regular.wav",
+    "modifiedTime": "2026-08-20T04:06:11.000Z",
+    "relative_path": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-regular.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Dialog Pane SFX/Typing Blip/sfx_typing-blip-regular.wav",
+    "downloaded_modified_time": "2026-08-20T04:06:11.000Z"
+  },
+  "1w0na1gCuEVqWDgwtUqawCkGn6iD_WDtx": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/1w0na1gCuEVqWDgwtUqawCkGn6iD_WDtx/view?usp=drivesdk",
+    "size": "18284",
+    "id": "1w0na1gCuEVqWDgwtUqawCkGn6iD_WDtx",
+    "name": "sfx_dialogue-next.wav",
+    "modifiedTime": "2026-08-20T04:13:51.000Z",
+    "relative_path": "SFX/Dialog Pane SFX/sfx_dialogue-next.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Dialog Pane SFX/sfx_dialogue-next.wav",
+    "downloaded_modified_time": "2026-08-20T04:13:51.000Z"
   }
 }
