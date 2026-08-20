@@ -1,3 +1,4 @@
+using Slafurry.System.Audio;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
@@ -7,6 +8,10 @@ public class Portal : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private DetectArea detectArea;
+
+    [Header("Audio")]
+    [SerializeField] private string category = "Puzzle";
+    [SerializeField] private string useSound = "Glitch_Portal";
 
     public void Teleport()
     {
@@ -20,5 +25,6 @@ public class Portal : MonoBehaviour
             return;
 
         detectArea.CurrentTarget.transform.position = destination.position;
+        Audio.PlaySFX2D(category, useSound);
     }
 }
