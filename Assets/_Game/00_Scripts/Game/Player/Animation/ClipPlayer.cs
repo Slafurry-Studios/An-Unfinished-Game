@@ -33,7 +33,7 @@ namespace Slafurry.Player.Animation
         public void Initialize(Animator animator, string graphName = "PlayerAnimationGraph")
         {
             _graph = PlayableGraph.Create(graphName);
-            _graph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
+            _graph.SetTimeUpdateMode(DirectorUpdateMode.UnscaledGameTime);
 
             _mixer = AnimationMixerPlayable.Create(_graph, 2);
 
