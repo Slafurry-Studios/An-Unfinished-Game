@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Slafurry.System.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovingPlatform : MonoBehaviour
@@ -13,6 +14,10 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private bool isActive = true;
     [SerializeField] private bool loop = true;
     [SerializeField] private float loopDelay = 1f;
+
+    [Header("Audio")]
+    [SerializeField] private string category = "Puzzle";
+    [SerializeField] private string moveSound = "Platform";
 
     private Rigidbody2D _rb;
     private Vector2 _lastPosition;
@@ -75,6 +80,8 @@ public class MovingPlatform : MonoBehaviour
     private IEnumerator WaitAndReverse()
     {
         isWaiting = true;
+
+        Audio.PlaySFX3D(category, moveSound, transform.position);
 
         yield return new WaitForSeconds(loopDelay);
 

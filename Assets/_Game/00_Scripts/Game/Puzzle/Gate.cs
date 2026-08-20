@@ -1,3 +1,4 @@
+using Slafurry.System.Audio;
 using UnityEngine;
 
 public class Gate : MonoBehaviour
@@ -8,6 +9,11 @@ public class Gate : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Collider2D gateCollider;
+
+    [Header("Audio")]
+    [SerializeField] private string category = "Puzzle";
+    [SerializeField] private string openSound = "Gate_Open";
+    [SerializeField] private string closeSound = "Gate_Close";
 
     private Animator animator;
 
@@ -31,9 +37,9 @@ public class Gate : MonoBehaviour
     {
         if (!isActive)
             return;
-
         isOpen = true;
         UpdateGate();
+        Audio.PlaySFX2D(category, openSound);
     }
 
     public void Close()
@@ -43,6 +49,7 @@ public class Gate : MonoBehaviour
 
         isOpen = false;
         UpdateGate();
+        Audio.PlaySFX2D(category, closeSound);
     }
 
     public void Toggle()
@@ -65,6 +72,7 @@ public class Gate : MonoBehaviour
         {
             gateCollider.enabled = !isOpen;
         }
+
     }
 
     public void SetActive(bool active)

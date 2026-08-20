@@ -18,4 +18,4 @@ MonoBehaviour:
     volume: 5.82
   - trackName: MainGameplayMusic
     clip: {fileID: 8300000, guid: eb12e4d1ca96d139c944cf54ff895dcb, type: 3}
-    volume: 5.82
+    volume: 6.64

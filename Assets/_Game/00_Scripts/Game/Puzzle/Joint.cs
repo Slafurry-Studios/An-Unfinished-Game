@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Slafurry.System.Audio;
 
 public class RotatingJoint : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class RotatingJoint : MonoBehaviour
     [SerializeField] private float loopDelay = 1f;
     [SerializeField] private bool reverse = false;
     [SerializeField] private bool reverseOnLoop = false;
+
+    [Header("Audio")]
+    [SerializeField] private string category = "Puzzle";
+    [SerializeField] private string moveSound = "Joint";
 
     private float currentRotation;
     private bool isWaiting;
@@ -72,9 +77,9 @@ public class RotatingJoint : MonoBehaviour
     private IEnumerator LoopDelay()
     {
         isWaiting = true;
-
         yield return new WaitForSeconds(loopDelay);
 
+        Audio.PlaySFX3D(category, moveSound, transform.position);
         isWaiting = false;
     }
 
