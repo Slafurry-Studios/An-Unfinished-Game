@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f389c41d65c452db0308108628f351, type: 3}
+  m_Name: PlayerSFX
+  m_EditorClassIdentifier: 
+  categoryName: Player
+  effects:
+  - groupID: Run
+    clips:
+    - {fileID: 8300000, guid: aca2ecffd56192cb5937202bdfbddaaf, type: 3}
+    volume: 7.94
+    maxSimultaneous: 1
+  - groupID: Jump
+    clips:
+    - {fileID: 8300000, guid: 40898332c55d300baa2bc2a1fdf03c4d, type: 3}
+    volume: 6.54
+    maxSimultaneous: 1
+  - groupID: Land
+    clips:
+    - {fileID: 8300000, guid: aca2ecffd56192cb5937202bdfbddaaf, type: 3}
+    - {fileID: 8300000, guid: 8162bb47c2d44d088b81be12b8d5d05b, type: 3}
+    - {fileID: 8300000, guid: 4d62b2810d5b4ba36a245e344deabdc9, type: 3}
+    - {fileID: 8300000, guid: 86e402e86bd92ecda87884b0400bf18f, type: 3}
+    - {fileID: 8300000, guid: 162f0c4726ed70cbfbe6833fccf72a6f, type: 3}
+    - {fileID: 8300000, guid: 388c2858f92e4f7088d3d873ae87432d, type: 3}
+    volume: 10
+    maxSimultaneous: 1
+  - groupID: Interact
+    clips:
+    - {fileID: 8300000, guid: a088df54d0884b8a9a1ae645d74592a2, type: 3}
+    volume: 6.54
+    maxSimultaneous: 1
+  - groupID: Crouch
+    clips:
+    - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
+    volume: 6.54
+    maxSimultaneous: 1
+  - groupID: CrouchTransition
+    clips:
+    - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
+    volume: 10
+    maxSimultaneous: 1
+  - groupID: CrouchWalk
+    clips:
+    - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
+    - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
+    volume: 6.95
+    maxSimultaneous: 1
+  - groupID: Death
+    clips:
+    - {fileID: 8300000, guid: 19762b1de01b623f8ba3a8a090756eef, type: 3}
+    volume: 6.54
+    maxSimultaneous: 1
+  poolSize: 8

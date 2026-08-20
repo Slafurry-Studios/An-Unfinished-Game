@@ -422,6 +422,10 @@ MonoBehaviour:
     trackName: MainMenuMusic
   - sceneName: AboutMenu
     trackName: MainMenuMusic
+  - sceneName: Alpha_v1.0.0 - Internal Puzzle Test (Scene 1)
+    trackName: MainGameplayMusic
+  - sceneName: Alpha_v1.0.0 - Internal Puzzle Test (Scene 2)
+    trackName: MainGameplayMusic
 --- !u!114 &806636979853351446
 MonoBehaviour:
   m_ObjectHideFlags: 0
