@@ -125,6 +125,8 @@ namespace Slafurry.Player.Animation
             DeathTransition = new DeathTransitionState(_ctx);
             DeathLoop = new DeathLoopState(_ctx);
             DeathBanish = new DeathBanishState(_ctx);
+
+            GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
         private void OnEnable()
@@ -147,7 +149,7 @@ namespace Slafurry.Player.Animation
         {
             if (_current == null) return;
 
-            float dt = Time.deltaTime;
+            float dt = Time.unscaledDeltaTime;
             _clipPlayer.Tick(dt);
 
             if (TryHandleCrouchToggle()) return;
