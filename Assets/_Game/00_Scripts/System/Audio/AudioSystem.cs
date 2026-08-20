@@ -15,20 +15,21 @@ namespace Slafurry.System.Audio
         public static void StopMusic(float fade = 0.5f)
             => AudioSystem.Music.StopMusic(fade);
 
-        public static void PlaySFX2D(string category, string effect, bool loop = false)
-            => AudioSystem.SFX.PlaySFX2D(category, effect, loop);
+        // fadeIn/fadeOut: -1f (default) = pakai setting per-effect dari SFXEffect, isi manual untuk override
+        public static void PlaySFX2D(string category, string effect, bool loop = false, float fadeIn = -1f)
+            => AudioSystem.SFX.PlaySFX2D(category, effect, loop, fadeIn);
 
-        public static void PlaySFX3D(string category, string effect, Vector3 pos, bool loop = false)
-            => AudioSystem.SFX.PlaySFX3D(category, effect, pos, loop);
+        public static void PlaySFX3D(string category, string effect, Vector3 pos, bool loop = false, float fadeIn = -1f)
+            => AudioSystem.SFX.PlaySFX3D(category, effect, pos, loop, fadeIn);
 
-        public static void StopSFX()
-            => AudioSystem.SFX.StopAllSFX();
+        public static void StopSFX(float fadeOut = -1f)
+            => AudioSystem.SFX.StopAllSFX(fadeOut);
 
-        public static void StopSFX(string category)
-            => AudioSystem.SFX.StopCategory(category);
+        public static void StopSFX(string category, float fadeOut = -1f)
+            => AudioSystem.SFX.StopCategory(category, fadeOut);
 
-        public static void StopSFX(string category, string effect)
-            => AudioSystem.SFX.StopSFX(category, effect);
+        public static void StopSFX(string category, string effect, float fadeOut = -1f)
+            => AudioSystem.SFX.StopSFX(category, effect, fadeOut);
     }
 
     public class AudioSystem : GameSystem<AudioSystem>

@@ -1517,6 +1517,8 @@ MonoBehaviour:
   isActive: 1
   loop: 1
   loopDelay: 1
+  category: Puzzle
+  moveSound: Platform
 --- !u!212 &626655947
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1680,6 +1682,8 @@ MonoBehaviour:
   loopDelay: 1
   reverse: 0
   reverseOnLoop: 0
+  category: Puzzle
+  moveSound: Joint
 --- !u!212 &673216928
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2201,6 +2205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {fileID: 1425942853}
   detectArea: {fileID: 961395761}
+  category: Puzzle
+  useSound: Glitch_Portal
 --- !u!114 &961395761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3857,6 +3863,8 @@ MonoBehaviour:
   loopDelay: 1
   reverse: 0
   reverseOnLoop: 0
+  category: Puzzle
+  moveSound: Joint
 --- !u!212 &1984656513
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4236,6 +4244,9 @@ MonoBehaviour:
   isOpen: 0
   isActive: 1
   gateCollider: {fileID: 2077403612}
+  category: Puzzle
+  openSound: Gate_Open
+  closeSound: Gate_Close
 --- !u!212 &2077403611
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4730,6 +4741,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ====== CAMERA ======
       objectReference: {fileID: 0}
+    - target: {fileID: 2246711917072510806, guid: 90d123569ba8f5a8791eda9d6a350f27,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 148.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246711917072510806, guid: 90d123569ba8f5a8791eda9d6a350f27,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6587650019541001684, guid: 90d123569ba8f5a8791eda9d6a350f27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4795,6 +4816,16 @@ PrefabInstance:
       propertyPath: m_Lens.OrthographicSize
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8022773711128363103, guid: 90d123569ba8f5a8791eda9d6a350f27,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 148.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022773711128363103, guid: 90d123569ba8f5a8791eda9d6a350f27,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4811,12 +4842,12 @@ PrefabInstance:
     - target: {fileID: 4026639399213959098, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.1
+      value: 148.8
       objectReference: {fileID: 0}
     - target: {fileID: 4026639399213959098, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.1
+      value: -5.9
       objectReference: {fileID: 0}
     - target: {fileID: 4026639399213959098, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
         type: 3}

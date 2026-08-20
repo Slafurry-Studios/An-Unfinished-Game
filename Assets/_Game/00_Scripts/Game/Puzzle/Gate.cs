@@ -1,3 +1,4 @@
+using System.Collections;
 using Slafurry.System.Audio;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ public class Gate : MonoBehaviour
             return;
         isOpen = true;
         UpdateGate();
-        Audio.PlaySFX2D(category, openSound);
+        Audio.PlaySFX3D(category, openSound, transform.position);
     }
 
     public void Close()
@@ -49,7 +50,7 @@ public class Gate : MonoBehaviour
 
         isOpen = false;
         UpdateGate();
-        Audio.PlaySFX2D(category, closeSound);
+        Audio.PlaySFX3D(category, closeSound, transform.position);
     }
 
     public void Toggle()
@@ -74,6 +75,7 @@ public class Gate : MonoBehaviour
         }
 
     }
+
 
     public void SetActive(bool active)
     {

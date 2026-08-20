@@ -27,6 +27,16 @@ public class RotatingJoint : MonoBehaviour
     private void Start()
     {
         direction = reverse ? -1f : 1f;
+
+        if (isActive)
+        {
+            Audio.PlaySFX3D(
+                category,
+                moveSound,
+                transform.position,
+                loop: true
+            );
+        }
     }
 
     private void Update()
@@ -46,6 +56,9 @@ public class RotatingJoint : MonoBehaviour
             currentRotation = 0f;
 
             RotateAroundPivot(rotationStep * direction);
+
+            // Stop audio karena rotasi selesai
+            Audio.StopSFX(category, moveSound, fadeOut: 0.3f);
 
             if (loop)
             {
@@ -77,19 +90,28 @@ public class RotatingJoint : MonoBehaviour
     private IEnumerator LoopDelay()
     {
         isWaiting = true;
+
         yield return new WaitForSeconds(loopDelay);
 
-        Audio.PlaySFX3D(category, moveSound, transform.position);
         isWaiting = false;
+
+        Audio.PlaySFX3D(
+            category,
+            moveSound,
+            transform.position,
+            loop: true
+        );
     }
 
     public void SetActive(bool active)
     {
+
         isActive = active;
     }
 
     public void ToggleActive()
     {
+
         isActive = !isActive;
     }
 }
