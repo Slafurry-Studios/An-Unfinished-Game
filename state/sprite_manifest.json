@@ -7,9 +7,7 @@
     "name": "Interact.png",
     "modifiedTime": "2026-08-13T16:37:20.000Z",
     "relative_path": "Entity/Player/Interact.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Interact.png",
-    "downloaded_modified_time": "2026-08-13T16:37:20.000Z"
+    "retrieve_status": "downloaded"
   },
   "1GMvcUp4YjucfPC6fOVd54nXnq7j9uHrV": {
     "mimeType": "image/png",
@@ -19,9 +17,7 @@
     "name": "Crouch(Interact).png",
     "modifiedTime": "2026-08-13T16:36:48.000Z",
     "relative_path": "Entity/Player/Crouch(Interact).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Crouch(Interact).png",
-    "downloaded_modified_time": "2026-08-13T16:36:48.000Z"
+    "retrieve_status": "downloaded"
   },
   "1EVJhRJH8CGZPHkhPxWf-ssgzSo3o6PtT": {
     "mimeType": "image/png",
@@ -31,9 +27,7 @@
     "name": "Crouch(Move).png",
     "modifiedTime": "2026-08-13T16:36:18.000Z",
     "relative_path": "Entity/Player/Crouch(Move).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Crouch(Move).png",
-    "downloaded_modified_time": "2026-08-13T16:36:18.000Z"
+    "retrieve_status": "downloaded"
   },
   "1e4yphWgWSmTRxxXBPg3Ip5DJcYCtSvLO": {
     "mimeType": "image/png",
@@ -43,9 +37,7 @@
     "name": "Crouch(Idle).png",
     "modifiedTime": "2026-08-13T16:35:50.000Z",
     "relative_path": "Entity/Player/Crouch(Idle).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Crouch(Idle).png",
-    "downloaded_modified_time": "2026-08-13T16:35:50.000Z"
+    "retrieve_status": "downloaded"
   },
   "1fgmxSpLgm2CpGHJ3UepFMMrY5Y1xvmom": {
     "mimeType": "image/png",
@@ -55,9 +47,7 @@
     "name": "Run.png",
     "modifiedTime": "2026-08-13T16:35:10.000Z",
     "relative_path": "Entity/Player/Run.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Run.png",
-    "downloaded_modified_time": "2026-08-13T16:35:10.000Z"
+    "retrieve_status": "downloaded"
   },
   "18hd50MlFI1RkU0ua7_bxS3CBea50vETk": {
     "mimeType": "image/png",
@@ -67,9 +57,7 @@
     "name": "Death(1)(Loop).png",
     "modifiedTime": "2026-08-13T16:33:04.000Z",
     "relative_path": "Entity/Player/Death(1)(Loop).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Death(1)(Loop).png",
-    "downloaded_modified_time": "2026-08-13T16:33:04.000Z"
+    "retrieve_status": "downloaded"
   },
   "1qnMhRuTmxnjtozPK97Zi3h3opzQ_d-E-": {
     "mimeType": "image/png",
@@ -79,9 +67,7 @@
     "name": "Death(Transtion Death (1)).png",
     "modifiedTime": "2026-08-13T16:32:28.000Z",
     "relative_path": "Entity/Player/Death(Transtion Death (1)).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Death(Transtion Death (1)).png",
-    "downloaded_modified_time": "2026-08-13T16:32:28.000Z"
+    "retrieve_status": "downloaded"
   },
   "1hYuU9AfpePTw1DeOxxN1NiqZfZKLgaPX": {
     "mimeType": "image/png",
@@ -91,9 +77,7 @@
     "name": "Death(2)(Banish).png",
     "modifiedTime": "2026-08-13T16:31:38.000Z",
     "relative_path": "Entity/Player/Death(2)(Banish).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Death(2)(Banish).png",
-    "downloaded_modified_time": "2026-08-13T16:31:38.000Z"
+    "retrieve_status": "downloaded"
   },
   "1tEyyz64hr2SMfX9l3Yog566Ic9nK3SxH": {
     "mimeType": "image/png",
@@ -103,9 +87,7 @@
     "name": "Idle(Transition to Crouch).png",
     "modifiedTime": "2026-08-13T16:30:02.000Z",
     "relative_path": "Entity/Player/Idle(Transition to Crouch).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Idle(Transition to Crouch).png",
-    "downloaded_modified_time": "2026-08-13T16:30:02.000Z"
+    "retrieve_status": "downloaded"
   },
   "18wSBBmzQfj_n4a907BZ5LxJG5o3ZJqNF": {
     "mimeType": "image/png",
@@ -115,9 +97,7 @@
     "name": "Crouch(Transition to Idle).png",
     "modifiedTime": "2026-08-13T16:24:52.000Z",
     "relative_path": "Entity/Player/Crouch(Transition to Idle).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Crouch(Transition to Idle).png",
-    "downloaded_modified_time": "2026-08-13T16:24:52.000Z"
+    "retrieve_status": "downloaded"
   },
   "1NR47ss4-RHNZRo6QYIgCbkHcX8Jq8q4N": {
     "mimeType": "image/png",
@@ -127,9 +107,7 @@
     "name": "Landing.png",
     "modifiedTime": "2026-08-13T16:21:48.000Z",
     "relative_path": "Entity/Player/Landing.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Landing.png",
-    "downloaded_modified_time": "2026-08-13T16:21:48.000Z"
+    "retrieve_status": "downloaded"
   },
   "1H50pjfJF51lSrkxqm9keSJmgomTsVK6L": {
     "mimeType": "image/png",
@@ -139,9 +117,7 @@
     "name": "jump.png",
     "modifiedTime": "2026-08-13T16:21:06.000Z",
     "relative_path": "Entity/Player/jump.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/jump.png",
-    "downloaded_modified_time": "2026-08-13T16:21:06.000Z"
+    "retrieve_status": "downloaded"
   },
   "1ZNcgoMkytFTaW4iSicGu8Mx6t-m8asQ1": {
     "mimeType": "image/png",
@@ -151,9 +127,7 @@
     "name": "Idle.png",
     "modifiedTime": "2026-08-13T16:20:03.000Z",
     "relative_path": "Entity/Player/Idle.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Idle.png",
-    "downloaded_modified_time": "2026-08-13T16:20:03.000Z"
+    "retrieve_status": "downloaded"
   },
   "1rtwsY7FE4o9TRKpt2H3KsScv51YByWfF": {
     "mimeType": "image/png",
@@ -163,9 +137,7 @@
     "name": "Fall(loop).png",
     "modifiedTime": "2026-08-14T10:52:22.000Z",
     "relative_path": "Entity/Player/Fall(loop).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Fall(loop).png",
-    "downloaded_modified_time": "2026-08-14T10:52:22.000Z"
+    "retrieve_status": "downloaded"
   },
   "12FvoEBu2HnhQ_F8LhW7u0QrQQ3JFfTGk": {
     "mimeType": "image/png",
@@ -175,9 +147,7 @@
     "name": "Jump(Transition to fall).png",
     "modifiedTime": "2026-08-14T10:51:54.000Z",
     "relative_path": "Entity/Player/Jump(Transition to fall).png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Player/Jump(Transition to fall).png",
-    "downloaded_modified_time": "2026-08-14T10:51:54.000Z"
+    "retrieve_status": "downloaded"
   },
   "1Pgwn2Th4LAAdl2eeQVR3Ot8f_rcfHrOo": {
     "mimeType": "image/png",
@@ -187,9 +157,7 @@
     "name": "Perfectionism base design.png",
     "modifiedTime": "2026-08-16T08:57:56.682Z",
     "relative_path": "Entity/Perfectionism/Perfectionism base design.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Perfectionism/Perfectionism base design.png",
-    "downloaded_modified_time": "2026-08-16T08:57:56.682Z"
+    "retrieve_status": "downloaded"
   },
   "1E5bNFrAtGkWzDGyjXEXCZhU00iTB1u70": {
     "mimeType": "image/png",
@@ -199,9 +167,7 @@
     "name": "FillBox.png",
     "modifiedTime": "2026-07-28T12:00:24.000Z",
     "relative_path": "Debug/FillBox.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Debug/FillBox.png",
-    "downloaded_modified_time": "2026-07-28T12:00:24.000Z"
+    "retrieve_status": "downloaded"
   },
   "11yMGeBVrQVyfQ2tu0O7b47Ic3UvqI96Q": {
     "mimeType": "image/png",
@@ -211,9 +177,7 @@
     "name": "Design Document Chamber-Ground.png",
     "modifiedTime": "2026-08-16T14:23:42.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Ground.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Ground.png",
-    "downloaded_modified_time": "2026-08-16T14:23:42.000Z"
+    "retrieve_status": "downloaded"
   },
   "1jjYWRejBj1vtSJR2potDaZenVxVA6L3s": {
     "mimeType": "image/png",
@@ -223,9 +187,7 @@
     "name": "Design Document Chamber-In Progress.png",
     "modifiedTime": "2026-08-16T14:17:35.296Z",
     "relative_path": "Room/DDC/Design Document Chamber-In Progress.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-In Progress.png",
-    "downloaded_modified_time": "2026-08-16T14:17:35.296Z"
+    "retrieve_status": "downloaded"
   },
   "1fVVB_BM4ZhHj22vqBa1VOo43K2Jhypww": {
     "mimeType": "image/png",
@@ -235,9 +197,7 @@
     "name": "Kanban parts-Sheet.png",
     "modifiedTime": "2026-08-16T14:09:40.000Z",
     "relative_path": "Room/DDC/Kanban parts-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Kanban parts-Sheet.png",
-    "downloaded_modified_time": "2026-08-16T14:09:40.000Z"
+    "retrieve_status": "downloaded"
   },
   "1J95imMxp3xGwY57aIyp5pO26Jcp5tOZe": {
     "mimeType": "image/png",
@@ -247,9 +207,7 @@
     "name": "Design Document Chamber-Crack.png",
     "modifiedTime": "2026-08-16T14:09:24.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Crack.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Crack.png",
-    "downloaded_modified_time": "2026-08-16T14:09:24.000Z"
+    "retrieve_status": "downloaded"
   },
   "100LzMcv7aq2f9jr-w5yE5-9VlIhQ76g7": {
     "mimeType": "image/png",
@@ -259,9 +217,7 @@
     "name": "Design Document Chamber-Done.png",
     "modifiedTime": "2026-08-16T14:09:15.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Done.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Done.png",
-    "downloaded_modified_time": "2026-08-16T14:09:15.000Z"
+    "retrieve_status": "downloaded"
   },
   "1uwAMNv4H2W5Vxb3HMVwAIYmVIQtMA1uL": {
     "mimeType": "image/png",
@@ -271,9 +227,7 @@
     "name": "Design Document Chamber-Rejected.png",
     "modifiedTime": "2026-08-16T14:09:05.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Rejected.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Rejected.png",
-    "downloaded_modified_time": "2026-08-16T14:09:05.000Z"
+    "retrieve_status": "downloaded"
   },
   "1qnfIGQZESAiM7c-L4oy2SePaqobnDLKb": {
     "mimeType": "image/png",
@@ -283,9 +237,7 @@
     "name": "Design Document Chamber-In Review.png",
     "modifiedTime": "2026-08-16T14:08:55.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-In Review.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-In Review.png",
-    "downloaded_modified_time": "2026-08-16T14:08:55.000Z"
+    "retrieve_status": "downloaded"
   },
   "1A8IunZ2k67FKvBms0FDxId2WPyqrZXKd": {
     "mimeType": "image/png",
@@ -295,9 +247,7 @@
     "name": "Design Document Chamber-Todo.png",
     "modifiedTime": "2026-08-16T14:08:32.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Todo.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Todo.png",
-    "downloaded_modified_time": "2026-08-16T14:08:32.000Z"
+    "retrieve_status": "downloaded"
   },
   "1c5v5UpYafF3gR8Q7jHrXNHL7IAb_3Qxx": {
     "mimeType": "image/png",
@@ -307,9 +257,7 @@
     "name": "Design Document Chamber-Desk.png",
     "modifiedTime": "2026-08-16T14:08:25.000Z",
     "relative_path": "Room/DDC/Design Document Chamber-Desk.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber-Desk.png",
-    "downloaded_modified_time": "2026-08-16T14:08:25.000Z"
+    "retrieve_status": "downloaded"
   },
   "1QOdoKCEbZDQWXUFxpeKYZ1wpaa0fnFL9": {
     "mimeType": "image/png",
@@ -319,9 +267,7 @@
     "name": "Design Document Chamber.png",
     "modifiedTime": "2026-08-16T14:07:59.000Z",
     "relative_path": "Room/DDC/Design Document Chamber.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Room/DDC/Design Document Chamber.png",
-    "downloaded_modified_time": "2026-08-16T14:07:59.000Z"
+    "retrieve_status": "downloaded"
   },
   "18gGA-zBbolwib2PLBl64Q5D7Iyi1rNi6": {
     "mimeType": "image/png",
@@ -331,9 +277,7 @@
     "name": "Portal-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:58.000Z",
     "relative_path": "Puzzle/Portal-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Portal-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:58.000Z"
+    "retrieve_status": "downloaded"
   },
   "1RAJXqxLJprbIlX2i5WR5rwCzJDN2chyK": {
     "mimeType": "image/png",
@@ -343,9 +287,7 @@
     "name": "Gate-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:53.000Z",
     "relative_path": "Puzzle/Gate-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Gate-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:53.000Z"
+    "retrieve_status": "downloaded"
   },
   "1z1EuLB8jqfDSTex2NAHff0i3jUyT0YOk": {
     "mimeType": "image/png",
@@ -355,9 +297,7 @@
     "name": "Joint-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:47.000Z",
     "relative_path": "Puzzle/Joint-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Joint-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:47.000Z"
+    "retrieve_status": "downloaded"
   },
   "1vhvsagm_ZolAJ3-nUmYv4ssLUe-pm8Nd": {
     "mimeType": "image/png",
@@ -367,9 +307,7 @@
     "name": "Moving Platform-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:42.000Z",
     "relative_path": "Puzzle/Moving Platform-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Moving Platform-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:42.000Z"
+    "retrieve_status": "downloaded"
   },
   "1tnSrUdrlrA3TYz4X_j2ASLqNQ6264ZtE": {
     "mimeType": "image/png",
@@ -379,9 +317,7 @@
     "name": "Boxes-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:38.000Z",
     "relative_path": "Puzzle/Boxes-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Boxes-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:38.000Z"
+    "retrieve_status": "downloaded"
   },
   "1lSFyw3Eq8E4Z4SRRolc77csW6b0kyhDs": {
     "mimeType": "image/png",
@@ -391,9 +327,7 @@
     "name": "Solids-Sheet.png",
     "modifiedTime": "2026-08-19T08:28:30.000Z",
     "relative_path": "Puzzle/Solids-Sheet.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Puzzle/Solids-Sheet.png",
-    "downloaded_modified_time": "2026-08-19T08:28:30.000Z"
+    "retrieve_status": "downloaded"
   },
   "1kgrWO_738867VnSeuyzLF4oUEhoiv7JL": {
     "mimeType": "image/png",
@@ -403,9 +337,7 @@
     "name": "Burnout Design.png",
     "modifiedTime": "2026-08-18T18:34:16.000Z",
     "relative_path": "Entity/Burnout/Burnout Design.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Entity/Burnout/Burnout Design.png",
-    "downloaded_modified_time": "2026-08-18T18:34:16.000Z"
+    "retrieve_status": "downloaded"
   },
   "1tSnC7GScrQTGXXLAgYtW4DxWEsRXr1U4": {
     "mimeType": "image/png",
@@ -415,8 +347,6 @@
     "name": "Sunk Cost design.png",
     "modifiedTime": "2026-08-18T18:35:02.000Z",
     "relative_path": "Entity/Sunk Cost/Sunk Cost design.png",
-    "retrieve_status": "downloaded",
-    "downloaded_as": "Entity/Sunk Cost/Sunk Cost design.png",
-    "downloaded_modified_time": "2026-08-18T18:35:02.000Z"
+    "retrieve_status": "downloaded"
   }
 }
