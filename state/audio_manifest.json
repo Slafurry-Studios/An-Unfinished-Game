@@ -254,14 +254,14 @@
   "1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT": {
     "mimeType": "audio/wav",
     "webViewLink": "https://drive.google.com/file/d/1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT/view?usp=drivesdk",
-    "size": "123830",
+    "size": "144194",
     "id": "1MDrWdkR-GCySS-7diuD8jR7L7aYkyCgT",
     "name": "sfx_click.wav",
-    "modifiedTime": "2026-08-20T03:52:09.000Z",
+    "modifiedTime": "2026-08-20T11:18:56.847Z",
     "relative_path": "SFX/UI SFX/sfx_click.wav",
     "retrieve_status": "downloaded",
     "downloaded_as": "SFX/UI SFX/sfx_click.wav",
-    "downloaded_modified_time": "2026-08-20T03:52:09.000Z"
+    "downloaded_modified_time": "2026-08-20T11:18:56.847Z"
   },
   "19gTignLph_KAg0IklR2oXaa9ElyHnLNL": {
     "mimeType": "audio/wav",
@@ -334,5 +334,29 @@
     "retrieve_status": "downloaded",
     "downloaded_as": "SFX/Dialog Pane SFX/sfx_dialogue-next.wav",
     "downloaded_modified_time": "2026-08-20T04:13:51.000Z"
+  },
+  "14xbLA8cR0gb8EmNMVno2HBr7Oz4TYE1p": {
+    "mimeType": "audio/wav",
+    "webViewLink": "https://drive.google.com/file/d/14xbLA8cR0gb8EmNMVno2HBr7Oz4TYE1p/view?usp=drivesdk",
+    "size": "209074",
+    "id": "14xbLA8cR0gb8EmNMVno2HBr7Oz4TYE1p",
+    "name": "sfx_interact.wav",
+    "modifiedTime": "2026-08-20T11:17:39.000Z",
+    "relative_path": "SFX/UI SFX/sfx_interact.wav",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/UI SFX/sfx_interact.wav",
+    "downloaded_modified_time": "2026-08-20T11:17:39.000Z"
+  },
+  "1IdmOPBv95RHcsf4zqTYEcHQGMewk-1ps": {
+    "mimeType": "audio/ogg",
+    "webViewLink": "https://drive.google.com/file/d/1IdmOPBv95RHcsf4zqTYEcHQGMewk-1ps/view?usp=drivesdk",
+    "size": "157609",
+    "id": "1IdmOPBv95RHcsf4zqTYEcHQGMewk-1ps",
+    "name": "sfx_walk.ogg",
+    "modifiedTime": "2026-08-20T10:12:44.000Z",
+    "relative_path": "SFX/Player SFX/sfx_walk.ogg",
+    "retrieve_status": "downloaded",
+    "downloaded_as": "SFX/Player SFX/sfx_walk.ogg",
+    "downloaded_modified_time": "2026-08-20T10:12:44.000Z"
   }
 }
