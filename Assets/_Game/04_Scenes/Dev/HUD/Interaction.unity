@@ -2548,6 +2548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4447,6 +4448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4606,6 +4608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
