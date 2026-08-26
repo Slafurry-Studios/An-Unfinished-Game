@@ -8,7 +8,7 @@ namespace Slafurry.Player
         public const string Run              = "Run";
         public const string Jump             = "Jump";
         public const string Land             = "Land";
-        public const string Interact         = "Interact";
+        public const string Interact         = "Interaction";
         public const string Crouch           = "Crouch";
         public const string CrouchTransition = "CrouchTransition";
         public const string CrouchWalk       = "CrouchWalk";

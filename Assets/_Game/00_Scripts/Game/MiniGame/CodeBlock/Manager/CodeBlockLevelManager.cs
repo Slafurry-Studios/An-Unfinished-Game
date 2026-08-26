@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Slafurry.System.InputHub;
 
 public class CodeBlockGameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class CodeBlockGameManager : MonoBehaviour
     private int currentIndex = 0;
     private bool isTransitioning = false;
     private bool gameStarted = false;
+    private bool gameEnded = false;
 
     void Awake()
     {
@@ -53,9 +55,13 @@ public class CodeBlockGameManager : MonoBehaviour
     {
         if (gameStarted) return;
         gameStarted = true;
+        gameEnded = false;
 
         if (gameUIRoot != null)
             gameUIRoot.SetActive(true);
+
+        // Kunci control player selama minigame code-block berlangsung
+        Controls.DisableInput();
 
         if (levels != null && levels.Count > 0)
             LoadLevelAt(0);
@@ -74,13 +80,11 @@ public class CodeBlockGameManager : MonoBehaviour
 
     void HandleLevelSolved()
     {
-
         if (isTransitioning) return;
         isTransitioning = true;
 
         Invoke(nameof(GoToNextLevel), delayBeforeNextLevel);
     }
-
 
     void HandlePlacementChanged()
     {
@@ -88,7 +92,7 @@ public class CodeBlockGameManager : MonoBehaviour
         if (loader.IsLevelComplete()) return;
 
         if (IsGridFull())
-            OnGameLose?.Invoke();
+            LoseGame();
     }
 
     bool IsGridFull()
@@ -111,12 +115,42 @@ public class CodeBlockGameManager : MonoBehaviour
         int next = currentIndex + 1;
         if (next < levels.Count)
         {
+            // Masih lanjut ke level berikutnya, game belum berakhir,
+            // jadi control TETAP terkunci di sini.
             LoadLevelAt(next);
         }
         else
         {
-            OnAllLevelsComplete?.Invoke();
-            OnGameWin?.Invoke();
+            WinGame();
         }
+    }
+
+    void WinGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        Controls.EnableInput();
+
+        OnAllLevelsComplete?.Invoke();
+        OnGameWin?.Invoke();
+    }
+
+    void LoseGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        Controls.EnableInput();
+
+        OnGameLose?.Invoke();
+    }
+
+    // Jaga-jaga: kalau objek ini di-disable/destroy saat game masih berjalan
+    // (belum win/lose), pastikan control player nggak nyangkut kekunci.
+    void OnDisable()
+    {
+        if (gameStarted && !gameEnded)
+            Controls.EnableInput();
     }
 }

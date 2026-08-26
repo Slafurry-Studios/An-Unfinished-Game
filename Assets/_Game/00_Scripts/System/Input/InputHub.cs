@@ -6,7 +6,6 @@ using Slafurry.Core.Abstract;
 
 namespace Slafurry.System.InputHub
 {
-
     public static class Controls
     {
         public static event Action OnJumpPressed
@@ -39,11 +38,17 @@ namespace Slafurry.System.InputHub
             add => InputHub.Instance.OnInteractReleased += value;
             remove => InputHub.Instance.OnInteractReleased -= value;
         }
+
+        // --- Fitur baru: kontrol on/off ---
+        public static bool IsInputEnabled => InputHub.Instance.IsInputEnabled;
+
+        public static void EnableInput() => InputHub.Instance.EnableInput();
+        public static void DisableInput() => InputHub.Instance.DisableInput();
+        public static void SetInputEnabled(bool enabled) => InputHub.Instance.SetInputEnabled(enabled);
     }
 
     public class InputHub : GameSystem<InputHub>
     {
-
         [SerializeField] private InputActionAsset inputActions;
 
         public event Action OnJumpPressed;
@@ -57,6 +62,9 @@ namespace Slafurry.System.InputHub
         private InputAction _moveAction;
         private InputAction _crouchAction;
         private InputAction _interactAction;
+        private InputActionMap _gameplayMap;
+
+        public bool IsInputEnabled { get; private set; } = true;
 
         public override IEnumerator Initialize() { yield return null; }
         public override void PostInitialize() { }
@@ -65,11 +73,11 @@ namespace Slafurry.System.InputHub
         {
             base.OnSingletonAwake();
 
-            var map = inputActions.FindActionMap("Gameplay");
-            _jumpAction = map.FindAction("Jump");
-            _moveAction = map.FindAction("Move");
-            _crouchAction = map.FindAction("Crouch");
-            _interactAction = map.FindAction("Interact");
+            _gameplayMap = inputActions.FindActionMap("Gameplay");
+            _jumpAction = _gameplayMap.FindAction("Jump");
+            _moveAction = _gameplayMap.FindAction("Move");
+            _crouchAction = _gameplayMap.FindAction("Crouch");
+            _interactAction = _gameplayMap.FindAction("Interact");
 
             _jumpAction.performed += ctx => OnJumpPressed?.Invoke();
             _moveAction.performed += ctx => OnMoveChanged?.Invoke(ctx.ReadValue<Vector2>());
@@ -79,7 +87,38 @@ namespace Slafurry.System.InputHub
             _interactAction.performed += ctx => OnInteractPressed?.Invoke();
             _interactAction.canceled += ctx => OnInteractReleased?.Invoke();
 
-            map.Enable();
+            _gameplayMap.Enable();
+            IsInputEnabled = true;
+        }
+
+        public void EnableInput()
+        {
+            if (IsInputEnabled) return;
+
+            _gameplayMap.Enable();
+            IsInputEnabled = true;
+        }
+
+        public void DisableInput()
+        {
+            if (!IsInputEnabled) return;
+
+            // Pastikan state gerak ter-reset sebelum dimatikan
+            // (biar player nggak "nyangkut" jalan terus)
+            if (_moveAction.IsPressed())
+                OnMoveChanged?.Invoke(Vector2.zero);
+
+            if (_crouchAction.IsPressed())
+                OnCrouchCanceled?.Invoke();
+
+            _gameplayMap.Disable();
+            IsInputEnabled = false;
+        }
+
+        public void SetInputEnabled(bool enabled)
+        {
+            if (enabled) EnableInput();
+            else DisableInput();
         }
     }
 }

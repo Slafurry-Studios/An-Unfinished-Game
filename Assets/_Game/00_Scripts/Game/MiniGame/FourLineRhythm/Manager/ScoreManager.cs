@@ -26,6 +26,7 @@ namespace RhythmGame
         private int _score;
         private int _combo;
         private int _maxCombo;
+        private int _missCount;
 
         private void Awake() => Instance = this;
 
@@ -45,7 +46,19 @@ namespace RhythmGame
         public void RegisterMiss()
         {
             _combo = 0;
+            _missCount++;
             ShowJudgement(Judgement.Miss);
+            UpdateUI();
+        }
+
+        /// <summary>Reset semua statistik (dipanggil GameManager.PlayGame() supaya bisa main ulang).</summary>
+        public void ResetStats()
+        {
+            _score = 0;
+            _combo = 0;
+            _maxCombo = 0;
+            _missCount = 0;
+            if (judgementText != null) judgementText.text = "";
             UpdateUI();
         }
 
@@ -69,5 +82,6 @@ namespace RhythmGame
 
         public int Score => _score;
         public int MaxCombo => _maxCombo;
+        public int MissCount => _missCount;
     }
 }
