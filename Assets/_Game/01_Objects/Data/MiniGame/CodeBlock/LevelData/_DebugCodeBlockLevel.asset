@@ -15,32 +15,11 @@ MonoBehaviour:
   width: 4
   height: 4
   inputs:
-  - x: 2
-    y: 3
-    value: 1
-  - x: 0
-    y: 0
-    value: 0
   - x: 0
     y: 3
-    value: 0
-  - x: 0
-    y: 1
-    value: 0
-  - x: 0
-    y: 2
-    value: 1
-  - x: 1
-    y: 1
-    value: 1
-  - x: 1
-    y: 0
-    value: 1
-  - x: 2
-    y: 0
     value: 1
   outputs:
-  - x: 1
-    y: 2
-    targetValue: 0
-  availableGates: 0100000002000000030000000400000004000000
+  - x: 0
+    y: 1
+    targetValue: 1
+  availableGates: 01000000
