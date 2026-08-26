@@ -603,7 +603,7 @@ PrefabInstance:
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 839.8781
+      value: 883.07416
       objectReference: {fileID: 0}
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
@@ -613,12 +613,12 @@ PrefabInstance:
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 419.93906
+      value: 441.53708
       objectReference: {fileID: 0}
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -185.7
+      value: -182.255
       objectReference: {fileID: 0}
     - target: {fileID: 7434997904627862298, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
@@ -638,37 +638,13 @@ PrefabInstance:
     - target: {fileID: 7861624202842476151, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000020086765
+      value: -0.9420694
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4990231610524130927, guid: a176fd223310f78f58eb2e4d53482a8c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4247612351355644833}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a176fd223310f78f58eb2e4d53482a8c, type: 3}
---- !u!1 &4247612351355644832 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4990231610524130927, guid: a176fd223310f78f58eb2e4d53482a8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4247612351355644831}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4247612351355644833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4247612351355644832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f2dd41c98d92f1990b1115c32816b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  category: UI
-  effectName: Click
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

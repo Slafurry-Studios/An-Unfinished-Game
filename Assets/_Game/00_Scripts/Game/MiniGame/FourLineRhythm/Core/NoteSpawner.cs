@@ -32,7 +32,7 @@ namespace RhythmGame
 
         private void Update()
         {
-            if (chart == null) return;
+            if (chart == null || conductor == null || !conductor.HasStarted) return;
 
             float songTime = conductor.GetSongTime();
 
@@ -93,6 +93,32 @@ namespace RhythmGame
         public void RemoveActiveNote(Note note)
         {
             _activeNotesPerLane[note.lane].Remove(note);
+        }
+
+        /// <summary>True kalau semua note di chart sudah selesai di-spawn (tidak berarti sudah dinilai).</summary>
+        public bool AllNotesSpawned => chart != null && _nextNoteIndex >= chart.notes.Count;
+
+        /// <summary>True kalau masih ada note yang tampil di layar (belum di-hit / di-miss).</summary>
+        public bool HasActiveNotes()
+        {
+            for (int i = 0; i < _activeNotesPerLane.Length; i++)
+                if (_activeNotesPerLane[i].Count > 0) return true;
+            return false;
+        }
+
+        /// <summary>True kalau chart sudah benar-benar selesai: semua note sudah di-spawn DAN sudah dinilai (hit/miss), tidak ada sisa di layar. Dipakai GameManager untuk mendeteksi kondisi MENANG.</summary>
+        public bool IsChartFinished => AllNotesSpawned && !HasActiveNotes();
+
+        /// <summary>Reset spawner supaya bisa main ulang dari awal (dipanggil GameManager.PlayGame()).</summary>
+        public void ResetSpawner()
+        {
+            _nextNoteIndex = 0;
+            for (int i = 0; i < _activeNotesPerLane.Length; i++)
+            {
+                foreach (var n in _activeNotesPerLane[i])
+                    if (n != null) Destroy(n.gameObject);
+                _activeNotesPerLane[i].Clear();
+            }
         }
     }
 }

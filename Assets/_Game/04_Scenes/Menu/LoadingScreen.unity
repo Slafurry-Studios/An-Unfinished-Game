@@ -485,11 +485,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 144336534769425525, guid: 6dd11de8d4967488cab22a6e69e968f9,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2232607441528115442, guid: 6dd11de8d4967488cab22a6e69e968f9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -595,10 +590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ====== LOADING ======
       objectReference: {fileID: 0}
-    - target: {fileID: 9067201995598820622, guid: 6dd11de8d4967488cab22a6e69e968f9,
+    - target: {fileID: 6925436476166699068, guid: 6dd11de8d4967488cab22a6e69e968f9,
         type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      propertyPath: m_TargetGraphic
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,56 +9,73 @@ public class ObjectiveHUD : MonoBehaviour
     [Header("References")]
     [SerializeField] private TMP_Text objectiveText;
 
+    [Tooltip("Opsional. Kalau kosong, akan otomatis diambil dari ObjectiveManager.Instance saat OnEnable.")]
+    [SerializeField] private ObjectiveManager objectiveManager;
+
     [Header("Display")]
     [SerializeField] private string header = "OBJECTIVES";
     [SerializeField] private string incompleteFormat = "• {0}  {1}/{2}";
     [SerializeField] private string completedFormat = "• {0}  ✓";
 
     [Header("Completed Objective")]
-    [Tooltip("How long a completed objective remains visible before fading out.")]
     [SerializeField] private float completedDisplayDuration = 2f;
-
-    [Tooltip("Duration of the fade-out animation.")]
     [SerializeField] private float fadeDuration = 0.5f;
 
     private Coroutine fadeRoutine;
+    private Coroutine bindRoutine;
 
     private void OnEnable()
     {
-        if (ObjectiveManager.Instance == null)
-            return;
-
-        ObjectiveManager.Instance.OnObjectivesChanged += Refresh;
-
-        Refresh();
+        bindRoutine = StartCoroutine(BindAndSubscribe());
     }
 
     private void OnDisable()
     {
-        if (ObjectiveManager.Instance != null)
-            ObjectiveManager.Instance.OnObjectivesChanged -= Refresh;
+        if (bindRoutine != null)
+        {
+            StopCoroutine(bindRoutine);
+            bindRoutine = null;
+        }
+
+        if (objectiveManager != null)
+            objectiveManager.OnObjectivesChanged -= Refresh;
+
+        if (fadeRoutine != null)
+        {
+            StopCoroutine(fadeRoutine);
+            fadeRoutine = null;
+        }
+    }
+
+    private IEnumerator BindAndSubscribe()
+    {
+        // Kalau belum di-assign manual di Inspector, ambil dari singleton.
+        // Tunggu sampai instance-nya siap (menghindari masalah urutan Awake).
+        while (objectiveManager == null)
+        {
+            objectiveManager = ObjectiveManager.Instance;
+            yield return null;
+        }
+
+        objectiveManager.OnObjectivesChanged += Refresh;
+        Refresh();
+
+        bindRoutine = null;
     }
 
     private void Refresh()
     {
-        if (objectiveText == null)
+        if (objectiveText == null || objectiveManager == null)
             return;
 
-        ObjectiveManager manager = ObjectiveManager.Instance;
+        BuildText(objectiveManager);
 
-        if (manager == null)
-            return;
-
-        BuildText(manager);
-
-        if (HasCompletedObjective(manager))
+        if (HasCompletedObjective(objectiveManager))
         {
             if (fadeRoutine != null)
                 StopCoroutine(fadeRoutine);
 
-            fadeRoutine = StartCoroutine(
-                FadeCompletedObjectiveRoutine()
-            );
+            fadeRoutine = StartCoroutine(FadeCompletedObjectiveRoutine());
         }
         else
         {
@@ -80,23 +97,16 @@ public class ObjectiveHUD : MonoBehaviour
         {
             if (objective.IsCompleted)
             {
-                builder.AppendLine(
-                    string.Format(
-                        completedFormat,
-                        objective.ObjectiveName
-                    )
-                );
+                builder.AppendLine(string.Format(completedFormat, objective.ObjectiveName));
             }
             else
             {
-                builder.AppendLine(
-                    string.Format(
-                        incompleteFormat,
-                        objective.ObjectiveName,
-                        objective.Progress,
-                        objective.Threshold
-                    )
-                );
+                builder.AppendLine(string.Format(
+                    incompleteFormat,
+                    objective.ObjectiveName,
+                    objective.Progress,
+                    objective.Threshold
+                ));
             }
         }
 
@@ -116,22 +126,15 @@ public class ObjectiveHUD : MonoBehaviour
 
     private IEnumerator FadeCompletedObjectiveRoutine()
     {
-        yield return new WaitForSeconds(
-            completedDisplayDuration
-        );
+        yield return new WaitForSeconds(completedDisplayDuration);
 
         float elapsed = 0f;
 
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
-
-            float alpha = 1f - Mathf.Clamp01(
-                elapsed / fadeDuration
-            );
-
+            float alpha = 1f - Mathf.Clamp01(elapsed / fadeDuration);
             SetAlpha(alpha);
-
             yield return null;
         }
 
@@ -146,14 +149,12 @@ public class ObjectiveHUD : MonoBehaviour
 
     private void RemoveCompletedObjectives()
     {
-        ObjectiveManager manager = ObjectiveManager.Instance;
-
-        if (manager == null)
+        if (objectiveManager == null)
             return;
 
         List<string> completedObjectives = new List<string>();
 
-        foreach (Objective objective in manager.Objectives)
+        foreach (Objective objective in objectiveManager.Objectives)
         {
             if (objective.IsCompleted)
                 completedObjectives.Add(objective.ObjectiveName);
@@ -161,7 +162,7 @@ public class ObjectiveHUD : MonoBehaviour
 
         foreach (string objectiveName in completedObjectives)
         {
-            manager.RemoveObjective(objectiveName);
+            objectiveManager.RemoveObjective(objectiveName);
         }
     }
 

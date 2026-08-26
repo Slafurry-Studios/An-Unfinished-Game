@@ -31,7 +31,12 @@ namespace RhythmGame
             Instance = this;
         }
 
-        private void Start()
+        /// <summary>
+        /// Mulai memutar lagu (dijadwalkan lewat dspTime supaya presisi).
+        /// Dipanggil oleh GameManager.PlayGame(), BUKAN otomatis di Start(),
+        /// supaya game baru mulai saat pemain menekan tombol "Play".
+        /// </summary>
+        public void StartSong()
         {
             _dspSongStartTime = AudioSettings.dspTime + startDelay;
             musicSource.PlayScheduled(_dspSongStartTime);

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Slafurry.System.InputHub;
 
 public class SlidingPuzzleManager : MonoBehaviour
 {
@@ -48,7 +49,6 @@ public class SlidingPuzzleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) TryMove(0, -1);  // ambil tile dari kiri
     }
 
-
     public void StartGame()
     {
         if (gameStarted) return;
@@ -57,6 +57,9 @@ public class SlidingPuzzleManager : MonoBehaviour
 
         if (gameUIRoot != null)
             gameUIRoot.SetActive(true);
+
+        // Kunci control player (Jump/Move/Crouch/dll) selama puzzle berlangsung
+        Controls.DisableInput();
 
         SetupSolvedBoard();
         Shuffle(shuffleMoves);
@@ -67,6 +70,8 @@ public class SlidingPuzzleManager : MonoBehaviour
     {
         if (gameEnded) return;
         gameEnded = true;
+
+        Controls.EnableInput();
 
         OnPuzzleLose?.Invoke();
     }
@@ -144,7 +149,6 @@ public class SlidingPuzzleManager : MonoBehaviour
                 int pieceId = board[i];
                 slotImages[i].sprite = pieceSprites[pieceId - 1];
 
-                // Kasih warna sendiri per piece, biar gak numpang default putih dari vertex color
                 if (pieceColors != null && pieceId - 1 < pieceColors.Length)
                     slotImages[i].color = pieceColors[pieceId - 1];
             }
@@ -164,6 +168,17 @@ public class SlidingPuzzleManager : MonoBehaviour
         gameEnded = true;
 
         Debug.Log("Puzzle selesai!");
+
+        Controls.EnableInput();
+
         OnPuzzleWin?.Invoke();
+    }
+
+    // Jaga-jaga: kalau objek ini di-disable/destroy saat puzzle masih aktif
+    // (misal scene ganti tiba-tiba), pastikan control player nggak nyangkut kekunci.
+    void OnDisable()
+    {
+        if (gameStarted && !gameEnded)
+            Controls.EnableInput();
     }
 }

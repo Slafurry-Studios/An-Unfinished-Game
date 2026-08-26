@@ -19,11 +19,23 @@ MonoBehaviour:
     - {fileID: 8300000, guid: aca2ecffd56192cb5937202bdfbddaaf, type: 3}
     volume: 7.94
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Jump
     clips:
     - {fileID: 8300000, guid: 40898332c55d300baa2bc2a1fdf03c4d, type: 3}
     volume: 6.54
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Land
     clips:
     - {fileID: 8300000, guid: aca2ecffd56192cb5937202bdfbddaaf, type: 3}
@@ -34,29 +46,76 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 388c2858f92e4f7088d3d873ae87432d, type: 3}
     volume: 10
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Interact
     clips: []
     volume: 6.54
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Crouch
     clips:
     - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
     volume: 6.54
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: CrouchTransition
     clips:
     - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
     volume: 10
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: CrouchWalk
     clips:
     - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
     - {fileID: 8300000, guid: 44bdb721d16027c7cb4a2833f1ef5e38, type: 3}
     volume: 6.95
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Death
     clips:
     - {fileID: 8300000, guid: 19762b1de01b623f8ba3a8a090756eef, type: 3}
     volume: 6.54
     maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: Interaction
+    clips:
+    - {fileID: 8300000, guid: 0911da8b2ee04d5d5b0b284e7644fd1a, type: 3}
+    volume: 6.54
+    maxSimultaneous: 1
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8

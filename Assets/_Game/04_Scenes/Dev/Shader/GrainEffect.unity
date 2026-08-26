@@ -2156,55 +2156,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.01}
   m_EdgeRadius: 0
---- !u!1 &928099282
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 928099284}
-  - component: {fileID: 928099283}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &928099283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928099282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: d41fe0912e5a6d82bbfb479b0e4e3724, type: 2}
---- !u!4 &928099284
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928099282}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 141.9958, y: 49.249733, z: -3.5265167}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961395758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,6 +2547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4439,6 +4391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4597,6 +4550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: Interact
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -4790,21 +4744,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ====== CAMERA ======
       objectReference: {fileID: 0}
-    - target: {fileID: 2246711917072510806, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 148.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2246711917072510806, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359710127246414850, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6587650019541001684, guid: 90d123569ba8f5a8791eda9d6a350f27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4855,31 +4794,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6878034365908552965, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: orthographic size
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7182851614403213286, guid: 90d123569ba8f5a8791eda9d6a350f27,
         type: 3}
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1376228962}
-    - target: {fileID: 7182851614403213286, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022773711128363103, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 148.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8022773711128363103, guid: 90d123569ba8f5a8791eda9d6a350f27,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4963,4 +4882,3 @@ SceneRoots:
   - {fileID: 1347636539}
   - {fileID: 1278544997}
   - {fileID: 560493647}
-  - {fileID: 928099284}
