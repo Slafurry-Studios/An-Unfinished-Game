@@ -1,28 +1,46 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SlidingPuzzleManager : MonoBehaviour
 {
     [Header("Setup")]
-    public Sprite[] pieceSprites; // 8 sprite (piece id 1-8), urut kiri-atas ke kanan-bawah
-    public Image[] slotImages;    // 9 Image sesuai urutan grid (row-major, kiri-atas = index 0)
+    public Sprite[] pieceSprites;
+    public Image[] slotImages;
+
+    [Header("Warna tiap piece (biar gak numpang default putih dari vertex color)")]
+    public Color[] pieceColors = new Color[8]
+    {
+        Color.white, Color.white, Color.white, Color.white,
+        Color.white, Color.white, Color.white, Color.white
+    };
+
+    [Header("UI Root (di-hide di awal, muncul pas StartGame() dipanggil)")]
+    public GameObject gameUIRoot;
 
     [Header("Shuffle")]
     public int shuffleMoves = 100;
 
-    int[] board = new int[9];     // 0 = kosong, 1-8 = piece id
-    int emptyIndex;
+    [Header("Events")]
+    public UnityEvent OnPuzzleWin;
+    public UnityEvent OnPuzzleLose;
 
-    void Start()
+    int[] board = new int[9];  
+    int emptyIndex;
+    bool gameStarted = false;
+    bool gameEnded = false;
+
+    void Awake()
     {
-        SetupSolvedBoard();
-        Shuffle(shuffleMoves);
-        Redraw();
+        if (gameUIRoot != null)
+            gameUIRoot.SetActive(false);
     }
 
     void Update()
     {
+        if (!gameStarted || gameEnded) return;
+
         // Keyboard dpad
         if (Input.GetKeyDown(KeyCode.UpArrow))    TryMove(1, 0);   // ambil tile dari bawah
         if (Input.GetKeyDown(KeyCode.DownArrow))  TryMove(-1, 0);  // ambil tile dari atas
@@ -30,7 +48,28 @@ public class SlidingPuzzleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow)) TryMove(0, -1);  // ambil tile dari kiri
     }
 
-    // ---- Board setup ----
+
+    public void StartGame()
+    {
+        if (gameStarted) return;
+        gameStarted = true;
+        gameEnded = false;
+
+        if (gameUIRoot != null)
+            gameUIRoot.SetActive(true);
+
+        SetupSolvedBoard();
+        Shuffle(shuffleMoves);
+        Redraw();
+    }
+
+    public void LoseGame()
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        OnPuzzleLose?.Invoke();
+    }
 
     void SetupSolvedBoard()
     {
@@ -60,8 +99,6 @@ public class SlidingPuzzleManager : MonoBehaviour
         return result;
     }
 
-    // ---- Input: dpad (keyboard atau UI button, panggil function ini) ----
-
     public void OnDpadUp()    => TryMove(1, 0);
     public void OnDpadDown()  => TryMove(-1, 0);
     public void OnDpadLeft()  => TryMove(0, 1);
@@ -69,6 +106,8 @@ public class SlidingPuzzleManager : MonoBehaviour
 
     void TryMove(int rowOffset, int colOffset)
     {
+        if (!gameStarted || gameEnded) return;
+
         int emptyRow = emptyIndex / 3;
         int emptyCol = emptyIndex % 3;
 
@@ -100,7 +139,15 @@ public class SlidingPuzzleManager : MonoBehaviour
         {
             bool isEmpty = board[i] == 0;
             slotImages[i].enabled = !isEmpty;
-            if (!isEmpty) slotImages[i].sprite = pieceSprites[board[i] - 1];
+            if (!isEmpty)
+            {
+                int pieceId = board[i];
+                slotImages[i].sprite = pieceSprites[pieceId - 1];
+
+                // Kasih warna sendiri per piece, biar gak numpang default putih dari vertex color
+                if (pieceColors != null && pieceId - 1 < pieceColors.Length)
+                    slotImages[i].color = pieceColors[pieceId - 1];
+            }
         }
     }
 
@@ -113,7 +160,10 @@ public class SlidingPuzzleManager : MonoBehaviour
 
     void OnPuzzleSolved()
     {
+        if (gameEnded) return;
+        gameEnded = true;
+
         Debug.Log("Puzzle selesai!");
-        // trigger event lain di sini, misal buka pintu / kasih reward
+        OnPuzzleWin?.Invoke();
     }
 }

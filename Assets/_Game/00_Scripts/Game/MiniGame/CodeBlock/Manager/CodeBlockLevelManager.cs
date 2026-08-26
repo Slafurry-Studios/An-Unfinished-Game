@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CodeBlockGameManager : MonoBehaviour
 {
@@ -8,29 +9,56 @@ public class CodeBlockGameManager : MonoBehaviour
     public GridBoardView board;
     public InventoryTrayView trayView;
 
+    [Header("UI Root (di-hide di awal, muncul pas StartGame() dipanggil)")]
+    public GameObject gameUIRoot;
+
     [Header("Level yang dimainkan berurutan")]
     public List<CodeBlockLevelData> levels;
 
     [Header("Jeda sebelum pindah ke level berikutnya (detik)")]
     public float delayBeforeNextLevel = 1f;
 
+    [Header("Events")]
+    public UnityEvent OnGameWin;   
+    public UnityEvent OnGameLose; 
+
     public System.Action OnAllLevelsComplete;
 
     private int currentIndex = 0;
     private bool isTransitioning = false;
+    private bool gameStarted = false;
+
+    void Awake()
+    {
+        if (gameUIRoot != null)
+            gameUIRoot.SetActive(false);
+    }
 
     void Start()
     {
         board.OnLevelSolved += HandleLevelSolved;
-
-        if (levels != null && levels.Count > 0)
-            LoadLevelAt(0);
+        board.OnPlacementChanged += HandlePlacementChanged;
     }
 
     void OnDestroy()
     {
         if (board != null)
+        {
             board.OnLevelSolved -= HandleLevelSolved;
+            board.OnPlacementChanged -= HandlePlacementChanged;
+        }
+    }
+
+    public void StartGame()
+    {
+        if (gameStarted) return;
+        gameStarted = true;
+
+        if (gameUIRoot != null)
+            gameUIRoot.SetActive(true);
+
+        if (levels != null && levels.Count > 0)
+            LoadLevelAt(0);
     }
 
     void LoadLevelAt(int index)
@@ -46,20 +74,49 @@ public class CodeBlockGameManager : MonoBehaviour
 
     void HandleLevelSolved()
     {
-        // RefreshVisuals bisa manggil OnLevelSolved berkali-kali (tiap ada perubahan grid),
-        // flag ini biar transisi cuma ke-trigger sekali per level
+
         if (isTransitioning) return;
         isTransitioning = true;
 
         Invoke(nameof(GoToNextLevel), delayBeforeNextLevel);
     }
 
+
+    void HandlePlacementChanged()
+    {
+        if (isTransitioning) return;
+        if (loader.IsLevelComplete()) return;
+
+        if (IsGridFull())
+            OnGameLose?.Invoke();
+    }
+
+    bool IsGridFull()
+    {
+        CodeBlockLevelData level = levels[currentIndex];
+        for (int x = 0; x < level.width; x++)
+        {
+            for (int y = 0; y < level.height; y++)
+            {
+                GridCell cell = board.Circuit.GetCell(x, y);
+                if (cell != null && cell.type == GridObjectType.Empty)
+                    return false; // masih ada ruang kosong, belum buntu
+            }
+        }
+        return true;
+    }
+
     void GoToNextLevel()
     {
         int next = currentIndex + 1;
         if (next < levels.Count)
+        {
             LoadLevelAt(next);
+        }
         else
+        {
             OnAllLevelsComplete?.Invoke();
+            OnGameWin?.Invoke();
+        }
     }
 }

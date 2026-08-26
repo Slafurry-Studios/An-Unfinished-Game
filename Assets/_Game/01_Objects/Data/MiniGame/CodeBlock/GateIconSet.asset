@@ -14,18 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - type: 1
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: f4869f8f3343ce0808861794ebe03dbb, type: 3}
   - type: 2
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
-  - type: 2
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: d97856f237268cb4f8bdba6e655bd981, type: 3}
   - type: 3
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: 8bed8aba3e422a1c9b985db84e695aa5, type: 3}
   - type: 4
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: 7b087cb1642a41318807fdba0a75d1e5, type: 3}
   - type: 5
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: e2d03d786617f93848e3bb0fbb9e1168, type: 3}
   - type: 6
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 21300000, guid: a2e34b99b3878d1ea953eb8c7014be1c, type: 3}
   - type: 0
-    sprite: {fileID: 21300000, guid: 48cb3b71a4bc37d7586c6827dd5a954f, type: 3}
+    sprite: {fileID: 0}
