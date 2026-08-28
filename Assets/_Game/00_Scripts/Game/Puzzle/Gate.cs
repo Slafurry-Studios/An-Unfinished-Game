@@ -1,4 +1,3 @@
-using System.Collections;
 using Slafurry.System.Audio;
 using UnityEngine;
 
@@ -10,18 +9,12 @@ public class Gate : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Collider2D gateCollider;
+    [SerializeField] private Animator animator;
 
     [Header("Audio")]
     [SerializeField] private string category = "Puzzle";
     [SerializeField] private string openSound = "Gate_Open";
     [SerializeField] private string closeSound = "Gate_Close";
-
-    private Animator animator;
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     private void Start()
     {
@@ -38,6 +31,7 @@ public class Gate : MonoBehaviour
     {
         if (!isActive)
             return;
+
         isOpen = true;
         UpdateGate();
         Audio.PlaySFX3D(category, openSound, transform.position);
@@ -73,9 +67,7 @@ public class Gate : MonoBehaviour
         {
             gateCollider.enabled = !isOpen;
         }
-
     }
-
 
     public void SetActive(bool active)
     {
