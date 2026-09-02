@@ -69,7 +69,7 @@ namespace Slafurry.Player
         private Vector2 _velocity;
         public float SpeedAlongRight => Vector2.Dot(_velocity, transform.right);
         public float SpeedAlongGravity => Vector2.Dot(_velocity, gravityDirection);
-        
+
         private float _moveInput;
         private bool _jumpQueued;
 
@@ -141,8 +141,23 @@ namespace Slafurry.Player
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
+            ClampVelocityAtCeiling(); 
             UpdateFacing();
             MoveAndSnap();
+        }
+
+        private void ClampVelocityAtCeiling()
+        {
+            if (!IsHeadBlocked)
+                return;
+
+            Vector2 upDirection = -gravityDirection;
+            float upwardSpeed = Vector2.Dot(_velocity, upDirection);
+
+            if (upwardSpeed > 0f)
+            {
+                ZeroVelocityAlong(upDirection);
+            }
         }
 
         private void HandlePlatformMovement()
