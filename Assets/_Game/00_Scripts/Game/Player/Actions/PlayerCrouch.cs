@@ -1,5 +1,5 @@
 using UnityEngine;
-using Slafurry.System.InputHub;
+using UnityEngine.InputSystem;
 using Slafurry.System.Audio;
 
 namespace Slafurry.Player
@@ -11,6 +11,9 @@ namespace Slafurry.Player
     /// Crouch state can only change while grounded — this avoids the
     /// collider swapping mid-air, which Ground/WallCheck aren't designed
     /// to handle gracefully.
+    ///
+    /// Crouch key rotates with gravity (see PlayerMovement.IsGravityCrouchKeyHeld).
+    /// Down Arrow is always an alternative crouch key.
     /// </summary>
     public class PlayerCrouch : MonoBehaviour
     {
@@ -18,41 +21,29 @@ namespace Slafurry.Player
         [SerializeField] private GroundCheck groundCheck;
         [SerializeField] private HeadCheck headCheck;
         [SerializeField] private WallCheck wallCheck;
+        [SerializeField] private PlayerMovement movement;
         [SerializeField] private Collider2D standingCollider;
         [SerializeField] private Collider2D crouchCollider;
 
         [Header("Settings")]
         [SerializeField, Range(0f, 1f)] private float crouchSpeedMultiplier = 0.5f;
 
-        private bool _crouchHeld;
-
         public bool IsCrouching { get; private set; }
         public float SpeedMultiplier => IsCrouching ? crouchSpeedMultiplier : 1f;
-
-        private void Start()
-        {
-            Controls.OnCrouchStarted += HandleCrouchStarted;
-            Controls.OnCrouchCanceled += HandleCrouchCanceled;
-        }
-
-        private void OnDisable()
-        {
-            Controls.OnCrouchStarted -= HandleCrouchStarted;
-            Controls.OnCrouchCanceled -= HandleCrouchCanceled;
-        }
-
-        private void HandleCrouchStarted() => _crouchHeld = true;
-        private void HandleCrouchCanceled() => _crouchHeld = false;
 
         private void FixedUpdate()
         {
             if (!groundCheck.IsGrounded)
                 return; // freeze current crouch state while airborne
 
-            bool wantsToStand = !_crouchHeld;
+            bool crouchKey = movement.IsGravityCrouchKeyHeld();
+            bool downArrow = Keyboard.current != null && Keyboard.current.downArrowKey.isPressed;
+            bool wantsToCrouch = crouchKey || downArrow;
+
+            bool wantsToStand = !wantsToCrouch;
             bool blockedFromStanding = wantsToStand && headCheck.IsBlocked;
 
-            bool shouldCrouch = _crouchHeld || blockedFromStanding;
+            bool shouldCrouch = wantsToCrouch || blockedFromStanding;
 
             if (shouldCrouch != IsCrouching)
                 ApplyCrouchState(shouldCrouch);

@@ -48,18 +48,41 @@ namespace Slafurry.Player.Animation
     }
 
     /// <summary>
-    /// Played once whenever PlayerCrouch.IsCrouching flips while grounded
-    /// (either direction — stand-to-crouch or crouch-to-stand). The state
-    /// machine triggers this as a global interrupt, not from another state's
-    /// Tick(); see PlayerAnimationStateMachine.TryHandleCrouchToggle.
+    /// Played once when the player transitions from standing to crouching.
+    /// The state machine triggers this as a global interrupt; see
+    /// PlayerAnimationStateMachine.TryHandleCrouchToggle.
     /// </summary>
-    public class CrouchTransitionState : PlayerAnimState
+    public class StandToCrouchState : PlayerAnimState
     {
-        public CrouchTransitionState(PlayerAnimContext ctx) : base(ctx) { }
+        public StandToCrouchState(PlayerAnimContext ctx) : base(ctx) { }
 
         public override void Enter()
         {
-            var c = Ctx.Machine.CrouchTransition_Clip;
+            var c = Ctx.Machine.StandToCrouch_Clip;
+            Ctx.Player.Play(c.clip, false, c.crossFadeDuration);
+        }
+
+        public override PlayerAnimState Tick(float deltaTime)
+        {
+            if (Ctx.Player.IsCurrentClipFinished)
+                return Ctx.ResolveGroundedState();
+
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Played once when the player transitions from crouching to standing.
+    /// The state machine triggers this as a global interrupt; see
+    /// PlayerAnimationStateMachine.TryHandleCrouchToggle.
+    /// </summary>
+    public class CrouchToStandState : PlayerAnimState
+    {
+        public CrouchToStandState(PlayerAnimContext ctx) : base(ctx) { }
+
+        public override void Enter()
+        {
+            var c = Ctx.Machine.CrouchToStand_Clip;
             Ctx.Player.Play(c.clip, false, c.crossFadeDuration);
         }
 

@@ -12731,6 +12731,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325501432412664729, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+        type: 3}
+      propertyPath: movement
+      value: 
+      objectReference: {fileID: 1725537246}
     - target: {fileID: 2583507378669439305, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
         type: 3}
       propertyPath: objectiveManager
@@ -12786,6 +12791,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6583980697829444115, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+        type: 3}
+      propertyPath: crouchToStandClip.clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 45bf9f860bfb4ad2484410fe0b817729, type: 2}
+    - target: {fileID: 6583980697829444115, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+        type: 3}
+      propertyPath: standToCrouchClip.clip
+      value: 
+      objectReference: {fileID: 7400000, guid: a49d044375b507421aa81e6f590cde68, type: 2}
     - target: {fileID: 8273749987144518326, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
         type: 3}
       propertyPath: m_Name
