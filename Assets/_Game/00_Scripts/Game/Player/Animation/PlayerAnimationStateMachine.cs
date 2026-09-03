@@ -45,7 +45,8 @@ namespace Slafurry.Player.Animation
         [SerializeField] private ClipConfig crouchIdleClip;
         [SerializeField] private ClipConfig crouchMoveClip;
         [SerializeField] private ClipConfig crouchInteractClip;
-        [SerializeField] private ClipConfig crouchTransitionClip;
+        [SerializeField] private ClipConfig standToCrouchClip;
+        [SerializeField] private ClipConfig crouchToStandClip;
 
         [Header("Death")]
         [SerializeField] private ClipConfig deathTransitionClip;
@@ -64,7 +65,8 @@ namespace Slafurry.Player.Animation
         public ClipConfig CrouchIdle_Clip => crouchIdleClip;
         public ClipConfig CrouchMove_Clip => crouchMoveClip;
         public ClipConfig CrouchInteract_Clip => crouchInteractClip;
-        public ClipConfig CrouchTransition_Clip => crouchTransitionClip;
+        public ClipConfig StandToCrouch_Clip => standToCrouchClip;
+        public ClipConfig CrouchToStand_Clip => crouchToStandClip;
         public ClipConfig DeathTransition_Clip => deathTransitionClip;
         public ClipConfig DeathLoop_Clip => deathLoopClip;
         public ClipConfig DeathBanish_Clip => deathBanishClip;
@@ -80,7 +82,8 @@ namespace Slafurry.Player.Animation
         public PlayerAnimState CrouchIdle { get; private set; }
         public PlayerAnimState CrouchMove { get; private set; }
         public PlayerAnimState CrouchInteract { get; private set; }
-        public PlayerAnimState CrouchTransition { get; private set; }
+        public PlayerAnimState StandToCrouch { get; private set; }
+        public PlayerAnimState CrouchToStand { get; private set; }
         public PlayerAnimState DeathTransition { get; private set; }
         public PlayerAnimState DeathLoop { get; private set; }
         public PlayerAnimState DeathBanish { get; private set; }
@@ -121,7 +124,8 @@ namespace Slafurry.Player.Animation
             CrouchIdle = new CrouchIdleState(_ctx);
             CrouchMove = new CrouchMoveState(_ctx);
             CrouchInteract = new CrouchInteractState(_ctx);
-            CrouchTransition = new CrouchTransitionState(_ctx);
+            StandToCrouch = new StandToCrouchState(_ctx);
+            CrouchToStand = new CrouchToStandState(_ctx);
             DeathTransition = new DeathTransitionState(_ctx);
             DeathLoop = new DeathLoopState(_ctx);
             DeathBanish = new DeathBanishState(_ctx);
@@ -181,7 +185,7 @@ namespace Slafurry.Player.Animation
             if (_current == Interact || _current == CrouchInteract || _current == Landing)
                 return false;
 
-            ChangeState(CrouchTransition);
+            ChangeState(crouchingNow ? StandToCrouch : CrouchToStand);
             return true;
         }
 

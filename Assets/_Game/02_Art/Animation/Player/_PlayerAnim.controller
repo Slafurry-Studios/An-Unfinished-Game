@@ -362,6 +362,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 9061196635468416176}
     m_Position: {x: 202.05188, y: 564.1736, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 9061865202469751940}
+    m_Position: {x: 191.70135, y: 270.77304, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -471,6 +474,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: b4580c26e9d1961539eb5d518d76357f, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &9061865202469751940
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_Crouch_Transition_Reverse
+  m_Speed: -1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: a49d044375b507421aa81e6f590cde68, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

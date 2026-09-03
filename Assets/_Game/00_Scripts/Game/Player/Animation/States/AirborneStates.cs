@@ -75,6 +75,8 @@ namespace Slafurry.Player.Animation
         {
             var c = Ctx.Machine.Landing_Clip;
             Ctx.Player.Play(c.clip, false, c.crossFadeDuration);
+            Ctx.Movement.DisableLeftMovement();
+            Ctx.Movement.DisableRightMovement();
         }
 
         public override PlayerAnimState Tick(float deltaTime)
@@ -86,6 +88,12 @@ namespace Slafurry.Player.Animation
                 return Ctx.ResolveGroundedState();
 
             return null;
+        }
+
+        public override void Exit()
+        {
+            Ctx.Movement.EnableLeftMovement();
+            Ctx.Movement.EnableRightMovement();
         }
     }
 }
