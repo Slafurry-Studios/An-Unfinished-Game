@@ -416,8 +416,11 @@ MonoBehaviour:
   crouchInteractClip:
     clip: {fileID: 7400000, guid: ededab115ccfa6d1b882f16e09df102b, type: 2}
     crossFadeDuration: 0
-  crouchTransitionClip:
-    clip: {fileID: 7400000, guid: 45bf9f860bfb4ad2484410fe0b817729, type: 2}
+  standToCrouchClip:
+    clip: {fileID: 0}
+    crossFadeDuration: 0
+  crouchToStandClip:
+    clip: {fileID: 0}
     crossFadeDuration: 0
   deathTransitionClip:
     clip: {fileID: 7400000, guid: 701cc6e8c7444e0639a440f30893725f, type: 2}
@@ -532,6 +535,7 @@ MonoBehaviour:
   groundCheck: {fileID: 7063735894642484234}
   headCheck: {fileID: 716935780959154649}
   wallCheck: {fileID: 7418909346122191739}
+  movement: {fileID: 3342133722336362804}
   standingCollider: {fileID: 4261564368857208814}
   crouchCollider: {fileID: 6095368971388077174}
   crouchSpeedMultiplier: 0.5
