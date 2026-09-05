@@ -1,5 +1,6 @@
 using Slafurry.System.InputHub;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Slafurry.Player
 {
@@ -19,6 +20,13 @@ namespace Slafurry.Player
     /// = "sideways" axis, gravityDirection = "downward" axis) instead of raw
     /// world X/Y, so left/right input and snapping stay correct no matter
     /// which way gravity points.
+    ///
+    /// Controls rotate with gravity:
+    ///   Down  -> A/D move, W jump,     S crouch
+    ///   Right -> W/S move, D jump,     A crouch
+    ///   Up    -> A/D move, S jump,     W crouch
+    ///   Left  -> W/S move, A jump,     D crouch
+    ///   (Space = always jump, Down Arrow = always crouch)
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public partial class PlayerMovement : MonoBehaviour
@@ -69,7 +77,7 @@ namespace Slafurry.Player
         private Vector2 _velocity;
         public float SpeedAlongRight => Vector2.Dot(_velocity, transform.right);
         public float SpeedAlongGravity => Vector2.Dot(_velocity, gravityDirection);
-        
+
         private float _moveInput;
         private bool _jumpQueued;
 
@@ -119,14 +127,69 @@ namespace Slafurry.Player
             StopMovementLoopSFX();
         }
 
+        // =========================================================
+        // GRAVITY-ROTATED INPUT
+        // =========================================================
+
+        /// <summary>
+        /// Returns the WASD key that acts as "jump" for the current gravity.
+        /// Space is always an alternative jump key (handled separately).
+        /// </summary>
+        public bool IsGravityJumpKeyHeld()
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return false;
+
+            if (gravityDirection == Vector2.down)  return kb.wKey.isPressed;
+            if (gravityDirection == Vector2.right) return kb.aKey.isPressed;
+            if (gravityDirection == Vector2.up)    return kb.sKey.isPressed;
+            if (gravityDirection == Vector2.left)  return kb.dKey.isPressed;
+            return false;
+        }
+
+        /// <summary>
+        /// Returns the WASD key that acts as "crouch" for the current gravity.
+        /// Down Arrow is always an alternative crouch key (handled separately).
+        /// </summary>
+        public bool IsGravityCrouchKeyHeld()
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return false;
+
+            if (gravityDirection == Vector2.down)  return kb.sKey.isPressed;
+            if (gravityDirection == Vector2.right) return kb.dKey.isPressed;
+            if (gravityDirection == Vector2.up)    return kb.wKey.isPressed;
+            if (gravityDirection == Vector2.left)  return kb.aKey.isPressed;
+            return false;
+        }
+
         private void HandleMoveChanged(Vector2 input)
         {
-            _moveInput = input.x;
+            // Rotate the input vector so the correct axis is used for
+            // movement regardless of which way gravity points.
+            float angle = Mathf.Atan2(gravityDirection.y, gravityDirection.x) * Mathf.Rad2Deg + 90f;
+            float rad = angle * Mathf.Deg2Rad;
+            float cos = Mathf.Cos(rad);
+            float sin = Mathf.Sin(rad);
+
+            _moveInput = input.x * cos + input.y * sin;
+
+            // Also check if the gravity-rotated jump key is pressed.
+            // When gravity is RIGHT, D fires Move (not Jump), so we
+            // need to catch it here. Same for A (LEFT) and S (UP).
+            if (IsGravityJumpKeyHeld())
+                _jumpQueued = true;
         }
 
         private void HandleJumpPressed()
         {
-            _jumpQueued = true;
+            // Only queue jump if the gravity-rotated jump key or Space is pressed.
+            // This prevents W from triggering jump when W is a movement key.
+            var kb = Keyboard.current;
+            if (kb == null) return;
+
+            if (IsGravityJumpKeyHeld() || kb.spaceKey.isPressed)
+                _jumpQueued = true;
         }
 
         private void FixedUpdate()
@@ -141,8 +204,23 @@ namespace Slafurry.Player
             ApplyHorizontalMovement();
             ApplyGravity();
             HandleJump();
+            ClampVelocityAtCeiling(); 
             UpdateFacing();
             MoveAndSnap();
+        }
+
+        private void ClampVelocityAtCeiling()
+        {
+            if (!IsHeadBlocked)
+                return;
+
+            Vector2 upDirection = -gravityDirection;
+            float upwardSpeed = Vector2.Dot(_velocity, upDirection);
+
+            if (upwardSpeed > 0f)
+            {
+                ZeroVelocityAlong(upDirection);
+            }
         }
 
         private void HandlePlatformMovement()
