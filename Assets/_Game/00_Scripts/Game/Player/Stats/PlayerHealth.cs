@@ -38,10 +38,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if (debug && Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(10);
-        }
+        // if (debug && Input.GetKeyDown(KeyCode.K))
+        // {
+        //     TakeDamage(10);
+        // }
     }
 
     public void TakeDamage(int damage)

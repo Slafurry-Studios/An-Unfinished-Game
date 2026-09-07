@@ -2307,6 +2307,8 @@ GameObject:
   - component: {fileID: 8934488584178166567}
   - component: {fileID: 8934488584178166568}
   - component: {fileID: 8934488584178166569}
+  - component: {fileID: 8934488584178166571}
+  - component: {fileID: 8934488584178166570}
   m_Layer: 5
   m_Name: ====== CUTSCENE ======
   m_TagString: Untagged
@@ -2717,19 +2719,7 @@ MonoBehaviour:
   triggerOnStart: 1
   onTrigger:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8934488584178166567}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8934488584178166567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2916,6 +2906,46 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &8934488584178166570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535582642175943530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7e1e1ae6e0e8654a3c80a6386cb8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8934488584178166571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535582642175943530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a2c0c08e0e198c28cc4360dbd0c17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerKey: 32
+  triggerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8934488584178166570}
+        m_TargetAssemblyTypeName: ChangeSceneTrigger, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TutorialRoom
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!1660057539 &9223372036854775807
