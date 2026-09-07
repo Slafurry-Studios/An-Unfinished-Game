@@ -668,10 +668,22 @@ MonoBehaviour:
     trackName: MainMenuMusic
   - sceneName: AboutMenu
     trackName: MainMenuMusic
-  - sceneName: Alpha_v1.2.0 - Internal Mini Game Test (Scene 1)
-    trackName: MainGameplayMusic
-  - sceneName: Alpha_v1.2.0 - Internal Mini Game Test (Scene 2)
-    trackName: MainGameplayMusic
+  - sceneName: IntroCutscene
+    trackName: IntroCutsceneMusic
+  - sceneName: TutorialRoom
+    trackName: TutorialRoomMusic
+  - sceneName: MainChamber
+    trackName: MainChamberMusic
+  - sceneName: SprintHub
+    trackName: SprintHubMusic
+  - sceneName: ArtAtelier
+    trackName: ArtAtelierMusic
+  - sceneName: SoundScape
+    trackName: SoundScapeMusic
+  - sceneName: IterativeRoom
+    trackName: IterativeRoomMusic
+  - sceneName: RejectedChamber
+    trackName: RejectedChamberMusic
 --- !u!114 &806636979853351446
 MonoBehaviour:
   m_ObjectHideFlags: 0
