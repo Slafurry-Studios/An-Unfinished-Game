@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Slafurry.Utils.UI
 {
@@ -32,15 +32,14 @@ namespace Slafurry.Utils.UI
         [SerializeField] private bool useUnscaledTime = true;
         [SerializeField] private bool deactivateOnHidden = false;
 
-        /// <summary>Fired when a SlideOut() finishes (e.g. safe point to deactivate the panel).</summary>
-        public event Action OnSlideOutComplete;
+        [Header("Events")]
+        [SerializeField] private UnityEvent onSlideInComplete;
+        [SerializeField] private UnityEvent onSlideOutComplete;
 
-        /// <summary>Fired when a SlideIn() finishes.</summary>
-        public event Action OnSlideInComplete;
-
-        private Vector2 _shownPos;   // the resting/visible position, captured once at Awake
-        private Vector2 _hiddenPos;  // the off-screen position, computed from Direction
+        private Vector2 _shownPos;
+        private Vector2 _hiddenPos;
         private Coroutine _routine;
+        private bool _isSlideIn;
 
         private void Awake()
         {
@@ -66,25 +65,22 @@ namespace Slafurry.Utils.UI
 
         public void SlideIn()
         {
+            _isSlideIn = true;
             rectTransform.anchoredPosition = _hiddenPos;
-            StartSlide(_hiddenPos, _shownPos, onComplete: () => OnSlideInComplete?.Invoke());
+            StartSlide(_hiddenPos, _shownPos);
         }
 
         public void SlideOut()
         {
-            StartSlide(rectTransform.anchoredPosition, _hiddenPos, onComplete: () =>
-            {
-                OnSlideOutComplete?.Invoke();
-                if (deactivateOnHidden)
-                    gameObject.SetActive(false);
-            });
+            _isSlideIn = false;
+            StartSlide(rectTransform.anchoredPosition, _hiddenPos);
         }
 
-        private void StartSlide(Vector2 from, Vector2 to, Action onComplete)
+        private void StartSlide(Vector2 from, Vector2 to)
         {
             if (_routine != null)
                 StopCoroutine(_routine);
-            _routine = StartCoroutine(SlideRoutine(from, to, onComplete));
+            _routine = StartCoroutine(SlideRoutine(from, to));
         }
 
         private Vector2 CalculateHiddenPos()
@@ -107,7 +103,7 @@ namespace Slafurry.Utils.UI
             };
         }
 
-        private IEnumerator SlideRoutine(Vector2 from, Vector2 to, Action onComplete)
+        private IEnumerator SlideRoutine(Vector2 from, Vector2 to)
         {
             if (delay > 0f)
                 yield return useUnscaledTime ? new WaitForSecondsRealtime(delay) : new WaitForSeconds(delay);
@@ -124,7 +120,15 @@ namespace Slafurry.Utils.UI
 
             rectTransform.anchoredPosition = to;
             _routine = null;
-            onComplete?.Invoke();
+
+            if (_isSlideIn)
+                onSlideInComplete?.Invoke();
+            else
+            {
+                onSlideOutComplete?.Invoke();
+                if (deactivateOnHidden)
+                    gameObject.SetActive(false);
+            }
         }
     }
 }

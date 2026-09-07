@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 namespace Slafurry.Utils.UI
 {
@@ -16,8 +16,9 @@ namespace Slafurry.Utils.UI
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private float dimAlphaWhileDragging = 0.6f;
 
-        public event Action OnDragStarted;
-        public event Action<PointerEventData> OnDragEnded;
+        [Header("Events")]
+        [SerializeField] private UnityEvent onDragStarted;
+        [SerializeField] private UnityEvent<Vector2> onDragEnded;
 
         private RectTransform _rectTransform;
         private Vector2 _originalAnchoredPosition;
@@ -44,7 +45,7 @@ namespace Slafurry.Utils.UI
                 canvasGroup.blocksRaycasts = false;
             }
 
-            OnDragStarted?.Invoke();
+            onDragStarted?.Invoke();
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -60,7 +61,7 @@ namespace Slafurry.Utils.UI
                 canvasGroup.blocksRaycasts = true;
             }
 
-            OnDragEnded?.Invoke(eventData);
+            onDragEnded?.Invoke(eventData.position);
         }
 
         /// <summary>Call this from your drop-target listener if the drop was invalid, to snap back.</summary>
