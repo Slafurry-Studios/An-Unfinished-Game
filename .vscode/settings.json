@@ -57,5 +57,5 @@
         "**/UserSettings": true,
         "**/.gitignore": true
     },
-    "dotnet.defaultSolution": "An-Unfinished-Game.sln"
+    "dotnet.defaultSolution": "An Unfinished Game.sln"
 }

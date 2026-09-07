@@ -9,12 +9,15 @@ structure, base classes, and reasoning behind each decision — so the team
 ## Root folder structure
 ```
 Assets/
-├── 00_Scripts/
-├── 01_Objects/
-├── 02_Art/
-├── 03_Audio/
-├── 04_Scenes/
-└── 05_Settings/
+├── _Game/              ← all game code and assets (numeric prefixes)
+│   ├── 00_Scripts/
+│   ├── 01_Objects/
+│   ├── 02_Art/
+│   ├── 03_Audio/
+│   ├── 04_Scenes/
+│   └── 05_Settings/
+├── _Vendor/            ← third-party packages
+└── Editor/
 ```
 Numeric prefixes are used at root level because several root folders get
 opened back-to-back all the time (`Scenes` especially) — prefixes lock the
@@ -31,15 +34,20 @@ of widening the same level.
 ```
 Scripts/
 ├── Core/
-│   ├── Interface/     — IInitializable, IResettable
+│   ├── Interface/     — IInitializable, IResettable, IGameSystemLifecycle
 │   └── Abstract/      — Singleton, GameSystem, LocalSingleton, Manager
 ├── System/             — GameSystem<T> subclasses, persistent cross-scene services
 ├── Manager/            — Manager subclasses, per-session gameplay coordinators
-├── Game/               — Controllers & per-instance entities, plus GameManager
+├── Game/               — Controllers & per-instance entities
 ├── UI/
-│   └── Generic/        — reusable UI components (LocalizedText, etc.)
-└── Utils/
-    └── GameFeel/       — reusable gamefeel effects
+│   ├── Generic/        — reusable UI components (LocalizeText, etc.)
+│   ├── HUD/            — in-game HUD (Dialog, Pause, Objective, GameOver)
+│   └── Menu/           — MainMenu, SettingsMenu, AboutMenu
+├── Utils/
+│   ├── GameFeel/       — reusable gamefeel effects
+│   ├── Pool/           — IPoolable, GenericPool<T>
+│   └── UI/             — UIFade, UIBlink, UISlide, UITransition, etc.
+└── _Debug/             — debug utilities (ResetScene, DebugButton)
 ```
 No numeric prefix here unlike root — only 6 folders and no alphabetical
 collision that actually disrupts the workflow, so there's no real problem
@@ -74,12 +82,14 @@ Check its base class:
   but dies when the scene changes. Used for controllers/objects that are
   convenient to access via `.Instance` but must not persist into the next
   scene (e.g. `CameraShake`).
-- `Manager` — NOT a singleton, registers manually with `GameManager`. Used
-  for `...Manager` (e.g. `EnemyManager`, `UIManager`).
+- `Manager` — NOT a singleton, registers via `LoadingSystem`. Used
+  for `...Manager` gameplay coordinators (e.g. `ObjectiveManager`).
 
 ## Interfaces (`Core/Interface/`)
 - `IInitializable` — one-time boot sequence contract: `Priority`,
-  `Initialize()`, `PostInitialize()`.
+  `Initialize()`, `PostInitialize()`. Used by `Manager` subclasses.
+- `IGameSystemLifecycle` — boot contract for `GameSystem<T>`:
+  `Initialize()` (coroutine) + `PostInitialize()`. Used by `BootstrapLoader`.
 - `IResettable` — `ResetState()` contract, called repeatedly on
   session/level restart, NOT through `LoadingSystem`. Only implemented by
   objects with per-session state (score, active enemies, timers) — not
@@ -91,10 +101,10 @@ Check its base class:
 - **System** — generic, cross-scene service, `GameSystem<T>`. Doesn't care
   about gameplay state. E.g. `AudioSystem`, `SaveSystem`, `SceneLoader`.
 - **Manager** — gameplay state coordinator, tied to a session/scene,
-  `Manager`. Hallmark: "owns many" (EnemyManager owns many Enemies).
+  `Manager` or `Singleton<T>`. Hallmark: "owns many" (e.g. `ObjectiveManager`).
 - **Controller** — owns the logic of one specific entity, usually not a
   singleton. If there are many instances in the scene, each instance gets
-  its own Controller (`EnemyController`, `PlayerController`).
+  its own Controller (`PlayerController`).
 
 Quick test: "how many instances of this exist?" — 1, cross-scene → System;
 1 but per-session, coordinating many other objects → Manager; many, one
@@ -103,47 +113,30 @@ per entity → Controller.
 ### Communication contract between programmers
 `Manager` is the public front door. Internals (pools, private lists) stay
 `private`. Other programmers only need to call a Manager's public methods
-or `GameManager.Instance.X` to integrate — no need to open up someone
-else's system.
+to integrate — no need to open up someone else's system.
 
 ---
 
 ## Child-object composition (per entity)
-```
-Enemy (root)
-  ├── EnemyController.cs   ← thin hub, the only link between children
-  ├── Stats/                (abstract Stats)
-  ├── Brain/                (abstract Brain)
-  └── GameFeel/
-        ├── GameFeelController.cs
-        ├── HitBlink.cs
-        └── SquashStretch.cs
-```
+Entities use a hub Controller at root with child objects for sub-components.
 - Children must NOT call each other directly / `GetComponentInParent` to
   reach a sibling.
 - All coordination goes through the hub (`Controller`) at root — either
   direct method calls, or events when a child needs to notify the hub back.
-- `Stats` / `Brain` are abstract → polymorphic per entity type
-  (`EnemyStats` vs `BossStats`).
 - Null-safety: guard + `Debug.LogWarning` in the hub if a child is missing,
   NEVER fail silently.
 
 ---
 
 ## GameFeel system (`Utils/GameFeel/`)
-- `IGameFeelEffect` — single contract (`Play(GameFeelContext ctx)`) for
-  every effect (blink, squash, shake).
-- `GameFeelContext` — generic parameter struct (Intensity, Duration,
-  Direction, Color); each effect reads only the fields it needs.
-- Local effects (per-entity: blink, squash) → `GameFeelController` sitting
-  on the `GameFeel` child, `GetComponentsInChildren<IGameFeelEffect>()`
-  then loop `Play(ctx)`.
-- Global effects (one per scene: camera) → `LocalSingleton<T>`, called via
-  the static helper `GameFeel.ShakeCamera()` so callers don't need to
-  distinguish local vs global calls.
-- `CameraShake` is wired to Cinemachine Impulse Source/Listener (not
-  manual lerp) — automatic distance falloff, and reaches every Virtual
-  Camera in the scene for free.
+- `IGameFeelEffect` — interface with `PlayEffect()` / `StopEffect()`.
+  Each effect (Blink, SquashOnHit, CameraShake, etc.) reads its own
+  serialized fields — no shared parameter struct.
+- `GameFeel` — `MonoBehaviour` that holds an `IGameFeelEffect[]` field.
+  Call `PlayEffect()` / `StopEffect()` to trigger all assigned effects.
+- `CameraShake` — `MonoBehaviour` implementing `IGameFeelEffect`, wired
+  to Cinemachine Impulse Source/Listener. NOT a `LocalSingleton<T>`.
+  Automatic distance falloff; reaches every Virtual Camera in the scene.
 
 ---
 
@@ -151,30 +144,30 @@ Enemy (root)
 
 ### AudioSystem
 - `AudioSystem` (`GameSystem<AudioSystem>`) — mixer/volume hub, holds NO
-  UI references (Slider/Text) at all. Exposes `OnMusicVolumeChanged` /
-  `OnSFXVolumeChanged` events; UI subscribes back via an observer
-  (`VolumeSliderUI` in `UI/`).
+  UI references. Exposes `OnMasterVolumeChanged` / `OnMusicVolumeChanged` /
+  `OnSFXVolumeChanged` events; UI subscribes back via an observer.
 - `MusicPlayer` / `SFXPlayer` — NOT standalone singletons, accessed via
   `AudioSystem.Music` / `AudioSystem.SFX` (static shortcut properties).
 - `MusicData` / `SFXData` — `ScriptableObject`, pure data.
   `SFXData` is categorized by domain (`Player`, `Enemy`, `UI`), each
   category gets its own `AudioSource` pool so one category's SFX can't be
-  "stolen" by another category that's currently busy.
+  "stolen" by another category that's currently busy. Each `SFXEffect`
+  has its own `volume`, `fadeIn`, `fadeOut`, `maxSimultaneous`, and 3D
+  spatial audio settings.
 - `MusicPlayer` subscribes to `SceneLoader.OnSceneLoadCompleted` (not
   `SceneManager.sceneLoaded` directly) so music switches right after the
   loading process finishes, not just when the scene technically finishes
   loading.
-- Static helper: `Audio.PlayMusic(...)`, `Audio.PlaySFX2D(...)`,
-  `Audio.PlaySFX3D(...)`.
+- Static helpers: `Audio.PlayMusic(...)`, `Audio.StopMusic(...)`,
+  `Audio.PlaySFX2D(...)`, `Audio.PlaySFX3D(...)`, `Audio.StopSFX(...)`.
 - Linear volume (0-1 from a Slider) is converted to decibels before going
   into `AudioMixer.SetFloat` (`Mathf.Log10(linear) * 20`).
 
 ### LoadingSystem
-- Collects every `IInitializable`, runs the boot sequence ordered by
-  `Priority`.
+- Collects every `IInitializable` (Manager) and `IGameSystemLifecycle` (GameSystem),
+  runs the boot sequence ordered by `Priority`.
 - Pure logic — fires events (`OnProgressChanged`, `OnStatusChanged`,
-  `OnLoadingComplete`), holds NO Slider/Text reference. UI
-  (`LoadingScreenUI`) subscribes separately in `UI/`.
+  `OnLoadingComplete`), holds NO Slider/Text reference.
 - Has a per-object timeout guard so a stuck `Initialize()` doesn't silently
   freeze the loading sequence forever.
 
@@ -183,7 +176,11 @@ Enemy (root)
   ≈90%, then activated — fires `OnSceneLoadStarted/Progress/Completed`.
 
 ### PauseSystem
-- `Time.timeScale` as the single source of truth for pausing.
+- Key-based pause stack (`HashSet<string>`) — multiple independent pause
+  sources supported. `Time.timeScale` is set to 0 when any key is active.
+- Static helper: `Pause.On(key)`, `Pause.Off(key)`, `Pause.Toggle(key)`,
+  `Pause.IsPaused`, `Pause.IsPausedBy(key)`, `Pause.ForceResume()`.
+- Events: `OnPaused`, `OnResumed`, `OnPauseRequested(key)`, `OnPauseReleased(key)`.
 - Team rule: gameplay/animation uses `Time.deltaTime` (auto-freezes);
   UI/gamefeel that must keep running while paused uses
   `Time.unscaledDeltaTime` / `WaitForSecondsRealtime`.
@@ -192,14 +189,18 @@ Enemy (root)
 - Uses `Newtonsoft.Json` (`com.unity.nuget.newtonsoft-json`) — supports
   `Dictionary<K,V>` and complex structures that Unity's built-in
   `JsonUtility` can't handle.
-- Generic: `Save<T>(data, fileName)` / `Load<T>(fileName, fallback)`.
+- Instance methods: `Save<T>(data, fileName)`, `Load<T>(fileName, fallback)`,
+  `HasSave(fileName)`, `DeleteSave(fileName)`.
+- Static helpers: `Save.To<T>(...)`, `Save.From<T>(...)`, `Save.Exists(...)`.
+- Events: `OnSaved`, `OnLoaded`.
 
 ### LocalizationSystem
 - `LocalizationTable` (`ScriptableObject`) — key → text data per language.
 - `LocalizationSystem` exposes `GetText(key)` + `OnLanguageChanged` event.
-- `LocalizedText` (`UI/Generic/`) — observer that auto-refreshes its text
-  when the language changes, uses `[RequireComponent(typeof(TMP_Text))]` +
-  `GetComponent` (no manual Inspector drag needed).
+- Static helper: `Localize.Text(key)`, `Localize.SetLanguage(lang)`.
+- `LocalizeText` (`UI/Generic/Text/`) — observer that auto-refreshes its
+  text when the language changes, uses `[RequireComponent(typeof(TMP_Text))]`
+  + `GetComponent` (no manual Inspector drag needed).
 
 ---
 
@@ -241,7 +242,4 @@ naturally cluster together alphabetically.
   forgot to register/assign.
 - `enum InitOrder` — centralize `Priority` numbers so they don't collide
   across files.
-- `IPoolable`, `IDamageable` — additional interfaces once there's a
-  concrete combat/pooling need.
-- Folder color/icon coding (`ColorfulFolders` / `Unity-Folder-Icons`) for
-  the `Objects/` and `Scripts/` structure.
+- `IDamageable` — additional interface once there's a concrete combat need.

@@ -49,8 +49,30 @@ Open the project in Unity Hub, let it import, then open the `Boot` scene to star
 
 ---
 
+## PROJECT STRUCTURE
+```
+Assets/
+├── _Game/              ← all game code and assets
+│   ├── 00_Scripts/     (Core/, System/, Manager/, Game/, UI/, Utils/)
+│   ├── 01_Objects/     (Prefabs/, Data/)
+│   ├── 02_Art/
+│   ├── 03_Audio/
+│   ├── 04_Scenes/
+│   └── 05_Settings/
+├── _Vendor/            ← third-party packages
+└── Editor/
+```
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed conventions (base classes, lifecycle, communication rules).
+
+---
+
 ## TECH STACK
 ![Unity](https://img.shields.io/badge/Unity-000000?style=flat-square&logo=unity&logoColor=ffffff)
+![Cinemachine](https://img.shields.io/badge/Cinemachine-000000?style=flat-square)
+![Input System](https://img.shields.io/badge/Input System-000000?style=flat-square)
+![TextMesh Pro](https://img.shields.io/badge/TextMesh Pro-000000?style=flat-square)
+![Newtonsoft.Json](https://img.shields.io/badge/Newtonsoft.Json-000000?style=flat-square)
 
 ---
 
@@ -62,6 +84,14 @@ Open the project in Unity Hub, let it import, then open the `Boot` scene to star
 | 2D Artist, UI Designer | Fekanme |
 | Audio Engineer | Ifanitas |
 | Narrative Designer | americano |
+
+---
+
+## CONTRIBUTING
+1. Follow the conventions in [ARCHITECTURE.md](ARCHITECTURE.md) (script placement, lifecycle order, naming).
+2. Keep the `Assets/_Game/` numeric prefix ordering — do not rename root folders.
+3. Run `git lfs install` before cloning; all binary assets require LFS.
+4. Commit `.meta` files alongside their assets; never commit `Library/`, `Temp/`, or `Logs/`.
 
 ---
 
