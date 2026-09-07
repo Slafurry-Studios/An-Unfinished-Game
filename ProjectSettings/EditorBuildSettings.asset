@@ -37,6 +37,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/04_Scenes/Dev/Level/ArtAtelier.unity
     guid: 7d7371e2449ae3b49aedcc794c372ece
+  - enabled: 1
+    path: Assets/_Game/04_Scenes/Cutscene/IntroCutscene.unity
+    guid: f46e764c4b995cc268134e35345385c0
+  - enabled: 1
+    path: Assets/_Game/04_Scenes/Dev/Level/TutorialRoom.unity
+    guid: 6ae1dcbb71351354ea5c87d42a941031
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: befec698e108ad6c6af4d3aaeaa0f9b0,
       type: 3}

@@ -417,10 +417,10 @@ MonoBehaviour:
     clip: {fileID: 7400000, guid: ededab115ccfa6d1b882f16e09df102b, type: 2}
     crossFadeDuration: 0
   standToCrouchClip:
-    clip: {fileID: 0}
+    clip: {fileID: 7400000, guid: a49d044375b507421aa81e6f590cde68, type: 2}
     crossFadeDuration: 0
   crouchToStandClip:
-    clip: {fileID: 0}
+    clip: {fileID: 7400000, guid: 45bf9f860bfb4ad2484410fe0b817729, type: 2}
     crossFadeDuration: 0
   deathTransitionClip:
     clip: {fileID: 7400000, guid: 701cc6e8c7444e0639a440f30893725f, type: 2}
@@ -1959,7 +1959,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3813877529069394127, guid: 40adb7d317515b86f9cb0e7698fd5abc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

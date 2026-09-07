@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Slafurry.Utils.UI
 {
@@ -17,10 +17,12 @@ namespace Slafurry.Utils.UI
         [SerializeField] private bool useUnscaledTime = true;
         [SerializeField] private bool disableInteractionWhileHidden = true;
 
-        public event Action OnFadeInComplete;
-        public event Action OnFadeOutComplete;
+        [Header("Events")]
+        [SerializeField] private UnityEvent onFadeInComplete;
+        [SerializeField] private UnityEvent onFadeOutComplete;
 
         private Coroutine _routine;
+        private bool _isFadingIn;
 
         private void Awake()
         {
@@ -30,12 +32,14 @@ namespace Slafurry.Utils.UI
 
         public void FadeIn(float? overrideDuration = null)
         {
-            StartFade(canvasGroup.alpha, 1f, overrideDuration ?? duration, () => OnFadeInComplete?.Invoke());
+            _isFadingIn = true;
+            StartFade(canvasGroup.alpha, 1f, overrideDuration ?? duration);
         }
 
         public void FadeOut(float? overrideDuration = null)
         {
-            StartFade(canvasGroup.alpha, 0f, overrideDuration ?? duration, () => OnFadeOutComplete?.Invoke());
+            _isFadingIn = false;
+            StartFade(canvasGroup.alpha, 0f, overrideDuration ?? duration);
         }
 
         public void SetImmediate(float alpha)
@@ -44,13 +48,13 @@ namespace Slafurry.Utils.UI
             ApplyAlpha(alpha);
         }
 
-        private void StartFade(float from, float to, float dur, Action onComplete)
+        private void StartFade(float from, float to, float dur)
         {
             if (_routine != null) StopCoroutine(_routine);
-            _routine = StartCoroutine(FadeRoutine(from, to, dur, onComplete));
+            _routine = StartCoroutine(FadeRoutine(from, to, dur));
         }
 
-        private IEnumerator FadeRoutine(float from, float to, float dur, Action onComplete)
+        private IEnumerator FadeRoutine(float from, float to, float dur)
         {
             float t = 0f;
             while (t < dur)
@@ -61,7 +65,11 @@ namespace Slafurry.Utils.UI
             }
             ApplyAlpha(to);
             _routine = null;
-            onComplete?.Invoke();
+
+            if (_isFadingIn)
+                onFadeInComplete?.Invoke();
+            else
+                onFadeOutComplete?.Invoke();
         }
 
         private void ApplyAlpha(float alpha)
