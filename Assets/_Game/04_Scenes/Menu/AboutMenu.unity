@@ -618,7 +618,42 @@ PrefabInstance:
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -182.255
+      value: -925.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324006248363224310, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 341.165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324006248363224310, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -54.33838
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771044277061306217, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771044277061306217, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771044277061306217, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771044277061306217, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771044277061306217, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7434997904627862298, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
@@ -630,6 +665,40 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7434997904627862298, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750134448335195503, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_text
+      value: "<size=150%><b>AN UNFINISHED GAME</b></size>\n\n<i>What if finishing
+        the game is the thing that's destroying you?</i>\n\n<size=120%><b>THE STORY</b></size>\n\nYou
+        are the Founder of a small game studio. After your team walks away from an
+        overly ambitious project, you refuse to let it die. You keep building, alone,
+        convinced that finishing it will prove them wrong.\n\nBut the deeper you
+        go, the less it feels like development \u2014 and the more it feels like
+        a fight against something inside your own mind.\n\n<size=120%><b>MEET YOUR
+        ENEMIES</b></size>\n\n<b>Perfectionism.</b> <i>\"Nothing is ever good enough.\"</i>\n<b>Sunk
+        Cost.</b> <i>\"You've already invested so much.\"</i>\n<b>Burnout.</b> <i>\"No
+        more...\"</i>\n\nThey don't just block your path. They chase you, trap you,
+        and whisper that stopping now would be a failure.\n\n<size=120%><b>ABOUT
+        THE STUDIO</b></size>\n\n<b>Slafurry Studios</b> is a small, independent
+        team that built this game the same way the Founder built his \u2014 one system,
+        one sprite, one sleepless deploy at a time. Hand-drawn, two-color, and unapologetically
+        rough by design, because a story about imperfection deserved to look the
+        part.\n\n<size=120%><b>THE POINT</b></size>\n\nThis isn't a game about never
+        giving up.\n\nIt's about learning that sometimes, <b>letting go</b> is the
+        bravest thing you can do \u2014 and that a project finished at 98% still
+        deserves to be called <i>done</i>.\n\n<i>Made with ambition, bugs, questionable
+        decisions, and probably too much coffee.</i>"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750134448335195503, guid: a176fd223310f78f58eb2e4d53482a8c,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7861624202842476151, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -638,7 +707,7 @@ PrefabInstance:
     - target: {fileID: 7861624202842476151, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.9420694
+      value: -0.000037479705
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
