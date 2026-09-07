@@ -16,6 +16,33 @@ MonoBehaviour:
   - trackName: MainMenuMusic
     clip: {fileID: 8300000, guid: 8933d9a9bdcd01bc392642197d690124, type: 3}
     volume: 5.82
+  - trackName: TutorialRoomMusic
+    clip: {fileID: 8300000, guid: fe72787846c76401fa6511f803109d4c, type: 3}
+    volume: 6.64
   - trackName: MainGameplayMusic
-    clip: {fileID: 8300000, guid: eb12e4d1ca96d139c944cf54ff895dcb, type: 3}
+    clip: {fileID: 8300000, guid: ab4537346a326d01b88fd34b12c89c13, type: 3}
+    volume: 6.64
+  - trackName: MainChamberMusic
+    clip: {fileID: 8300000, guid: 1678b412475fbfaa18805e323461fb8e, type: 3}
+    volume: 6.64
+  - trackName: SprintHubMusic
+    clip: {fileID: 8300000, guid: b1effda78780959529d8cfc5c77d0205, type: 3}
+    volume: 6.64
+  - trackName: ArtAtelierMusic
+    clip: {fileID: 8300000, guid: 55002270e99bb8de8abe8da97315d91c, type: 3}
+    volume: 6.64
+  - trackName: LogicCoreMusic
+    clip: {fileID: 8300000, guid: 1c8db7552c3724b5d9b488449d776f20, type: 3}
+    volume: 6.64
+  - trackName: SoundScapeMusic
+    clip: {fileID: 8300000, guid: ab4537346a326d01b88fd34b12c89c13, type: 3}
+    volume: 6.64
+  - trackName: IterativeRoomMusic
+    clip: {fileID: 8300000, guid: ea0d031b3e3f3939aaebe47f1e6c1f2f, type: 3}
+    volume: 6.64
+  - trackName: RejectedChamberMusic
+    clip: {fileID: 8300000, guid: fe72787846c76401fa6511f803109d4c, type: 3}
+    volume: 6.64
+  - trackName: IntroCutsceneMusic
+    clip: {fileID: 8300000, guid: 1678b412475fbfaa18805e323461fb8e, type: 3}
     volume: 6.64
