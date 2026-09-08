@@ -22,6 +22,7 @@ namespace Slafurry.Interaction
         [SerializeField] private UnityEvent onLimitReached;
 
         public string Prompt => prompt;
+        public bool CanInteract => !IsLimitReached;
 
         private int _interactionCount = 0;
 
