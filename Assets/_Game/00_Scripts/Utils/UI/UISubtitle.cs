@@ -119,6 +119,7 @@ namespace Slafurry.Utils.UI
         {
             if (_routine != null) { StopCoroutine(_routine); _routine = null; }
             StopShake();
+            StopTypeSfx();
             if (textLabel != null) textLabel.text = "";
             HidePanel();
         }
@@ -156,14 +157,16 @@ namespace Slafurry.Utils.UI
             textLabel.text = "";
             textLabel.alpha = 1f;
 
+            PlayTypeSfx();
+
             for (int i = 0; i < line.text.Length; i++)
             {
                 _typedCount = i + 1;
                 ApplyShake();
-                if (AudioSystem.Instance != null)
-                    Audio.PlaySFX2D(sfxCategory, typeSFX);
                 yield return new WaitForSecondsRealtime(typeDelay);
             }
+
+            StopTypeSfx();
 
             StartShake();
 
@@ -255,6 +258,18 @@ namespace Slafurry.Utils.UI
         private void HidePanel()
         {
             if (panel != null) panel.SetActive(false);
+        }
+
+        private void PlayTypeSfx()
+        {
+            if (AudioSystem.Instance == null) return;
+            Audio.PlaySFX2D(sfxCategory, typeSFX, loop: true);
+        }
+
+        private void StopTypeSfx()
+        {
+            if (AudioSystem.Instance == null) return;
+            Audio.StopSFX(sfxCategory, typeSFX);
         }
     }
 }
