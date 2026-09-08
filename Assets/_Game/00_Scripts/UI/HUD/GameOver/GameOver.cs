@@ -22,10 +22,10 @@ public class GameOver : MonoBehaviour
 
     void Update()
     {
-        if (debug && Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(ShowGameOverCoroutine());
-        }
+        // if (debug && Input.GetKeyDown(KeyCode.R))
+        // {
+        //     StartCoroutine(ShowGameOverCoroutine());
+        // }
     }
 
     public void Retry()

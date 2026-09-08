@@ -27,7 +27,7 @@ MonoBehaviour:
     volume: 6.64
   - trackName: SprintHubMusic
     clip: {fileID: 8300000, guid: b1effda78780959529d8cfc5c77d0205, type: 3}
-    volume: 6.64
+    volume: 4.57
   - trackName: ArtAtelierMusic
     clip: {fileID: 8300000, guid: 55002270e99bb8de8abe8da97315d91c, type: 3}
     volume: 6.64

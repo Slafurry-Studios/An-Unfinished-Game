@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 using DialogSystem = Game.Dialog;
 using System;
@@ -38,6 +39,7 @@ namespace Game.UI.HUD
 
         private string currentDialog;
         private Coroutine typingCoroutine;
+        private UnityEvent[] currentLineEvents;
         public Action OnDialogEnd;
 
         private void Update()
@@ -62,6 +64,11 @@ namespace Game.UI.HUD
             dialogUIPrefab.SetActive(true);
 
             ShowCurrentDialog();
+        }
+
+        public void SetLineEvents(UnityEvent[] events)
+        {
+            currentLineEvents = events;
         }
 
         public void NextDialog()
@@ -89,6 +96,7 @@ namespace Game.UI.HUD
                 dialogUIPrefab.SetActive(false);
                 isLast = false;
                 currentBucket = null;
+                currentLineEvents = null;
                 return;
             }
 
@@ -112,6 +120,7 @@ namespace Game.UI.HUD
             OnDialogEnd?.Invoke();
             dialogUIPrefab.SetActive(false);
             currentBucket = null;
+            currentLineEvents = null;
         }
 
         private void ShowCurrentDialog()
@@ -148,8 +157,17 @@ namespace Game.UI.HUD
             dialogText.text = currentDialog;
             isTyping = false;
 
+            InvokeLineEvent();
+
             if (!isLast)
                 nextDialogClue.SetActive(true);
+        }
+
+        private void InvokeLineEvent()
+        {
+            if (currentLineEvents == null) return;
+            if (currentIndex < currentLineEvents.Length)
+                currentLineEvents[currentIndex]?.Invoke();
         }
 
         private void PlayTypeSfx()

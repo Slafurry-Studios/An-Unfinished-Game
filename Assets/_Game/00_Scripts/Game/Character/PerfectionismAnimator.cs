@@ -34,6 +34,8 @@ namespace Slafurry.Game.Character
 
         private float _crossfadeElapsed;
         private bool _crossfading;
+        private bool _currentLoop;
+        private float _currentClipLength;
 
         private Coroutine _transitionRoutine;
 
@@ -45,7 +47,7 @@ namespace Slafurry.Game.Character
         private void Initialize(Animator animator)
         {
             _graph = PlayableGraph.Create("PerfectionismGraph");
-            _graph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
+            _graph.SetTimeUpdateMode(DirectorUpdateMode.UnscaledGameTime);
 
             _mixer = AnimationMixerPlayable.Create(_graph, 2);
 
@@ -57,32 +59,39 @@ namespace Slafurry.Game.Character
 
         private void Update()
         {
-            Tick(Time.deltaTime);
+            Tick(Time.unscaledDeltaTime);
         }
 
         private void Tick(float deltaTime)
         {
-            if (!_crossfading) return;
-
-            _crossfadeElapsed += deltaTime;
-            float t = Mathf.Clamp01(_crossfadeElapsed / crossfadeDuration);
-
-            _mixer.SetInputWeight(0, 1f - t);
-            _mixer.SetInputWeight(1, t);
-
-            if (t >= 1f)
+            if (_crossfading)
             {
-                _crossfading = false;
+                _crossfadeElapsed += deltaTime;
+                float t = Mathf.Clamp01(_crossfadeElapsed / crossfadeDuration);
 
-                if (_previous.IsValid())
+                _mixer.SetInputWeight(0, 1f - t);
+                _mixer.SetInputWeight(1, t);
+
+                if (t >= 1f)
                 {
-                    _graph.Disconnect(_mixer, 0);
-                    _previous.Destroy();
-                }
+                    _crossfading = false;
 
-                _graph.Disconnect(_mixer, 1);
-                _graph.Connect(_current, 0, _mixer, 0);
-                _mixer.SetInputWeight(0, 1f);
+                    if (_previous.IsValid())
+                    {
+                        _graph.Disconnect(_mixer, 0);
+                        _previous.Destroy();
+                    }
+
+                    _graph.Disconnect(_mixer, 1);
+                    _graph.Connect(_current, 0, _mixer, 0);
+                    _mixer.SetInputWeight(0, 1f);
+                }
+            }
+
+            if (_currentLoop && _current.IsValid() && _currentClipLength > 0f)
+            {
+                if (_current.GetTime() >= _currentClipLength)
+                    _current.SetTime(_current.GetTime() - _currentClipLength);
             }
         }
 
@@ -147,7 +156,7 @@ namespace Slafurry.Game.Character
         {
             PlayClip(transitionClip, false);
 
-            yield return new WaitForSeconds(transitionClip.length);
+            yield return new WaitForSecondsRealtime(transitionClip.length);
 
             PlayClip(nextClip, loop);
 
@@ -175,8 +184,15 @@ namespace Slafurry.Game.Character
                 _previous.Destroy();
 
             _previous = _current;
+
+            if (_mixer.GetInputCount() > 1)
+                _graph.Disconnect(_mixer, 1);
+
             _current = AnimationClipPlayable.Create(_graph, clip);
             _current.SetApplyFootIK(false);
+
+            _currentLoop = loop;
+            _currentClipLength = Mathf.Max(clip.length, 0.0001f);
 
             _graph.Connect(_current, 0, _mixer, 1);
             _mixer.SetInputWeight(1, 0f);
