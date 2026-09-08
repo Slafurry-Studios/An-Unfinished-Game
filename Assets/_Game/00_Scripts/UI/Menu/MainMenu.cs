@@ -1,6 +1,8 @@
 using Slafurry.System.Scene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
+
 
 public class MainMenu : MonoBehaviour
 {
@@ -30,8 +32,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(_settingsSceneName);
     }
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern void QuitToWebsite();
+#endif
+
     public void QuitGame()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        QuitToWebsite();
+#else
         Application.Quit();
+#endif
+
     }
 }
