@@ -279,6 +279,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: 239940c3bb24fc12d9bf4c3e4a6de25f, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!114 &231432838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,74 +401,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 208752732}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &405460999
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6538750392564081746, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_Name
-      value: Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 146.99808
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.7028694
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.5784945
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789764731100171643, guid: 853adb8ef2beaf77f8024701911f4558,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 853adb8ef2beaf77f8024701911f4558, type: 3}
 --- !u!1 &432946345
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +754,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: a095e15e46e1997c889303739bbd9dee, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!61 &1016051231
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1164,6 +1106,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: 5e137918f4b0389b8a078e7a43a53341, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!61 &1712489325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1295,6 +1242,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: b05d37329ee782085a9ba2c33d884ab7, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!114 &1728778174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1538,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: 07268ab6eda7b2bde91132d7ff3714ed, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!61 &1901675516
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2247,6 +2204,11 @@ MonoBehaviour:
   playLimit: 1
   unlimited: 0
   bucket: {fileID: 11400000, guid: dc3b4ed52445937078d05262738b83c5, type: 2}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!1001 &2900408282282259818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2457,4 +2419,3 @@ SceneRoots:
   - {fileID: 2900408282282259818}
   - {fileID: 1025690000}
   - {fileID: 2025378341}
-  - {fileID: 405460999}
