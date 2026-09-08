@@ -58,4 +58,59 @@ MonoBehaviour:
     rolloffMode: 1
     minDistance: 1
     maxDistance: 15
+  - groupID: Mouse-Click
+    clips:
+    - {fileID: 8300000, guid: 98e843a7c0ecf807c9c09cde9b82d4eb, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: Keyboard-Click
+    clips:
+    - {fileID: 8300000, guid: 98dd4438b6e8872b0b9b393b253ec49a, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: Paper_Up
+    clips:
+    - {fileID: 8300000, guid: afaacc89638b0d20fa7975531043a3d0, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: Paper_Rip
+    clips:
+    - {fileID: 8300000, guid: 624dc50f313dac77aaedfaef28769e22, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: PC_Sound
+    clips:
+    - {fileID: 8300000, guid: 76bc14c02571c3a7c9f7c44543054da9, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8
