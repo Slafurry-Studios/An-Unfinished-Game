@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using Slafurry.System.Story;
+using StoryAPI = Slafurry.System.Story.Story;
 
 namespace Slafurry.Game.Story
 {
@@ -30,33 +30,33 @@ namespace Slafurry.Game.Story
 
         public bool Evaluate()
         {
-            if (StoryManager.Instance == null) return false;
+            if (Slafurry.System.Story.StoryManager.Instance == null) return false;
 
             switch (type)
             {
                 case StoryConditionType.FlagIsTrue:
-                    return Story.GetFlag(key);
+                    return StoryAPI.GetFlag(key);
 
                 case StoryConditionType.FlagIsFalse:
-                    return !Story.GetFlag(key);
+                    return !StoryAPI.GetFlag(key);
 
                 case StoryConditionType.IntEquals:
-                    return Story.GetInt(key) == intValue;
+                    return StoryAPI.GetInt(key) == intValue;
 
                 case StoryConditionType.IntGreaterThan:
-                    return Story.GetInt(key) > intValue;
+                    return StoryAPI.GetInt(key) > intValue;
 
                 case StoryConditionType.IntLessThan:
-                    return Story.GetInt(key) < intValue;
+                    return StoryAPI.GetInt(key) < intValue;
 
                 case StoryConditionType.FloatGreaterThan:
-                    return Story.GetFloat(key) > floatValue;
+                    return StoryAPI.GetFloat(key) > floatValue;
 
                 case StoryConditionType.FloatLessThan:
-                    return Story.GetFloat(key) < floatValue;
+                    return StoryAPI.GetFloat(key) < floatValue;
 
                 case StoryConditionType.StringEquals:
-                    return Story.GetString(key) == stringValue;
+                    return StoryAPI.GetString(key) == stringValue;
 
                 default:
                     return false;
@@ -87,24 +87,24 @@ namespace Slafurry.Game.Story
 
             if (listenToStoryChanges)
             {
-                if (StoryManager.Instance != null)
+                if (Slafurry.System.Story.StoryManager.Instance != null)
                 {
-                    StoryManager.Instance.OnFlagChanged += OnStoryChanged;
-                    StoryManager.Instance.OnIntChanged += OnStoryChanged;
-                    StoryManager.Instance.OnFloatChanged += OnStoryChanged;
-                    StoryManager.Instance.OnStringChanged += OnStoryChanged;
+                    Slafurry.System.Story.StoryManager.Instance.OnFlagChanged += OnStoryChanged;
+                    Slafurry.System.Story.StoryManager.Instance.OnIntChanged += OnStoryChanged;
+                    Slafurry.System.Story.StoryManager.Instance.OnFloatChanged += OnStoryChanged;
+                    Slafurry.System.Story.StoryManager.Instance.OnStringChanged += OnStoryChanged;
                 }
             }
         }
 
         private void OnDisable()
         {
-            if (StoryManager.Instance != null)
+            if (Slafurry.System.Story.StoryManager.Instance != null)
             {
-                StoryManager.Instance.OnFlagChanged -= OnStoryChanged;
-                StoryManager.Instance.OnIntChanged -= OnStoryChanged;
-                StoryManager.Instance.OnFloatChanged -= OnStoryChanged;
-                StoryManager.Instance.OnStringChanged -= OnStoryChanged;
+                Slafurry.System.Story.StoryManager.Instance.OnFlagChanged -= OnStoryChanged;
+                Slafurry.System.Story.StoryManager.Instance.OnIntChanged -= OnStoryChanged;
+                Slafurry.System.Story.StoryManager.Instance.OnFloatChanged -= OnStoryChanged;
+                Slafurry.System.Story.StoryManager.Instance.OnStringChanged -= OnStoryChanged;
             }
         }
 

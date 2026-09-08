@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DetectArea : MonoBehaviour
+public class DetectArea : BaseTrigger
 {
     [Header("Detection")]
     [SerializeField] private string targetTag = "Player";
@@ -18,7 +18,11 @@ public class DetectArea : MonoBehaviour
         if (!other.CompareTag(targetTag))
             return;
 
+        if (!CanTrigger())
+            return;
+
         CurrentTarget = other.gameObject;
+        AddTriggerCount();
         onTriggerEnter?.Invoke();
     }
 

@@ -194,6 +194,17 @@ Entities use a hub Controller at root with child objects for sub-components.
 - Static helpers: `Save.To<T>(...)`, `Save.From<T>(...)`, `Save.Exists(...)`.
 - Events: `OnSaved`, `OnLoaded`.
 
+### CameraSystem
+- **DetectArea** (`Game/Level/`) — generic trigger detector with UnityEvents (`onTriggerEnter`, `onTriggerStay`, `onTriggerExit`). Tag player as `"Player"`.
+- **CameraChanger** (`System/Camera/`) — programmatic camera switching (cutscenes, boss fights).
+  Methods: `SwitchToCutscene(index)`, `SwitchCamera(cam)`, `ReturnToDefault()`, `BoostPriority(cam)`.
+- **PostProcessBlender** (`System/Camera/`) — blends URP Volume weight over time.
+  Methods: `BlendIn()`, `BlendOut()`, `BlendTo(float)`, `InstantApply()`, `InstantReset()`.
+- How it works: Cinemachine priority system — active camera gets priority 10, inactive gets 0.
+  Cinemachine handles smooth blending between cameras automatically.
+- Setup: use `DetectArea` + UnityEvents to call `CameraChanger`/`PostProcessBlender` methods.
+  Each zone gets its own `CinemachineVirtualCamera` with custom settings.
+
 ### LocalizationSystem
 - `LocalizationTable` (`ScriptableObject`) — key → text data per language.
 - `LocalizationSystem` exposes `GetText(key)` + `OnLanguageChanged` event.

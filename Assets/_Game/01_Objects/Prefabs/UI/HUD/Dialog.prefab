@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6189383342413258196
 RectTransform:
   m_ObjectHideFlags: 0
@@ -544,8 +544,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3218865561177325718}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogPane, Assembly-CSharp
+      - m_Target: {fileID: 5973220058715195504}
+        m_TargetAssemblyTypeName: Game.UI.HUD.DialogHUD, Assembly-CSharp
         m_MethodName: NextDialog
         m_Mode: 1
         m_Arguments:
@@ -569,10 +569,7 @@ GameObject:
   - component: {fileID: 755528112247475777}
   - component: {fileID: 5618051587397006592}
   - component: {fileID: 5147481263439658821}
-  - component: {fileID: 3813877529069394127}
   - component: {fileID: 5973220058715195504}
-  - component: {fileID: 3218865561177325718}
-  - component: {fileID: 736241289587955763}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
@@ -671,36 +668,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8304266189075886647}
   m_CullTransparentMesh: 1
---- !u!114 &3813877529069394127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8304266189075886647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39607844}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5973220058715195504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,47 +685,6 @@ MonoBehaviour:
   nextDialogClue: {fileID: 4525720885207589429}
   dialogUIPrefab: {fileID: 2823269957374694226}
   typingSpeed: 0.03
-  audioSource: {fileID: 0}
-  typeLoopSfx: {fileID: 0}
+  sfxCategory: UI
+  typeSFX: typing
   allowSkip: 1
---- !u!114 &3218865561177325718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8304266189075886647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e462b5332f9f9389bece70f65f80b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &736241289587955763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8304266189075886647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a2c0c08e0e198c28cc4360dbd0c17a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerKey: 98
-  triggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3218865561177325718}
-        m_TargetAssemblyTypeName: Game.Dialog.DialogPane, Assembly-CSharp
-        m_MethodName: StartDialog
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: dc3b4ed52445937078d05262738b83c5,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: Game.Dialog.DialogBucket, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

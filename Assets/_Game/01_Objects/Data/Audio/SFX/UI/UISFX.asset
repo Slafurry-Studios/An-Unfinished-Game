@@ -19,14 +19,43 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 80e5d6153c14c42dca2cfca2a68ca5c3, type: 3}
     volume: 10
     maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Rejected
     clips:
     - {fileID: 8300000, guid: 298cf0ce640a879278d21dbdc1c211f5, type: 3}
     volume: 10
     maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   - groupID: Close
     clips:
     - {fileID: 8300000, guid: 7fc4cf702975e07bdbb3283efb6a1790, type: 3}
     volume: 10
     maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: typing
+    clips:
+    - {fileID: 8300000, guid: d1293c638fb857b19b165d90449b2c9b, type: 3}
+    volume: 1.64
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8

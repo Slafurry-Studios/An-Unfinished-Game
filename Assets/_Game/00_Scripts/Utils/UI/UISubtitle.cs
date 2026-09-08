@@ -48,7 +48,6 @@ namespace Slafurry.Utils.UI
         [SerializeField] private float maxShakinessValue = 5f;
 
         [Header("Fade")]
-        [SerializeField] private float fadeInDuration = 0.2f;
         [SerializeField] private float fadeOutDuration = 0.3f;
         [SerializeField] private float hideDelay = 1f;
 
