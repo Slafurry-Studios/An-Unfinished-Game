@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
+  m_Name: 01_DDC_Dialog
+  m_EditorClassIdentifier: 
+  dialogs:
+  - name: Perfectionism
+    dialog: Welcome back! Shall we start the project?
+  - name: Founder
+    dialog: Yes
+  - name: Perfectionism
+    dialog: Fine. I'll give you the first task today
+  - name: Perfectionism
+    dialog: Let me prepare it for you
+  - name: Perfectionism
+    dialog: Alright, task Issue #224
+  - name: Perfectionism
+    dialog: You need to create visual asset for the game
+  - name: Perfectionism
+    dialog: Of course. All the asset must be made by us
+  - name: Perfectionism
+    dialog: As using free assets leads to mediocrity
+  - name: Perfectionism
+    dialog: But don't worry
+  - name: Perfectionism
+    dialog: As long as i'm here, that won't happen

@@ -30,16 +30,22 @@ namespace Slafurry.Utils.UI
                 canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void FadeIn(float? overrideDuration = null)
+        // ---- Dipanggil dari UnityEvent (tanpa parameter) ----
+        public void FadeIn() => FadeIn(duration);
+
+        public void FadeOut() => FadeOut(duration);
+
+        // ---- Dipanggil dari kode (dengan override duration) ----
+        public void FadeIn(float overrideDuration)
         {
             _isFadingIn = true;
-            StartFade(canvasGroup.alpha, 1f, overrideDuration ?? duration);
+            StartFade(canvasGroup.alpha, 1f, overrideDuration);
         }
 
-        public void FadeOut(float? overrideDuration = null)
+        public void FadeOut(float overrideDuration)
         {
             _isFadingIn = false;
-            StartFade(canvasGroup.alpha, 0f, overrideDuration ?? duration);
+            StartFade(canvasGroup.alpha, 0f, overrideDuration);
         }
 
         public void SetImmediate(float alpha)

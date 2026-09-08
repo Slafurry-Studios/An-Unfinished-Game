@@ -132,6 +132,9 @@ namespace Slafurry.Player
             if (CurrentTarget == null)
                 return;
 
+            if (!CurrentTarget.CanInteract)
+                return;
+
             // Prevent starting another hold while one is already active.
             if (_holdTarget != null)
                 return;
@@ -187,6 +190,9 @@ namespace Slafurry.Player
 
                 if (!collider.TryGetComponent(
                         out IInteractable interactable))
+                    continue;
+
+                if (!interactable.CanInteract)
                     continue;
 
                 float distSqr =
