@@ -215,6 +215,13 @@ namespace Slafurry.Player.Animation
             ChangeState(DeathTransition);
         }
 
+        public void ForceIdle()
+        {
+            if (_isDead) return;
+            if (_current == Idle) return;
+            ChangeState(Idle);
+        }
+
         /// <summary>Call from your respawn/death-UI flow when it's time to play the final banish clip.</summary>
         public void RequestBanish() => _banishRequested = true;
 

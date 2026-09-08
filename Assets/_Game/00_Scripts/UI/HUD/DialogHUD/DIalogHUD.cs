@@ -2,9 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Game.Dialog;
+using DialogSystem = Game.Dialog;
 using System;
 using Slafurry.System.Pause;
+using Slafurry.System.Audio;
+using Slafurry.Player.Animation;
 
 namespace Game.UI.HUD
 {
@@ -20,25 +22,23 @@ namespace Game.UI.HUD
         [SerializeField] private float typingSpeed = 0.03f;
 
         [Header("SFX")]
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip typeLoopSfx;
+        [SerializeField] private string sfxCategory = "UI";
+        [SerializeField] private string typeSFX = "typing";
 
         [Header("Options")]
         [SerializeField] private bool allowSkip = true;
 
-        private DialogPane dialogPane;
+        [Header("Player")]
+        [SerializeField] private PlayerAnimationStateMachine animStateMachine;
 
+        private DialogSystem.DialogBucket currentBucket;
+        private int currentIndex;
         private bool isLast;
         private bool isTyping;
 
         private string currentDialog;
         private Coroutine typingCoroutine;
         public Action OnDialogEnd;
-
-        private void Awake()
-        {
-            dialogPane = FindAnyObjectByType<DialogPane>();
-        }
 
         private void Update()
         {
@@ -47,8 +47,53 @@ namespace Game.UI.HUD
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SkipDialog();
+                NextDialog();
             }
+        }
+
+        public void StartDialog(DialogSystem.DialogBucket bucket)
+        {
+            if (bucket == null || bucket.dialogs.Length == 0) return;
+
+            currentBucket = bucket;
+            currentIndex = 0;
+
+            Pause.On("Dialog");
+            dialogUIPrefab.SetActive(true);
+
+            ShowCurrentDialog();
+        }
+
+        public void NextDialog()
+        {
+            if (currentBucket == null) return;
+
+            if (isTyping)
+            {
+                StopCoroutine(typingCoroutine);
+                StopTypeSfx();
+
+                dialogText.text = currentDialog;
+                isTyping = false;
+
+                if (!isLast)
+                    nextDialogClue.SetActive(true);
+
+                return;
+            }
+
+            if (isLast)
+            {
+                Pause.Off("Dialog");
+                OnDialogEnd?.Invoke();
+                dialogUIPrefab.SetActive(false);
+                isLast = false;
+                currentBucket = null;
+                return;
+            }
+
+            currentIndex++;
+            ShowCurrentDialog();
         }
 
         public void SkipDialog()
@@ -63,28 +108,19 @@ namespace Game.UI.HUD
             isTyping = false;
             isLast = false;
 
-            Hide();
-        }
-
-        public void Show()
-        {
-            Pause.On("Dialog");
-            dialogUIPrefab.SetActive(true);
-        }
-
-        public void Hide()
-        {
             Pause.Off("Dialog");
             OnDialogEnd?.Invoke();
             dialogUIPrefab.SetActive(false);
+            currentBucket = null;
         }
 
-        public void SetDialog(string characterName, string dialog, bool isLast)
+        private void ShowCurrentDialog()
         {
-            nameText.text = characterName;
+            DialogSystem.Dialog dialog = currentBucket.dialogs[currentIndex];
+            isLast = currentIndex >= currentBucket.dialogs.Length - 1;
 
-            currentDialog = dialog;
-            this.isLast = isLast;
+            nameText.text = dialog.name;
+            currentDialog = dialog.dialog;
 
             nextDialogClue.SetActive(false);
 
@@ -116,48 +152,16 @@ namespace Game.UI.HUD
                 nextDialogClue.SetActive(true);
         }
 
-        public void NextDialog()
-        {
-            if (isTyping)
-            {
-                StopCoroutine(typingCoroutine);
-                StopTypeSfx();
-
-                dialogText.text = currentDialog;
-                isTyping = false;
-
-                if (!isLast)
-                    nextDialogClue.SetActive(true);
-
-                return;
-            }
-
-            if (isLast)
-            {
-                Hide();
-                isLast = false;
-                return;
-            }
-
-            dialogPane.NextDialog();
-        }
-
         private void PlayTypeSfx()
         {
-            if (audioSource == null || typeLoopSfx == null)
-                return;
-
-            audioSource.clip = typeLoopSfx;
-            audioSource.loop = true;
-            audioSource.Play();
+            if (AudioSystem.Instance == null) return;
+            Audio.PlaySFX2D(sfxCategory, typeSFX, loop: true);
         }
 
         private void StopTypeSfx()
         {
-            if (audioSource == null)
-                return;
-
-            audioSource.Stop();
+            if (AudioSystem.Instance == null) return;
+            Audio.StopSFX(sfxCategory, typeSFX);
         }
     }
 }

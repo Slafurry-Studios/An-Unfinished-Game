@@ -72,6 +72,7 @@ Numeric prefixes lock folder order in Unity's Project window.
 - **LocalizationSystem** — `LocalizationTable` (ScriptableObject) + `LocalizeText` observer (auto-refreshes on language change).
 - **VFXSystem** — pooled VFX spawning. `VFX.Play(key, position)`.
 - **InputHub** — Unity Input System wrapper. Jump, Move, Crouch, Interact actions with enable/disable control.
+- **CameraSystem** — `DetectArea` (generic trigger with UnityEvents) + `CameraChanger` (programmatic camera switching) + `PostProcessBlender` (URP Volume weight blending). Uses Cinemachine priority system for smooth blending.
 
 ---
 

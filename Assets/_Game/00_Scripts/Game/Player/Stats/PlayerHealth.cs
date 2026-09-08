@@ -22,9 +22,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField, Range(0f, 1f)] private float blinkAlpha = 0.35f;
 
-    [Header("Debug")]
-    [SerializeField] private bool debug = true;
-
     private bool _isInvincible;
     private Coroutine _invincibilityCoroutine;
 
