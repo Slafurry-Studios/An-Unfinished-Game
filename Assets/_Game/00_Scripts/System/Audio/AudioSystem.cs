@@ -9,10 +9,10 @@ namespace Slafurry.System.Audio
 {
     public static class Audio
     {
-        public static void PlayMusic(string trackName, float fade = 0.5f)
+        public static void PlayMusic(string trackName, float fade = -1f)
             => AudioSystem.Music.PlayMusic(trackName, fade);
 
-        public static void StopMusic(float fade = 0.5f)
+        public static void StopMusic(float fade = -1f)
             => AudioSystem.Music.StopMusic(fade);
 
         // fadeIn/fadeOut: -1f (default) = pakai setting per-effect dari SFXEffect, isi manual untuk override
