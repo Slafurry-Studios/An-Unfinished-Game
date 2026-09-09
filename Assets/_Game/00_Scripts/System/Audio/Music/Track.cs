@@ -16,4 +16,11 @@ public struct MusicTrack
     public AudioClip introClip;
     [Range(0f, 10f)]
     public float volume;
+    [Tooltip("Durasi fade in saat track ini mulai diputar.")]
+    [SerializeField] private float fadeIn;
+    [Tooltip("Durasi fade out saat track ini berhenti atau berganti.")]
+    [SerializeField] private float fadeOut;
+
+    public float FadeIn => fadeIn > 0f ? fadeIn : 1f;
+    public float FadeOut => fadeOut > 0f ? fadeOut : 1f;
 }

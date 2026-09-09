@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Slafurry.Core.Abstract;
 using Slafurry.System.Audio;
-using Slafurry.System.Scene;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveManager : Singleton<ObjectiveManager>
 {
@@ -22,19 +22,6 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
     public override void PostInitialize()
     {
-        SceneLoader.Instance.OnSceneLoadCompleted += HandleSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        if (SceneLoader.Instance != null)
-            SceneLoader.Instance.OnSceneLoadCompleted -= HandleSceneLoaded;
-    }
-
-    private void HandleSceneLoaded(string sceneName)
-    {
-        if (objectives.Count > 0)
-            ClearObjectives();
     }
 
     protected override void OnSingletonAwake()
@@ -50,7 +37,8 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         if (HasObjective(data.objectiveName))
             return;
 
-        objectives.Add(new Objective(data));
+        string scene = SceneManager.GetActiveScene().name;
+        objectives.Add(new Objective(data, scene));
 
         Audio.PlaySFX2D("Objective", "NewObjective");
 
@@ -154,9 +142,23 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         return null;
     }
 
+    /// <summary>
+    /// Clear semua objectives (untuk reset total / quit ke main menu).
+    /// </summary>
     public void ClearObjectives()
     {
         objectives.Clear();
+        OnObjectivesChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// Clear hanya objectives dari scene tertentu.
+    /// Dipanggil saat retry/reset supaya objectives dari scene lain tetap ada.
+    /// Script di scene yang reload akan re-add objectives awal secara otomatis.
+    /// </summary>
+    public void ResetSceneObjectives(string sceneName)
+    {
+        objectives.RemoveAll(o => o.SceneName == sceneName);
         OnObjectivesChanged?.Invoke();
     }
 }

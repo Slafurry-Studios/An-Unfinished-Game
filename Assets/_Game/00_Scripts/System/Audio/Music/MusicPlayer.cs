@@ -14,6 +14,8 @@ namespace Slafurry.System.Audio
 
         private Coroutine _currentFadeCoroutine;
         private Coroutine _introCoroutine;
+        private MusicTrack _currentTrack;
+        private bool _hasTrack;
 
         public void Initialize()
         {
@@ -58,10 +60,15 @@ namespace Slafurry.System.Audio
 
             StopAllPlayback();
 
+            _currentTrack = track;
+            _hasTrack = true;
+
+            float fadeIn = track.FadeIn;
+
             if (track.introClip != null)
-                _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeDuration));
+                _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeIn));
             else
-                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, false, fadeDuration));
+                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, false, fadeIn));
         }
 
         public void StopMusic(float fadeDuration = 0.5f)
@@ -70,15 +77,18 @@ namespace Slafurry.System.Audio
 
             StopAllPlayback();
 
-            if (fadeDuration <= 0f)
+            float fadeOut = _hasTrack ? _currentTrack.FadeOut : fadeDuration;
+
+            if (fadeOut <= 0f)
             {
                 musicSource.Stop();
                 musicSource.clip = null;
                 musicSource.volume = 0f;
+                _hasTrack = false;
                 return;
             }
 
-            _currentFadeCoroutine = StartCoroutine(FadeOutAndStop(fadeDuration));
+            _currentFadeCoroutine = StartCoroutine(FadeOutAndStop(fadeOut));
         }
 
         private void StopAllPlayback()
@@ -100,26 +110,23 @@ namespace Slafurry.System.Audio
 
         private IEnumerator PlayIntroThenLoop(MusicTrack track, float fadeDuration)
         {
-            // Fade out lagu sebelumnya
             float startVolume = musicSource.volume;
-            float percent = 0f;
-            while (percent < 1f)
+            float elapsed = 0f;
+            while (elapsed < fadeDuration)
             {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(startVolume, 0f, percent);
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
                 yield return null;
             }
 
-            // Putar intro (sekali, tidak loop)
             musicSource.clip = track.introClip;
             musicSource.loop = false;
             musicSource.Play();
 
-            // Tunggu sampai intro selesai
             while (musicSource.isPlaying)
                 yield return null;
 
-            // Crossfade ke loop clip
             _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, true, fadeDuration));
         }
 
@@ -128,11 +135,12 @@ namespace Slafurry.System.Audio
         private IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float targetVolume, bool loop, float fadeDuration = 0.5f)
         {
             float startVolume = musicSource.volume;
-            float percent = 0f;
-            while (percent < 1f)
+            float elapsed = 0f;
+            while (elapsed < fadeDuration)
             {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(startVolume, 0f, percent);
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
                 yield return null;
             }
 
@@ -140,11 +148,12 @@ namespace Slafurry.System.Audio
             musicSource.loop = loop;
             musicSource.Play();
 
-            percent = 0f;
-            while (percent < 1f)
+            elapsed = 0f;
+            while (elapsed < fadeDuration)
             {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(0f, targetVolume, percent);
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
+                musicSource.volume = Mathf.Lerp(0f, targetVolume, t);
                 yield return null;
             }
 
@@ -157,12 +166,13 @@ namespace Slafurry.System.Audio
         private IEnumerator FadeOutAndStop(float fadeDuration)
         {
             float startVolume = musicSource.volume;
-            float percent = 0f;
+            float elapsed = 0f;
 
-            while (percent < 1f)
+            while (elapsed < fadeDuration)
             {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(startVolume, 0f, percent);
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
                 yield return null;
             }
 
@@ -170,6 +180,7 @@ namespace Slafurry.System.Audio
             musicSource.clip = null;
             musicSource.volume = startVolume;
 
+            _hasTrack = false;
             _currentFadeCoroutine = null;
         }
     }

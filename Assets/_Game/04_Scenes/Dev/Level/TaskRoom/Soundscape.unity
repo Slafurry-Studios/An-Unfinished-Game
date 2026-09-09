@@ -2125,6 +2125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 258188271}
+  - component: {fileID: 258188272}
   m_Layer: 0
   m_Name: 03_Platforms
   m_TagString: Untagged
@@ -2156,6 +2157,31 @@ Transform:
   - {fileID: 1203331987}
   m_Father: {fileID: 2132732727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &258188272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258188270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &260983416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8404960867364345771, guid: cb367107d03d93d2ab90a739147a27ac,
@@ -2795,6 +2821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401305625}
+  - component: {fileID: 401305626}
   m_Layer: 0
   m_Name: 01_Platforms
   m_TagString: Untagged
@@ -2826,6 +2853,31 @@ Transform:
   - {fileID: 1732171370}
   m_Father: {fileID: 2132732727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &401305626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401305624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &403333414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1951689609395019555, guid: 00d4537a3ad3652308cd8a3f1cbb9cee,
@@ -3484,6 +3536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 522485650}
+  - component: {fileID: 522485651}
   m_Layer: 0
   m_Name: 02_Platforms
   m_TagString: Untagged
@@ -3518,6 +3571,31 @@ Transform:
   - {fileID: 1825777783}
   m_Father: {fileID: 2132732727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &522485651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522485649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &541504702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4263,6 +4341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 715138892}
+  - component: {fileID: 715138893}
   m_Layer: 0
   m_Name: 04_Platforms
   m_TagString: Untagged
@@ -4293,6 +4372,31 @@ Transform:
   - {fileID: 1012149308}
   m_Father: {fileID: 2132732727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715138893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715138891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &721608378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8404960867364345771, guid: cb367107d03d93d2ab90a739147a27ac,
@@ -6930,6 +7034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1047717783}
+  - component: {fileID: 1047717784}
   m_Layer: 0
   m_Name: 05_Platform
   m_TagString: Untagged
@@ -6961,6 +7066,31 @@ Transform:
   - {fileID: 1428935169}
   m_Father: {fileID: 2132732727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1047717784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047717782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1049794258 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5768191593427557533, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,

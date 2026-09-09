@@ -1543,6 +1543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271143031}
+  - component: {fileID: 271143032}
   m_Layer: 0
   m_Name: Platforms_2
   m_TagString: Untagged
@@ -1569,6 +1570,31 @@ Transform:
   - {fileID: 983242870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &271143032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271143030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &276320638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5251,6 +5277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775109330}
+  - component: {fileID: 775109331}
   m_Layer: 0
   m_Name: Platforms_1
   m_TagString: Untagged
@@ -5278,6 +5305,31 @@ Transform:
   - {fileID: 2137053220}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &775109331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775109329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &790034654
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,6 +5541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824252561}
+  - component: {fileID: 824252562}
   m_Layer: 0
   m_Name: Platforms_4
   m_TagString: Untagged
@@ -5520,6 +5573,31 @@ Transform:
   - {fileID: 1119016617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &824252562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824252560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &837207772
 GameObject:
   m_ObjectHideFlags: 0
@@ -10076,6 +10154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824004450}
+  - component: {fileID: 1824004451}
   m_Layer: 0
   m_Name: Platforms_3
   m_TagString: Untagged
@@ -10103,6 +10182,31 @@ Transform:
   - {fileID: 1983749080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1824004451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824004449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1831097819
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Slafurry.Utils.GameFeel;
 
 public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
@@ -11,6 +12,9 @@ public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
     [Header("Visual")]
     public Image background; // warna sinyal (kosong/off/on/benar/salah)
     public Image icon;       // sprite gate yang lagi nempatin cell ini
+
+    [Header("GameFeel")]
+    [SerializeField] private WorldScalePop scalePop;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -33,6 +37,8 @@ public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
 
         board.RefreshVisuals();
         board.OnPlacementChanged?.Invoke();
+
+        if (scalePop != null) scalePop.PlayEffect();
     }
 
     // Klik cell yang udah keisi gate (bukan Input/Output) buat hapus lagi
@@ -51,5 +57,7 @@ public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
         board.Circuit.RemoveObject(x, y);
         board.RefreshVisuals();
         board.OnPlacementChanged?.Invoke();
+
+        if (scalePop != null) scalePop.PlayEffect();
     }
 }

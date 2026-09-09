@@ -8,6 +8,7 @@ public class AboutMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        ObjectiveManager.Instance.ClearObjectives();
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 }

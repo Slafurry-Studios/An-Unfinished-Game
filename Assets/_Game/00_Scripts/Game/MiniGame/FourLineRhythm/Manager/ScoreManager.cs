@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using Slafurry.Utils.GameFeel;
+using Slafurry.System.Audio;
 
 namespace RhythmGame
 {
@@ -23,6 +25,16 @@ namespace RhythmGame
         public int goodScore = 70;
         public int okScore = 30;
 
+        [Header("GameFeel")]
+        [SerializeField] private CameraShake cameraShake;
+        [SerializeField] private float shakeOnPerfect = 0.3f;
+        [SerializeField] private float shakeOnGood = 0.15f;
+        [SerializeField] private float shakeOnMiss = 0.5f;
+        [SerializeField] private float shakeOnComboMilestone = 0.6f;
+        [SerializeField] private Color flashOnPerfect = new Color(1f, 0.85f, 0.2f, 0.4f);
+        [SerializeField] private Color flashOnMiss = new Color(0.8f, 0.2f, 0.2f, 0.4f);
+        [SerializeField] private Color flashOnCombo = new Color(0.3f, 0.8f, 1f, 0.3f);
+
         private int _score;
         private int _combo;
         private int _maxCombo;
@@ -41,6 +53,9 @@ namespace RhythmGame
             _maxCombo = Mathf.Max(_maxCombo, _combo);
             ShowJudgement(judgement);
             UpdateUI();
+
+            PlayHitFeel(judgement);
+            CheckComboMilestone();
         }
 
         public void RegisterMiss()
@@ -49,6 +64,8 @@ namespace RhythmGame
             _missCount++;
             ShowJudgement(Judgement.Miss);
             UpdateUI();
+
+            PlayMissFeel();
         }
 
         /// <summary>Reset semua statistik (dipanggil GameManager.PlayGame() supaya bisa main ulang).</summary>
@@ -83,5 +100,51 @@ namespace RhythmGame
         public int Score => _score;
         public int MaxCombo => _maxCombo;
         public int MissCount => _missCount;
+
+        // ======================== GAMEFEEL ========================
+
+        private void PlayHitFeel(Judgement judgement)
+        {
+            switch (judgement)
+            {
+                case Judgement.Perfect:
+                    if (cameraShake != null) cameraShake.Shake(shakeOnPerfect, 1f, 0.1f);
+                    Flash(flashOnPerfect, 0.15f);
+                    Audio.PlaySFX2D("Rhythm", "Perfect");
+                    break;
+                case Judgement.Good:
+                    if (cameraShake != null) cameraShake.Shake(shakeOnGood, 1f, 0.08f);
+                    Audio.PlaySFX2D("Rhythm", "Good");
+                    break;
+                case Judgement.Ok:
+                    Audio.PlaySFX2D("Rhythm", "Ok");
+                    break;
+            }
+        }
+
+        private void PlayMissFeel()
+        {
+            if (cameraShake != null) cameraShake.Shake(shakeOnMiss, 1f, 0.15f);
+            Flash(flashOnMiss, 0.2f);
+            Audio.PlaySFX2D("Rhythm", "Miss");
+        }
+
+        private void CheckComboMilestone()
+        {
+            if (_combo <= 0) return;
+            if (_combo % 25 != 0) return;
+
+            if (cameraShake != null) cameraShake.Shake(shakeOnComboMilestone, 1.2f, 0.2f);
+            Flash(flashOnCombo, 0.25f);
+            Audio.PlaySFX2D("Rhythm", "ComboMilestone");
+        }
+
+        private static void Flash(Color color, float duration)
+        {
+            if (ScreenFlash.Instance == null) return;
+            ScreenFlash.Instance.SetColor(color);
+            ScreenFlash.Instance.SetDuration(duration);
+            ScreenFlash.Instance.PlayEffect();
+        }
     }
 }

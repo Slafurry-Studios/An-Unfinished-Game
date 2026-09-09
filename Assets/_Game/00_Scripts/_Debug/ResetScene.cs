@@ -11,6 +11,7 @@ public class ResetScene : MonoBehaviour
     {
         if (Input.GetKeyDown(resetKey))
         {
+            ObjectiveManager.Instance.ResetSceneObjectives(SceneManager.GetActiveScene().name);
             SceneSystem.Load(SceneManager.GetActiveScene().name);
         }
     }

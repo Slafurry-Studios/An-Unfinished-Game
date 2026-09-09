@@ -31,13 +31,14 @@ public class GameOver : MonoBehaviour
     public void Retry()
     {
         HideGameOver();
-        // Debug
+        ObjectiveManager.Instance.ResetSceneObjectives(SceneManager.GetActiveScene().name);
         SceneSystem.Load(SceneManager.GetActiveScene().name);
     }
 
     public void Quit()
     {
         HideGameOver();
+        ObjectiveManager.Instance.ClearObjectives();
         SceneSystem.Load("MainMenu");
     }
 

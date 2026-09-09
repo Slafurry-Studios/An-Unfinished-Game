@@ -18,6 +18,9 @@ namespace Slafurry.Utils.GameFeel
         [SerializeField] private float duration = 0.25f;
         [SerializeField] private AnimationCurve curve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
+        [Header("Trigger")]
+        [SerializeField] private bool playOnEnable = false;
+
         private Vector3 _originalScale;
         private Coroutine _routine;
 
@@ -25,6 +28,24 @@ namespace Slafurry.Utils.GameFeel
         {
             if (target == null) target = transform;
             _originalScale = target.localScale;
+        }
+
+        private void OnEnable()
+        {
+            _routine = null;
+            target.localScale = _originalScale;
+
+            if (playOnEnable)
+                PlayEffect();
+        }
+
+        private void OnDisable()
+        {
+            if (_routine != null)
+            {
+                StopCoroutine(_routine);
+                _routine = null;
+            }
         }
 
         public void PlayEffect()

@@ -52,6 +52,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        ObjectiveManager.Instance.ClearObjectives();
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 
