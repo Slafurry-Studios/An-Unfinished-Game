@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8998282832003848947}
   - component: {fileID: 7619221877469052623}
   - component: {fileID: 2442986773895560970}
+  - component: {fileID: 6501701447462267098}
   m_Layer: 5
   m_Name: CodeBlockManager
   m_TagString: Untagged
@@ -112,10 +113,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6501701447462267098}
+        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnGameLose:
     m_PersistentCalls:
       m_Calls: []
+  cameraShake: {fileID: 0}
+  shakeOnSolve: 0.4
+  shakeOnWin: 0.7
+  shakeOnLose: 0.9
+  flashOnSolve: {r: 0.3, g: 0.8, b: 0.3, a: 0.4}
+  flashOnWin: {r: 1, g: 0.85, b: 0.2, a: 0.5}
+  flashOnLose: {r: 0.8, g: 0.2, b: 0.2, a: 0.5}
   interactionTrigger: {fileID: 0}
+--- !u!114 &6501701447462267098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906912361248231664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playLimit: 0
+  unlimited: 1
+  bucket: {fileID: 0}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!1 &2079363695925805000
 GameObject:
   m_ObjectHideFlags: 0

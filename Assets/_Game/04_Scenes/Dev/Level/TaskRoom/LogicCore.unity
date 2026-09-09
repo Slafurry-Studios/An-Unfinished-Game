@@ -676,6 +676,12 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6501701447462267098, guid: 97671c987cbba0068bee13f6eb5b4baa,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 42d2f4b19db4b461ea9bd8e8fe30e997,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2613,6 +2619,12 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6501701447462267098, guid: 97671c987cbba0068bee13f6eb5b4baa,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 656e7b9b33d1ad1c68cc740f864e4e67,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2994,6 +3006,12 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6501701447462267098, guid: 97671c987cbba0068bee13f6eb5b4baa,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: c80b707faa9a85dbbad3748057bbef37,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8150,6 +8168,12 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6501701447462267098, guid: 97671c987cbba0068bee13f6eb5b4baa,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f72adb14d2b38753813024b35dd82d3,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10410,6 +10434,12 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6501701447462267098, guid: 97671c987cbba0068bee13f6eb5b4baa,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b937607e0185416c965cafa5e02a3ef,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

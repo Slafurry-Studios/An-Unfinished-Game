@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39038830dce3be413b932dcb5c48c222, type: 3}
   m_Name: 02_Create Music
   m_EditorClassIdentifier: 
-  objectiveName: Compose Music
+  objectiveName: Score the Atmosphere
   threshold: 5
   onCompleted:
     m_PersistentCalls:

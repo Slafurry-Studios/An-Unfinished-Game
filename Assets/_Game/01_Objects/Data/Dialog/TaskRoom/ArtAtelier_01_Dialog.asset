@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
-  m_Name: 04_TutorialRoom_Dialog
+  m_Name: ArtAtelier_01_Dialog
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: They never saw what you saw, Founder. They lacked the vision.
+    dialog: "The first canvas takes form. Raw, but promising."
   - name: Perfectionism
-    dialog: That is why they failed. And why we will not.
+    dialog: "Every stroke was deliberate. Every choice, calculated."
+  - name: Perfectionism
+    dialog: "This is only the beginning, Founder. Do not slow down."

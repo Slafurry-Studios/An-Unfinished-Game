@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: STOP RIGHT THEREE!!!
+    dialog: Stop.
   - name: Perfectionism
-    dialog: You forgot your Objective HUD
+    dialog: You forgot your Objective HUD. How do you expect to track progress without
+      it?
   - name: Perfectionism
-    dialog: Don't do this again. Fortunately i'm here
+    dialog: Do not make this mistake again. Fortunately, I am here to catch what you
+      miss.
   - name: Perfectionism
-    dialog: Mistakes leads to imperfection
+    dialog: Every oversight is a crack in the foundation. We seal them before they
+      spread.

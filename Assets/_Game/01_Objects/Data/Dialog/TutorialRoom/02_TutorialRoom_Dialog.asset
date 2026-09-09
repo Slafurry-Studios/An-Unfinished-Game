@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: A bit sloppy on the landing... Look at that stance. Unbalanced.
+    dialog: Sloppy. That landing was... acceptable. Nothing more.
   - name: Perfectionism
-    dialog: In a masterwork, there is no room for 'almost'. Let's polish it.
+    dialog: In a masterwork, there is no room for 'almost'. Again.

@@ -5916,6 +5916,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 202ac3cd8fcae68709e2e29efd7ba522,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7271,6 +7277,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b395cf9dc4ab2d0ca628e0814f8cd71,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -8720,6 +8732,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 916c734ae931a64f9b4947531d3b126c,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y

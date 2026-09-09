@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39038830dce3be413b932dcb5c48c222, type: 3}
   m_Name: 01_Finish Art
   m_EditorClassIdentifier: 
-  objectiveName: Create Visual Asset
+  objectiveName: Craft the Visual Identity
   threshold: 3
   onCompleted:
     m_PersistentCalls:

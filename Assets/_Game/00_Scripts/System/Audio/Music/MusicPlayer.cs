@@ -68,7 +68,7 @@ namespace Slafurry.System.Audio
             if (track.introClip != null)
                 _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeIn));
             else
-                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, false, fadeIn));
+                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, true, fadeIn));
         }
 
         public void StopMusic(float fadeDuration = -1f)

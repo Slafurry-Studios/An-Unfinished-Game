@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
-  m_Name: 04_TutorialRoom_Dialog
+  m_Name: LogicCore_03_Dialog
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: They never saw what you saw, Founder. They lacked the vision.
+    dialog: The complexity grows, yet the logic remains pure.
   - name: Perfectionism
-    dialog: That is why they failed. And why we will not.
+    dialog: A lesser mind would have cut corners. You did not.
+  - name: Perfectionism
+    dialog: The foundation strengthens with every solution.

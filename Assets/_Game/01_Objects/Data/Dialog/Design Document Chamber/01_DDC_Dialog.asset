@@ -14,22 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Welcome back! Shall we start the project?
+    dialog: Welcome back, Founder. Are you ready to begin?
   - name: Founder
-    dialog: Yes
+    dialog: Yes.
   - name: Perfectionism
-    dialog: Fine. I'll give you the first task today
+    dialog: Good. Your first task awaits.
   - name: Perfectionism
-    dialog: Let me prepare it for you
+    dialog: Task Issue #224 — create the visual assets for our game.
   - name: Perfectionism
-    dialog: Alright, task Issue #224
+    dialog: Every asset must be crafted by our own hands.
   - name: Perfectionism
-    dialog: You need to create visual asset for the game
+    dialog: Stock assets are the language of the mediocre. We do not speak it.
   - name: Perfectionism
-    dialog: Of course. All the asset must be made by us
-  - name: Perfectionism
-    dialog: As using free assets leads to mediocrity
-  - name: Perfectionism
-    dialog: But don't worry
-  - name: Perfectionism
-    dialog: As long as i'm here, that won't happen
+    dialog: Do not worry. With me guiding you, mediocrity is not an option.

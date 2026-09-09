@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7618450120769046014}
   - component: {fileID: 914196984880896072}
+  - component: {fileID: 1030881031486298238}
+  - component: {fileID: 8258956250685821418}
   m_Layer: 5
   m_Name: PuzzleManager
   m_TagString: Untagged
@@ -181,9 +183,123 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1030881031486298238}
+        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UISlide, Assembly-CSharp
+        m_MethodName: SlideOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8258956250685821418}
+        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPuzzleLose:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1030881031486298238}
+        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UISlide, Assembly-CSharp
+        m_MethodName: SlideOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  cameraShake: {fileID: 0}
+  shakeOnMove: 0.05
+  shakeOnSolve: 0.7
+  shakeOnLose: 0.6
+  flashOnSolve: {r: 1, g: 0.85, b: 0.2, a: 0.5}
+  flashOnLose: {r: 0.8, g: 0.2, b: 0.2, a: 0.4}
+  interactionTrigger: {fileID: 0}
+--- !u!114 &1030881031486298238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394447828823778867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efbf5c0ce3339d8093c1b3d7241dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 7971174235508920582}
+  canvasRect: {fileID: 4017655179069147862}
+  fromDirection: 1
+  extraOffset: 100
+  duration: 0.5
+  delay: 0
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  playOnEnable: 1
+  useUnscaledTime: 1
+  deactivateOnHidden: 0
+  onSlideInComplete:
+    m_PersistentCalls:
       m_Calls: []
+  onSlideOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8258956250685821418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394447828823778867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playLimit: 0
+  unlimited: 1
+  bucket: {fileID: 0}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!1 &588087358261426363
 GameObject:
   m_ObjectHideFlags: 0
