@@ -5,18 +5,19 @@ public class MusicTrigger : BaseTrigger
 {
     [Header("Music Track")]
     [SerializeField] private string trackName;
+    [SerializeField] private float fadeDuration = -1f;
 
     public void PlayMusic()
     {
         if (!CanTrigger()) return;
-        Audio.PlayMusic(trackName);
+        Audio.PlayMusic(trackName, fadeDuration);
         AddTriggerCount();
     }
 
-    public void StopMusic(float fadeDuration)
+    public void StopMusic(float fadeOverride)
     {
         if (!CanTrigger()) return;
-        Audio.StopMusic(fadeDuration);
+        Audio.StopMusic(fadeOverride > 0f ? fadeOverride : fadeDuration);
         AddTriggerCount();
     }
 }

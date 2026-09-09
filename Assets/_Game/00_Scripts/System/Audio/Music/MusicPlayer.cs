@@ -51,7 +51,7 @@ namespace Slafurry.System.Audio
                 PlayMusic(trackToPlay);
         }
 
-        public void PlayMusic(string trackName, float fadeDuration = 0.5f)
+        public void PlayMusic(string trackName, float fadeDuration = -1f)
         {
             if (musicData == null || musicSource == null) return;
 
@@ -63,7 +63,7 @@ namespace Slafurry.System.Audio
             _currentTrack = track;
             _hasTrack = true;
 
-            float fadeIn = track.FadeIn;
+            float fadeIn = fadeDuration > 0f ? fadeDuration : track.FadeIn;
 
             if (track.introClip != null)
                 _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeIn));
@@ -71,13 +71,13 @@ namespace Slafurry.System.Audio
                 _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, false, fadeIn));
         }
 
-        public void StopMusic(float fadeDuration = 0.5f)
+        public void StopMusic(float fadeDuration = -1f)
         {
             if (musicSource == null) return;
 
             StopAllPlayback();
 
-            float fadeOut = _hasTrack ? _currentTrack.FadeOut : fadeDuration;
+            float fadeOut = fadeDuration > 0f ? fadeDuration : (_hasTrack ? _currentTrack.FadeOut : 1f);
 
             if (fadeOut <= 0f)
             {
