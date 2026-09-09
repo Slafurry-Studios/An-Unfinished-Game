@@ -50,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/04_Scenes/Dev/Level/MainChamber/MainChamber_2.unity
     guid: 22e2a06bcfb5471ee8bd37d31779709c
+  - enabled: 1
+    path: Assets/_Game/04_Scenes/Dev/Level/MainChamber/MainChamber_3.unity
+    guid: 84801f00ad93020f082b9971768d8d13
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: befec698e108ad6c6af4d3aaeaa0f9b0,
       type: 3}
