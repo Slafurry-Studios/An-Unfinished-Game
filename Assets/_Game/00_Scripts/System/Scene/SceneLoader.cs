@@ -16,6 +16,7 @@ namespace Slafurry.System.Scene
         public event Action<string> OnSceneLoadStarted;
         public event Action<float> OnSceneLoadProgress;
         public event Action<string> OnSceneLoadCompleted;
+        public event Action<string, Action> OnBeforeSceneLoad;
 
         private bool _isLoading;
 
@@ -40,6 +41,15 @@ namespace Slafurry.System.Scene
         private IEnumerator LoadRoutine(string sceneName)
         {
             _isLoading = true;
+
+            if (OnBeforeSceneLoad != null)
+            {
+                bool ready = false;
+                OnBeforeSceneLoad.Invoke(sceneName, () => ready = true);
+                while (!ready)
+                    yield return null;
+            }
+
             OnSceneLoadStarted?.Invoke(sceneName);
 
             var operation = SceneManager.LoadSceneAsync(sceneName);

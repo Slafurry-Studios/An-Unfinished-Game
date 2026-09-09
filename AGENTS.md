@@ -70,7 +70,8 @@ Numeric prefixes lock folder order in Unity's Project window.
 - **PauseSystem** — key-based pause stack. `Time.timeScale` is the single source of truth. Static helpers: `Pause.On(key)`, `Pause.Off(key)`, `Pause.Toggle(key)`, `Pause.IsPaused`, `Pause.ForceResume()`.
 - **LoadingSystem** — runs all `IInitializable` ordered by `Priority`. Has a per-object timeout guard.
 - **LocalizationSystem** — `LocalizationTable` (ScriptableObject) + `LocalizeText` observer (auto-refreshes on language change).
-- **VFXSystem** — pooled VFX spawning. `VFX.Play(key, position)`.
+- **StoryManager** — runtime story state via `PlayerPrefs` (keys prefixed `story_`). Static helpers: `Story.GetFlag(key)`, `Story.SetFlag(key, val)`, `Story.GetInt(key)`, `Story.SetInt(key, val)`, `Story.GetFloat(key)`, `Story.SetFloat(key, val)`, `Story.GetString(key)`, `Story.SetString(key, val)`, `Story.Delete(key)`, `Story.DeleteAll()`. **Do NOT use `SaveSystem` for story state** — `StoryManager` handles it.
+- **VFXSystem** — pooled VFX spawning. `VFX.Play(key, position)` or `VFX.Play(key, position, rotation)`.
 - **InputHub** — Unity Input System wrapper. Jump, Move, Crouch, Interact actions with enable/disable control.
 - **CameraSystem** — `DetectArea` (generic trigger with UnityEvents) + `CameraChanger` (programmatic camera switching) + `PostProcessBlender` (URP Volume weight blending). Uses Cinemachine priority system for smooth blending.
 
