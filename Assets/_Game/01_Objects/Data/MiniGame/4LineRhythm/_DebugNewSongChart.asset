@@ -15,13 +15,13 @@ MonoBehaviour:
   songName: biji
   bpm: 120
   notes:
-  - lane: 0
-    hitTime: 0
-  - lane: 0
-    hitTime: 7.875
-  - lane: 1
-    hitTime: 9.875
   - lane: 2
-    hitTime: 11.375
+    hitTime: 0
+  - lane: 2
+    hitTime: 2
+  - lane: 1
+    hitTime: 3
+  - lane: 2
+    hitTime: 4
   - lane: 3
-    hitTime: 13
+    hitTime: 5

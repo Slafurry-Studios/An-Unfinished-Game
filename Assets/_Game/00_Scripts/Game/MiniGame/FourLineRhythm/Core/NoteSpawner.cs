@@ -1,28 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RhythmGame
 {
     public class NoteSpawner : MonoBehaviour
     {
-        public static NoteSpawner Instance { get; private set; }
+        public static NoteSpawner Instance { get; internal set; }
 
         [Header("Referensi")]
         public SongChart chart;
-        public GameObject notePrefab;         // Prefab UI: RectTransform + Image + Note.cs
+        public GameObject notePrefab;
         public Conductor conductor;
-        public RectTransform noteContainer;   // RectTransform kosong, PARENT semua note (JANGAN taruh di dalam Horizontal Layout Group!)
+        public RectTransform noteContainer;
 
         [Header("Titik Hit (tempat kamu harus menekan tombol)")]
-        [Tooltip("Drag 4 GameObject penanda hit point, urut lane 0-3. Note akan berhenti tepat di posisi ini saat waktunya pas (hitTime).")]
+        [Tooltip("Drag 4 GameObject penanda hit point, urut lane 0-3.")]
         public RectTransform[] laneHitPoints = new RectTransform[4];
 
         [Header("Titik Spawn (tempat note pertama kali muncul)")]
-        [Tooltip("Drag 4 GameObject penanda titik spawn, urut lane 0-3. Boleh 1 objek yang sama untuk semua lane (misal garis 'SpawnLine' di atas layar), atau beda-beda per lane kalau mau.")]
+        [Tooltip("Drag 4 GameObject penanda titik spawn, urut lane 0-3.")]
         public RectTransform[] laneSpawnPoints = new RectTransform[4];
 
         private int _nextNoteIndex;
         private readonly List<Note>[] _activeNotesPerLane = new List<Note>[4];
+
+        private Vector2[] _cachedHitLocalPos;
+        private Vector2[] _cachedSpawnLocalPos;
+        private bool _positionsCached;
+        private bool _waitingToCache;
 
         private void Awake()
         {
@@ -30,9 +36,69 @@ namespace RhythmGame
             for (int i = 0; i < 4; i++) _activeNotesPerLane[i] = new List<Note>();
         }
 
+        /// <summary>
+        /// Tandai bahwa posisi perlu di-cache di frame berikutnya.
+        /// Dipanggil dari PlayGame() supaya frame pertama sudah pakai posisi benar.
+        /// </summary>
+        public void InvalidateCache()
+        {
+            _positionsCached = false;
+            _waitingToCache = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (_waitingToCache && !_positionsCached)
+            {
+                _waitingToCache = false;
+                CachePositions();
+            }
+        }
+
+        private void CachePositions()
+        {
+            if (noteContainer == null) return;
+
+            // Force rebuild layout HIERARCHY dulu, bukan cuma canvas global
+            var layoutRoot = noteContainer.GetComponentInParent<HorizontalLayoutGroup>();
+            if (layoutRoot != null)
+                LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot.GetComponent<RectTransform>());
+
+            // juga rebuild noteContainer sendiri kalau dia punya layout
+            var selfLayout = noteContainer.GetComponent<LayoutGroup>();
+            if (selfLayout != null)
+                LayoutRebuilder.ForceRebuildLayoutImmediate(noteContainer);
+
+            _cachedHitLocalPos = new Vector2[laneHitPoints.Length];
+            _cachedSpawnLocalPos = new Vector2[laneSpawnPoints.Length];
+
+            for (int i = 0; i < laneHitPoints.Length; i++)
+            {
+                if (laneHitPoints[i] != null)
+                {
+                    laneHitPoints[i].ForceUpdateRectTransforms();
+                    _cachedHitLocalPos[i] = noteContainer.InverseTransformPoint(laneHitPoints[i].position);
+                }
+            }
+
+            for (int i = 0; i < laneSpawnPoints.Length; i++)
+            {
+                if (laneSpawnPoints[i] != null)
+                {
+                    laneSpawnPoints[i].ForceUpdateRectTransforms();
+                    _cachedSpawnLocalPos[i] = noteContainer.InverseTransformPoint(laneSpawnPoints[i].position);
+                }
+            }
+
+            _positionsCached = true;
+
+            Debug.Log($"[NoteSpawner] CachePositions done. Hit[0]={_cachedHitLocalPos[0]}, Spawn[0]={_cachedSpawnLocalPos[0]}");
+        }
+
         private void Update()
         {
             if (chart == null || conductor == null || !conductor.HasStarted) return;
+            if (!_positionsCached) return;
 
             float songTime = conductor.GetSongTime();
 
@@ -42,7 +108,6 @@ namespace RhythmGame
                 int lane = Mathf.Clamp(data.lane, 0, laneHitPoints.Length - 1);
                 float leadTime = GetLeadTime(lane);
 
-                // Belum waktunya spawn note ini -> berhenti cek, tunggu frame berikutnya
                 if (data.hitTime - leadTime > songTime) break;
 
                 SpawnNote(data, lane);
@@ -50,20 +115,13 @@ namespace RhythmGame
             }
         }
 
-        /// <summary>
-        /// Berapa detik note butuh untuk jalan dari titik spawn ke titik hit,
-        /// dihitung langsung dari JARAK ANTAR OBJEK (bukan angka manual),
-        /// dibagi scrollSpeed saat ini. Dihitung ulang tiap kali dipanggil,
-        /// jadi otomatis akurat walau speed berubah live atau posisi objek digeser.
-        /// </summary>
         private float GetLeadTime(int lane)
         {
-            RectTransform hit = laneHitPoints[lane];
-            RectTransform spawn = laneSpawnPoints[lane];
-            if (hit == null || spawn == null || noteContainer == null) return 1f;
+            if (_cachedHitLocalPos == null || _cachedSpawnLocalPos == null) return 1f;
+            if (lane >= _cachedHitLocalPos.Length || lane >= _cachedSpawnLocalPos.Length) return 1f;
 
-            float hitY = noteContainer.InverseTransformPoint(hit.position).y;
-            float spawnY = noteContainer.InverseTransformPoint(spawn.position).y;
+            float hitY = _cachedHitLocalPos[lane].y;
+            float spawnY = _cachedSpawnLocalPos[lane].y;
             float distance = Mathf.Abs(spawnY - hitY);
 
             return distance / Mathf.Max(conductor.scrollSpeed, 0.01f);
@@ -71,16 +129,13 @@ namespace RhythmGame
 
         private void SpawnNote(NoteData data, int lane)
         {
-            RectTransform hit = laneHitPoints[lane];
-            if (hit == null)
+            if (_cachedHitLocalPos == null || lane >= _cachedHitLocalPos.Length)
             {
                 Debug.LogWarning($"[NoteSpawner] laneHitPoints[{lane}] belum di-assign! Note dilewati.");
                 return;
             }
 
-            // Posisi X & Y target (hit point) diambil langsung dari objek yang
-            // kamu taruh di scene, dikonversi ke local space milik noteContainer.
-            Vector2 hitLocalPos = noteContainer.InverseTransformPoint(hit.position);
+            Vector2 hitLocalPos = _cachedHitLocalPos[lane];
 
             GameObject obj = Instantiate(notePrefab, noteContainer);
             Note note = obj.GetComponent<Note>();

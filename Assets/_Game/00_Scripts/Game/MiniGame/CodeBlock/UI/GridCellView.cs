@@ -22,6 +22,12 @@ public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
         bool placed = board.Circuit.PlaceObject(x, y, draggedItem.gateType);
         if (!placed) return; // gagal (misal cell ini Input/Output yang fixed)
 
+        // Track that this item is now on this cell
+        draggedItem.currentCell = this;
+
+        // Reparent item to this cell so it visually sits on the grid
+        draggedItem.transform.SetParent(transform, true);
+
         if (draggedItem.consumeOnPlace)
             draggedItem.gameObject.SetActive(false);
 
@@ -36,6 +42,11 @@ public class GridCellView : MonoBehaviour, IDropHandler, IPointerClickHandler
         if (cell == null) return;
         if (cell.type == GridObjectType.Input || cell.type == GridObjectType.Output) return;
         if (cell.type == GridObjectType.Empty) return;
+
+        // Clear currentCell on any child DraggableGateItem before removing
+        DraggableGateItem item = GetComponentInChildren<DraggableGateItem>();
+        if (item != null)
+            item.currentCell = null;
 
         board.Circuit.RemoveObject(x, y);
         board.RefreshVisuals();

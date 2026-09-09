@@ -18,6 +18,9 @@ public class DraggableGateItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
     private Vector2 originalAnchoredPos;
     private Canvas rootCanvas;
 
+    // Track which grid cell this item is currently sitting on (null if in tray)
+    [HideInInspector] public GridCellView currentCell;
+
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -29,6 +32,15 @@ public class DraggableGateItem : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         originalParent = transform.parent;
         originalAnchoredPos = rect.anchoredPosition;
+
+        // If item was on a grid cell, remove it from the circuit first
+        if (currentCell != null)
+        {
+            currentCell.board.Circuit.RemoveObject(currentCell.x, currentCell.y);
+            currentCell.board.RefreshVisuals();
+            currentCell.board.OnPlacementChanged?.Invoke();
+            currentCell = null;
+        }
 
         // Pindah jadi child langsung dari root canvas biar render di atas semua UI lain
         transform.SetParent(rootCanvas.transform, true);
