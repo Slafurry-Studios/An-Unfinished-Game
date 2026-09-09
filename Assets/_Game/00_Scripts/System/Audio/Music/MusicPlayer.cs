@@ -13,6 +13,7 @@ namespace Slafurry.System.Audio
         [SerializeField] private SceneTrack[] sceneTracks;
 
         private Coroutine _currentFadeCoroutine;
+        private Coroutine _introCoroutine;
 
         public void Initialize()
         {
@@ -55,31 +56,103 @@ namespace Slafurry.System.Audio
             MusicTrack track = musicData.GetTrack(trackName);
             if (track.clip == null) return;
 
-            if (_currentFadeCoroutine != null)
-                StopCoroutine(_currentFadeCoroutine);
+            StopAllPlayback();
 
-            _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, fadeDuration));
+            if (track.introClip != null)
+                _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeDuration));
+            else
+                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, false, fadeDuration));
         }
 
         public void StopMusic(float fadeDuration = 0.5f)
         {
-            if (musicSource == null)
-                return;
+            if (musicSource == null) return;
 
-            if (_currentFadeCoroutine != null)
-                StopCoroutine(_currentFadeCoroutine);
+            StopAllPlayback();
 
             if (fadeDuration <= 0f)
             {
                 musicSource.Stop();
                 musicSource.clip = null;
                 musicSource.volume = 0f;
-                _currentFadeCoroutine = null;
                 return;
             }
 
             _currentFadeCoroutine = StartCoroutine(FadeOutAndStop(fadeDuration));
         }
+
+        private void StopAllPlayback()
+        {
+            if (_currentFadeCoroutine != null)
+            {
+                StopCoroutine(_currentFadeCoroutine);
+                _currentFadeCoroutine = null;
+            }
+
+            if (_introCoroutine != null)
+            {
+                StopCoroutine(_introCoroutine);
+                _introCoroutine = null;
+            }
+        }
+
+        // ======================== INTRO + LOOP ========================
+
+        private IEnumerator PlayIntroThenLoop(MusicTrack track, float fadeDuration)
+        {
+            // Fade out lagu sebelumnya
+            float startVolume = musicSource.volume;
+            float percent = 0f;
+            while (percent < 1f)
+            {
+                percent += Time.unscaledDeltaTime / fadeDuration;
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, percent);
+                yield return null;
+            }
+
+            // Putar intro (sekali, tidak loop)
+            musicSource.clip = track.introClip;
+            musicSource.loop = false;
+            musicSource.Play();
+
+            // Tunggu sampai intro selesai
+            while (musicSource.isPlaying)
+                yield return null;
+
+            // Crossfade ke loop clip
+            _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, true, fadeDuration));
+        }
+
+        // ======================== CROSSFADE ========================
+
+        private IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float targetVolume, bool loop, float fadeDuration = 0.5f)
+        {
+            float startVolume = musicSource.volume;
+            float percent = 0f;
+            while (percent < 1f)
+            {
+                percent += Time.unscaledDeltaTime / fadeDuration;
+                musicSource.volume = Mathf.Lerp(startVolume, 0f, percent);
+                yield return null;
+            }
+
+            musicSource.clip = nextTrack;
+            musicSource.loop = loop;
+            musicSource.Play();
+
+            percent = 0f;
+            while (percent < 1f)
+            {
+                percent += Time.unscaledDeltaTime / fadeDuration;
+                musicSource.volume = Mathf.Lerp(0f, targetVolume, percent);
+                yield return null;
+            }
+
+            musicSource.volume = targetVolume;
+            _currentFadeCoroutine = null;
+        }
+
+        // ======================== FADE OUT & STOP ========================
 
         private IEnumerator FadeOutAndStop(float fadeDuration)
         {
@@ -97,32 +170,6 @@ namespace Slafurry.System.Audio
             musicSource.clip = null;
             musicSource.volume = startVolume;
 
-            _currentFadeCoroutine = null;
-        }
-
-        private IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float targetVolume, float fadeDuration = 0.5f)
-        {
-            float startVolume = musicSource.volume;
-            float percent = 0;
-            while (percent < 1)
-            {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(startVolume, 0, percent);
-                yield return null;
-            }
-
-            musicSource.clip = nextTrack;
-            musicSource.Play();
-
-            percent = 0;
-            while (percent < 1)
-            {
-                percent += Time.unscaledDeltaTime / fadeDuration;
-                musicSource.volume = Mathf.Lerp(0, targetVolume, percent);
-                yield return null;
-            }
-
-            musicSource.volume = targetVolume;
             _currentFadeCoroutine = null;
         }
     }
