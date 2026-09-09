@@ -17,23 +17,23 @@ MonoBehaviour:
   - groupID: NewObjective
     clips:
     - {fileID: 8300000, guid: 68fd23563ff51a673b8e5942298c58ef, type: 3}
-    volume: 6.77
+    volume: 10
     maxSimultaneous: 0
     fadeIn: 0
     fadeOut: 0
     distanceOnlyNoPanning: 0
     rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
+    minDistance: 1
+    maxDistance: 15
   - groupID: ObjectiveComplete
     clips:
     - {fileID: 8300000, guid: b26f8bd08ae6a917896c7cafa0046da2, type: 3}
-    volume: 7.02
+    volume: 10
     maxSimultaneous: 0
     fadeIn: 0
     fadeOut: 0
     distanceOnlyNoPanning: 0
     rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8

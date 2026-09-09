@@ -5526,6 +5526,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 394447828823778867, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Name
+      value: PuzzleManager_3
+      objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
@@ -5560,12 +5565,12 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1293096003}
+      objectReference: {fileID: 1096655206}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1691803156}
+      objectReference: {fileID: 1096655207}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
@@ -6013,6 +6018,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be3bffe6834cd51bdb3a3a303e999f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1096655206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1096655203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1096655207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1030881031486298238, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1096655203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efbf5c0ce3339d8093c1b3d7241dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1110252396
@@ -6915,6 +6944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394447828823778867, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Name
+      value: PuzzleManager_1
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -8418,6 +8452,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 394447828823778867, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Name
+      value: PuzzleManager_2
+      objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
@@ -8452,12 +8491,12 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1293096003}
+      objectReference: {fileID: 1551730912}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1691803156}
+      objectReference: {fileID: 1551730913}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
@@ -8889,6 +8928,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3937d51c2bef88c091ae024fe76cb30, type: 3}
+--- !u!114 &1551730912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1551730911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1551730913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1030881031486298238, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1551730911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efbf5c0ce3339d8093c1b3d7241dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1610502072
 GameObject:
   m_ObjectHideFlags: 0
