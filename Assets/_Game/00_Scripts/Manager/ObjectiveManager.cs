@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Slafurry.Core.Abstract;
+using Slafurry.System.Audio;
+using Slafurry.System.Scene;
 using UnityEngine;
 
 public class ObjectiveManager : Singleton<ObjectiveManager>
@@ -20,6 +22,19 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
     public override void PostInitialize()
     {
+        SceneLoader.Instance.OnSceneLoadCompleted += HandleSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        if (SceneLoader.Instance != null)
+            SceneLoader.Instance.OnSceneLoadCompleted -= HandleSceneLoaded;
+    }
+
+    private void HandleSceneLoaded(string sceneName)
+    {
+        if (objectives.Count > 0)
+            ClearObjectives();
     }
 
     protected override void OnSingletonAwake()
@@ -36,6 +51,8 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
             return;
 
         objectives.Add(new Objective(data));
+
+        Audio.PlaySFX2D("Objective", "NewObjective");
 
         OnObjectivesChanged?.Invoke();
     }
@@ -63,10 +80,10 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
 
         objective.AddProgress(amount);
 
-        OnObjectivesChanged?.Invoke();
+        if (!wasCompleted && objective.IsCompleted)
+            Audio.PlaySFX2D("Objective", "ObjectiveComplete");
 
-        // Kalau baru saja complete, event sudah ditangani
-        // oleh Objective sendiri.
+        OnObjectivesChanged?.Invoke();
     }
 
     public void SetProgress(string objectiveName, int value)
@@ -76,7 +93,12 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         if (objective == null)
             return;
 
+        bool wasCompleted = objective.IsCompleted;
+
         objective.SetProgress(value);
+
+        if (!wasCompleted && objective.IsCompleted)
+            Audio.PlaySFX2D("Objective", "ObjectiveComplete");
 
         OnObjectivesChanged?.Invoke();
     }
@@ -88,7 +110,11 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         if (objective == null)
             return;
 
-        objective.Complete();
+        if (!objective.IsCompleted)
+        {
+            objective.Complete();
+            Audio.PlaySFX2D("Objective", "ObjectiveComplete");
+        }
 
         OnObjectivesChanged?.Invoke();
     }
