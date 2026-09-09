@@ -812,6 +812,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f0c09d7bb06a9dafab51e0736362c181,
         type: 2}
+    - target: {fileID: 3510999913299128614, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
+        type: 3}
+      propertyPath: chart
+      value: 
+      objectReference: {fileID: 11400000, guid: d72aa2d75184cf783b9d3086339e1986,
+        type: 2}
     - target: {fileID: 4102913284002363307, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4962,6 +4968,12 @@ PrefabInstance:
       propertyPath: bucket
       value: 
       objectReference: {fileID: 11400000, guid: 3ff381e538951f921a60bfa17e813b57,
+        type: 2}
+    - target: {fileID: 3510999913299128614, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
+        type: 3}
+      propertyPath: chart
+      value: 
+      objectReference: {fileID: 11400000, guid: b34b5beb409e46dd881d8992fe7dd2e6,
         type: 2}
     - target: {fileID: 4102913284002363307, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
         type: 3}
@@ -9867,6 +9879,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e48ead76043f4005fbb94e713e2203ee,
         type: 2}
+    - target: {fileID: 3510999913299128614, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
+        type: 3}
+      propertyPath: chart
+      value: 
+      objectReference: {fileID: 11400000, guid: 2840aa56ea37b59b08c15ef8d992d27a,
+        type: 2}
     - target: {fileID: 4102913284002363307, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10830,6 +10848,12 @@ PrefabInstance:
       propertyPath: bucket
       value: 
       objectReference: {fileID: 11400000, guid: 5065bcaee9735594b98ff5b877db6c66,
+        type: 2}
+    - target: {fileID: 3510999913299128614, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
+        type: 3}
+      propertyPath: chart
+      value: 
+      objectReference: {fileID: 11400000, guid: 617908043f3c9552aae47e3545de8d4b,
         type: 2}
     - target: {fileID: 4102913284002363307, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
         type: 3}
@@ -14922,6 +14946,12 @@ PrefabInstance:
       propertyPath: bucket
       value: 
       objectReference: {fileID: 11400000, guid: 4d4bd06dc40840637bf39e2485f17911,
+        type: 2}
+    - target: {fileID: 3510999913299128614, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
+        type: 3}
+      propertyPath: chart
+      value: 
+      objectReference: {fileID: 11400000, guid: ee7a69291107230fb8374975529db399,
         type: 2}
     - target: {fileID: 4102913284002363307, guid: e58eb8a36dbd1b59bb2ee75d2d7385d2,
         type: 3}

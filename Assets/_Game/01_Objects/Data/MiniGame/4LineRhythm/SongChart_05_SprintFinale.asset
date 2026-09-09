@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007f150bc3026891d90ea17a130f78f9, type: 3}
+  m_Name: SongChart_05_SprintFinale
+  m_EditorClassIdentifier: 
+  songName: Sprint Finale
+  bpm: 160
+  notes:
+  - lane: 0
+    hitTime: 0.0
+  - lane: 1
+    hitTime: 0.38
+  - lane: 2
+    hitTime: 0.75
+  - lane: 3
+    hitTime: 1.13
+  - lane: 3
+    hitTime: 1.5
+  - lane: 2
+    hitTime: 1.88
+  - lane: 1
+    hitTime: 2.25
+  - lane: 0
+    hitTime: 2.63
+  - lane: 0
+    hitTime: 3.0
+  - lane: 3
+    hitTime: 3.0
+  - lane: 1
+    hitTime: 3.38
+  - lane: 2
+    hitTime: 3.38
+  - lane: 0
+    hitTime: 3.75
+  - lane: 1
+    hitTime: 3.75
+  - lane: 2
+    hitTime: 4.13
+  - lane: 3
+    hitTime: 4.13
+  - lane: 0
+    hitTime: 4.5
+  - lane: 1
+    hitTime: 4.88
+  - lane: 2
+    hitTime: 5.25
+  - lane: 3
+    hitTime: 5.63
+  - lane: 3
+    hitTime: 6.0
+  - lane: 0
+    hitTime: 6.0
+  - lane: 1
+    hitTime: 6.38
+  - lane: 2
+    hitTime: 6.75
