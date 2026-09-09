@@ -124,7 +124,7 @@ namespace RhythmGame
         private void Win()
         {
             State = GameState.Won;
-            SetGameplayUIVisible(false);
+            // SetGameplayUIVisible(false);
 
             Controls.EnableInput();
 

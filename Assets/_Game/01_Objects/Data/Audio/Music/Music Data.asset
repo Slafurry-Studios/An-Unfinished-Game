@@ -56,11 +56,11 @@ MonoBehaviour:
     fadeIn: 0
     fadeOut: 0
   - trackName: SoundScapeMusic
-    clip: {fileID: 8300000, guid: ab4537346a326d01b88fd34b12c89c13, type: 3}
+    clip: {fileID: 8300000, guid: 708e9418b95ceddfa8aaa126dcc59485, type: 3}
     introClip: {fileID: 0}
     volume: 6.64
-    fadeIn: 0
-    fadeOut: 0
+    fadeIn: 5
+    fadeOut: 1
   - trackName: IterativeRoomMusic
     clip: {fileID: 8300000, guid: ea0d031b3e3f3939aaebe47f1e6c1f2f, type: 3}
     introClip: {fileID: 8300000, guid: a31ad909fdc47e81d9e0fcc1e7c29dcc, type: 3}
