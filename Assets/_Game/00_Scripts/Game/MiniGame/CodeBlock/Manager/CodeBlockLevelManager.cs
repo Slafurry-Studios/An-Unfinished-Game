@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Slafurry.System.InputHub;
+using Slafurry.System.Audio;
+using Slafurry.Utils.GameFeel;
 using Slafurry.Interaction;
 
 public class CodeBlockGameManager : MonoBehaviour
@@ -23,6 +25,15 @@ public class CodeBlockGameManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnGameWin;   
     public UnityEvent OnGameLose; 
+
+    [Header("GameFeel")]
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private float shakeOnSolve = 0.4f;
+    [SerializeField] private float shakeOnWin = 0.7f;
+    [SerializeField] private float shakeOnLose = 0.9f;
+    [SerializeField] private Color flashOnSolve = new Color(0.3f, 0.8f, 0.3f, 0.4f);
+    [SerializeField] private Color flashOnWin = new Color(1f, 0.85f, 0.2f, 0.5f);
+    [SerializeField] private Color flashOnLose = new Color(0.8f, 0.2f, 0.2f, 0.5f);
 
     [Header("Trigger (opsional)")]
     [Tooltip("Reference ke InteractionTrigger yang meluncurkan minigame ini. " +
@@ -97,6 +108,10 @@ public class CodeBlockGameManager : MonoBehaviour
         if (isTransitioning) return;
         isTransitioning = true;
 
+        PlayFeel(cameraShake, shakeOnSolve);
+        FlashScreen(flashOnSolve, 0.3f);
+        Audio.PlaySFX2D("Minigame", "Correct");
+
         Invoke(nameof(GoToNextLevel), delayBeforeNextLevel);
     }
 
@@ -146,6 +161,10 @@ public class CodeBlockGameManager : MonoBehaviour
 
         Controls.EnableInput();
 
+        PlayFeel(cameraShake, shakeOnWin);
+        FlashScreen(flashOnWin, 0.4f);
+        Audio.PlaySFX2D("Minigame", "Win");
+
         OnAllLevelsComplete?.Invoke();
         OnGameWin?.Invoke();
     }
@@ -157,6 +176,10 @@ public class CodeBlockGameManager : MonoBehaviour
 
         Controls.EnableInput();
         interactionTrigger?.DecrementCount();
+
+        PlayFeel(cameraShake, shakeOnLose);
+        FlashScreen(flashOnLose, 0.4f);
+        Audio.PlaySFX2D("Minigame", "Lose");
 
         OnGameLose?.Invoke();
     }
@@ -182,5 +205,20 @@ public class CodeBlockGameManager : MonoBehaviour
     {
         if (gameStarted && !gameEnded)
             Controls.EnableInput();
+    }
+
+    // ======================== GAMEFEEL HELPERS ========================
+
+    private static void PlayFeel(CameraShake shake, float amplitude)
+    {
+        if (shake != null) shake.Shake(amplitude, 1f, 0.15f);
+    }
+
+    private static void FlashScreen(Color color, float duration)
+    {
+        if (ScreenFlash.Instance == null) return;
+        ScreenFlash.Instance.SetColor(color);
+        ScreenFlash.Instance.SetDuration(duration);
+        ScreenFlash.Instance.PlayEffect();
     }
 }

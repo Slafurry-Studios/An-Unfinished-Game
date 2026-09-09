@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Slafurry.System.InputHub;
+using Slafurry.System.Audio;
+using Slafurry.Utils.GameFeel;
 using Slafurry.Interaction;
 
 namespace RhythmGame
@@ -46,6 +48,13 @@ namespace RhythmGame
         [Header("Event Tambahan (opsional)")]
         [Tooltip("Dipicu tepat saat PlayGame() dipanggil (lagu mulai diputar).")]
         public UnityEvent OnGameStart;
+
+        [Header("GameFeel")]
+        [SerializeField] private CameraShake cameraShake;
+        [SerializeField] private float shakeOnWin = 0.6f;
+        [SerializeField] private float shakeOnLose = 0.8f;
+        [SerializeField] private Color flashOnWin = new Color(1f, 0.85f, 0.2f, 0.5f);
+        [SerializeField] private Color flashOnLose = new Color(0.8f, 0.2f, 0.2f, 0.5f);
 
         [Header("Trigger (opsional)")]
         [Tooltip("Reference ke InteractionTrigger yang meluncurkan minigame ini. " +
@@ -119,6 +128,10 @@ namespace RhythmGame
 
             Controls.EnableInput();
 
+            PlayFeel(cameraShake, shakeOnWin);
+            Flash(flashOnWin, 0.4f);
+            Audio.PlaySFX2D("Minigame", "Win");
+
             OnWin?.Invoke();
         }
 
@@ -129,6 +142,10 @@ namespace RhythmGame
 
             Controls.EnableInput();
             interactionTrigger?.DecrementCount();
+
+            PlayFeel(cameraShake, shakeOnLose);
+            Flash(flashOnLose, 0.4f);
+            Audio.PlaySFX2D("Minigame", "Lose");
 
             OnLose?.Invoke();
         }
@@ -162,6 +179,21 @@ namespace RhythmGame
         {
             if (State == GameState.Playing)
                 Controls.EnableInput();
+        }
+
+        // ======================== GAMEFEEL HELPERS ========================
+
+        private static void PlayFeel(CameraShake shake, float amplitude)
+        {
+            if (shake != null) shake.Shake(amplitude, 1f, 0.15f);
+        }
+
+        private static void Flash(Color color, float duration)
+        {
+            if (ScreenFlash.Instance == null) return;
+            ScreenFlash.Instance.SetColor(color);
+            ScreenFlash.Instance.SetDuration(duration);
+            ScreenFlash.Instance.PlayEffect();
         }
     }
 }

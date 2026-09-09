@@ -403,6 +403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150673613}
+  - component: {fileID: 150673614}
   m_Layer: 0
   m_Name: 04_Platform
   m_TagString: Untagged
@@ -431,6 +432,31 @@ Transform:
   - {fileID: 1537565955}
   m_Father: {fileID: 1929442989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150673614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150673612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &176831614
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,6 +3495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818620867}
+  - component: {fileID: 818620868}
   m_Layer: 0
   m_Name: 06_Platform
   m_TagString: Untagged
@@ -3497,6 +3524,31 @@ Transform:
   - {fileID: 1860202272}
   m_Father: {fileID: 1929442989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &818620868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818620866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &822118882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7529,6 +7581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330980235}
+  - component: {fileID: 1330980236}
   m_Layer: 0
   m_Name: 05_Platform
   m_TagString: Untagged
@@ -7556,6 +7609,31 @@ Transform:
   - {fileID: 1297090948}
   m_Father: {fileID: 1929442989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330980236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330980234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b9963ffd30f7889a73dade35cdb88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
+  duration: 1
+  useUnscaledTime: 0
+  disableCollidersWhileHidden: 0
+  colliders: []
+  playOnEnable: 1
+  fadeInOnEnable: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1340532593
 PrefabInstance:
   m_ObjectHideFlags: 0
