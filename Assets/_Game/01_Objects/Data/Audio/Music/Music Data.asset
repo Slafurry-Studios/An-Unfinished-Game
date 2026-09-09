@@ -20,7 +20,7 @@ MonoBehaviour:
     fadeIn: 5
     fadeOut: 0
   - trackName: TutorialRoomMusic
-    clip: {fileID: 8300000, guid: fe72787846c76401fa6511f803109d4c, type: 3}
+    clip: {fileID: 8300000, guid: 62bc20b13eb3c4cc197fbad78ce85ed9, type: 3}
     introClip: {fileID: 0}
     volume: 6.64
     fadeIn: 0
