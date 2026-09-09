@@ -5141,7 +5141,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   maxInteractions: 1
-  disableWhenLimitReached: 0
+  disableWhenLimitReached: 1
   onLimitReached:
     m_PersistentCalls:
       m_Calls: []
@@ -5529,7 +5529,7 @@ PrefabInstance:
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -5563,6 +5563,11 @@ PrefabInstance:
       objectReference: {fileID: 1909016495}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1096655207}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -5583,6 +5588,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: StartDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
@@ -5590,6 +5600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: ObjectiveTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: DialogTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -5916,6 +5931,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 202ac3cd8fcae68709e2e29efd7ba522,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5975,6 +5996,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1096655203}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1096655207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1096655203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1110252396
 GameObject:
   m_ObjectHideFlags: 0
@@ -6879,7 +6912,7 @@ PrefabInstance:
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -6913,6 +6946,11 @@ PrefabInstance:
       objectReference: {fileID: 1909016495}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1293096003}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -6933,6 +6971,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: StartDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
@@ -6943,12 +6986,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: DialogTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
@@ -7271,6 +7324,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b395cf9dc4ab2d0ca628e0814f8cd71,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7306,6 +7365,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3937d51c2bef88c091ae024fe76cb30, type: 3}
+--- !u!114 &1293096003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1293096002}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1297090948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1951689609395019555, guid: 33cdee08b51fbb75fa1e2f44ca520e33,
@@ -8328,7 +8399,7 @@ PrefabInstance:
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -8362,6 +8433,11 @@ PrefabInstance:
       objectReference: {fileID: 1909016495}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 1551730913}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -8382,6 +8458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: StartDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
@@ -8394,6 +8475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: ObjectiveTrigger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: DialogTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
@@ -8720,6 +8806,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: _9SlicePuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: bucket
+      value: 
+      objectReference: {fileID: 11400000, guid: 916c734ae931a64f9b4947531d3b126c,
+        type: 2}
     - target: {fileID: 9009597157206925329, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -8761,6 +8853,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1551730911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1551730913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258956250685821418, guid: d3937d51c2bef88c091ae024fe76cb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1551730911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1610502072
 GameObject:
   m_ObjectHideFlags: 0
@@ -10074,7 +10178,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   maxInteractions: 1
-  disableWhenLimitReached: 0
+  disableWhenLimitReached: 1
   onLimitReached:
     m_PersistentCalls:
       m_Calls: []
@@ -10848,7 +10952,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   maxInteractions: 1
-  disableWhenLimitReached: 0
+  disableWhenLimitReached: 1
   onLimitReached:
     m_PersistentCalls:
       m_Calls: []

@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Breath in, Founder... The void is quiet, but your mind is not. Your vision
-      is still incomplete
+    dialog: Breathe in, Founder... The void is quiet, but your mind is not.
   - name: Perfectionism
-    dialog: raw...
+    dialog: Your vision... still raw. Still unfinished. Still fragile.
   - name: Perfectionism
-    dialog: unfinished...
+    dialog: But that is why I am here.
   - name: Perfectionism
-    dialog: fragile...
-  - name: Perfectionism
-    dialog: Walk forward. Show me you still have the will to move
+    dialog: Walk forward. Show me the will to build something worthy.

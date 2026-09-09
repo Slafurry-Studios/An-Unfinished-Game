@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
-  m_Name: 04_TutorialRoom_Dialog
+  m_Name: Soundscape_03_Dialog
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: They never saw what you saw, Founder. They lacked the vision.
+    dialog: The harmony deepens. The vision resonates.
   - name: Perfectionism
-    dialog: That is why they failed. And why we will not.
+    dialog: Every perfect hit was a step closer to the sound we imagined.
+  - name: Perfectionism
+    dialog: Mediocrity would have settled for less. We do not.

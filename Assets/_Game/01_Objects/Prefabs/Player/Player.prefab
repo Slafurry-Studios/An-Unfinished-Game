@@ -1437,6 +1437,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -315.1181
       objectReference: {fileID: 0}
+    - target: {fileID: 3906524576989840677, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 32767
+      objectReference: {fileID: 0}
     - target: {fileID: 5300779581673165037, guid: ed014d2ae52301554b4496be4ad7cf88,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

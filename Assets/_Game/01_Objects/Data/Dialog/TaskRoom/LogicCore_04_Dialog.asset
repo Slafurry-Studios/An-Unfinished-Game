@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
-  m_Name: 04_TutorialRoom_Dialog
+  m_Name: LogicCore_04_Dialog
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: They never saw what you saw, Founder. They lacked the vision.
+    dialog: The system hums now. Every input, every output... synchronized.
   - name: Perfectionism
-    dialog: That is why they failed. And why we will not.
+    dialog: You are not just fixing bugs. You are engineering certainty.
+  - name: Perfectionism
+    dialog: They will call it polished. We will call it inevitable.

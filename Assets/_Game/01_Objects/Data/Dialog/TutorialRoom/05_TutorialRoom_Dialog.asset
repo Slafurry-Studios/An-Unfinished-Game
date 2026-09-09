@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: But I am here. I will never let you settle for mediocrity.
+    dialog: Others would have quit by now. But you are not others.
+  - name: Perfectionism
+    dialog: I am here, Founder. I will never let you settle for less than extraordinary.

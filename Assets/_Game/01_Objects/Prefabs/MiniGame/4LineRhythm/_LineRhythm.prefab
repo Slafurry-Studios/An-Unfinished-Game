@@ -2131,6 +2131,7 @@ GameObject:
   - component: {fileID: 1065909941518645761}
   - component: {fileID: 2636153681483238224}
   - component: {fileID: 785940176094646487}
+  - component: {fileID: 3390703363450329651}
   m_Layer: 5
   m_Name: _LineRhythm
   m_TagString: Untagged
@@ -2255,13 +2256,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 3390703363450329651}
+        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
+        m_MethodName: StartDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnLose:
     m_PersistentCalls:
       m_Calls: []
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
+  cameraShake: {fileID: 0}
+  shakeOnWin: 0.6
+  shakeOnLose: 0.8
+  flashOnWin: {r: 1, g: 0.85, b: 0.2, a: 0.5}
+  flashOnLose: {r: 0.8, g: 0.2, b: 0.2, a: 0.5}
   interactionTrigger: {fileID: 0}
+--- !u!114 &3390703363450329651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147999810376074730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb1d23dcd084fe58f51b599f66e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playLimit: 0
+  unlimited: 1
+  bucket: {fileID: 0}
+  dialogHUD: {fileID: 0}
+  onDialogEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onLineComplete: []
 --- !u!1 &4614149184549503468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2973,14 @@ MonoBehaviour:
   perfectScore: 100
   goodScore: 70
   okScore: 30
+  cameraShake: {fileID: 0}
+  shakeOnPerfect: 0.3
+  shakeOnGood: 0.15
+  shakeOnMiss: 0.5
+  shakeOnComboMilestone: 0.6
+  flashOnPerfect: {r: 1, g: 0.85, b: 0.2, a: 0.4}
+  flashOnMiss: {r: 0.8, g: 0.2, b: 0.2, a: 0.4}
+  flashOnCombo: {r: 0.3, g: 0.8, b: 1, a: 0.3}
 --- !u!114 &3510999913299128614
 MonoBehaviour:
   m_ObjectHideFlags: 0
