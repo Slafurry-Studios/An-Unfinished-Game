@@ -12,6 +12,7 @@ namespace RhythmGame
         public static Conductor Instance { get; internal set; }
 
         [Header("Audio")]
+        [Tooltip("Opsional. Kalau kosong, minigame berjalan tanpa musik sendiri (musik utama tetap jalan).")]
         public AudioSource musicSource;
         [Tooltip("Delay sebelum lagu mulai diputar (detik), memberi waktu countdown")]
         public float startDelay = 2f;
@@ -39,13 +40,18 @@ namespace RhythmGame
         public void StartSong()
         {
             _dspSongStartTime = AudioSettings.dspTime + startDelay;
-            musicSource.PlayScheduled(_dspSongStartTime);
+
+            if (musicSource != null)
+                musicSource.PlayScheduled(_dspSongStartTime);
+
             _hasStarted = true;
         }
 
         public void StopSong()
         {
-            musicSource.Stop();
+            if (musicSource != null)
+                musicSource.Stop();
+
             _hasStarted = false;
         }
 
