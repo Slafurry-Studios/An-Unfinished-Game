@@ -2177,7 +2177,7 @@ PrefabInstance:
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
@@ -2188,7 +2188,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 553176974}
+      objectReference: {fileID: 571359794}
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2202,7 +2202,7 @@ PrefabInstance:
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FadeIn
+      value: ChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
@@ -2212,7 +2212,7 @@ PrefabInstance:
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Slafurry.Utils.UI.UIFade, Assembly-CSharp
+      value: ChangeSceneTrigger, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
@@ -2222,7 +2222,7 @@ PrefabInstance:
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: MainChamber
+      value: MainChamber_1
       objectReference: {fileID: 0}
     - target: {fileID: 5524205462079620805, guid: c547abc115dcfd98787748fd621cca13,
         type: 3}
@@ -2239,6 +2239,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c547abc115dcfd98787748fd621cca13, type: 3}
+--- !u!114 &571359794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 277776546246299548, guid: c547abc115dcfd98787748fd621cca13,
+    type: 3}
+  m_PrefabInstance: {fileID: 571359793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7e1e1ae6e0e8654a3c80a6386cb8e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &648678596
 GameObject:
   m_ObjectHideFlags: 0

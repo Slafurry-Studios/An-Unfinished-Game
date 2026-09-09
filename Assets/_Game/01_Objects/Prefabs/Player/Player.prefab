@@ -515,6 +515,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4923359433846559777}
+        m_TargetAssemblyTypeName: DelayTrigger, Assembly-CSharp
+        m_MethodName: TriggerDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   invincibilityDuration: 1.5
   blinkInterval: 0.1
   spriteRenderer: {fileID: 6878744658898407997}
@@ -1887,14 +1899,138 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9081599307949447717, guid: 27cdda98f2b7d78948062391f118430c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4923359433846559777}
+    - targetCorrespondingSourceObject: {fileID: 6336659750119710317, guid: 27cdda98f2b7d78948062391f118430c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7416978387376922660}
+    - targetCorrespondingSourceObject: {fileID: 6336659750119710317, guid: 27cdda98f2b7d78948062391f118430c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5715753962309630697}
   m_SourcePrefab: {fileID: 100100000, guid: 27cdda98f2b7d78948062391f118430c, type: 3}
+--- !u!1 &1265036723084401993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6336659750119710317, guid: 27cdda98f2b7d78948062391f118430c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5079504345811354404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &7416978387376922660
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265036723084401993}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5715753962309630697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265036723084401993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59181299e3c873e1d8894c5b9470510d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 7416978387376922660}
+  duration: 0.3
+  useUnscaledTime: 1
+  disableInteractionWhileHidden: 1
+  onFadeInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onFadeOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &2217207085719574946 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6393735237295725190, guid: 27cdda98f2b7d78948062391f118430c,
     type: 3}
   m_PrefabInstance: {fileID: 5079504345811354404}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4068531938672056577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9081599307949447717, guid: 27cdda98f2b7d78948062391f118430c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5079504345811354404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4923359433846559777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068531938672056577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c993be83b5ee177194a89a81d8e8320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playLimit: 0
+  unlimited: 1
+  delay: 3
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5157245663066540724}
+        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+        m_MethodName: ShowGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1265036723084401993}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5715753962309630697}
+        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UIFade, Assembly-CSharp
+        m_MethodName: FadeIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5157245663066540724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 138540464166062480, guid: 27cdda98f2b7d78948062391f118430c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5079504345811354404}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4068531938672056577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bce6b5b7ee6a19ea7af35fb37a393aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7686823915288308233
 PrefabInstance:
   m_ObjectHideFlags: 0

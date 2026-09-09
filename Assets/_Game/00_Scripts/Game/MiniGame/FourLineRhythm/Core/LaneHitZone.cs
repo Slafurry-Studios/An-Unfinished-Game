@@ -9,9 +9,9 @@ namespace RhythmGame
     /// </summary>
     public class LaneHitZone : MonoBehaviour
     {
-        public const float PerfectWindow = 0.05f; // detik
-        public const float GoodWindow = 0.10f;
-        public const float MissWindow = 0.15f;
+        public const float PerfectWindow = 0.08f; // detik
+        public const float GoodWindow = 0.15f;
+        public const float MissWindow = 0.25f;
 
         [Tooltip("Index lane, 0-3, harus cocok dengan NoteData.lane")]
         public int laneIndex;

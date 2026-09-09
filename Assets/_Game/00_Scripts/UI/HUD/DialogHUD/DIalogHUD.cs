@@ -40,7 +40,10 @@ namespace Game.UI.HUD
         private string currentDialog;
         private Coroutine typingCoroutine;
         private UnityEvent[] currentLineEvents;
-        public Action OnDialogEnd;
+
+        // Callback khusus untuk pemanggil StartDialog() saat ini.
+        // Digunakan sekali lalu di-null-kan, jadi tidak "nempel" ke trigger lain.
+        private Action onEndCallback;
 
         private void Update()
         {
@@ -53,12 +56,19 @@ namespace Game.UI.HUD
             }
         }
 
-        public void StartDialog(DialogSystem.DialogBucket bucket)
+        public bool IsBusy => currentBucket != null;
+
+        public void StartDialog(DialogSystem.DialogBucket bucket, Action onEnd = null)
         {
             if (bucket == null || bucket.dialogs.Length == 0) return;
 
+            // Cegah dialog baru "menimpa" dialog yang sedang berjalan
+            // (opsional, tapi disarankan agar tidak ada dua dialog nabrak).
+            if (currentBucket != null) return;
+
             currentBucket = bucket;
             currentIndex = 0;
+            onEndCallback = onEnd;
 
             Pause.On("Dialog");
             dialogUIPrefab.SetActive(true);
@@ -91,12 +101,7 @@ namespace Game.UI.HUD
 
             if (isLast)
             {
-                Pause.Off("Dialog");
-                OnDialogEnd?.Invoke();
-                dialogUIPrefab.SetActive(false);
-                isLast = false;
-                currentBucket = null;
-                currentLineEvents = null;
+                EndDialog();
                 return;
             }
 
@@ -114,13 +119,23 @@ namespace Game.UI.HUD
 
             StopTypeSfx();
             isTyping = false;
-            isLast = false;
 
-            Pause.Off("Dialog");
-            OnDialogEnd?.Invoke();
-            dialogUIPrefab.SetActive(false);
+            EndDialog();
+        }
+
+        private void EndDialog()
+        {
+            var callback = onEndCallback;
+            onEndCallback = null;
+
+            isLast = false;
             currentBucket = null;
             currentLineEvents = null;
+
+            Pause.Off("Dialog");
+            dialogUIPrefab.SetActive(false);
+
+            callback?.Invoke();
         }
 
         private void ShowCurrentDialog()
