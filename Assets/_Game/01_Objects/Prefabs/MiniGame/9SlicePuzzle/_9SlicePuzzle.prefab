@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 7971174235508920582}
   - component: {fileID: 53665960676670251}
   - component: {fileID: 4523813398553194478}
+  - component: {fileID: 4253082289096398122}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -603,6 +604,57 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4253082289096398122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3601733271472238186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efbf5c0ce3339d8093c1b3d7241dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 7971174235508920582}
+  canvasRect: {fileID: 4017655179069147862}
+  fromDirection: 1
+  extraOffset: 100
+  duration: 0.5
+  delay: 0
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  playOnEnable: 1
+  useUnscaledTime: 1
+  deactivateOnHidden: 0
+  onSlideInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onSlideOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3980426381174290634
 GameObject:
   m_ObjectHideFlags: 0
