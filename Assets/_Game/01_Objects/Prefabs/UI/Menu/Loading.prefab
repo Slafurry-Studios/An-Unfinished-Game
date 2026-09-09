@@ -31,7 +31,7 @@ RectTransform:
   m_Children:
   - {fileID: 8344357822497929319}
   - {fileID: 2347641184349085954}
-  m_Father: {fileID: 2232607441528115442}
+  m_Father: {fileID: 5052960122100690260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -114,12 +114,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470497296193785488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2232607441528115442}
+  m_Father: {fileID: 5052960122100690260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -253,7 +253,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1264883898262706701}
+  - {fileID: 7439591112310837816}
   m_Father: {fileID: 2232607441528115442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -422,6 +424,8 @@ GameObject:
   - component: {fileID: 257421500112551206}
   - component: {fileID: 5728326617979976040}
   - component: {fileID: 1243771631745655862}
+  - component: {fileID: 7706567528135839805}
+  - component: {fileID: 1957369306002854596}
   m_Layer: 5
   m_Name: Loading
   m_TagString: Untagged
@@ -442,8 +446,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5052960122100690260}
-  - {fileID: 1264883898262706701}
-  - {fileID: 7439591112310837816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -472,7 +474,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &5728326617979976040
 MonoBehaviour:
@@ -514,6 +516,47 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7706567528135839805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773052021503551936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804e72360e3eba2f298da883ebaca284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 257421500112551206}
+  canvasGroup: {fileID: 1957369306002854596}
+  loadingContent: {fileID: 2663156028451292291}
+  loadingText: {fileID: 2108494421456129558}
+  progressBar: {fileID: 6925436476166699068}
+  dotInterval: 0.4
+  maxDots: 3
+  minDisplayTime: 2
+  maxDisplayTime: 4
+  fadeInDuration: 0.5
+  fadeOutDuration: 0.5
+  excludedScenes:
+  - Boot
+  - MainMenu
+  - AboutMenu
+  - SettingsMenu
+  - IntroCutscene
+--- !u!225 &1957369306002854596
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5773052021503551936}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6016830805950423194
 GameObject:
   m_ObjectHideFlags: 0
