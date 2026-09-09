@@ -45,6 +45,15 @@ namespace Slafurry.Interaction
         }
 
         /// <summary>
+        /// Kurangi hitungan interaksi sebanyak 1 (untuk quit/kalah dari mini-game).
+        /// Tidak akan turun di bawah 0.
+        /// </summary>
+        public void DecrementCount()
+        {
+            _interactionCount = Mathf.Max(0, _interactionCount - 1);
+        }
+
+        /// <summary>
         /// Reset hitungan interaksi, kalau butuh object ini bisa dipakai ulang lagi
         /// (misal setelah reset level / checkpoint).
         /// </summary>

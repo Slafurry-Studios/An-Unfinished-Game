@@ -11,7 +11,7 @@ namespace RhythmGame
     /// </summary>
     public class ScoreManager : MonoBehaviour
     {
-        public static ScoreManager Instance { get; private set; }
+        public static ScoreManager Instance { get; internal set; }
 
         [Header("UI (TextMeshPro)")]
         public TMP_Text scoreText;

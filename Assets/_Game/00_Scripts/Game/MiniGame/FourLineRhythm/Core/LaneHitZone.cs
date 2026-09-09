@@ -61,7 +61,7 @@ namespace RhythmGame
             else ScoreManager.Instance.RegisterHit(Judgement.Ok);
 
             NoteSpawner.Instance.RemoveActiveNote(closest);
-            Destroy(closest.gameObject);
+            closest.PlayHitPunch();
         }
     }
 }

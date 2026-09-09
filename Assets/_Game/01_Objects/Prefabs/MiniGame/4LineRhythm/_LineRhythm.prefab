@@ -1569,13 +1569,26 @@ MonoBehaviour:
   maxMisses: 10
   OnWin:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnLose:
     m_PersistentCalls:
       m_Calls: []
   OnGameStart:
     m_PersistentCalls:
       m_Calls: []
+  interactionTrigger: {fileID: 0}
 --- !u!1 &4614149184549503468
 GameObject:
   m_ObjectHideFlags: 0

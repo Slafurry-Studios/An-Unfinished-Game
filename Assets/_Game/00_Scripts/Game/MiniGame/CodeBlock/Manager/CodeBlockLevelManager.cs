@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Slafurry.System.InputHub;
+using Slafurry.Interaction;
 
 public class CodeBlockGameManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class CodeBlockGameManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnGameWin;   
     public UnityEvent OnGameLose; 
+
+    [Header("Trigger (opsional)")]
+    [Tooltip("Reference ke InteractionTrigger yang meluncurkan minigame ini. " +
+             "Kalau diisi, counter akan dikurangi -1 saat kalah atau quit.")]
+    [SerializeField] private InteractionTrigger interactionTrigger;
 
     public System.Action OnAllLevelsComplete;
 
@@ -49,6 +55,14 @@ public class CodeBlockGameManager : MonoBehaviour
             board.OnLevelSolved -= HandleLevelSolved;
             board.OnPlacementChanged -= HandlePlacementChanged;
         }
+    }
+
+    void Update()
+    {
+        if (!gameStarted || gameEnded || isTransitioning) return;
+
+        if (Input.GetKeyDown(KeyCode.R))
+            LoadLevelAt(currentIndex);
     }
 
     public void StartGame()
@@ -142,6 +156,22 @@ public class CodeBlockGameManager : MonoBehaviour
         gameEnded = true;
 
         Controls.EnableInput();
+        interactionTrigger?.DecrementCount();
+
+        OnGameLose?.Invoke();
+    }
+
+    /// <summary>
+    /// Panggil dari tombol Quit buat keluar dari minigame.
+    /// Counter interaksi dikurangi -1 supaya bisa dicoba lagi.
+    /// </summary>
+    public void QuitGame()
+    {
+        if (!gameStarted || gameEnded) return;
+        gameEnded = true;
+
+        Controls.EnableInput();
+        interactionTrigger?.DecrementCount();
 
         OnGameLose?.Invoke();
     }

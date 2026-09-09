@@ -9,7 +9,7 @@ namespace RhythmGame
     /// </summary>
     public class Conductor : MonoBehaviour
     {
-        public static Conductor Instance { get; private set; }
+        public static Conductor Instance { get; internal set; }
 
         [Header("Audio")]
         public AudioSource musicSource;
@@ -41,6 +41,12 @@ namespace RhythmGame
             _dspSongStartTime = AudioSettings.dspTime + startDelay;
             musicSource.PlayScheduled(_dspSongStartTime);
             _hasStarted = true;
+        }
+
+        public void StopSong()
+        {
+            musicSource.Stop();
+            _hasStarted = false;
         }
 
         /// <summary>

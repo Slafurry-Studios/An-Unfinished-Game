@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Slafurry.System.InputHub;
+using Slafurry.Interaction;
 
 namespace RhythmGame
 {
@@ -46,6 +47,11 @@ namespace RhythmGame
         [Tooltip("Dipicu tepat saat PlayGame() dipanggil (lagu mulai diputar).")]
         public UnityEvent OnGameStart;
 
+        [Header("Trigger (opsional)")]
+        [Tooltip("Reference ke InteractionTrigger yang meluncurkan minigame ini. " +
+                 "Kalau diisi, counter akan dikurangi -1 saat kalah atau quit.")]
+        [SerializeField] private InteractionTrigger interactionTrigger;
+
         public GameState State { get; private set; } = GameState.NotStarted;
 
         private void Awake()
@@ -81,12 +87,25 @@ namespace RhythmGame
         /// </summary>
         public void PlayGame()
         {
+            // Force set static singletons ke instance INI.
+            // Scene Soundscape punya 5 instance _LineRhythm — semua Awake()
+            // menimpa static Instance, jadi hanya last-to-Awake yang aktif.
+            // Tanpa ini, PlayGame() di instance A masih pakai spawner/conductor
+            // milik instance B -> note spawn di posisi salah (0,0).
+            Instance = this;
+            NoteSpawner.Instance = noteSpawner;
+            Conductor.Instance = conductor;
+            ScoreManager.Instance = scoreManager;
+
             scoreManager.ResetStats();
             noteSpawner.ResetSpawner();
             State = GameState.Playing;
             SetGameplayUIVisible(true);
 
-            // Kunci control player selama minigame rhythm berlangsung
+            Canvas.ForceUpdateCanvases();
+
+            noteSpawner.InvalidateCache();
+
             Controls.DisableInput();
 
             conductor.StartSong();
@@ -109,6 +128,25 @@ namespace RhythmGame
             SetGameplayUIVisible(false);
 
             Controls.EnableInput();
+            interactionTrigger?.DecrementCount();
+
+            OnLose?.Invoke();
+        }
+
+        /// <summary>
+        /// Panggil dari tombol Quit buat keluar dari minigame.
+        /// Counter interaksi dikurangi -1 supaya bisa dicoba lagi.
+        /// </summary>
+        public void QuitGame()
+        {
+            if (State != GameState.Playing) return;
+
+            State = GameState.Lost;
+            conductor.StopSong();
+            SetGameplayUIVisible(false);
+
+            Controls.EnableInput();
+            interactionTrigger?.DecrementCount();
 
             OnLose?.Invoke();
         }

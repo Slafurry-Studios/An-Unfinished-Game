@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Slafurry.System.InputHub;
+using Slafurry.Interaction;
 
 public class SlidingPuzzleManager : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class SlidingPuzzleManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnPuzzleWin;
     public UnityEvent OnPuzzleLose;
+
+    [Header("Trigger (opsional)")]
+    [Tooltip("Reference ke InteractionTrigger yang meluncurkan minigame ini. " +
+             "Kalau diisi, counter akan dikurangi -1 saat kalah atau quit.")]
+    [SerializeField] private InteractionTrigger interactionTrigger;
 
     int[] board = new int[9];  
     int emptyIndex;
@@ -72,6 +78,22 @@ public class SlidingPuzzleManager : MonoBehaviour
         gameEnded = true;
 
         Controls.EnableInput();
+        interactionTrigger?.DecrementCount();
+
+        OnPuzzleLose?.Invoke();
+    }
+
+    /// <summary>
+    /// Panggil dari tombol Quit buat keluar dari minigame.
+    /// Counter interaksi dikurangi -1 supaya bisa dicoba lagi.
+    /// </summary>
+    public void QuitGame()
+    {
+        if (!gameStarted || gameEnded) return;
+        gameEnded = true;
+
+        Controls.EnableInput();
+        interactionTrigger?.DecrementCount();
 
         OnPuzzleLose?.Invoke();
     }
