@@ -5550,7 +5550,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 150673612}
+      objectReference: {fileID: 818620866}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -8442,7 +8442,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 150673612}
+      objectReference: {fileID: 1330980234}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Target

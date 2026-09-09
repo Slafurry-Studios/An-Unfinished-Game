@@ -33,4 +33,11 @@ public class CodeBlockLevelLoader : MonoBehaviour
         if (currentLevel == null) return false;
         return circuit.CheckWin(targetOutputs);
     }
+
+    public bool GetOutputTarget(int outputIndex)
+    {
+        if (targetOutputs == null || outputIndex < 0 || outputIndex >= targetOutputs.Length)
+            return false;
+        return targetOutputs[outputIndex];
+    }
 }

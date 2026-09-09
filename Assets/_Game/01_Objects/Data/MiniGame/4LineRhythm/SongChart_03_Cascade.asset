@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007f150bc3026891d90ea17a130f78f9, type: 3}
+  m_Name: SongChart_03_Cascade
+  m_EditorClassIdentifier: 
+  songName: Cascade
+  bpm: 110
+  notes:
+  - lane: 0
+    hitTime: 0.0
+  - lane: 1
+    hitTime: 0.55
+  - lane: 2
+    hitTime: 1.1
+  - lane: 3
+    hitTime: 1.65
+  - lane: 3
+    hitTime: 2.2
+  - lane: 2
+    hitTime: 2.75
+  - lane: 1
+    hitTime: 3.3
+  - lane: 0
+    hitTime: 3.85
+  - lane: 0
+    hitTime: 4.4
+  - lane: 1
+    hitTime: 4.95
+  - lane: 2
+    hitTime: 5.5
+  - lane: 3
+    hitTime: 6.05
+  - lane: 3
+    hitTime: 6.6
+  - lane: 2
+    hitTime: 7.15
+  - lane: 1
+    hitTime: 7.7
+  - lane: 0
+    hitTime: 8.25
+  - lane: 0
+    hitTime: 8.8
+  - lane: 2
+    hitTime: 9.35
+  - lane: 1
+    hitTime: 9.9
+  - lane: 3
+    hitTime: 10.45

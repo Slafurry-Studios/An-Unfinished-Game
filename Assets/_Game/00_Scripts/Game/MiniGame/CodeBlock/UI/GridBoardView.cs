@@ -115,8 +115,15 @@ public class GridBoardView : MonoBehaviour
 
                 if (cell.type == GridObjectType.Output)
                 {
-                    view.background.color = !hasValue ? unresolvedColor
-                        : (solved ? outputCorrectColor : outputWrongColor);
+                    bool target = Loader.GetOutputTarget(cell.outputTargetIndex);
+                    if (!hasValue)
+                    {
+                        view.background.color = target ? signalOnColor : signalOffColor;
+                    }
+                    else
+                    {
+                        view.background.color = (value == target) ? outputCorrectColor : outputWrongColor;
+                    }
                 }
                 else
                 {
