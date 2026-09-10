@@ -16,7 +16,7 @@ MonoBehaviour:
   effects:
   - groupID: Perfect
     clips:
-    - {fileID: 8300000, guid: ba3441801f470ba22b478452e8a80ef2, type: 3}
+    - {fileID: 8300000, guid: 74e5060cc7be4b2ca931a669cceb5156, type: 3}
     volume: 10
     maxSimultaneous: 3
     fadeIn: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
     maxDistance: 15
   - groupID: Good
     clips:
-    - {fileID: 8300000, guid: ba3441801f470ba22b478452e8a80ef2, type: 3}
+    - {fileID: 8300000, guid: 74e5060cc7be4b2ca931a669cceb5156, type: 3}
     volume: 10
     maxSimultaneous: 3
     fadeIn: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     maxDistance: 15
   - groupID: Ok
     clips:
-    - {fileID: 8300000, guid: ba3441801f470ba22b478452e8a80ef2, type: 3}
+    - {fileID: 8300000, guid: 74e5060cc7be4b2ca931a669cceb5156, type: 3}
     volume: 10
     maxSimultaneous: 3
     fadeIn: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     maxDistance: 0
   - groupID: Miss
     clips:
-    - {fileID: 8300000, guid: a1b7adafef4ae881db8085be5ea80bec, type: 3}
+    - {fileID: 8300000, guid: f464547a0d6bfc2c09d99f40d90a2dcc, type: 3}
     volume: 10
     maxSimultaneous: 3
     fadeIn: 0

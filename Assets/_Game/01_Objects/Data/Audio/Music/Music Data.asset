@@ -16,13 +16,19 @@ MonoBehaviour:
   - trackName: MainMenuMusic
     clip: {fileID: 8300000, guid: 8933d9a9bdcd01bc392642197d690124, type: 3}
     introClip: {fileID: 0}
-    volume: 5.82
-    fadeIn: 5
+    volume: 10.15
+    fadeIn: 0
     fadeOut: 0
   - trackName: TutorialRoomMusic
     clip: {fileID: 8300000, guid: 62bc20b13eb3c4cc197fbad78ce85ed9, type: 3}
     introClip: {fileID: 0}
-    volume: 6.64
+    volume: 20
+    fadeIn: 0
+    fadeOut: 0
+  - trackName: IntroCutsceneMusic
+    clip: {fileID: 8300000, guid: 1678b412475fbfaa18805e323461fb8e, type: 3}
+    introClip: {fileID: 0}
+    volume: 7.254948
     fadeIn: 0
     fadeOut: 0
   - trackName: MainGameplayMusic
@@ -40,31 +46,31 @@ MonoBehaviour:
   - trackName: SprintHubMusic
     clip: {fileID: 8300000, guid: b1effda78780959529d8cfc5c77d0205, type: 3}
     introClip: {fileID: 0}
-    volume: 4.57
+    volume: 0.05
     fadeIn: 0
     fadeOut: 0
   - trackName: ArtAtelierMusic
     clip: {fileID: 8300000, guid: 55002270e99bb8de8abe8da97315d91c, type: 3}
     introClip: {fileID: 0}
-    volume: 6.64
+    volume: 7.38
     fadeIn: 0
     fadeOut: 0
   - trackName: LogicCoreMusic
     clip: {fileID: 8300000, guid: ef086eff1c7a67b93bdc9da4d376d85e, type: 3}
     introClip: {fileID: 8300000, guid: 69a10c98f04b451cb9fd287cd003b767, type: 3}
-    volume: 6.64
+    volume: 0.55
     fadeIn: 0
     fadeOut: 0
   - trackName: SoundScapeMusic
     clip: {fileID: 8300000, guid: 708e9418b95ceddfa8aaa126dcc59485, type: 3}
     introClip: {fileID: 0}
-    volume: 6.64
+    volume: 9.69
     fadeIn: 5
     fadeOut: 1
   - trackName: IterativeRoomMusic
     clip: {fileID: 8300000, guid: ea0d031b3e3f3939aaebe47f1e6c1f2f, type: 3}
     introClip: {fileID: 8300000, guid: a31ad909fdc47e81d9e0fcc1e7c29dcc, type: 3}
-    volume: 6.64
+    volume: 11.08
     fadeIn: 0
     fadeOut: 0
   - trackName: RejectedChamberMusic
@@ -73,9 +79,21 @@ MonoBehaviour:
     volume: 6.64
     fadeIn: 0
     fadeOut: 0
-  - trackName: IntroCutsceneMusic
-    clip: {fileID: 8300000, guid: 1678b412475fbfaa18805e323461fb8e, type: 3}
+  - trackName: ChaseAmbient
+    clip: {fileID: 8300000, guid: 1bdc375c7123379cdbe7a4b4b3f70f73, type: 3}
     introClip: {fileID: 0}
-    volume: 6.64
+    volume: 10
+    fadeIn: 0
+    fadeOut: 0
+  - trackName: PublishingCorridorMusic
+    clip: {fileID: 8300000, guid: cf57534f309d72c56a45d14653705734, type: 3}
+    introClip: {fileID: 8300000, guid: acf5991517089b465aca16530c019cf6, type: 3}
+    volume: 20
+    fadeIn: 0
+    fadeOut: 0
+  - trackName: EndingCutsceneMusic
+    clip: {fileID: 8300000, guid: ebb94da951aaef453a80e9be3efe5b26, type: 3}
+    introClip: {fileID: 0}
+    volume: 0.5
     fadeIn: 0
     fadeOut: 0

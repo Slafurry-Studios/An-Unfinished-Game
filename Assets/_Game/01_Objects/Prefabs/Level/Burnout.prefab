@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4863902682456524301}
+  visualRoot: {fileID: 8404960867364345771}
   cautiousRange: 10
   aggroRange: 2.5
   cautiousDuration: 1.5

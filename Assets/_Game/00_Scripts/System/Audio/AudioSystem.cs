@@ -65,9 +65,9 @@ namespace Slafurry.System.Audio
         {
             musicPlayer.Initialize();
             // Retrieve saved volume
-            float masterVolume = PlayerPrefs.GetFloat(MasterKey, 1f);
-            float musicVolume = PlayerPrefs.GetFloat(MusicKey, 1f);
-            float sfxVolume = PlayerPrefs.GetFloat(SFXKey, 1f);
+            float masterVolume = PlayerPrefs.GetFloat(MasterKey, 5f);
+            float musicVolume = PlayerPrefs.GetFloat(MusicKey, 5f);
+            float sfxVolume = PlayerPrefs.GetFloat(SFXKey, 5f);
 
             // Apply volume to mixer
             UpdateMasterVolume(masterVolume);
@@ -117,7 +117,7 @@ namespace Slafurry.System.Audio
 
         public void UpdateMusicVolume(float linearVolume)
         {
-            linearVolume = Mathf.Clamp01(linearVolume);
+            linearVolume = Mathf.Clamp(linearVolume, 0f, 20f);
 
             audioMixer.SetFloat(
                 MusicKey,
@@ -132,7 +132,7 @@ namespace Slafurry.System.Audio
 
         public void UpdateSFXVolume(float linearVolume)
         {
-            linearVolume = Mathf.Clamp01(linearVolume);
+            linearVolume = Mathf.Clamp(linearVolume, 0f, 20f);
 
             audioMixer.SetFloat(
                 SFXKey,

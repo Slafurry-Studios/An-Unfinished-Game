@@ -527,6 +527,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3342133722336362804}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 325501432412664729}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1274044441067061667}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   invincibilityDuration: 1.5
   blinkInterval: 0.1
   spriteRenderer: {fileID: 6878744658898407997}
@@ -1440,7 +1476,7 @@ PrefabInstance:
     - target: {fileID: 3906524576989840677, guid: ed014d2ae52301554b4496be4ad7cf88,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 32767
+      value: 32766
       objectReference: {fileID: 0}
     - target: {fileID: 5300779581673165037, guid: ed014d2ae52301554b4496be4ad7cf88,
         type: 3}
@@ -1516,6 +1552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801278312255715363, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 32767
       objectReference: {fileID: 0}
     - target: {fileID: 7061290821339377534, guid: ed014d2ae52301554b4496be4ad7cf88,
         type: 3}

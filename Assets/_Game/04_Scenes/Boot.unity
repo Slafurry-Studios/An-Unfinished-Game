@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a565c8ffbeeb237cf845197f23474a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSceneName: MainMenu
+  targetSceneName: PublishingCorridor
   systemsToWaitFor:
   - {fileID: 3453229033653526675}
   - {fileID: 2197898990449848631}
@@ -371,6 +371,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 257421500112551206, guid: 6dd11de8d4967488cab22a6e69e968f9,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 32767
+      objectReference: {fileID: 0}
     - target: {fileID: 2232607441528115442, guid: 6dd11de8d4967488cab22a6e69e968f9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -485,6 +490,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Loading (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706567528135839805, guid: 6dd11de8d4967488cab22a6e69e968f9,
+        type: 3}
+      propertyPath: excludedScenes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706567528135839805, guid: 6dd11de8d4967488cab22a6e69e968f9,
+        type: 3}
+      propertyPath: excludedScenes.Array.data[5]
+      value: EndingCutscene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -925,12 +940,18 @@ MonoBehaviour:
     trackName: SprintHubMusic
   - sceneName: ArtAtelier
     trackName: ArtAtelierMusic
-  - sceneName: SoundScape
+  - sceneName: Soundscape
     trackName: SoundScapeMusic
   - sceneName: IterativeRoom
     trackName: IterativeRoomMusic
   - sceneName: RejectedChamber
     trackName: RejectedChamberMusic
+  - sceneName: PublishingCorridor
+    trackName: PublishingCorridorMusic
+  - sceneName: EndingCutscene
+    trackName: EndingCutsceneMusic
+  - sceneName: LogicCore
+    trackName: LogicCoreMusic
 --- !u!114 &806636979853351446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,7 +1054,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0

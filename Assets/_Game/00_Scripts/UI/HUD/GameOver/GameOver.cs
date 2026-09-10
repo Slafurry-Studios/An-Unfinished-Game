@@ -31,7 +31,6 @@ public class GameOver : MonoBehaviour
     public void Retry()
     {
         HideGameOver();
-        ObjectiveManager.Instance.ResetSceneObjectives(SceneManager.GetActiveScene().name);
         SceneSystem.Load(SceneManager.GetActiveScene().name);
     }
 
