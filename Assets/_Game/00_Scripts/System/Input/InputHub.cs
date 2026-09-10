@@ -67,7 +67,10 @@ namespace Slafurry.System.InputHub
         public bool IsInputEnabled { get; private set; } = true;
 
         public override IEnumerator Initialize() { yield return null; }
-        public override void PostInitialize() { }
+        public override void PostInitialize()
+        {
+            SceneLoader.Instance.OnSceneLoadCompleted += _ => EnableInput();
+        }
 
         protected override void OnSingletonAwake()
         {
