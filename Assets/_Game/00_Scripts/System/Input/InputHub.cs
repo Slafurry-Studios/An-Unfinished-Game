@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Slafurry.Core.Abstract;
+using Slafurry.System.Scene;
 
 namespace Slafurry.System.InputHub
 {
