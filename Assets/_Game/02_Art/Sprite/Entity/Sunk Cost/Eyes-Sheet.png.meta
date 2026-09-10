@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: febeee9aa1cce684cb853d7ded9c621b
+guid: 053e9cd2ac6cd59c5a5bc61592d63065
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_0
+      name: Eyes-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 800
+        width: 200
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aace9678d332aae58fc9402db40089c
-      internalID: -681534908
+      spriteID: 563fda93aeb20689ab9ca4a551cef58c
+      internalID: -428003100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_1
+      name: Eyes-Sheet_1
       rect:
         serializedVersion: 2
-        x: 800
+        x: 200
         y: 0
-        width: 800
-        height: 800
+        width: 200
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ec1bc945fadc02b69a135cdd884f351
-      internalID: 474627309
+      spriteID: 0a81f3e96ff499706a7549b054d2c9c3
+      internalID: 1519493725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_2
+      name: Eyes-Sheet_2
       rect:
         serializedVersion: 2
-        x: 1600
+        x: 400
         y: 0
-        width: 800
-        height: 800
+        width: 200
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,71 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e242040eebed00d39ad8c497239c5b7
-      internalID: 506260827
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_3
-      rect:
-        serializedVersion: 2
-        x: 2400
-        y: 0
-        width: 800
-        height: 800
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa38f5d617742b2d6b7087005f9622f9
-      internalID: 355567705
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_4
-      rect:
-        serializedVersion: 2
-        x: 3200
-        y: 0
-        width: 800
-        height: 800
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 543c1fe0524883e43a97bbe80c4ca520
-      internalID: 219377739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sunk Tentacles (Holding)(Long take)_5
-      rect:
-        serializedVersion: 2
-        x: 4000
-        y: 0
-        width: 800
-        height: 800
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 524c1328ae162a80cb3758d5800cd298
-      internalID: -644100321
+      spriteID: e68c00a572adb2793808dae36547683e
+      internalID: -1103999056
       vertices: []
       indices: 
       edges: []
@@ -259,12 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sunk Tentacles (Holding)(Long take)_0: -681534908
-      Sunk Tentacles (Holding)(Long take)_1: 474627309
-      Sunk Tentacles (Holding)(Long take)_2: 506260827
-      Sunk Tentacles (Holding)(Long take)_3: 355567705
-      Sunk Tentacles (Holding)(Long take)_4: 219377739
-      Sunk Tentacles (Holding)(Long take)_5: -644100321
+      Eyes-Sheet_0: -428003100
+      Eyes-Sheet_1: 1519493725
+      Eyes-Sheet_2: -1103999056
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

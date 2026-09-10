@@ -79,3 +79,21 @@ MonoBehaviour:
     volume: 6.64
     fadeIn: 0
     fadeOut: 0
+  - trackName: ChaseAmbient
+    clip: {fileID: 8300000, guid: 1bdc375c7123379cdbe7a4b4b3f70f73, type: 3}
+    introClip: {fileID: 0}
+    volume: 10
+    fadeIn: 0
+    fadeOut: 0
+  - trackName: PublishingCorridorMusic
+    clip: {fileID: 8300000, guid: cf57534f309d72c56a45d14653705734, type: 3}
+    introClip: {fileID: 8300000, guid: acf5991517089b465aca16530c019cf6, type: 3}
+    volume: 10
+    fadeIn: 0
+    fadeOut: 0
+  - trackName: EndingCutsceneMusic
+    clip: {fileID: 8300000, guid: ad7d2b4301c2ef3179079072afb3e2a6, type: 3}
+    introClip: {fileID: 0}
+    volume: 10
+    fadeIn: 0
+    fadeOut: 0

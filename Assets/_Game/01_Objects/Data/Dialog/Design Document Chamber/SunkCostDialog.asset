@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29e55426216fb29eab3098b34141b4d7, type: 3}
-  m_Name: SprintHub_Arrival_Perfectionism
+  m_Name: SunkCostDialog
   m_EditorClassIdentifier: 
   dialogs:
-  - name: Perfectionism
-    dialog: Good. You made it.
-  - name: Perfectionism
-    dialog: Now go back
+  - name: Sunk Cost
+    dialog: YOU HAVE SPENT YEARS ON THIS!
+  - name: Sunk Cost
+    dialog: YOU CANT JUST THROW IT ALL AWAY!
