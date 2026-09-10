@@ -1478,6 +1478,26 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 32766
       objectReference: {fileID: 0}
+    - target: {fileID: 4789453070470936598, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3446120588329273837}
+    - target: {fileID: 4789453070470936598, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retry
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789453070470936598, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseHUD, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789453070470936598, guid: ed014d2ae52301554b4496be4ad7cf88,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5300779581673165037, guid: ed014d2ae52301554b4496be4ad7cf88,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
