@@ -51,7 +51,7 @@ namespace Slafurry.System.Audio
                 PlayMusic(trackToPlay);
         }
 
-        public void PlayMusic(string trackName, float fadeDuration = -1f)
+        public void PlayMusic(string trackName, float fadeDuration = 0f)
         {
             if (musicData == null || musicSource == null) return;
 
@@ -63,23 +63,60 @@ namespace Slafurry.System.Audio
             _currentTrack = track;
             _hasTrack = true;
 
-            float fadeIn = fadeDuration > 0f ? fadeDuration : track.FadeIn;
-
-            if (track.introClip != null)
-                _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeIn));
+            if (fadeDuration > 0f)
+            {
+                if (track.introClip != null)
+                    _currentFadeCoroutine = StartCoroutine(PlayIntroThenLoop(track, fadeDuration));
+                else
+                    _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, true, fadeDuration));
+            }
             else
-                _currentFadeCoroutine = StartCoroutine(AnimateMusicCrossfade(track.clip, track.volume, true, fadeIn));
+            {
+                PlayInstant(track);
+            }
         }
 
-        public void StopMusic(float fadeDuration = -1f)
+        private void PlayInstant(MusicTrack track)
+        {
+            musicSource.Stop();
+            musicSource.volume = track.volume;
+
+            if (track.introClip != null)
+            {
+                musicSource.clip = track.introClip;
+                musicSource.loop = false;
+                musicSource.Play();
+
+                _introCoroutine = StartCoroutine(WaitIntroThenLoopInstant(track));
+            }
+            else
+            {
+                musicSource.clip = track.clip;
+                musicSource.loop = true;
+                musicSource.Play();
+            }
+        }
+
+        private IEnumerator WaitIntroThenLoopInstant(MusicTrack track)
+        {
+            while (musicSource.isPlaying)
+                yield return null;
+
+            musicSource.clip = track.clip;
+            musicSource.loop = true;
+            musicSource.volume = track.volume;
+            musicSource.Play();
+
+            _introCoroutine = null;
+        }
+
+        public void StopMusic(float fadeDuration = 0f)
         {
             if (musicSource == null) return;
 
             StopAllPlayback();
 
-            float fadeOut = fadeDuration > 0f ? fadeDuration : (_hasTrack ? _currentTrack.FadeOut : 1f);
-
-            if (fadeOut <= 0f)
+            if (fadeDuration <= 0f)
             {
                 musicSource.Stop();
                 musicSource.clip = null;
@@ -88,7 +125,7 @@ namespace Slafurry.System.Audio
                 return;
             }
 
-            _currentFadeCoroutine = StartCoroutine(FadeOutAndStop(fadeOut));
+            _currentFadeCoroutine = StartCoroutine(FadeOutAndStop(fadeDuration));
         }
 
         private void StopAllPlayback()
@@ -110,18 +147,9 @@ namespace Slafurry.System.Audio
 
         private IEnumerator PlayIntroThenLoop(MusicTrack track, float fadeDuration)
         {
-            float startVolume = musicSource.volume;
-            float elapsed = 0f;
-            while (elapsed < fadeDuration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
-                musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
-                yield return null;
-            }
-
             musicSource.clip = track.introClip;
             musicSource.loop = false;
+            musicSource.volume = track.volume;
             musicSource.Play();
 
             while (musicSource.isPlaying)
@@ -134,21 +162,12 @@ namespace Slafurry.System.Audio
 
         private IEnumerator AnimateMusicCrossfade(AudioClip nextTrack, float targetVolume, bool loop, float fadeDuration = 0.5f)
         {
-            float startVolume = musicSource.volume;
-            float elapsed = 0f;
-            while (elapsed < fadeDuration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                float t = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(elapsed / fadeDuration));
-                musicSource.volume = Mathf.Lerp(startVolume, 0f, t);
-                yield return null;
-            }
-
             musicSource.clip = nextTrack;
             musicSource.loop = loop;
+            musicSource.volume = 0f;
             musicSource.Play();
 
-            elapsed = 0f;
+            float elapsed = 0f;
             while (elapsed < fadeDuration)
             {
                 elapsed += Time.unscaledDeltaTime;
@@ -178,7 +197,7 @@ namespace Slafurry.System.Audio
 
             musicSource.Stop();
             musicSource.clip = null;
-            musicSource.volume = startVolume;
+            musicSource.volume = 0f;
 
             _hasTrack = false;
             _currentFadeCoroutine = null;

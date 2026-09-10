@@ -50,7 +50,7 @@ MonoBehaviour:
   - groupID: typing
     clips:
     - {fileID: 8300000, guid: d1293c638fb857b19b165d90449b2c9b, type: 3}
-    volume: 1.64
+    volume: 0.06
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   - groupID: Mouse-Click
     clips:
     - {fileID: 8300000, guid: 98e843a7c0ecf807c9c09cde9b82d4eb, type: 3}
-    volume: 1.64
+    volume: 0.43
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   - groupID: Keyboard-Click
     clips:
     - {fileID: 8300000, guid: 98dd4438b6e8872b0b9b393b253ec49a, type: 3}
-    volume: 1.64
+    volume: 0.12
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   - groupID: Paper_Up
     clips:
     - {fileID: 8300000, guid: afaacc89638b0d20fa7975531043a3d0, type: 3}
-    volume: 1.64
+    volume: 0.8
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   - groupID: Paper_Rip
     clips:
     - {fileID: 8300000, guid: 624dc50f313dac77aaedfaef28769e22, type: 3}
-    volume: 1.64
+    volume: 1.02
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   - groupID: PC_Sound
     clips:
     - {fileID: 8300000, guid: 76bc14c02571c3a7c9f7c44543054da9, type: 3}
-    volume: 1.64
+    volume: 0.71
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0

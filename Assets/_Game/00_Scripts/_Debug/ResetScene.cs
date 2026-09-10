@@ -9,10 +9,10 @@ public class ResetScene : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(resetKey))
-        {
-            ObjectiveManager.Instance.ResetSceneObjectives(SceneManager.GetActiveScene().name);
-            SceneSystem.Load(SceneManager.GetActiveScene().name);
-        }
+        // if (Input.GetKeyDown(resetKey))
+        // {
+        //     ObjectiveManager.Instance.ResetSceneObjectives(SceneManager.GetActiveScene().name);
+        //     SceneSystem.Load(SceneManager.GetActiveScene().name);
+        // }
     }
 }
