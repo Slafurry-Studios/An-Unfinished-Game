@@ -1,5 +1,7 @@
 using Slafurry.System.Pause;
 using UnityEngine;
+using Slafurry.System.Scene;
+using UnityEngine.SceneManagement;
 
 public class PauseHUD : MonoBehaviour
 {
@@ -11,6 +13,12 @@ public class PauseHUD : MonoBehaviour
         if (pauseMenu == null)
             Debug.LogWarning("Pause menu is not assigned in the inspector.");
     }
+
+    public void Retry()
+    {
+        SceneSystem.Load(SceneManager.GetActiveScene().name);
+    }
+
 
     public void ShowPauseMenu()
     {
