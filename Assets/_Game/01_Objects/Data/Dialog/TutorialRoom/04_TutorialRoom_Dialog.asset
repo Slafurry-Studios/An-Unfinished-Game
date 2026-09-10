@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: They never saw what you saw, Founder. They lacked the vision.
+    dialog: They never saw it the way you do. That's on them.
   - name: Perfectionism
-    dialog: That is why they failed. And why we will not.
+    dialog: Which is exactly why we're still standing.

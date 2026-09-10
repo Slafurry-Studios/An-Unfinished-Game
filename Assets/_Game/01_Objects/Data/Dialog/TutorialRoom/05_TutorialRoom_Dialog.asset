@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Others would have quit by now. But you are not others.
+    dialog: Most people would've quit by now.
   - name: Perfectionism
-    dialog: I am here, Founder. I will never let you settle for less than extraordinary.
+    dialog: Good thing you're not most people
+  - name: Perfectionism
+    dialog: You are special
+  - name: Perfectionism
+    dialog: Because we aiming for perfection, unlike others

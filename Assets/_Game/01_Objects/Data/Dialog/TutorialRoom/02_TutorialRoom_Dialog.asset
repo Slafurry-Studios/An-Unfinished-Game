@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Sloppy. That landing was... acceptable. Nothing more.
+    dialog: That landing was fine. Fine isn't what we're aiming for.
   - name: Perfectionism
-    dialog: In a masterwork, there is no room for 'almost'. Again.
+    dialog: Again. Properly this time.

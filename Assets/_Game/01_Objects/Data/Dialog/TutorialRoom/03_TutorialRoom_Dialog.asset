@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Better. Do you feel it? The precision?
+    dialog: Better. Feel that?
   - name: Perfectionism
-    dialog: Every pixel. Every frame. Every decision must serve the vision.
+    dialog: Every pixel. Every frame. Nothing here happens by accident.
   - name: Perfectionism
-    dialog: Together, we will build something they cannot ignore.
+    dialog: Keep that up and they won't be able to look away.
