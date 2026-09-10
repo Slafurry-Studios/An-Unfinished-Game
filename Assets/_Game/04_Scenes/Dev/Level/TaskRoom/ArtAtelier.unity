@@ -5496,6 +5496,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1030552001}
     m_Modifications:
+    - target: {fileID: 58745375602150267, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e6f558387bfbe9fa5810544dde978a30,
+        type: 3}
+    - target: {fileID: 58745375602150267, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 58745375602150267, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 58745375602150267, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 296654718699812199, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5531,6 +5552,60 @@ PrefabInstance:
       propertyPath: m_Name
       value: PuzzleManager_3
       objectReference: {fileID: 0}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: -531018675, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 1940299946, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: -809455053, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: -2069582223, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 1833576667, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: -1402531023, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: -1492022302, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[7]
+      value: 
+      objectReference: {fileID: -1472536880, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
+    - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
+        type: 3}
+      propertyPath: pieceSprites.Array.data[8]
+      value: 
+      objectReference: {fileID: 425934596, guid: 00c66e2d5ed4ccc309b2de382a97bc99,
+        type: 3}
     - target: {fileID: 914196984880896072, guid: d3937d51c2bef88c091ae024fe76cb30,
         type: 3}
       propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size

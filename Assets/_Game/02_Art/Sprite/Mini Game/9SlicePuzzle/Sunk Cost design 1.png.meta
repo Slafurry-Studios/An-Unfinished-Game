@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 18d3fb4e40d9bba839986f012e445f35
+guid: e6f558387bfbe9fa5810544dde978a30
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -123,76 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Burnout Design_0
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 480
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4997b09a7673b5e69386b1d6de94e55
-      internalID: -1126689221
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Burnout Design_1
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 480
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a83c7c2cfb8cfd89ea6abdbc794d150f
-      internalID: -382541988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Burnout Design_2
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 480
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 482867c05892a8a6cac127c79da89f20
-      internalID: -816992956
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Burnout Design_3
+      name: Sunk Cost design_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
-        width: 160
-        height: 160
+        y: 533.3334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aa432ab06a9ed18b8165ad64a184c3a
-      internalID: 979678571
+      spriteID: 1eac07a045af3c8dba70f3cfbb5e15a9
+      internalID: -531018675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_4
+      name: Sunk Cost design_1
       rect:
         serializedVersion: 2
-        x: 160
-        y: 320
-        width: 160
-        height: 160
+        x: 266
+        y: 533.3334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 639a2130eae3a667190a58034cecbc7b
-      internalID: 557681673
+      spriteID: 2d31af6130a5c21d29d1a25d1f64340c
+      internalID: 1940299946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_5
+      name: Sunk Cost design_2
       rect:
         serializedVersion: 2
-        x: 320
-        y: 320
-        width: 160
-        height: 160
+        x: 532
+        y: 533.3334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,62 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21a960122df4eb60cb4e02b12b4b472f
-      internalID: -1223570522
+      spriteID: 8a9b1e605370ea5bf985fe03df4e14ae
+      internalID: -809455053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_6
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 320
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e677b7ef1573831794789f02f08e185
-      internalID: 1212239562
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Burnout Design_7
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 320
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34dd244095b716c0e8a8190ce7b942c6
-      internalID: -652158346
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Burnout Design_8
+      name: Sunk Cost design_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
-        width: 160
-        height: 160
+        y: 267.33334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7bfe9e754cf229759ccba535be5c1d7
-      internalID: 1138291285
+      spriteID: 4ec2661e25804342ba5875e6092e4db8
+      internalID: -2069582223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_9
+      name: Sunk Cost design_4
       rect:
         serializedVersion: 2
-        x: 160
-        y: 160
-        width: 160
-        height: 160
+        x: 266
+        y: 267.33334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17f00d4fa750e7a9489bed1fc38b8ae6
-      internalID: -661385553
+      spriteID: 20ef50b58ab17ffd0a7af5d097403b12
+      internalID: 1833576667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_10
+      name: Sunk Cost design_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 160
-        width: 160
-        height: 160
+        x: 532
+        y: 267.33334
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f19977a1efa18407aa9985475c6aa1f5
-      internalID: -1912020094
+      spriteID: 3ab123556f06f723eb7a9e2c6d3e0cb7
+      internalID: -1402531023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_11
+      name: Sunk Cost design_6
       rect:
         serializedVersion: 2
-        x: 480
-        y: 160
-        width: 160
-        height: 160
+        x: 0
+        y: 1.3333435
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8537309fc691ca9cab85d8970c5fb23f
-      internalID: -1394580890
+      spriteID: e000aeeb5ffbb5777b63408f2f4a6a48
+      internalID: -1492022302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burnout Design_12
+      name: Sunk Cost design_7
       rect:
         serializedVersion: 2
-        x: 640
-        y: 160
-        width: 160
-        height: 160
+        x: 266
+        y: 1.3333435
+        width: 266.66666
+        height: 266.66666
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,8 +284,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e41c051117dde98b09a05cbad1f6ce70
-      internalID: -835481902
+      spriteID: 81e22aa6ea09ca0c281b2c91cb702f8a
+      internalID: -1472536880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sunk Cost design_8
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 1.3333435
+        width: 266.66666
+        height: 266.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e2b53d17df6d778aa129b714d35634
+      internalID: 425934596
       vertices: []
       indices: 
       edges: []
@@ -406,19 +322,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Burnout Design_0: -1126689221
-      Burnout Design_1: -382541988
-      Burnout Design_10: -1912020094
-      Burnout Design_11: -1394580890
-      Burnout Design_12: -835481902
-      Burnout Design_2: -816992956
-      Burnout Design_3: 979678571
-      Burnout Design_4: 557681673
-      Burnout Design_5: -1223570522
-      Burnout Design_6: 1212239562
-      Burnout Design_7: -652158346
-      Burnout Design_8: 1138291285
-      Burnout Design_9: -661385553
+      Sunk Cost design_0: -531018675
+      Sunk Cost design_1: 1940299946
+      Sunk Cost design_2: -809455053
+      Sunk Cost design_3: -2069582223
+      Sunk Cost design_4: 1833576667
+      Sunk Cost design_5: -1402531023
+      Sunk Cost design_6: -1492022302
+      Sunk Cost design_7: -1472536880
+      Sunk Cost design_8: 425934596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
