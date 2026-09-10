@@ -165,6 +165,23 @@ namespace Slafurry.Player
 
         private void HandleMoveChanged(Vector2 input)
         {
+            // Read movement keys directly from keyboard instead of relying
+            // on the 2D Vector composite output. The composite includes S as
+            // "down", and when S is pressed alongside A/D, the composite may
+            // normalize the vector — reducing the horizontal component and
+            // causing an unintended speed drop during crouch.
+            var kb = Keyboard.current;
+            if (kb != null)
+            {
+                float h = 0f;
+                float v = 0f;
+                if (kb.aKey.isPressed) h -= 1f;
+                if (kb.dKey.isPressed) h += 1f;
+                if (kb.wKey.isPressed) v += 1f;
+                if (kb.sKey.isPressed) v -= 1f;
+                input = new Vector2(h, v);
+            }
+
             // Rotate the input vector so the correct axis is used for
             // movement regardless of which way gravity points.
             float angle = Mathf.Atan2(gravityDirection.y, gravityDirection.x) * Mathf.Rad2Deg + 90f;

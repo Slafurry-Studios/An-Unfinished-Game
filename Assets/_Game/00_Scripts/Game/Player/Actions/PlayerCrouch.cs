@@ -36,6 +36,12 @@ namespace Slafurry.Player
             if (!groundCheck.IsGrounded)
                 return; // freeze current crouch state while airborne
 
+            // When forced to crouch by a ceiling, ignore crouch input
+            // entirely — the player can't stand up anyway, and pressing
+            // the crouch key in this state caused an unintended speed drop.
+            if (IsCrouching && headCheck.IsBlocked)
+                return;
+
             bool crouchKey = movement.IsGravityCrouchKeyHeld();
             bool downArrow = Keyboard.current != null && Keyboard.current.downArrowKey.isPressed;
             bool wantsToCrouch = crouchKey || downArrow;

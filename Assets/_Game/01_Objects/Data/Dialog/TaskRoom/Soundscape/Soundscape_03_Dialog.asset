@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: This starting to sound right.
+    dialog: How miraculous can a song be.
   - name: Perfectionism
-    dialog: Every perfect hit gets us closer to what we imagined.
+    dialog: It speaks without speaking.
   - name: Perfectionism
-    dialog: Mediocre would've lost to us
+    dialog: It shows without showing.

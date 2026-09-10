@@ -28,7 +28,7 @@ MonoBehaviour:
   - groupID: Correct
     clips:
     - {fileID: 8300000, guid: 7bad5196f3b9dc2ef8f12596f55c7a7c, type: 3}
-    volume: 0.55
+    volume: 0.17
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0

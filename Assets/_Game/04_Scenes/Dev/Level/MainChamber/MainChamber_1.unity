@@ -4702,7 +4702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2465cf1694ecceffb9339e659cb9af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: (E) Talk to Perfectionism
+  prompt: Talk to Perfectionism
   onInteract:
     m_PersistentCalls:
       m_Calls:
@@ -9870,6 +9870,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  playOnEnable: 0
 --- !u!1 &1522710914
 GameObject:
   m_ObjectHideFlags: 0
