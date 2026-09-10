@@ -17,7 +17,7 @@ MonoBehaviour:
   - groupID: Jumpscare
     clips:
     - {fileID: 8300000, guid: ebb94da951aaef453a80e9be3efe5b26, type: 3}
-    volume: 0.005
+    volume: 0.03
     maxSimultaneous: 10
     fadeIn: 0
     fadeOut: 0

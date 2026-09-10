@@ -46,7 +46,7 @@ MonoBehaviour:
   - trackName: SprintHubMusic
     clip: {fileID: 8300000, guid: b1effda78780959529d8cfc5c77d0205, type: 3}
     introClip: {fileID: 0}
-    volume: 4.57
+    volume: 0.05
     fadeIn: 0
     fadeOut: 0
   - trackName: ArtAtelierMusic
@@ -88,12 +88,12 @@ MonoBehaviour:
   - trackName: PublishingCorridorMusic
     clip: {fileID: 8300000, guid: cf57534f309d72c56a45d14653705734, type: 3}
     introClip: {fileID: 8300000, guid: acf5991517089b465aca16530c019cf6, type: 3}
-    volume: 17.94
+    volume: 20
     fadeIn: 0
     fadeOut: 0
   - trackName: EndingCutsceneMusic
-    clip: {fileID: 8300000, guid: ad7d2b4301c2ef3179079072afb3e2a6, type: 3}
+    clip: {fileID: 8300000, guid: ebb94da951aaef453a80e9be3efe5b26, type: 3}
     introClip: {fileID: 0}
-    volume: 12.91
+    volume: 0.5
     fadeIn: 0
     fadeOut: 0

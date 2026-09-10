@@ -27,8 +27,8 @@ MonoBehaviour:
     maxDistance: 0
   - groupID: Correct
     clips:
-    - {fileID: 8300000, guid: 197b1809d1c9c73539758c2e6741e52b, type: 3}
-    volume: 5.75
+    - {fileID: 8300000, guid: 7bad5196f3b9dc2ef8f12596f55c7a7c, type: 3}
+    volume: 0.55
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
@@ -39,7 +39,7 @@ MonoBehaviour:
   - groupID: Win
     clips:
     - {fileID: 8300000, guid: ae46399d28c9f34b283aca134b2d9917, type: 3}
-    volume: 10
+    volume: 0.37
     maxSimultaneous: 3
     fadeIn: 0
     fadeOut: 0
