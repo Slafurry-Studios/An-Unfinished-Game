@@ -618,7 +618,7 @@ PrefabInstance:
     - target: {fileID: 2462631147583618250, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -925.71
+      value: -966.21
       objectReference: {fileID: 0}
     - target: {fileID: 4324006248363224310, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
@@ -688,11 +688,15 @@ PrefabInstance:
         team that built this game the same way the Founder built his \u2014 one system,
         one sprite, one sleepless deploy at a time. Hand-drawn, two-color, and unapologetically
         rough by design, because a story about imperfection deserved to look the
-        part.\n\n<size=120%><b>THE POINT</b></size>\n\nThis isn't a game about never
-        giving up.\n\nIt's about learning that sometimes, <b>letting go</b> is the
-        bravest thing you can do \u2014 and that a project finished at 98% still
-        deserves to be called <i>done</i>.\n\n<i>Made with ambition, bugs, questionable
-        decisions, and probably too much coffee.</i>"
+        part.\n\n<size=120%><b>THE TEAM</b></size>\n\n<b>Muhammad Zaini</b>\nProject
+        Manager, Unity Programmer, Game Designer\n\n<b>Muhamad Rizal</b>\nLevel Designer,
+        Unity Programmer\n\n<b>Muhammad Kahil Deiryl Kiefe Moesliem</b>\n2D Artist,
+        UI Designer\n\n<b>Muhammad Raifan Syifa Dien</b>\nAudio Engineer\n\n<b>Niken
+        Qinata Rahayu</b>\nNarrative Designer\n\n<size=120%><b>THE POINT</b></size>\n\nThis
+        isn't a game about never giving up.\n\nIt's about learning that sometimes,
+        <b>letting go</b> is the bravest thing you can do \u2014 and that a project
+        finished at 98% still deserves to be called <i>done</i>.\n\n<i>Made with
+        ambition, bugs, questionable decisions, and probably too much coffee.</i>"
       objectReference: {fileID: 0}
     - target: {fileID: 7750134448335195503, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
@@ -707,7 +711,7 @@ PrefabInstance:
     - target: {fileID: 7861624202842476151, guid: a176fd223310f78f58eb2e4d53482a8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000037479705
+      value: 0.000012306406
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
