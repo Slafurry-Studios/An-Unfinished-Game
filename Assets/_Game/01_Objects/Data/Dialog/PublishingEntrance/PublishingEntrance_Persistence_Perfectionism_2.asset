@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Do you hear me? We can still fix this. We can still make it perfect.
+    dialog: Are you even listening? We can still fix this. Still make it right.
   - name: Perfectionism
     dialog: ...
   - name: Perfectionism
@@ -23,3 +23,7 @@ MonoBehaviour:
     dialog: I will be here when you realize the truth.
   - name: Perfectionism
     dialog: That without me... you are nothing.
+  - name: Perfectionism
+    dialog: And i know you can't escape this project
+  - name: Perfectionism
+    dialog: Soon. You go back to me

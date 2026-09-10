@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The first note finds its place. A foundation of sound.
+    dialog: That's the spirit
   - name: Perfectionism
-    dialog: Rhythm is the heartbeat of experience. You feel it now.
+    dialog: We gonna control our player emotion with this
   - name: Perfectionism
-    dialog: Keep the tempo. Do not let it slip.
+    dialog: To the point they always remembers us.

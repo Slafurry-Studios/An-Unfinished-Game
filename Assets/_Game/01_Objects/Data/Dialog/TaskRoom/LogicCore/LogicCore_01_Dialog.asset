@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The first circuit holds. A clean connection.
+    dialog: First circuit's holding. Clean connection.
   - name: Perfectionism
-    dialog: Logic is the skeleton of creation. Without it, everything collapses.
+    dialog: Logic is the skeleton here. Without it, everything falls apart.
   - name: Perfectionism
-    dialog: You are building something that will not break. Continue.
+    dialog: You're building something that won't break. Keep going.
+  - name: Perfectionism
+    dialog: Show them that we all perfect in every domain

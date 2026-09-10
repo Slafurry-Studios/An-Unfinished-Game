@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The complexity grows, yet the logic remains pure.
+    dialog: It's getting complicated, but the logic's still clean.
   - name: Perfectionism
-    dialog: A lesser mind would have cut corners. You did not.
+    dialog: Cut corners only for the weak.
   - name: Perfectionism
-    dialog: The foundation strengthens with every solution.
+    dialog: For us, detail is everything
+  - name: Perfectionism
+    dialog: Every fix makes the foundation stronger.

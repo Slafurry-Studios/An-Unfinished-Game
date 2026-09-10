@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The system hums now. Every input, every output... synchronized.
+    dialog: The system's running smooth now. Everything's in sync.
   - name: Perfectionism
-    dialog: You are not just fixing bugs. You are engineering certainty.
+    dialog: The time they'll see this
   - name: Perfectionism
-    dialog: They will call it polished. We will call it inevitable.
+    dialog: It would be inevitable
+  - name: Perfectionism
+    dialog: But we show them when its perfect

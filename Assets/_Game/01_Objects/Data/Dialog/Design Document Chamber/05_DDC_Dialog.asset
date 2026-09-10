@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Rejected. A failure.
+    dialog: Rejected. This doesn't work. A failure
   - name: Perfectionism
-    dialog: ...But in failure, I see what was missing.
+    dialog: But now I can see exactly what's wrong with it.
   - name: Perfectionism
-    dialog: The logic beneath the surface. Flawed. Invisible to most, but not to us.
+    dialog: The logic underneath is broken. Most people wouldn't even notice. We
+      do.
   - name: Perfectionism
     dialog: We do not ignore what others overlook.
   - name: Perfectionism
     dialog: We will fix it. We will make this game undeniable.
+  - name: Perfectionism
+    dialog: PERFECT, as it is.

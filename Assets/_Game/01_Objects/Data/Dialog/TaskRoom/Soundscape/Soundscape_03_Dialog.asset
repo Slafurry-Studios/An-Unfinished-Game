@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The harmony deepens. The vision resonates.
+    dialog: This starting to sound right.
   - name: Perfectionism
-    dialog: Every perfect hit was a step closer to the sound we imagined.
+    dialog: Every perfect hit gets us closer to what we imagined.
   - name: Perfectionism
-    dialog: Mediocrity would have settled for less. We do not.
+    dialog: Mediocre would've lost to us

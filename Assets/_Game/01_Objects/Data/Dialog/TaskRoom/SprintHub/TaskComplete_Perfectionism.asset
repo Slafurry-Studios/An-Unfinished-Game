@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Every task complete. Every detail accounted for. We have done it,
-      Founder.
+    dialog: Every task's done. Every detail accounted for. We actually did it.
   - name: Perfectionism
-    dialog: But before we publish... there is something we need from the Sprint
+    dialog: But before we publish, there's one more thing we need from the Sprint
       Hub.
   - name: Perfectionism
-    dialog: A final asset. One that will make the difference between good and
-      unforgettable.
+    dialog: One last asset. The kind that separates "good" from "unforgettable."
   - name: Perfectionism
-    dialog: Go there. Retrieve it. I will guide you.
+    dialog: Go get it. I'll guide you there.

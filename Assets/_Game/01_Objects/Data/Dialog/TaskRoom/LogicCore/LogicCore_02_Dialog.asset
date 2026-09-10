@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The gate opens. The path forward is clear.
+    dialog: Gate's open. Path's clear.
   - name: Perfectionism
-    dialog: Every condition met. Every branch resolved.
-  - name: Perfectionism
-    dialog: This is what they will never see... but always feel.
+    dialog: They'll never see this part. But they'll feel it.

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: "Another layer of the vision, realized."
+    dialog: Another layer done.
   - name: Perfectionism
-    dialog: "You are learning to see what others cannot. Good."
+    dialog: You're starting to see what most people miss. Good.
   - name: Perfectionism
-    dialog: "The masterpiece is not built in a single brushstroke. Remember that."
+    dialog: Nobody builds a masterpiece in one stroke. Keep going.
+  - name: Perfectionism
+    dialog: We'll make this perfect.

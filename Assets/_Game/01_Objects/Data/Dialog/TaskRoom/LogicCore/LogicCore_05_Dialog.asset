@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The logic core is complete. No flaw. No weakness.
+    dialog: Logic's core done
   - name: Perfectionism
-    dialog: Every gate, every connection... flawless. Exactly as we designed it.
+    dialog: Everything goes as we planned
   - name: Perfectionism
-    dialog: The game is nearly whole, Founder. Let us see it through to the end.
+    dialog: Bugs exterminated, the success is guaraanted
+  - name: Perfectionism
+    dialog: The game's almost whole. Let's add more detail after this.
