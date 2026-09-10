@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The soundtrack breathes now. It lives.
+    dialog: The soundtrack's alive now.
   - name: Perfectionism
-    dialog: You are learning that precision and emotion are not opposites.
+    dialog: Turns out precision and emotion aren't opposites.
   - name: Perfectionism
     dialog: They are partners. Like us.
+  - name: Perfectionism
+    dialog: Creating a perfect harmony

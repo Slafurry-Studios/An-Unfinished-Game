@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Do not touch that—!
+    dialog: DONT TOUCH THAT!!!
   - name: Burnout
     dialog: ...tired...
   - name: Burnout
@@ -22,8 +22,10 @@ MonoBehaviour:
   - name: Burnout
     dialog: just... rest...
   - name: Perfectionism
-    dialog: Founder, listen to me. I know the weight is heavy.
+    dialog: I know it's heavy, Founder.
   - name: Perfectionism
-    dialog: But we cannot stop. Not now. Not when the shape is finally emerging.
+    dialog: But we don't stop. Not now. Not when it's finally taking shape.
   - name: Perfectionism
-    dialog: Push through. The vision demands it. And so do I.
+    dialog: Push through. The work needs it. So do I.
+  - name: Perfectionism
+    dialog: If we give up now, we gonna fall into mediocrity

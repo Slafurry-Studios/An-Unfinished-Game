@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The melody strengthens. Each beat, a pulse of intention.
+    dialog: The melody's getting stronger. Every beat means something.
   - name: Perfectionism
-    dialog: You are not just playing notes. You are composing meaning.
+    dialog: The effect would be inevitable
   - name: Perfectionism
-    dialog: The silence between notes matters as much as the notes themselves.
+    dialog: We still far from that point, but we will get there

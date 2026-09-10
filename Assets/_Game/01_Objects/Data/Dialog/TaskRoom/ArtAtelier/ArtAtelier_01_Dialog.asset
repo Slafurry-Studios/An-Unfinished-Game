@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: "The first canvas takes form. Raw, but promising."
+    dialog: The first canvas is taking shape. Rough, but there's something there.
   - name: Perfectionism
-    dialog: "Every stroke was deliberate. Every choice, calculated."
+    dialog: Every stroke had a reason. Nothing careless.
   - name: Perfectionism
-    dialog: "This is only the beginning, Founder. Do not slow down."
+    dialog: This is just the start. Keep the pace.

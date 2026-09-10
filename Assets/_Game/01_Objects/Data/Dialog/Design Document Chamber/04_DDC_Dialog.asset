@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Acceptable. The assets hold potential.
+    dialog: Acceptable. But we dont aim for acceptable only
   - name: Perfectionism
-    dialog: Now, the next task. Every great game needs a voice of its own.
+    dialog: Next task, every game needs a good music
   - name: Perfectionism
-    dialog: We will compose the soundtrack. Make them feel what they see.
+    dialog: Let's make them feel what they're looking at.

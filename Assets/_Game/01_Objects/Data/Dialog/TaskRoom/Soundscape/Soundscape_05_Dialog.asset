@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The soundscape is complete. Every frequency, every silence... placed.
+    dialog: Soundscape's done. Every frequency, every silence, exactly where it should
+      be.
   - name: Perfectionism
-    dialog: This is what they will hear when they enter our world.
-  - name: Perfectionism
-    dialog: Now... let us ensure the logic beneath it all is equally flawless.
+    dialog: This is what they'll hear the moment they step into our world.

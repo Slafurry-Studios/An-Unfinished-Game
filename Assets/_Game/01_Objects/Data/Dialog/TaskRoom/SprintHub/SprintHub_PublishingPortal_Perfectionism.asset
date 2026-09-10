@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: No. Founder, do not go through that portal.
+    dialog: No. Don't go through that portal, Founder.
   - name: Perfectionism
-    dialog: That is the Publishing Entrance. We are not ready yet.
+    dialog: That's the Publishing Entrance. We're not ready.
   - name: Perfectionism
     dialog: We still need to refine. To polish. To perfect.
   - name: Perfectionism
-    dialog: Founder. Listen to me. This is not the way.
+    dialog: LISTEN TO ME!
   - name: Perfectionism
-    dialog: ...Founder!
+    dialog: ...FOUNDER!!!!

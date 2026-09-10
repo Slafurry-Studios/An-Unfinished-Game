@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Turn around. Go back. This is not where we are supposed to be.
+    dialog: Turn around. Go back. This isn't where we're supposed to be.
   - name: Perfectionism
-    dialog: The game is not finished, Founder. It needs more work.
+    dialog: The game isn't finished, Founder. It needs more work.
   - name: Perfectionism
-    dialog: You are making a mistake. A grave one.
+    dialog: You're making a mistake. A serious one.
+  - name: Perfectionism
+    dialog: I'll make you regret this.

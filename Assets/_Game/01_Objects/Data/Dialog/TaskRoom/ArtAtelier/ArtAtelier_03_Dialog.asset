@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: "The visual identity is taking shape. They will see what we see."
+    dialog: The visual identity's coming together. They'll see it the way we do.
   - name: Perfectionism
-    dialog: "Flawless execution. No room for doubt."
+    dialog: Clean execution. No doubts left.
   - name: Perfectionism
-    dialog: "Now... let us give this world a voice."
+    dialog: Now... let us give this world a voice.
