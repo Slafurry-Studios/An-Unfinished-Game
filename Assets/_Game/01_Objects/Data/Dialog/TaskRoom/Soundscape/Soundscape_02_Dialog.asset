@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The melody's getting stronger. Every beat means something.
+    dialog: The cry of the soul.
   - name: Perfectionism
-    dialog: The effect would be inevitable
+    dialog: Your longing and regrets.
   - name: Perfectionism
-    dialog: We still far from that point, but we will get there
+    dialog: I can hear it in every note.

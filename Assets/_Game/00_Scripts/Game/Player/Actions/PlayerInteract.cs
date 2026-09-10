@@ -221,7 +221,7 @@ namespace Slafurry.Player
             }
 
             interactPrompt.gameObject.SetActive(true);
-            interactPrompt.text = target.Prompt;
+            interactPrompt.text = "(E) " + target.Prompt;
         }
 
         private void OnDrawGizmosSelected()

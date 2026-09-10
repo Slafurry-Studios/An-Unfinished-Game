@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: The soundtrack's alive now.
+    dialog: 'Miraculous. '
   - name: Perfectionism
-    dialog: Turns out precision and emotion aren't opposites.
+    dialog: 'Miraculous. '
   - name: Perfectionism
-    dialog: They are partners. Like us.
+    dialog: We are close.
   - name: Perfectionism
-    dialog: Creating a perfect harmony
+    dialog: Continue. Fill this barren world with your heart.

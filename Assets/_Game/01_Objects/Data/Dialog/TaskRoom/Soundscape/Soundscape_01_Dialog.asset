@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: That's the spirit
+    dialog: 'The cacophony. '
   - name: Perfectionism
-    dialog: We gonna control our player emotion with this
+    dialog: The symphony.
   - name: Perfectionism
-    dialog: To the point they always remembers us.
+    dialog: Can you feel it, founder?

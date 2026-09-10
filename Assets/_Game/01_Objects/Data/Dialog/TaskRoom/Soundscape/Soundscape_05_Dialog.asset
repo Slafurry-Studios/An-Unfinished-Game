@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - name: Perfectionism
-    dialog: Soundscape's done. Every frequency, every silence, exactly where it should
-      be.
+    dialog: Now, they shall speak your name among the legends, founder.
   - name: Perfectionism
-    dialog: This is what they'll hear the moment they step into our world.
+    dialog: However, we are not through.
+  - name: Perfectionism
+    dialog: Let us move on to other matters. There is more that needs fixing.
+  - name: Perfectionism
+    dialog: With my watchful gaze,
+  - name: Perfectionism
+    dialog: perfection is within our reach.
