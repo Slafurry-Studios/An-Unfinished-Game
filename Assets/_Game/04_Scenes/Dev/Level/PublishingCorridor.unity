@@ -760,19 +760,19 @@ MonoBehaviour:
   panel: {fileID: 1290468644}
   textLabel: {fileID: 293180611}
   lines:
-  - text: YOU HAVE SPENT YEARS ON THIS!
+  - text: 'Sunk Cost: "YOU HAVE SPENT YEARS ON THIS!"'
     duration: 2.5
     shakiness: 0.02
     delayAfter: 0.3
-  - text: YOU CANT JUST THROW IT ALL AWAY!
+  - text: 'Sunk Cost: "YOU CANT JUST THROW IT ALL AWAY!"'
     duration: 2.5
     shakiness: 0.02
     delayAfter: 0.3
-  - text: DONT MAKE EVERYTHING YOU DO IN VAIN
+  - text: 'Sunk Cost: "DONT MAKE EVERYTHING YOU DO IN VAIN"'
     duration: 2.5
     shakiness: 0.02
     delayAfter: 0.3
-  - text: THE PROJECT CANT BE STOPPED LIKE THIS!!!
+  - text: 'Sunk Cost: "THE PROJECT CANT BE STOPPED LIKE THIS!!!"'
     duration: 2.5
     shakiness: 0.02
     delayAfter: 0.3
@@ -1872,7 +1872,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 100.93541, y: -11.307009}
+  m_Offset: {x: 189.94458, y: -3.7919865}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1883,7 +1883,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 257.79294, y: 15.58083}
+  m_Size: {x: 435.81128, y: 30.610874}
   m_EdgeRadius: 0
 --- !u!4 &439927429
 Transform:
@@ -2587,7 +2587,7 @@ Transform:
   m_GameObject: {fileID: 743085560}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 150.5, y: 5.1, z: 1.1}
+  m_LocalPosition: {x: 323.7, y: 11.6, z: 1.1}
   m_LocalScale: {x: -874.16565, y: 16816.166, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6358,8 +6358,8 @@ Transform:
   m_GameObject: {fileID: 1418961828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -66.5394, y: 74.8689, z: 1.055093}
-  m_LocalScale: {x: -44020.902, y: 1537.0709, z: 1}
+  m_LocalPosition: {x: 18.6506, y: 74.8689, z: 1.055093}
+  m_LocalScale: {x: -61058.74, y: 1537.0709, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1350640326}
@@ -6488,8 +6488,8 @@ Transform:
   m_GameObject: {fileID: 1420262168}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.6708, y: -34.4747, z: 1.1}
-  m_LocalScale: {x: -26926.977, y: 5831.7676, z: 1}
+  m_LocalPosition: {x: 104.4824, y: -34.4747, z: 1.1}
+  m_LocalScale: {x: -43888.21, y: 5831.7676, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1350640326}
