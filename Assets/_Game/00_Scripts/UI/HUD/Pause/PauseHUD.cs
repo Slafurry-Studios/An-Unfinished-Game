@@ -16,6 +16,7 @@ public class PauseHUD : MonoBehaviour
 
     public void Retry()
     {
+        Pause.ForceResume();
         SceneSystem.Load(SceneManager.GetActiveScene().name);
     }
 
