@@ -38,11 +38,9 @@ An Unfinished Game is a 2D narrative platformer about the founder of a game stud
 ## GETTING STARTED
 ### Prerequisites
 - Unity `2022.3.62f3` (2022.3 LTS)
-- Git LFS ([installation guide](https://git-lfs.github.com))
 
 ### Setup
 ```bash
-git lfs install
 git clone https://github.com/Slafurry-Studios/An-Unfinished-Game.git
 ```
 Open the project in Unity Hub, let it import, then open the `Boot` scene to start.
@@ -90,7 +88,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed conventions (base classes, l
 ## CONTRIBUTING
 1. Follow the conventions in [ARCHITECTURE.md](ARCHITECTURE.md) (script placement, lifecycle order, naming).
 2. Keep the `Assets/_Game/` numeric prefix ordering — do not rename root folders.
-3. Run `git lfs install` before cloning; all binary assets require LFS.
+3. Binary assets (audio, images, fonts, …) are stored as regular git objects — no Git LFS required.
 4. Commit `.meta` files alongside their assets; never commit `Library/`, `Temp/`, or `Logs/`.
 
 ---
