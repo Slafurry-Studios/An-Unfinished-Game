@@ -239,12 +239,16 @@ naturally cluster together alphabetically.
 ---
 
 ## Git
-- `.gitattributes` uses the official
+- `.gitattributes` is based on the official
   [gitattributes/gitattributes Unity template](https://github.com/gitattributes/gitattributes/blob/master/Unity.gitattributes)
-  (MIT) — handles C# diffing, Unity's YAML merge driver, and LFS for every
-  binary asset type (audio, 3D models, images, video, archives, etc.).
-- **Required**: run `git lfs install` on every machine before cloning, or
-  binary assets will only fetch as LFS pointers instead of actual content.
+  (MIT) — handles C# diffing and Unity's YAML merge driver. Binary asset types
+  (audio, 3D models, images, video, archives, etc.) are marked `binary`
+  (stored as regular git blobs).
+- **Git LFS was removed** (2026-09): assets are plain git objects, so no
+  `git lfs install` is needed. Commits made *before* that date still contain
+  LFS pointers — GitHub keeps serving them, but checking out historical
+  revisions of those files directly yields pointer text unless Git LFS is
+  installed.
 
 ---
 
