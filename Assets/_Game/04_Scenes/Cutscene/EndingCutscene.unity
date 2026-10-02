@@ -122,42 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &435256829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 428136801889651646, guid: 175526afd6e42af138ca564075a090aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1749837818}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &435256835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 435256829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c993be83b5ee177194a89a81d8e8320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playLimit: 0
-  unlimited: 1
-  delay: 2
-  onComplete:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1758563258}
-        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UIFade, Assembly-CSharp
-        m_MethodName: FadeIn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &721020367
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,65 +349,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 121261740137257863, guid: 175526afd6e42af138ca564075a090aa,
+        type: 3}
+      propertyPath: onComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1758563258}
     - target: {fileID: 428136801889651646, guid: 175526afd6e42af138ca564075a090aa,
         type: 3}
       propertyPath: m_Name
       value: EyesScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: maxCount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: sfxEffect
-      value: Spawn
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: sfxCategory
-      value: Entity
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: spawnInterval
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 435256835}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TriggerDelay
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DelayTrigger, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332800242828454279, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: onEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4864170617777837218, guid: 175526afd6e42af138ca564075a090aa,
         type: 3}
@@ -545,19 +459,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5338991248364941511, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 428136801889651646, guid: 175526afd6e42af138ca564075a090aa,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 435256835}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 175526afd6e42af138ca564075a090aa, type: 3}
 --- !u!1001 &1758563257
 PrefabInstance:

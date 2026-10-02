@@ -113,4 +113,26 @@ MonoBehaviour:
     rolloffMode: 1
     minDistance: 1
     maxDistance: 15
+  - groupID: Windup
+    clips:
+    - {fileID: 8300000, guid: 276d101e5d3885ecaab0f060fe5029c8, type: 3}
+    volume: 0.71
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+  - groupID: Jumpscare
+    clips:
+    - {fileID: 8300000, guid: ebb94da951aaef453a80e9be3efe5b26, type: 3}
+    volume: 1
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8

@@ -97,3 +97,9 @@ MonoBehaviour:
     volume: 0.5
     fadeIn: 0
     fadeOut: 0
+  - trackName: Credits
+    clip: {fileID: 8300000, guid: e0d72208961b5c3b8b91c54f88b27237, type: 3}
+    introClip: {fileID: 0}
+    volume: 0.5
+    fadeIn: 0
+    fadeOut: 0

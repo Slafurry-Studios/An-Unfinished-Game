@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b2909cd440ac97108fa6828ff7cb5a4
+guid: cbdb964c40ba53f528dfa42328b6cb6f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -123,85 +123,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Second Half Ending walk_0
+      name: Perfectionism_Hide_And_Seek_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
-        height: 500
+        width: 800
+        height: 800
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dadfc3e616e12e4c2b09bfd94ba66a4b
-      internalID: -1944960058
+      spriteID: a6faf0126e4c36b29bd690013cec45fb
+      internalID: 427496682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Second Half Ending walk_1
+      name: Perfectionism_Hide_And_Seek_1
       rect:
         serializedVersion: 2
-        x: 500
+        x: 800
         y: 0
-        width: 500
-        height: 500
+        width: 800
+        height: 800
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8183efd30d83b39e58d5208abf1767f2
-      internalID: -383100526
+      spriteID: cb25c73e1cefd06dc97203d8fe2cb049
+      internalID: 552849950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Second Half Ending walk_2
+      name: Perfectionism_Hide_And_Seek_2
       rect:
         serializedVersion: 2
-        x: 1000
+        x: 1600
         y: 0
-        width: 500
-        height: 500
+        width: 800
+        height: 800
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f2b483edebe943d4ba6d1965073875f
-      internalID: -802338051
+      spriteID: 06b83e59be491ac24ac57a025aef17ae
+      internalID: 516192138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Second Half Ending walk_3
+      name: Perfectionism_Hide_And_Seek_3
       rect:
         serializedVersion: 2
-        x: 1500
+        x: 2400
         y: 0
-        width: 500
-        height: 500
+        width: 800
+        height: 800
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5402da33e53b72fa4822bed23a8ff191
-      internalID: 451738312
+      spriteID: 000d0436f4616634bb22c395feb7ddc3
+      internalID: 482460471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Perfectionism_Hide_And_Seek_4
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ac68795aaddfda20bb0e4295181b954
+      internalID: 1601720395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Perfectionism_Hide_And_Seek_5
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 0
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e414c1fda85eafb0e8c7b09ea4a8dc47
+      internalID: -1335717232
       vertices: []
       indices: 
       edges: []
@@ -209,7 +251,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: fe8776df4a92b235e8d8d37d8631967e
     internalID: 0
     vertices: []
     indices: 
@@ -217,15 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Second Half Ending walk_0: -1944960058
-      Second Half Ending walk_1: -383100526
-      Second Half Ending walk_2: -802338051
-      Second Half Ending walk_3: 451738312
-      Second Half Ending walk_4: -784315326
-      Second Half Ending walk_5: 862961994
-      Second Half Ending walk_6: 8227150
-      Second Half Ending walk_7: 975911758
-      Second Half Ending walk_8: -931253976
+      Perfectionism_Hide_And_Seek_0: 427496682
+      Perfectionism_Hide_And_Seek_1: 552849950
+      Perfectionism_Hide_And_Seek_2: 516192138
+      Perfectionism_Hide_And_Seek_3: 482460471
+      Perfectionism_Hide_And_Seek_4: 1601720395
+      Perfectionism_Hide_And_Seek_5: -1335717232
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
