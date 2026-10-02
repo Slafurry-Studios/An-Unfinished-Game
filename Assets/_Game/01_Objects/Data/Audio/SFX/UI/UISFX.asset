@@ -135,4 +135,15 @@ MonoBehaviour:
     rolloffMode: 1
     minDistance: 1
     maxDistance: 15
+  - groupID: ButtonLast
+    clips:
+    - {fileID: 8300000, guid: b8f8a7b2e99b8912eb201381c76206eb, type: 3}
+    volume: 1
+    maxSimultaneous: 3
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
   poolSize: 8

@@ -59,6 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/04_Scenes/Dev/Level/PreReleaseTunnel.unity
     guid: 12eb7717619da8e4187b1bd78df75db8
+  - enabled: 1
+    path: Assets/_Game/04_Scenes/Cutscene/Credits.unity
+    guid: c6167c6a403b4fe57b80844d64c314f0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: befec698e108ad6c6af4d3aaeaa0f9b0,
       type: 3}

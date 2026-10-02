@@ -82,7 +82,7 @@ MonoBehaviour:
   - trackName: ChaseAmbient
     clip: {fileID: 8300000, guid: 1bdc375c7123379cdbe7a4b4b3f70f73, type: 3}
     introClip: {fileID: 0}
-    volume: 10
+    volume: 0.05
     fadeIn: 0
     fadeOut: 0
   - trackName: PublishingCorridorMusic
