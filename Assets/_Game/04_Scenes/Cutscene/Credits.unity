@@ -4450,21 +4450,185 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAN
-    UNFINISHED GAME\n\nDeveloped by\nSlafurry Studios\n\n\nTEAMS\n\nProject Manager\n-
-    Muhammad Zaini\n\nUnity Programmers\n- Muhammad Zaini\n- Muhamad Rizal\n\nGame
-    Designer\n- Muhammad Zaini\n\nLevel Designer\n- Muhamad Rizal\n\n2D Artist\n-
-    Muhammad Kahil Deiryl Kiefe Moesliem\n\nUI Designer\n- Muhammad Kahil Deiryl
-    Kiefe Moesliem\n\nAudio Engineer\n- Muhammad Raifan Syifa Dien\n\nNarrative Designer\n-
-    Niken Qinata Rahayu\n\n\nSPECIAL THANKS\n\n- csw\n- Dina Varya\n- Nisa Rizqiya
-    Fadhliana, S.Kom., M.T.\n\n\nSLAFURRY STUDIOS\n\nSpecial thanks to all Slafurry
-    Studios members who supported us throughout this 12/100 Game Jam journey.\n\n-
-    Faiz2979\n- americano\n- ModDiv\n- Kayzu\n- CarteChia\n- Rafif\n- Dann\n- SoftPotatoes\n-
-    Rinka\n- cheerful\n- Ifanitas\n- LUEM\n- Cyan cyret\n- \u30A2\u30EB\u30AB\u30C7\u30F3\n-
-    nop-\n- InSesth\n- Erick_Patin\n- RoYunTo\n- boji21\n- TiramissuCake\n- Cumulonimbus\n-
-    CrispySpinach\n- Asura\n\n\nThis game was not made by one person.\n\nEvery idea,
-    contribution, feedback, and support helped bring this project to life.\n\nThank
-    you for being part of this unfinished journey."
+  m_text: '
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    AN UNFINISHED GAME
+
+
+    Developed
+    by
+
+    Slafurry Studios
+
+
+
+    TEAMS
+
+
+    Project Manager
+
+    - Muhammad Zaini
+
+
+    Unity
+    Programmers
+
+    - Muhammad Zaini
+
+    - Muhamad Rizal
+
+
+    Game Designer
+
+    -
+    Muhammad Zaini
+
+
+    Level Designer
+
+    - Muhamad Rizal
+
+
+    2D Artist
+
+    -
+    Muhammad Kahil Deiryl Kiefe Moesliem
+
+
+    UI Designer
+
+    - Muhammad Kahil
+    Deiryl Kiefe Moesliem
+
+
+    Audio Engineer
+
+    - Muhammad Raifan Syifa Dien
+
+
+    Narrative
+    Designer
+
+    - Niken Qinata Rahayu
+
+
+
+    SPECIAL THANKS
+
+
+    - csw
+
+    -
+    Dina Varya
+
+    - Nisa Rizqiya Fadhliana, S.Kom., M.T.
+
+
+
+    SLAFURRY STUDIOS
+
+
+    Special
+    thanks to all Slafurry Studios members who supported us throughout this 12/100
+    Game Jam journey.
+
+
+    - Faiz2979
+
+    - americano
+
+    - ModDiv
+
+    - Kayzu
+
+    -
+    CarteChia
+
+    - Rafif
+
+    - Dann
+
+    - SoftPotatoes
+
+    - Rinka
+
+    - cheerful
+
+    -
+    Ifanitas
+
+    - LUEM
+
+    - Cyan cyret
+
+    - Arucaden
+
+    - nop-
+
+    - InSesth
+
+    -
+    Erick_Patin
+
+    - RoYunTo
+
+    - boji21
+
+    - TiramissuCake
+
+    - Cumulonimbus
+
+    -
+    CrispySpinach
+
+    - Asura
+
+
+
+    This game was not made by one person.
+
+
+    Every
+    idea, contribution, feedback, and support helped bring this project to life.
+
+
+    Thank
+    you for being part of this unfinished journey.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7a070210581336368f8a25c13bd2a07, type: 2}
   m_sharedMaterial: {fileID: -4309493083186649642, guid: b7a070210581336368f8a25c13bd2a07,
@@ -5892,7 +6056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 0}
-  duration: 0.3
+  duration: 3
   useUnscaledTime: 1
   disableInteractionWhileHidden: 1
   onFadeInComplete:
