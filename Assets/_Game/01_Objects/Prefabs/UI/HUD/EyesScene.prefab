@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1907161944378171655}
   - component: {fileID: 8857838666504825540}
   - component: {fileID: 4332800242828454279}
+  - component: {fileID: 121261740137257863}
   m_Layer: 0
   m_Name: EyesScene
   m_TagString: Untagged
@@ -61,7 +62,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 32767
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1907161944378171655
 MonoBehaviour:
@@ -117,15 +118,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 5338991248364941511}
   prefab: {fileID: 2498963751194777568, guid: 6b76bdbf26fee863584d946eca661042, type: 3}
-  maxCount: 10
+  maxCount: 30
   minDistance: 50
-  spawnInterval: 0.5
+  spawnInterval: 0.05
   spawnRadius: 100
-  sfxCategory: SFX
+  sfxCategory: Entity
   sfxEffect: Spawn
   onEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 121261740137257863}
+        m_TargetAssemblyTypeName: DelayTrigger, Assembly-CSharp
+        m_MethodName: TriggerDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &121261740137257863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428136801889651646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c993be83b5ee177194a89a81d8e8320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playLimit: 0
+  unlimited: 1
+  delay: 2
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UIFade, Assembly-CSharp
+        m_MethodName: FadeIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  useUnscaledTime: 0
 --- !u!1 &5517974612698816688
 GameObject:
   m_ObjectHideFlags: 0

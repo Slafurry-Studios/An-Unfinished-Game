@@ -55,6 +55,7 @@ public class RandomSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
 
+        Audio.StopSFX(sfxCategory, sfxEffect, fadeOut: 1f);
         onEnd?.Invoke();
     }
 

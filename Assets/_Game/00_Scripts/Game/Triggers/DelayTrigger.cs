@@ -6,6 +6,7 @@ public class DelayTrigger : BaseTrigger
 {
     [SerializeField] private float delay = 1f;
     [SerializeField] private UnityEvent onComplete;
+    [SerializeField] private bool useUnscaledTime = false;
 
     private bool isWaiting;
 
@@ -21,7 +22,10 @@ public class DelayTrigger : BaseTrigger
 
     private IEnumerator DelayCoroutine()
     {
-        yield return new WaitForSeconds(delay);
+        if (useUnscaledTime)
+            yield return new WaitForSecondsRealtime(delay);
+        else
+            yield return new WaitForSeconds(delay);
 
         isWaiting = false;
         onComplete?.Invoke();

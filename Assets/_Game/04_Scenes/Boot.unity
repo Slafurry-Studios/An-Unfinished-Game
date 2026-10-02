@@ -946,7 +946,7 @@ MonoBehaviour:
     trackName: IterativeRoomMusic
   - sceneName: RejectedChamber
     trackName: RejectedChamberMusic
-  - sceneName: PublishingCorridor
+  - sceneName: IterationCorridor
     trackName: PublishingCorridorMusic
   - sceneName: EndingCutscene
     trackName: EndingCutsceneMusic

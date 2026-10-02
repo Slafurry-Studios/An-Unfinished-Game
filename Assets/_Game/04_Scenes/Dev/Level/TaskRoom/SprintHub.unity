@@ -17677,7 +17677,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2847419363206177456, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1725537250}
   m_SourcePrefab: {fileID: 100100000, guid: 3ad960b3581ad50a0a0e59dcd1c9300f, type: 3}
 --- !u!4 &1725537245 stripped
 Transform:
@@ -17697,6 +17701,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4001da9d4ec1684508255b8896bddff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1725537247 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3946458251138706714, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725537244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1725537248 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 340856046829213968, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725537244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1725537249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2847419363206177456, guid: 3ad960b3581ad50a0a0e59dcd1c9300f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1725537244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1725537250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725537249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efbf5c0ce3339d8093c1b3d7241dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 1725537248}
+  canvasRect: {fileID: 1725537247}
+  fromDirection: 2
+  extraOffset: 100
+  duration: 0.5
+  delay: 0
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  playOnEnable: 1
+  useUnscaledTime: 1
+  deactivateOnHidden: 0
+  onSlideInComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onSlideOutComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1725931134
 GameObject:
   m_ObjectHideFlags: 0
@@ -19098,7 +19171,19 @@ MonoBehaviour:
   dialogHUD: {fileID: 0}
   onDialogEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1725537250}
+        m_TargetAssemblyTypeName: Slafurry.Utils.UI.UISlide, Assembly-CSharp
+        m_MethodName: SlideOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLineComplete: []
 --- !u!114 &1869461796
 MonoBehaviour:
