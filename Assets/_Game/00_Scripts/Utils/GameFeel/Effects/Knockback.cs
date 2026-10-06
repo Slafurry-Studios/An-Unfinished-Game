@@ -57,8 +57,8 @@ namespace Slafurry.Utils.GameFeel
 
         public void StopEffect()
         {
-            if (_rb3D != null) _rb3D.velocity = Vector3.zero;
-            if (_rb2D != null) _rb2D.velocity = Vector2.zero;
+            if (_rb3D != null) _rb3D.linearVelocity = Vector3.zero;
+            if (_rb2D != null) _rb2D.linearVelocity = Vector2.zero;
         }
     }
 }
