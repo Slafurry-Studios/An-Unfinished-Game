@@ -37,7 +37,7 @@ An Unfinished Game is a 2D narrative platformer about the founder of a game stud
 
 ## GETTING STARTED
 ### Prerequisites
-- Unity `2022.3.62f3` (2022.3 LTS)
+- Unity `6000.3.25f1` (6.3 LTS)
 
 ### Setup
 ```bash
